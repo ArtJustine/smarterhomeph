@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground: 0 0% 18%;
+  --background: 0 0% 99%;
+  --primary: 150 20% 71%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 60 33% 96%;
+  --secondary-foreground: 0 0% 18%;
+  --muted: 60 6% 90%;
+  --muted-foreground: 0 0% 43%;
+  --accent: 60 33% 96%;
+  --accent-foreground: 0 0% 18%;
+  --border: 60 5% 86%;
+  --input: 60 6% 90%;
+  --ring: 150 20% 71%;
+  --radius: 0.5rem;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
