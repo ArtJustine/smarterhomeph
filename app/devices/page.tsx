@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronDown, X, Filter, ShoppingBag, Search, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -254,9 +255,11 @@ export default function DevicesPage() {
                           <p className="text-sm text-muted-foreground mb-8 flex-1 leading-relaxed">{device.description}</p>
                           <div className="flex justify-between items-center pt-6 border-t border-foreground/5">
                             <span className="text-2xl font-black tracking-tighter italic">${device.price}</span>
-                            <Button size="icon" className="h-12 w-12 rounded-xl bg-foreground text-background hover:bg-primary hover:text-foreground transition-all">
-                              <ShoppingBag className="h-5 w-5" />
-                            </Button>
+                            <Link href="/contact">
+                              <Button size="icon" className="h-12 w-12 rounded-xl bg-foreground text-background hover:bg-primary hover:text-foreground transition-all">
+                                <ShoppingBag className="h-5 w-5" />
+                              </Button>
+                            </Link>
                           </div>
                         </CardContent>
                       </Card>

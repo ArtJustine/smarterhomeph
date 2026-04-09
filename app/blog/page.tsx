@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { Calendar, User, ArrowRight, Sparkles } from "lucide-react"
+import Link from "next/link"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { Card, CardContent } from "@/components/ui/card"
@@ -80,7 +81,7 @@ export default function BlogPage() {
                        <Sparkles className="h-4 w-4" />
                        <span className="text-[10px] uppercase font-black tracking-widest">EDITORIAL</span>
                     </div>
-                    <h1 className="text-4xl md:text-6xl font-black tracking-tighter uppercase italic">ZENITH <span className="text-primary italic">JOURNAL</span></h1>
+                    <h1 className="text-4xl md:text-6xl font-black tracking-tighter uppercase italic">SMARTER HOME <span className="text-primary italic">JOURNAL</span></h1>
                  </div>
                  <p className="text-muted-foreground max-w-sm text-sm leading-relaxed">
                    Deep dives into the future of home automation, private cloud systems, and intelligent lifestyle engineering.
@@ -118,9 +119,11 @@ export default function BlogPage() {
                     </div>
                     <h3 className="text-2xl font-bold tracking-tight mb-4 group-hover:text-primary transition-colors leading-tight italic">{post.title}</h3>
                     <p className="text-muted-foreground text-sm mb-8 flex-1 leading-relaxed">{post.excerpt}</p>
-                    <Button variant="ghost" className="w-fit p-0 h-auto hover:bg-transparent hover:text-primary font-black uppercase tracking-widest text-xs group/btn italic">
-                      READ ARTICLE <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-                    </Button>
+                    <Link href={`/blog/${post.id}`}>
+                      <Button variant="ghost" className="w-fit p-0 h-auto hover:bg-transparent hover:text-primary font-black uppercase tracking-widest text-xs group/btn italic">
+                        READ ARTICLE <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                      </Button>
+                    </Link>
                   </CardContent>
                 </Card>
               </motion.div>

@@ -3,8 +3,8 @@ import './globals.css'
 import { Toaster } from 'sonner'
 
 export const metadata: Metadata = {
-  title: 'Zenith Smart Systems | Intelligent Living, Reimagined',
-  description: 'Engineering the next generation of private, secure, and intuitive smart home environments.',
+  title: 'Smarter Home PH | Intelligent Living, Reimagined',
+  description: 'Premium smart home solutions and automation systems in the Philippines.',
 }
 
 export default function RootLayout({

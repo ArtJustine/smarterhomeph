@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { 
   Lightbulb, 
@@ -115,9 +116,11 @@ export default function ServicesPage() {
                             </li>
                           ))}
                        </ul>
-                       <Button variant="outline" className="rounded-xl h-12 border-foreground/10 hover:bg-primary hover:text-primary-foreground transition-all">
-                         EXPLORE <ArrowRight className="ml-2 h-4 w-4" />
-                       </Button>
+                       <Link href={`/devices?category=${cat.id}`}>
+                         <Button variant="outline" className="rounded-xl w-full h-12 border-foreground/10 hover:bg-primary hover:text-primary-foreground transition-all">
+                           EXPLORE <ArrowRight className="ml-2 h-4 w-4" />
+                         </Button>
+                       </Link>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -135,8 +138,12 @@ export default function ServicesPage() {
                 Our lead engineers are available for specialized consultations for large-scale residential and commercial projects.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-                 <Button size="lg" className="h-16 px-12 rounded-2xl text-lg font-bold">BOOK A SESSION</Button>
-                 <Button size="lg" variant="outline" className="h-16 px-12 rounded-2xl text-lg font-bold">VIEW CASE STUDIES</Button>
+                 <Link href="/contact">
+                   <Button size="lg" className="h-16 px-12 rounded-2xl text-lg font-bold">BOOK A SESSION</Button>
+                 </Link>
+                 <Link href="/blog">
+                   <Button size="lg" variant="outline" className="h-16 px-12 rounded-2xl text-lg font-bold">VIEW CASE STUDIES</Button>
+                 </Link>
               </div>
            </div>
         </section>

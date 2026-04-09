@@ -90,7 +90,7 @@ export default function ContactPage() {
 
                 <div className="grid gap-8">
                   {[
-                    { title: "Email Us", desc: "hello@zenithsmart.com", icon: Mail },
+                    { title: "Email Us", desc: "hello@smarterhomeph.com", icon: Mail },
                     { title: "Call Us", desc: "+1 (555) 000-0000", icon: Phone },
                     { title: "Visit Us", desc: "123 Innovation Way, Tech City", icon: MapPin },
                     { title: "Support", desc: "24/7 Priority Support", icon: Clock },

@@ -5,10 +5,12 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X, Rocket } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+import { usePathname } from "next/navigation"
 
 export function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,20 +35,23 @@ export function SiteHeader() {
           <div className="p-1.5 bg-primary rounded-lg text-primary-foreground">
             <Rocket className="h-5 w-5" />
           </div>
-          <span>SMARTHOME</span>
+          <span>SMARTER HOME PH</span>
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          {navLinks.map((link) => (
-            <Link 
-              key={link.name} 
-              href={link.href} 
-              className={`text-sm font-bold uppercase tracking-widest transition-colors hover:text-primary ${link.highlight ? "text-primary" : scrolled ? "text-foreground" : "text-white"}`}
-            >
-              {link.name}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href
+            return (
+              <Link 
+                key={link.name} 
+                href={link.href} 
+                className={`text-sm font-bold uppercase tracking-widest transition-colors hover:text-primary ${isActive ? "text-primary" : scrolled ? "text-foreground" : "text-white opacity-80"}`}
+              >
+                {link.name}
+              </Link>
+            )
+          })}
         </nav>
 
         {/* Action Buttons */}
@@ -73,16 +78,19 @@ export function SiteHeader() {
             className="md:hidden glass border-t overflow-hidden"
           >
             <nav className="flex flex-col space-y-4 p-6">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="text-lg font-bold uppercase tracking-widest transition-colors hover:text-primary"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {link.name}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className={`text-lg font-bold uppercase tracking-widest transition-colors hover:text-primary ${isActive ? "text-primary" : "text-foreground"}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.name}
+                  </Link>
+                )
+              })}
               <Link href="/builder" onClick={() => setMobileMenuOpen(false)}>
                 <Button className="rounded-xl w-full py-6 text-lg font-bold">
                   BUILD YOUR HOME

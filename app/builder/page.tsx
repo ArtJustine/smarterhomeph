@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useMemo } from "react"
+import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { 
   Building2, 
@@ -131,9 +132,11 @@ export default function BuilderPage() {
               <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Estimated Total</p>
               <p className="text-3xl font-bold text-primary">${totalPrice.toLocaleString()}</p>
             </div>
-            <Button size="lg" className="rounded-xl shadow-lg shadow-primary/20" disabled={step < 3}>
-              Save Config <ChevronRight className="ml-2 h-4 w-4" />
-            </Button>
+            <Link href="/contact">
+              <Button size="lg" className="rounded-xl shadow-lg shadow-primary/20" disabled={step < 3}>
+                Save Config <ChevronRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
           </div>
         </div>
 
@@ -387,9 +390,11 @@ export default function BuilderPage() {
                      <p className="text-sm text-muted-foreground font-medium">Final Investment</p>
                      <p className="text-4xl font-black text-primary tracking-tighter">${totalPrice.toLocaleString()}</p>
                    </div>
-                   <Button size="lg" className="rounded-2xl px-12 h-14 text-lg font-bold shadow-2xl shadow-primary/30">
-                     Book Consultation
-                   </Button>
+                   <Link href="/contact">
+                     <Button size="lg" className="rounded-2xl px-12 h-14 text-lg font-bold shadow-2xl shadow-primary/30">
+                       Book Consultation
+                     </Button>
+                   </Link>
                 </div>
               </div>
 

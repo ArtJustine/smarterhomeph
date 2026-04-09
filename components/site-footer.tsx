@@ -17,7 +17,7 @@ export function SiteFooter() {
               <div className="p-1.5 bg-primary rounded-lg text-primary-foreground">
                 <Rocket className="h-6 w-6" />
               </div>
-              <span className="text-white uppercase">Zenith</span>
+              <span className="text-white uppercase">SMARTER HOME PH</span>
             </Link>
             <p className="text-background/60 text-lg max-w-md leading-relaxed">
               Engineering the next generation of private, secure, and intuitive smart home environments for the modern lifestyle.
@@ -81,8 +81,8 @@ export function SiteFooter() {
             </div>
             <div className="pt-4 border-t border-white/10">
                <p className="text-[10px] text-background/30 uppercase font-black tracking-widest leading-loose">
-                 © {new Date().getFullYear()} ZENITH SMART SYSTEMS.<br />
-                 INTELLIGENT LIVING, REIMAGINED.
+                 © {new Date().getFullYear()} SMARTER HOME PH.<br />
+                 INTELLIGENT LIVING, PHILIPPINES.
                </p>
             </div>
           </div>

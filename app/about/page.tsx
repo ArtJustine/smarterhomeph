@@ -4,7 +4,9 @@ import { motion } from "framer-motion"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { Badge } from "@/components/ui/badge"
-import { Users, Target, Shield, Heart } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Users, Target, Shield, Heart, ArrowRight, Mail } from "lucide-react"
+import Link from "next/link"
 
 export default function AboutPage() {
   return (
@@ -20,7 +22,7 @@ export default function AboutPage() {
               </Badge>
               <h1 className="text-5xl md:text-7xl font-black tracking-tighter leading-none">
                 DEFINING THE FUTURE OF <br />
-                <span className="text-primary italic">INTELLIGENT LIVING.</span>
+                <span className="text-primary italic">SMARTER HOME PH.</span>
               </h1>
               <p className="text-xl text-muted-foreground leading-relaxed">
                 We don't just sell gadgets; we engineer private, secure, and intuitive smart home environments for the modern lifestyle.
@@ -51,6 +53,11 @@ export default function AboutPage() {
                   </div>
                   <h3 className="text-xl font-bold italic tracking-tight">{val.title}</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">{val.desc}</p>
+                  <Link href="/contact">
+                    <Button variant="ghost" className="w-fit p-0 h-auto hover:bg-transparent hover:text-primary font-black uppercase tracking-widest text-xs group/btn italic">
+                      LEARN MORE <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
                 </motion.div>
               ))}
             </div>
@@ -62,7 +69,7 @@ export default function AboutPage() {
             <div className="space-y-6">
               <h2 className="text-3xl font-black italic tracking-tighter uppercase">Our Story</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Founded in 2015, Zenith began with a simple idea: that technology should work for people, not the other
+                Founded in 2015, Smarter Home PH began with a simple idea: that technology should work for people, not the other
                 way around. Our team of engineers, designers, and home automation enthusiasts came together with a shared
                 vision of creating smart home solutions that are both powerful and easy to use.
               </p>

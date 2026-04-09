@@ -73,9 +73,11 @@ export default function Home() {
                       START BUILDING <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                     </Button>
                   </Link>
-                  <Button size="lg" variant="outline" className="h-16 px-10 rounded-2xl text-lg font-bold glass-dark text-white border-white/20 hover:bg-white/10">
-                    OUR SOLUTIONS
-                  </Button>
+                  <Link href="/services">
+                    <Button size="lg" variant="outline" className="h-16 px-10 rounded-2xl text-lg font-bold glass-dark text-white border-white/20 hover:bg-white/10">
+                      OUR SOLUTIONS
+                    </Button>
+                  </Link>
                 </div>
               </motion.div>
             </div>
@@ -178,7 +180,7 @@ export default function Home() {
               </div>
               
               <div className="relative z-10 max-w-2xl">
-                 <h2 className="text-4xl md:text-6xl font-black tracking-tighter leading-none mb-8">READY TO BUILD YOUR <br /><span className="text-primary italic">ZENITH HOME?</span></h2>
+                 <h2 className="text-4xl md:text-6xl font-black tracking-tighter leading-none mb-8">READY TO BUILD YOUR <br /><span className="text-primary italic">SMARTER HOME?</span></h2>
                  <p className="text-background/60 text-xl mb-12">Our interactive builder helps you plan your smart conversion in minutes. Get an instant quote for your property type.</p>
                  <Link href="/builder">
                    <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 h-16 px-12 rounded-2xl font-black text-xl shadow-2xl shadow-primary/20">
