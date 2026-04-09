@@ -1,38 +1,61 @@
 "use client"
 
 import Link from "next/link"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Rocket } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
 
 export function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  const navLinks = [
+    { name: "Devices", href: "/devices" },
+    { name: "Builder", href: "/builder", highlight: true },
+    { name: "Services", href: "/services" },
+    { name: "About", href: "/about" },
+    { name: "Blog", href: "/blog" },
+  ]
 
   return (
-    <header className="absolute top-0 left-0 right-0 z-50 w-full">
-      <div className="container flex h-16 items-center justify-between">
-        <Link href="/" className="text-xl font-bold text-black">
-          SmartHome
+    <header className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${scrolled ? "glass border-b py-2" : "bg-transparent py-4 text-white"}`}>
+      <div className="container flex items-center justify-between px-4 sm:px-6 lg:px-8">
+        <Link href="/" className="flex items-center gap-2 text-2xl font-black tracking-tighter">
+          <div className="p-1.5 bg-primary rounded-lg text-primary-foreground">
+            <Rocket className="h-5 w-5" />
+          </div>
+          <span>SMARTHOME</span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-6">
-          <Link href="/devices" className="text-sm font-medium text-black hover:text-primary">
-            Devices
-          </Link>
-          <Link href="/services" className="text-sm font-medium text-black hover:text-primary">
-            Services
-          </Link>
-          <Link href="/blog" className="text-sm font-medium text-black hover:text-primary">
-            Blog
-          </Link>
+        <nav className="hidden md:flex items-center space-x-8">
+          {navLinks.map((link) => (
+            <Link 
+              key={link.name} 
+              href={link.href} 
+              className={`text-sm font-bold uppercase tracking-widest transition-colors hover:text-primary ${link.highlight ? "text-primary" : scrolled ? "text-foreground" : "text-white"}`}
+            >
+              {link.name}
+            </Link>
+          ))}
         </nav>
 
-        {/* Mobile Menu Button */}
+        {/* Action Buttons */}
         <div className="flex items-center gap-4">
-          <Button variant="outline" className="rounded-full hidden md:flex">
-            Contact Us
-          </Button>
+          <Link href="/builder">
+            <Button size="sm" className="rounded-full px-6 font-bold hidden sm:flex">
+              GET STARTED
+            </Button>
+          </Link>
           <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             <span className="sr-only">Toggle menu</span>
@@ -41,37 +64,36 @@ export function SiteHeader() {
       </div>
 
       {/* Mobile Navigation */}
-      {mobileMenuOpen && (
-        <div className="md:hidden">
-          <nav className="flex flex-col space-y-4 p-4 bg-white border-t">
-            <Link
-              href="/devices"
-              className="text-sm font-medium transition-colors hover:text-primary"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Devices
-            </Link>
-            <Link
-              href="/services"
-              className="text-sm font-medium transition-colors hover:text-primary"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Services
-            </Link>
-            <Link
-              href="/blog"
-              className="text-sm font-medium transition-colors hover:text-primary"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Blog
-            </Link>
-            <Button variant="outline" className="rounded-full w-full">
-              Contact Us
-            </Button>
-          </nav>
-        </div>
-      )}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden glass border-t overflow-hidden"
+          >
+            <nav className="flex flex-col space-y-4 p-6">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="text-lg font-bold uppercase tracking-widest transition-colors hover:text-primary"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {link.name}
+                </Link>
+              ))}
+              <Link href="/builder" onClick={() => setMobileMenuOpen(false)}>
+                <Button className="rounded-xl w-full py-6 text-lg font-bold">
+                  BUILD YOUR HOME
+                </Button>
+              </Link>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   )
 }
+
 

@@ -1,9 +1,13 @@
+"use client"
+
 import Image from "next/image"
+import { motion } from "framer-motion"
+import { Calendar, User, ArrowRight, Sparkles } from "lucide-react"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
-import { PageHeader } from "@/components/page-header"
-import { Card, CardContent, CardFooter } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 
 export default function BlogPage() {
   const blogPosts = [
@@ -14,7 +18,7 @@ export default function BlogPage() {
         "Discover the latest smart home innovations that can make your home more comfortable, efficient, and secure.",
       date: "March 20, 2025",
       author: "Emma Johnson",
-      category: "Smart Living",
+      category: "Vision",
     },
     {
       id: 2,
@@ -32,25 +36,25 @@ export default function BlogPage() {
         "Explore how voice assistant technology is evolving and what it means for the future of home automation.",
       date: "March 10, 2025",
       author: "Sarah Williams",
-      category: "Technology Trends",
+      category: "Intelligence",
     },
     {
       id: 4,
       title: "Energy Saving Tips with Smart Home Automation",
       excerpt:
-        "Discover how smart thermostats, lighting, and appliances can help reduce your energy consumption and utility bills.",
+        "Discover how smart thermostats, lighting, and appliances can help reduce your energy consumption.",
       date: "March 5, 2025",
       author: "David Rodriguez",
-      category: "Energy Efficiency",
+      category: "Efficiency",
     },
     {
       id: 5,
       title: "Integrating Smart Home Systems: A Comprehensive Guide",
       excerpt:
-        "Learn how to make different smart home ecosystems work together for a seamless home automation experience.",
+        "Learn how to make different smart home ecosystems work together for a seamless experience.",
       date: "February 28, 2025",
       author: "Lisa Thompson",
-      category: "Integration",
+      category: "Ecosystems",
     },
     {
       id: 6,
@@ -63,39 +67,63 @@ export default function BlogPage() {
   ]
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-background selection:bg-primary selection:text-primary-foreground">
       <SiteHeader />
 
       <main className="flex-1">
-        <PageHeader title="BLOG" backgroundImage="/placeholder.svg?height=500&width=1200" alt="Smart home blog" />
+        {/* Simple Page Header */}
+        <div className="pt-32 pb-12 border-b border-foreground/5 mb-12">
+           <div className="container px-4">
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                 <div className="space-y-2">
+                    <div className="flex items-center gap-2 text-primary">
+                       <Sparkles className="h-4 w-4" />
+                       <span className="text-[10px] uppercase font-black tracking-widest">EDITORIAL</span>
+                    </div>
+                    <h1 className="text-4xl md:text-6xl font-black tracking-tighter uppercase italic">ZENITH <span className="text-primary italic">JOURNAL</span></h1>
+                 </div>
+                 <p className="text-muted-foreground max-w-sm text-sm leading-relaxed">
+                   Deep dives into the future of home automation, private cloud systems, and intelligent lifestyle engineering.
+                 </p>
+              </div>
+           </div>
+        </div>
 
-        <section className="container py-12 md:py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post) => (
-              <Card key={post.id} className="overflow-hidden flex flex-col">
-                <div className="aspect-video relative bg-gray-100">
-                  <Image
-                    src={`/placeholder.svg?height=300&width=600&text=Blog+${post.id}`}
-                    alt={post.title}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <CardContent className="p-6 flex-1">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-xs font-medium px-2 py-1 bg-gray-100 rounded-full">{post.category}</span>
-                    <span className="text-xs text-muted-foreground">{post.date}</span>
+        <section className="container px-4 pb-24">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            {blogPosts.map((post, i) => (
+              <motion.div
+                key={post.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <Card className="group glass h-full rounded-[2.5rem] border-foreground/5 hover:border-primary/50 transition-all duration-500 overflow-hidden flex flex-col">
+                  <div className="aspect-[16/10] relative bg-muted overflow-hidden">
+                    <Image
+                      src={`/placeholder.svg?height=400&width=600&text=Blog+${post.id}`}
+                      alt={post.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100"
+                    />
+                    <div className="absolute top-6 left-6">
+                       <Badge className="bg-primary text-primary-foreground text-[10px] font-black uppercase tracking-widest px-3 py-1">{post.category}</Badge>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold mb-2">{post.title}</h3>
-                  <p className="text-muted-foreground mb-3">{post.excerpt}</p>
-                  <p className="text-sm text-muted-foreground">By {post.author}</p>
-                </CardContent>
-                <CardFooter className="p-6 pt-0">
-                  <Button variant="outline" className="w-full">
-                    Read More
-                  </Button>
-                </CardFooter>
-              </Card>
+                  <CardContent className="p-8 flex flex-col flex-1">
+                    <div className="flex items-center gap-4 mb-4 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground italic">
+                      <div className="flex items-center gap-1.5"><Calendar className="h-3 w-3" /> {post.date}</div>
+                      <div className="flex items-center gap-1.5"><User className="h-3 w-3" /> {post.author}</div>
+                    </div>
+                    <h3 className="text-2xl font-bold tracking-tight mb-4 group-hover:text-primary transition-colors leading-tight italic">{post.title}</h3>
+                    <p className="text-muted-foreground text-sm mb-8 flex-1 leading-relaxed">{post.excerpt}</p>
+                    <Button variant="ghost" className="w-fit p-0 h-auto hover:bg-transparent hover:text-primary font-black uppercase tracking-widest text-xs group/btn italic">
+                      READ ARTICLE <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                    </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </section>
@@ -105,4 +133,5 @@ export default function BlogPage() {
     </div>
   )
 }
+
 

@@ -2,16 +2,17 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { ChevronDown, X } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
+import { ChevronDown, X, Filter, ShoppingBag, Search, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
-import { PageHeader } from "@/components/page-header"
 import { Slider } from "@/components/ui/slider"
 import { Badge } from "@/components/ui/badge"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
 
 // Sample device data
 const sampleDevices = [
@@ -23,7 +24,7 @@ const sampleDevices = [
     brand: "Ecobee",
     category: "Climate",
     ecosystems: ["HomeKit", "Alexa", "Google Home"],
-    image: "/placeholder.svg?height=300&width=300&text=Thermostat",
+    image: "/placeholder.svg?height=400&width=400&text=Thermostat",
   },
   {
     id: 2,
@@ -33,7 +34,7 @@ const sampleDevices = [
     brand: "Reolink",
     category: "Security",
     ecosystems: ["Alexa", "Google Home"],
-    image: "/placeholder.svg?height=300&width=300&text=Camera",
+    image: "/placeholder.svg?height=400&width=400&text=Camera",
   },
   {
     id: 3,
@@ -43,7 +44,7 @@ const sampleDevices = [
     brand: "Philips",
     category: "Lighting",
     ecosystems: ["HomeKit", "Alexa", "Google Home", "Matter"],
-    image: "/placeholder.svg?height=300&width=300&text=Bulb",
+    image: "/placeholder.svg?height=400&width=400&text=Bulb",
   },
   {
     id: 4,
@@ -53,7 +54,7 @@ const sampleDevices = [
     brand: "August",
     category: "Security",
     ecosystems: ["HomeKit", "Alexa"],
-    image: "/placeholder.svg?height=300&width=300&text=Lock",
+    image: "/placeholder.svg?height=400&width=400&text=Lock",
   },
   {
     id: 5,
@@ -63,7 +64,7 @@ const sampleDevices = [
     brand: "Aqara",
     category: "Sensors",
     ecosystems: ["HomeKit", "Alexa", "Google Home", "Matter"],
-    image: "/placeholder.svg?height=300&width=300&text=Sensor",
+    image: "/placeholder.svg?height=400&width=400&text=Sensor",
   },
   {
     id: 6,
@@ -73,319 +74,203 @@ const sampleDevices = [
     brand: "TP-Link",
     category: "Power",
     ecosystems: ["Alexa", "Google Home"],
-    image: "/placeholder.svg?height=300&width=300&text=Plug",
+    image: "/placeholder.svg?height=400&width=400&text=Plug",
   },
 ]
 
-// Filter options
 const brands = ["Ecobee", "Reolink", "Philips", "August", "Aqara", "TP-Link"]
-const categories = ["Climate", "Security", "Lighting", "Sensors", "Power"]
-const ecosystems = ["HomeKit", "Alexa", "Google Home", "Matter"]
-const priceRanges = [
-  { min: 0, max: 50, label: "Under $50" },
-  { min: 50, max: 100, label: "$50 - $100" },
-  { min: 100, max: 200, label: "$100 - $200" },
-  { min: 200, max: 1000, label: "$200+" },
-]
+const categoriesArr = ["Climate", "Security", "Lighting", "Sensors", "Power"]
+const ecosystemsArr = ["HomeKit", "Alexa", "Google Home", "Matter"]
 
 export default function DevicesPage() {
   const [expandedFilter, setExpandedFilter] = useState<string | null>("brand")
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 200])
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 500])
   const [selectedBrands, setSelectedBrands] = useState<string[]>([])
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
   const [selectedEcosystems, setSelectedEcosystems] = useState<string[]>([])
-  const [activeFilters, setActiveFilters] = useState<string[]>([])
+  const [searchQuery, setSearchQuery] = useState("")
 
   const toggleFilter = (filter: string) => {
-    if (expandedFilter === filter) {
-      setExpandedFilter(null)
+    setExpandedFilter(expandedFilter === filter ? null : filter)
+  }
+
+  const toggleItem = (list: string[], setList: (l: string[]) => void, item: string) => {
+    if (list.includes(item)) {
+      setList(list.filter((i) => i !== item))
     } else {
-      setExpandedFilter(filter)
+      setList([...list, item])
     }
-  }
-
-  const toggleBrand = (brand: string) => {
-    if (selectedBrands.includes(brand)) {
-      setSelectedBrands(selectedBrands.filter((b) => b !== brand))
-      setActiveFilters(activeFilters.filter((f) => f !== `Brand: ${brand}`))
-    } else {
-      setSelectedBrands([...selectedBrands, brand])
-      setActiveFilters([...activeFilters, `Brand: ${brand}`])
-    }
-  }
-
-  const toggleCategory = (category: string) => {
-    if (selectedCategories.includes(category)) {
-      setSelectedCategories(selectedCategories.filter((c) => c !== category))
-      setActiveFilters(activeFilters.filter((f) => f !== `Category: ${category}`))
-    } else {
-      setSelectedCategories([...selectedCategories, category])
-      setActiveFilters([...activeFilters, `Category: ${category}`])
-    }
-  }
-
-  const toggleEcosystem = (ecosystem: string) => {
-    if (selectedEcosystems.includes(ecosystem)) {
-      setSelectedEcosystems(selectedEcosystems.filter((e) => e !== ecosystem))
-      setActiveFilters(activeFilters.filter((f) => f !== `Ecosystem: ${ecosystem}`))
-    } else {
-      setSelectedEcosystems([...selectedEcosystems, ecosystem])
-      setActiveFilters([...activeFilters, `Ecosystem: ${ecosystem}`])
-    }
-  }
-
-  const handlePriceChange = (value: number[]) => {
-    const [min, max] = value
-    setPriceRange([min, max])
-
-    // Update active filters for price
-    const existingPriceFilter = activeFilters.find((f) => f.startsWith("Price:"))
-    if (existingPriceFilter) {
-      setActiveFilters(activeFilters.filter((f) => !f.startsWith("Price:")))
-    }
-
-    setActiveFilters([...activeFilters.filter((f) => !f.startsWith("Price:")), `Price: $${min} - $${max}`])
-  }
-
-  const removeFilter = (filter: string) => {
-    if (filter.startsWith("Brand:")) {
-      const brand = filter.replace("Brand: ", "")
-      setSelectedBrands(selectedBrands.filter((b) => b !== brand))
-    } else if (filter.startsWith("Category:")) {
-      const category = filter.replace("Category: ", "")
-      setSelectedCategories(selectedCategories.filter((c) => c !== category))
-    } else if (filter.startsWith("Ecosystem:")) {
-      const ecosystem = filter.replace("Ecosystem: ", "")
-      setSelectedEcosystems(selectedEcosystems.filter((e) => e !== ecosystem))
-    } else if (filter.startsWith("Price:")) {
-      setPriceRange([0, 200])
-    }
-
-    setActiveFilters(activeFilters.filter((f) => f !== filter))
   }
 
   const clearAllFilters = () => {
     setSelectedBrands([])
     setSelectedCategories([])
     setSelectedEcosystems([])
-    setPriceRange([0, 200])
-    setActiveFilters([])
+    setPriceRange([0, 500])
+    setSearchQuery("")
   }
 
-  // Filter devices based on selected filters
   const filteredDevices = sampleDevices.filter((device) => {
     const matchesBrand = selectedBrands.length === 0 || selectedBrands.includes(device.brand)
     const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(device.category)
-    const matchesEcosystem =
-      selectedEcosystems.length === 0 || device.ecosystems.some((eco) => selectedEcosystems.includes(eco))
+    const matchesEcosystem = selectedEcosystems.length === 0 || device.ecosystems.some((eco) => selectedEcosystems.includes(eco))
     const matchesPrice = device.price >= priceRange[0] && device.price <= priceRange[1]
+    const matchesSearch = device.name.toLowerCase().includes(searchQuery.toLowerCase()) || device.brand.toLowerCase().includes(searchQuery.toLowerCase())
 
-    return matchesBrand && matchesCategory && matchesEcosystem && matchesPrice
+    return matchesBrand && matchesCategory && matchesEcosystem && matchesPrice && matchesSearch
   })
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-background selection:bg-primary selection:text-primary-foreground">
       <SiteHeader />
 
       <main className="flex-1">
-        <PageHeader
-          title="ALL DEVICES"
-          backgroundImage="/placeholder.svg?height=500&width=1200"
-          alt="Modern living room with smart home features"
-        />
-
-        <section className="container py-8 md:py-12">
-          {/* Active Filters */}
-          {activeFilters.length > 0 && (
-            <div className="mb-6">
-              <div className="flex items-center justify-between mb-2">
-                <h3 className="font-medium">Active Filters</h3>
-                <Button variant="ghost" size="sm" onClick={clearAllFilters} className="text-sm">
-                  Clear All
-                </Button>
+        {/* Simple Page Header */}
+        <div className="pt-32 pb-12 border-b border-foreground/5 mb-12">
+           <div className="container px-4">
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                 <div className="space-y-2">
+                    <div className="flex items-center gap-2 text-primary">
+                       <Sparkles className="h-4 w-4" />
+                       <span className="text-[10px] uppercase font-black tracking-widest">CURATED CATALOG</span>
+                    </div>
+                    <h1 className="text-4xl md:text-6xl font-black tracking-tighter uppercase italic">DEVICES <span className="text-primary">&</span> HARDWARE</h1>
+                 </div>
+                 <div className="w-full md:w-96 relative">
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Input 
+                      placeholder="Search ecosystem..." 
+                      className="h-14 pl-12 bg-muted/50 border-none rounded-2xl"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                 </div>
               </div>
-              <div className="flex flex-wrap gap-2">
-                {activeFilters.map((filter) => (
-                  <Badge key={filter} variant="secondary" className="flex items-center gap-1 px-3 py-1">
-                    {filter}
-                    <X className="h-3 w-3 cursor-pointer" onClick={() => removeFilter(filter)} />
-                  </Badge>
-                ))}
-              </div>
-            </div>
-          )}
+           </div>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <section className="container px-4 pb-24">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
             {/* Filters Sidebar */}
-            <div className="space-y-2">
-              <div
-                className="p-4 bg-gray-50 rounded-md flex justify-between items-center cursor-pointer"
-                onClick={() => toggleFilter("brand")}
-              >
-                <h3 className="font-medium">Search By Brand</h3>
-                <ChevronDown
-                  className={`h-5 w-5 transition-transform ${expandedFilter === "brand" ? "rotate-180" : ""}`}
-                />
+            <div className="space-y-6">
+              <div className="flex items-center justify-between">
+                <h3 className="text-sm font-black uppercase tracking-widest opacity-50">Filter Options</h3>
+                <Button variant="ghost" size="sm" onClick={clearAllFilters} className="text-xs hover:text-primary">RESET</Button>
               </div>
 
-              {expandedFilter === "brand" && (
-                <div className="p-4 bg-white border rounded-md">
-                  <div className="space-y-2">
-                    {brands.map((brand) => (
-                      <div key={brand} className="flex items-center space-x-2">
-                        <Checkbox
-                          id={`brand-${brand}`}
-                          checked={selectedBrands.includes(brand)}
-                          onCheckedChange={() => toggleBrand(brand)}
-                        />
-                        <Label htmlFor={`brand-${brand}`} className="text-sm cursor-pointer">
-                          {brand}
-                        </Label>
-                      </div>
-                    ))}
+              <div className="space-y-3">
+                {[
+                  { id: "brand", label: "Brands", items: brands, state: selectedBrands, setState: setSelectedBrands },
+                  { id: "category", label: "Categories", items: categoriesArr, state: selectedCategories, setState: setSelectedCategories },
+                  { id: "ecosystem", label: "Ecosystems", items: ecosystemsArr, state: selectedEcosystems, setState: setSelectedEcosystems },
+                ].map((sec) => (
+                  <div key={sec.id} className="glass rounded-[1.5rem] overflow-hidden">
+                    <button
+                      className="w-full p-5 flex justify-between items-center text-sm font-bold uppercase tracking-tight"
+                      onClick={() => toggleFilter(sec.id)}
+                    >
+                      {sec.label}
+                      <ChevronDown className={`h-4 w-4 transition-transform ${expandedFilter === sec.id ? "rotate-180" : ""}`} />
+                    </button>
+                    <AnimatePresence>
+                      {expandedFilter === sec.id && (
+                        <motion.div
+                          initial={{ height: 0 }}
+                          animate={{ height: "auto" }}
+                          exit={{ height: 0 }}
+                          className="px-5 pb-5 overflow-hidden"
+                        >
+                          <div className="space-y-3 pt-2">
+                            {sec.items.map((item) => (
+                              <div key={item} className="flex items-center space-x-3">
+                                <Checkbox
+                                  id={`${sec.id}-${item}`}
+                                  checked={sec.state.includes(item)}
+                                  onCheckedChange={() => toggleItem(sec.state, sec.setState, item)}
+                                  className="h-5 w-5 rounded-lg border-primary/20 data-[state=checked]:bg-primary"
+                                />
+                                <Label htmlFor={`${sec.id}-${item}`} className="text-sm cursor-pointer hover:text-primary transition-colors">
+                                  {item}
+                                </Label>
+                              </div>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
-                </div>
-              )}
+                ))}
 
-              <div
-                className="p-4 bg-gray-50 rounded-md flex justify-between items-center cursor-pointer"
-                onClick={() => toggleFilter("category")}
-              >
-                <h3 className="font-medium">Search By Category</h3>
-                <ChevronDown
-                  className={`h-5 w-5 transition-transform ${expandedFilter === "category" ? "rotate-180" : ""}`}
-                />
-              </div>
-
-              {expandedFilter === "category" && (
-                <div className="p-4 bg-white border rounded-md">
-                  <div className="space-y-2">
-                    {categories.map((category) => (
-                      <div key={category} className="flex items-center space-x-2">
-                        <Checkbox
-                          id={`category-${category}`}
-                          checked={selectedCategories.includes(category)}
-                          onCheckedChange={() => toggleCategory(category)}
-                        />
-                        <Label htmlFor={`category-${category}`} className="text-sm cursor-pointer">
-                          {category}
-                        </Label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              <div
-                className="p-4 bg-gray-50 rounded-md flex justify-between items-center cursor-pointer"
-                onClick={() => toggleFilter("price")}
-              >
-                <h3 className="font-medium">Search By Price</h3>
-                <ChevronDown
-                  className={`h-5 w-5 transition-transform ${expandedFilter === "price" ? "rotate-180" : ""}`}
-                />
-              </div>
-
-              {expandedFilter === "price" && (
-                <div className="p-4 bg-white border rounded-md">
+                {/* Price Filter */}
+                <div className="glass rounded-[1.5rem] p-5 space-y-4">
+                  <h3 className="text-sm font-bold uppercase tracking-tight">Price Range</h3>
                   <div className="space-y-6">
-                    <div>
-                      <div className="flex justify-between mb-2">
-                        <span className="text-sm">${priceRange[0]}</span>
-                        <span className="text-sm">${priceRange[1]}</span>
-                      </div>
-                      <Slider
-                        defaultValue={[0, 200]}
-                        max={200}
-                        step={10}
-                        value={priceRange}
-                        onValueChange={handlePriceChange}
-                        className="my-4"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      {priceRanges.map((range, index) => (
-                        <div key={index} className="flex items-center space-x-2">
-                          <Checkbox
-                            id={`price-${index}`}
-                            checked={priceRange[0] === range.min && priceRange[1] === range.max}
-                            checked={priceRange[0] === range.min && priceRange[1] === range.max}
-                            onCheckedChange={() => handlePriceChange([range.min, range.max])}
-                          />
-                          <Label htmlFor={`price-${index}`} className="text-sm cursor-pointer">
-                            {range.label}
-                          </Label>
-                        </div>
-                      ))}
+                    <Slider
+                      defaultValue={[0, 500]}
+                      max={500}
+                      step={10}
+                      value={priceRange}
+                      onValueChange={(v) => setPriceRange(v as [number, number])}
+                      className="py-4"
+                    />
+                    <div className="flex justify-between items-center bg-background/50 p-3 rounded-xl border border-foreground/5">
+                      <span className="text-xs font-black tracking-tight">${priceRange[0]}</span>
+                      <span className="text-xs opacity-20">—</span>
+                      <span className="text-xs font-black tracking-tight">${priceRange[1]}</span>
                     </div>
                   </div>
                 </div>
-              )}
-
-              <div
-                className="p-4 bg-gray-50 rounded-md flex justify-between items-center cursor-pointer"
-                onClick={() => toggleFilter("ecosystem")}
-              >
-                <h3 className="font-medium">Search By Ecosystem</h3>
-                <ChevronDown
-                  className={`h-5 w-5 transition-transform ${expandedFilter === "ecosystem" ? "rotate-180" : ""}`}
-                />
               </div>
-
-              {expandedFilter === "ecosystem" && (
-                <div className="p-4 bg-white border rounded-md">
-                  <div className="space-y-2">
-                    {ecosystems.map((ecosystem) => (
-                      <div key={ecosystem} className="flex items-center space-x-2">
-                        <Checkbox
-                          id={`ecosystem-${ecosystem}`}
-                          checked={selectedEcosystems.includes(ecosystem)}
-                          onCheckedChange={() => toggleEcosystem(ecosystem)}
-                        />
-                        <Label htmlFor={`ecosystem-${ecosystem}`} className="text-sm cursor-pointer">
-                          {ecosystem}
-                        </Label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
 
             {/* Products Grid */}
-            <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* Product Cards */}
+            <div className="lg:col-span-3">
               {filteredDevices.length > 0 ? (
-                filteredDevices.map((device) => (
-                  <Card key={device.id} className="overflow-hidden">
-                    <div className="aspect-square relative bg-gray-100">
-                      <Image src={device.image || "/placeholder.svg"} alt={device.name} fill className="object-cover" />
-                    </div>
-                    <CardContent className="p-4">
-                      <h3 className="font-medium mb-1">{device.name}</h3>
-                      <p className="text-sm text-muted-foreground mb-2">{device.description}</p>
-                      <div className="flex flex-wrap gap-1 mb-3">
-                        {device.ecosystems.map((eco) => (
-                          <Badge key={eco} variant="outline" className="text-xs">
-                            {eco}
-                          </Badge>
-                        ))}
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="font-bold">${device.price.toFixed(2)}</span>
-                        <Button variant="outline" size="sm" className="rounded-full">
-                          View Details
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
+                  {filteredDevices.map((device) => (
+                    <motion.div
+                      layout
+                      key={device.id}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                    >
+                      <Card className="group glass-dark h-full rounded-[2.5rem] border-foreground/5 hover:border-primary/50 transition-all duration-500 overflow-hidden flex flex-col">
+                        <div className="aspect-[4/5] relative bg-muted relative overflow-hidden">
+                           <Image 
+                            src={device.image} 
+                            alt={device.name} 
+                            fill 
+                            className="object-cover group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-100" 
+                           />
+                           <div className="absolute top-4 right-4 flex flex-col gap-2">
+                              {device.ecosystems.slice(0, 2).map(eco => (
+                                 <Badge key={eco} className="bg-white/10 backdrop-blur-md text-white border-white/10 text-[10px] font-black uppercase tracking-widest">{eco}</Badge>
+                              ))}
+                           </div>
+                        </div>
+                        <CardContent className="p-8 flex flex-col flex-1">
+                          <div className="text-[10px] font-black uppercase tracking-widest text-primary mb-2 italic">{device.brand}</div>
+                          <h3 className="text-xl font-bold tracking-tight mb-2 group-hover:text-primary transition-colors">{device.name}</h3>
+                          <p className="text-sm text-muted-foreground mb-8 flex-1 leading-relaxed">{device.description}</p>
+                          <div className="flex justify-between items-center pt-6 border-t border-foreground/5">
+                            <span className="text-2xl font-black tracking-tighter italic">${device.price}</span>
+                            <Button size="icon" className="h-12 w-12 rounded-xl bg-foreground text-background hover:bg-primary hover:text-foreground transition-all">
+                              <ShoppingBag className="h-5 w-5" />
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  ))}
+                </div>
               ) : (
-                <div className="md:col-span-3 flex flex-col items-center justify-center py-12">
-                  <p className="text-lg text-muted-foreground mb-4">No devices match your current filters</p>
-                  <Button variant="outline" onClick={clearAllFilters}>
-                    Clear All Filters
-                  </Button>
+                <div className="h-96 flex flex-col items-center justify-center text-center space-y-4">
+                   <div className="p-6 bg-muted/50 rounded-full">
+                      <Search className="h-10 w-10 text-muted-foreground opacity-20" />
+                   </div>
+                   <h3 className="text-2xl font-bold">No hardware found</h3>
+                   <p className="text-muted-foreground">Try adjusting your filters or search query.</p>
+                   <Button variant="outline" onClick={clearAllFilters} className="rounded-xl mt-4">CLEAR ALL FILTERS</Button>
                 </div>
               )}
             </div>
@@ -397,4 +282,5 @@ export default function DevicesPage() {
     </div>
   )
 }
+
 

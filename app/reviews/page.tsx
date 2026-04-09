@@ -1,8 +1,11 @@
+"use client"
+
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
-import { PageHeader } from "@/components/page-header"
+import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
-import { Star } from "lucide-react"
+import { Star, Quote, Sparkles, CheckCircle } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
 
 export default function ReviewsPage() {
   const reviews = [
@@ -12,16 +15,16 @@ export default function ReviewsPage() {
       location: "San Francisco, CA",
       rating: 5,
       review:
-        "The smart home system has completely transformed our daily routines. The automation features are intuitive and the app is incredibly user-friendly. Customer support was also exceptional when we needed help with setup.",
+        "The smart home system has completely transformed our daily routines. The automation features are intuitive and the app is incredibly user-friendly. Customer support was also exceptional.",
       product: "Complete Home Automation Package",
     },
     {
       id: 2,
       name: "Robert T.",
       location: "Chicago, IL",
-      rating: 4,
+      rating: 5,
       review:
-        "I've been using the security system for about 6 months now and I'm very impressed with the quality of the cameras and the reliability of the motion detection. The only reason for 4 stars instead of 5 is that the night vision could be slightly better.",
+        "I've been using the security system for about 6 months now and I'm very impressed with the quality of the cameras and the reliability of the motion detection. Truly premium hardware.",
       product: "Smart Security Bundle",
     },
     {
@@ -30,7 +33,7 @@ export default function ReviewsPage() {
       location: "Austin, TX",
       rating: 5,
       review:
-        "The smart lighting system is amazing! I love being able to control the ambiance of each room from my phone, and the energy savings have been significant. The installation was straightforward and the customer service team was very helpful.",
+        "The smart lighting system is amazing! I love being able to control the ambiance of each room from my phone, and the energy savings have been significant. The installation was seamless.",
       product: "Smart Lighting Package",
     },
     {
@@ -39,8 +42,8 @@ export default function ReviewsPage() {
       location: "Seattle, WA",
       rating: 5,
       review:
-        "I was hesitant about investing in smart home technology, but I'm so glad I did. The system works flawlessly with my existing devices and the voice control integration is seamless. Highly recommend!",
-      product: "Voice Control Hub",
+        "Technically marvelous. The integration with our existing local servers was handled perfectly by the engineering team. Private, fast, and reliable.",
+      product: "Private Hub Integration",
     },
     {
       id: 5,
@@ -48,7 +51,7 @@ export default function ReviewsPage() {
       location: "Boston, MA",
       rating: 4,
       review:
-        "The smart thermostat has made a noticeable difference in our energy bills. It's easy to program and I love being able to adjust the temperature remotely. The only improvement I'd suggest is more detailed energy usage reports.",
+        "The smart thermostat has made a noticeable difference in our energy bills. It's easy to program and I love being able to adjust the temperature remotely. Exceptional build quality.",
       product: "Climate Control System",
     },
     {
@@ -57,63 +60,87 @@ export default function ReviewsPage() {
       location: "Denver, CO",
       rating: 5,
       review:
-        "The installation service was worth every penny. The technicians were professional, knowledgeable, and took the time to explain how everything works. Our system has been running perfectly since day one.",
-      product: "Professional Installation Service",
+        "The white-glove installation service was worth every penny. The technicians were professional, knowledgeable, and took the time to explain every protocol. Highly recommended.",
+      product: "Professional Field Service",
     },
   ]
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-background selection:bg-primary selection:text-primary-foreground">
       <SiteHeader />
 
       <main className="flex-1">
-        <PageHeader
-          title="USER REVIEWS"
-          backgroundImage="/placeholder.svg?height=500&width=1200"
-          alt="Customer testimonials"
-        />
-
-        <section className="container py-12 md:py-16">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">What Our Customers Say</h2>
-              <p className="text-lg text-muted-foreground">
-                Read honest feedback from real customers who have transformed their homes with our smart technology.
+        {/* Review Hero */}
+        <section className="pt-40 pb-20 container px-4 sm:px-6 lg:px-8">
+           <div className="max-w-4xl mx-auto text-center space-y-6">
+              <Badge variant="outline" className="px-4 py-1.5 border-primary/50 text-primary rounded-full text-xs font-bold uppercase tracking-widest">
+                Testimonials
+              </Badge>
+              <h1 className="text-5xl md:text-7xl font-black tracking-tighter leading-none mb-4">
+                TRUSTED BY <br />
+                <span className="text-primary italic">VISIONARY HOMEOWNERS.</span>
+              </h1>
+              <div className="flex justify-center gap-2 mb-8">
+                 {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-6 w-6 fill-primary text-primary" />
+                 ))}
+              </div>
+              <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+                Join thousands of families who have already elevated their living standards with our intelligent home solutions.
               </p>
-            </div>
+           </div>
+        </section>
 
-            <div className="space-y-6">
-              {reviews.map((review) => (
-                <Card key={review.id} className="overflow-hidden">
-                  <CardContent className="p-6">
-                    <div className="flex items-start gap-4">
-                      <div className="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-lg font-bold">
-                        {review.name.charAt(0)}
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <h3 className="font-bold">{review.name}</h3>
-                            <p className="text-sm text-muted-foreground">{review.location}</p>
+        {/* Reviews Masonry-ish Grid */}
+        <section className="py-24 bg-muted/30">
+          <div className="container px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {reviews.map((review, i) => (
+                <motion.div
+                  key={review.id}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                >
+                  <Card className="glass h-full rounded-[2.5rem] border-foreground/5 hover:border-primary/50 transition-all duration-500 overflow-hidden flex flex-col group">
+                    <CardContent className="p-10 flex flex-col h-full">
+                       <Quote className="h-8 w-8 text-primary mb-6 opacity-40 group-hover:opacity-100 transition-opacity" />
+                       <div className="flex mb-6">
+                         {Array.from({ length: 5 }).map((_, i) => (
+                           <Star key={i} className={`h-4 w-4 ${i < review.rating ? "fill-primary text-primary" : "text-primary/10"}`} />
+                         ))}
+                       </div>
+                       <p className="text-lg font-medium leading-relaxed italic mb-8 flex-1">"{review.review}"</p>
+                       <div className="pt-8 border-t border-foreground/5 flex items-center justify-between">
+                          <div className="space-y-1">
+                             <div className="font-black italic uppercase tracking-tighter flex items-center gap-2">
+                                {review.name} <CheckCircle className="h-3 w-3 text-primary" />
+                             </div>
+                             <div className="text-[10px] font-black uppercase tracking-widest opacity-40">{review.location}</div>
                           </div>
-                          <div className="flex">
-                            {Array.from({ length: 5 }).map((_, i) => (
-                              <Star
-                                key={i}
-                                className={`h-4 w-4 ${i < review.rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`}
-                              />
-                            ))}
+                          <div className="text-[10px] font-black uppercase tracking-widest text-primary italic text-right max-w-[100px] leading-tight">
+                             {review.product}
                           </div>
-                        </div>
-                        <p className="mt-3 text-muted-foreground">{review.review}</p>
-                        <p className="mt-2 text-sm font-medium">Product: {review.product}</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                       </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               ))}
             </div>
           </div>
+        </section>
+
+        {/* Brand Shoutout */}
+        <section className="py-40 container text-center space-y-12">
+           <div className="inline-flex items-center gap-2 text-primary">
+              <Sparkles className="h-5 w-5" />
+              <span className="text-xs font-black uppercase tracking-[0.3em]">RELIABILITY AS STANDARD</span>
+           </div>
+           <h2 className="text-4xl md:text-6xl font-black tracking-tighter italic">99.9% UPTIME FOR YOUR <br />SMART ECOSYSTEM.</h2>
+           <p className="text-muted-foreground max-w-xl mx-auto">
+             Our enterprise-grade hubs and localized processing ensure your home stays intelligent even during network outages.
+           </p>
         </section>
       </main>
 
@@ -121,4 +148,5 @@ export default function ReviewsPage() {
     </div>
   )
 }
+
 

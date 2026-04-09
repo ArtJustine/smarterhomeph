@@ -1,44 +1,81 @@
+"use client"
+
+import { motion } from "framer-motion"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
-import { PageHeader } from "@/components/page-header"
+import { Badge } from "@/components/ui/badge"
+import { Users, Target, Shield, Heart } from "lucide-react"
 
 export default function AboutPage() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-background selection:bg-primary selection:text-primary-foreground">
       <SiteHeader />
 
       <main className="flex-1">
-        <PageHeader title="ABOUT US" backgroundImage="/placeholder.svg?height=500&width=1200" alt="Smart home team" />
+        {/* Simple Premium Hero */}
+        <section className="pt-40 pb-20 container px-4 sm:px-6 lg:px-8">
+           <div className="max-w-4xl mx-auto text-center space-y-6">
+              <Badge variant="outline" className="px-4 py-1.5 border-primary/50 text-primary rounded-full text-xs font-bold uppercase tracking-widest">
+                Our Vision
+              </Badge>
+              <h1 className="text-5xl md:text-7xl font-black tracking-tighter leading-none">
+                DEFINING THE FUTURE OF <br />
+                <span className="text-primary italic">INTELLIGENT LIVING.</span>
+              </h1>
+              <p className="text-xl text-muted-foreground leading-relaxed">
+                We don't just sell gadgets; we engineer private, secure, and intuitive smart home environments for the modern lifestyle.
+              </p>
+           </div>
+        </section>
 
-        <section className="container py-12 md:py-16">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              At SmartHome, we're dedicated to transforming houses into intelligent, responsive living spaces that
-              enhance comfort, security, and efficiency. Our mission is to make smart home technology accessible,
-              intuitive, and seamlessly integrated into everyday life.
-            </p>
+        {/* Values Grid */}
+        <section className="py-24 bg-muted/30">
+          <div className="container px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                { title: "Privacy First", desc: "Local-first processing ensures your data never leaves your home.", icon: Shield },
+                { title: "Expert Engineering", desc: "Our technicians are certified in top automation protocols.", icon: Target },
+                { title: "User Centered", desc: "Every interface we build is designed for absolute simplicity.", icon: Heart },
+                { title: "Scaleable Support", desc: "From studios to estates, we grow with your automation needs.", icon: Users },
+              ].map((val, i) => (
+                <motion.div 
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="glass p-8 rounded-[2rem] space-y-4 hover:border-primary/50 transition-colors"
+                >
+                  <div className="p-3 bg-primary/10 rounded-xl w-fit text-primary">
+                    <val.icon className="h-6 w-6" />
+                  </div>
+                  <h3 className="text-xl font-bold italic tracking-tight">{val.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{val.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-            <h2 className="text-3xl font-bold mb-6">Our Story</h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              Founded in 2015, SmartHome began with a simple idea: that technology should work for people, not the other
-              way around. Our team of engineers, designers, and home automation enthusiasts came together with a shared
-              vision of creating smart home solutions that are both powerful and easy to use.
-            </p>
+        <section className="py-24 container px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto space-y-16">
+            <div className="space-y-6">
+              <h2 className="text-3xl font-black italic tracking-tighter uppercase">Our Story</h2>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Founded in 2015, Zenith began with a simple idea: that technology should work for people, not the other
+                way around. Our team of engineers, designers, and home automation enthusiasts came together with a shared
+                vision of creating smart home solutions that are both powerful and easy to use.
+              </p>
+            </div>
 
-            <h2 className="text-3xl font-bold mb-6">Our Approach</h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              We believe in a holistic approach to smart home technology. Rather than offering isolated gadgets, we
-              create ecosystems where devices work together seamlessly. Our solutions are designed to be flexible,
-              scalable, and compatible with the leading smart home platforms.
-            </p>
-
-            <h2 className="text-3xl font-bold mb-6">Our Commitment</h2>
-            <p className="text-lg text-muted-foreground">
-              Customer satisfaction is at the heart of everything we do. We're committed to providing exceptional
-              service, reliable products, and ongoing support to ensure your smart home experience exceeds expectations.
-              We continuously innovate and improve our offerings based on customer feedback and emerging technologies.
-            </p>
+            <div className="space-y-6">
+              <h2 className="text-3xl font-black italic tracking-tighter uppercase">Our Approach</h2>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                We believe in a holistic approach to smart home technology. Rather than offering isolated gadgets, we
+                create ecosystems where devices work together seamlessly. Our solutions are designed to be flexible,
+                scalable, and compatible with the leading smart home platforms like Matter, HomeKit, and Home Assistant.
+              </p>
+            </div>
           </div>
         </section>
       </main>
@@ -47,4 +84,5 @@ export default function AboutPage() {
     </div>
   )
 }
+
 

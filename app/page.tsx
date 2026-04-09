@@ -2,492 +2,191 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { useState, useEffect, useRef } from "react"
+import { motion } from "framer-motion"
+import { 
+  ArrowRight, 
+  ShieldCheck, 
+  Zap, 
+  Smartphone, 
+  Cpu, 
+  ChevronRight,
+  Play,
+  Star
+} from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+
+const brands = [
+  { name: "Aqara", logo: "/aqara-logo 1.svg" },
+  { name: "Govee", logo: "/Govee-Logo 1.svg" },
+  { name: "Eve", logo: "/eve.svg" },
+  { name: "Reolink", logo: "/reolink.svg" },
+  { name: "Abode", logo: "/abode.svg" },
+  { name: "YoLink", logo: "/yolink.svg" },
+]
 
 export default function Home() {
-  const [activeRoom, setActiveRoom] = useState("living-room")
-  const featuresRef = useRef<HTMLDivElement>(null)
-  const [isFeatureVisible, setIsFeatureVisible] = useState(false)
-
-  // Room images mapping
-  const roomImages = {
-    "living-room": "/HeroImage.svg?height=500&width=1200",
-    kitchen: "/kitchenImage.svg?height=500&width=1200&text=Kitchen",
-    bedroom: "/bedroomImage.svg?height=500&width=1200&text=Bedroom",
-    bathroom: "/bathroomImage.svg?height=500&width=1200&text=Bathroom",
-  }
-
-  // Room alt text mapping
-  const roomAltText = {
-    "living-room": "Modern living room with smart home features",
-    kitchen: "Smart kitchen with connected appliances",
-    bedroom: "Bedroom with smart lighting and climate control",
-    bathroom: "Bathroom with smart fixtures and automation",
-  }
-
-  // Set up intersection observer for scroll animations
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsFeatureVisible(true)
-          }
-        })
-      },
-      { threshold: 0.1 },
-    )
-
-    if (featuresRef.current) {
-      observer.observe(featuresRef.current)
-    }
-
-    return () => {
-      if (featuresRef.current) {
-        observer.unobserve(featuresRef.current)
-      }
-    }
-  }, [])
-
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col overflow-x-hidden selection:bg-primary selection:text-primary-foreground">
+      <SiteHeader />
+      
       <main className="flex-1">
-        {/* Hero Section with integrated header */}
-        <section className="relative">
-          <div className="relative h-[350px] sm:h-[450px] md:h-[550px] w-full">
-            <Image
-              src={roomImages[activeRoom as keyof typeof roomImages] || "/placeholder.svg"}
-              alt={roomAltText[activeRoom as keyof typeof roomAltText]}
-              fill
-              className="object-cover brightness-95"
-              priority
-            />
-            <div className="absolute inset-0 bg-black/5" />
-            <SiteHeader />
+        {/* Breathtaking Hero Section */}
+        <section className="relative min-h-screen flex items-center pt-24 pb-12 overflow-hidden">
+          {/* Background Image with Overlay */}
+          <div className="absolute inset-0 z-0">
+             <Image
+               src="/luxury_smart_home_hero_1775713596304.png"
+               alt="Luxury Smart Home"
+               fill
+               className="object-cover scale-105"
+               priority
+             />
+             <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-background" />
+             <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent hidden lg:block" />
           </div>
 
-          {/* Room Category Buttons */}
-          <div className="container relative -mt-10 sm:-mt-16 flex justify-center">
-            <div className="flex flex-wrap gap-2 justify-center px-6 mb-6">
-              <Button
-                variant={activeRoom === "living-room" ? "secondary" : "outline"}
-                className="rounded-full bg-white/90 hover:bg-white text-xs sm:text-sm"
-                onClick={() => setActiveRoom("living-room")}
+          <div className="container relative z-10 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
               >
-                Living Room
-              </Button>
-              <Button
-                variant={activeRoom === "kitchen" ? "secondary" : "outline"}
-                className="rounded-full bg-white/90 hover:bg-white text-xs sm:text-sm"
-                onClick={() => setActiveRoom("kitchen")}
-              >
-                Kitchen
-              </Button>
-              <Button
-                variant={activeRoom === "bedroom" ? "secondary" : "outline"}
-                className="rounded-full bg-white/90 hover:bg-white text-xs sm:text-sm"
-                onClick={() => setActiveRoom("bedroom")}
-              >
-                Bedroom
-              </Button>
-              <Button
-                variant={activeRoom === "bathroom" ? "secondary" : "outline"}
-                className="rounded-full bg-white/90 hover:bg-white text-xs sm:text-sm"
-                onClick={() => setActiveRoom("bathroom")}
-              >
-                Bathroom
-              </Button>
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="container py-8 md:py-12 text-center">
-          <Button className="rounded-full bg-green-200 text-green-800 hover:bg-green-300 hover:text-green-900 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg font-medium">
-            GET YOUR FREE QUOTE!
-          </Button>
-
-          <div className="mt-8 md:mt-12">
-            <p className="text-center text-muted-foreground mb-6 md:mb-8 px-4">
-              Partnered with Trusted Brands to Bring You Seamless Smart Home Integrations.
-            </p>
-            <div className="overflow-hidden">
-              <div className="flex items-center gap-6 md:gap-8 lg:gap-12 animate-marquee">
-                <Image
-                  src="/aqara-logo 1.svg?height=30&width=80"
-                  alt="Aqara"
-                  width={80}
-                  height={30}
-                  className="w-16 sm:w-20 md:w-24"
-                />
-                <Image
-                  src="/Govee-Logo 1.svg?height=30&width=80"
-                  alt="Govee"
-                  width={80}
-                  height={30}
-                  className="w-16 sm:w-20 md:w-24"
-                />
-                <Image
-                  src="/eve.svg?height=30&width=80"
-                  alt="Eve"
-                  width={80}
-                  height={30}
-                  className="w-16 sm:w-20 md:w-24"
-                />
-                <Image
-                  src="/reolink.svg?height=30&width=80"
-                  alt="Reolink"
-                  width={80}
-                  height={30}
-                  className="w-16 sm:w-20 md:w-24"
-                />
-                <Image
-                  src="/abode.svg?height=30&width=80"
-                  alt="Abode"
-                  width={80}
-                  height={30}
-                  className="w-16 sm:w-20 md:w-24"
-                />
-                <Image
-                  src="/yolink.svg?height=30&width=80"
-                  alt="YoLink"
-                  width={80}
-                  height={30}
-                  className="w-16 sm:w-20 md:w-24"
-                />
-                {/* Duplicate logos for continuous animation */}
-                <Image
-                  src="/aqara-logo 1.svg?height=30&width=80"
-                  alt="Aqara"
-                  width={80}
-                  height={30}
-                  className="w-16 sm:w-20 md:w-24"
-                />
-                <Image
-                  src="/Govee-Logo 1.svg?height=30&width=80"
-                  alt="Govee"
-                  width={80}
-                  height={30}
-                  className="w-16 sm:w-20 md:w-24"
-                />
-                <Image
-                  src="/eve.svg?height=30&width=80"
-                  alt="Eve"
-                  width={80}
-                  height={30}
-                  className="w-16 sm:w-20 md:w-24"
-                />
-                <Image
-                  src="/reolink.svg?height=30&width=80"
-                  alt="Reolink"
-                  width={80}
-                  height={30}
-                  className="w-16 sm:w-20 md:w-24"
-                />
-                <Image
-                  src="/abode.svg?height=30&width=80"
-                  alt="Abode"
-                  width={80}
-                  height={30}
-                  className="w-16 sm:w-20 md:w-24"
-                />
-                <Image
-                  src="/yolink.svg?height=30&width=80"
-                  alt="YoLink"
-                  width={80}
-                  height={30}
-                  className="w-16 sm:w-20 md:w-24"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Features Section */}
-        <section ref={featuresRef} className="py-10 md:py-16">
-          <div className="container px-4 sm:px-6 lg:px-8">
-            {/* Desktop version (hidden on small screens) */}
-            <div className="hidden md:block relative rounded-lg overflow-hidden">
-              <div className="relative h-auto aspect-[16/10] lg:aspect-[16/7] w-full">
-                <Image
-                  src="/iphones.svg?height=800&width=1400"
-                  alt="Smart home features background"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-black/30" />
-              </div>
-
-              <div className="absolute inset-0 z-10">
-                <div className="h-full w-full p-6 md:p-8 lg:p-10 flex flex-col justify-center">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
-                    {/* Left column */}
-                    <div
-                      className={`transition-all duration-1000 ${isFeatureVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
-                    >
-                      <h2 className="text-3xl lg:text-4xl font-bold mb-3 md:mb-4 text-white">
-                        Manage and monitor your home from anywhere.
-                      </h2>
-                      <p className="text-white/80 mb-6">Enhance Your Home Management System</p>
-
-                      <Card className="bg-white/80 border-0 backdrop-blur-sm mb-6">
-                        <CardContent className="p-4 sm:p-6">
-                          <h3 className="font-bold mb-2">Effortless Remote Home Control</h3>
-                          <p className="text-sm text-muted-foreground">
-                            Enjoy unparalleled convenience with the ability to manage your home from anywhere, putting
-                            you in complete control, no matter where life takes you.
-                          </p>
-                        </CardContent>
-                      </Card>
-
-                      <Button className="rounded-full bg-green-200 text-green-800 hover:bg-green-300 hover:text-green-900 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg font-medium w-full sm:w-auto">
-                        GET YOUR FREE QUOTE!
-                      </Button>
-                    </div>
-
-                    {/* Right column */}
-                    <div
-                      className={`transition-all duration-1000 delay-300 ${isFeatureVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
-                    >
-                      <div className="space-y-4">
-                        <Card className="bg-white/80 border-0 backdrop-blur-sm">
-                          <CardContent className="p-4 sm:p-6">
-                            <h3 className="font-bold mb-2">Infinite Possibilities Await</h3>
-                            <p className="text-sm text-muted-foreground">
-                              Unlock endless opportunities with our multifunctional smart home ecosystem, designed to
-                              adapt and grow with your unique lifestyle.
-                            </p>
-                          </CardContent>
-                        </Card>
-
-                        <Card className="bg-white/80 border-0 backdrop-blur-sm">
-                          <CardContent className="p-4 sm:p-6">
-                            <h3 className="font-bold mb-2">Compatible with Any Ecosystem</h3>
-                            <p className="text-sm text-muted-foreground">
-                              No matter which smart home platform you use, our devices seamlessly integrate to work
-                              perfectly for you.
-                            </p>
-                          </CardContent>
-                        </Card>
-
-                        <Card className="bg-white/80 border-0 backdrop-blur-sm">
-                          <CardContent className="p-4 sm:p-6">
-                            <h3 className="font-bold mb-2">Smart Security Solutions</h3>
-                            <p className="text-sm text-muted-foreground">
-                              Protect your home with advanced security features that keep you informed and your property
-                              safe at all times.
-                            </p>
-                          </CardContent>
-                        </Card>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Mobile version (shown only on small screens) */}
-            <div className="md:hidden bg-gray-100 rounded-lg overflow-hidden">
-              <div className="p-6">
-                <h2 className="text-2xl font-bold mb-3 text-center">Manage and monitor your home from anywhere.</h2>
-                <p className="text-center text-muted-foreground mb-6">Enhance Your Home Management System</p>
-              </div>
-
-              <div className="relative h-48 w-full">
-                <Image
-                  src="/iphones.svg?height=800&width=1400"
-                  alt="Smart home features background"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-black/20" />
-              </div>
-
-              <div className="p-6">
-                <Card className="mb-6">
-                  <CardContent className="p-4">
-                    <h3 className="font-bold mb-2">Effortless Remote Home Control</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Enjoy unparalleled convenience with the ability to manage your home from anywhere, putting you in
-                      complete control, no matter where life takes you.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <div className="flex justify-center mb-8">
-                  <Button className="rounded-full bg-green-200 text-green-800 hover:bg-green-300 hover:text-green-900 px-6 py-4 text-base font-medium">
-                    GET YOUR FREE QUOTE!
-                  </Button>
-                </div>
-
-                <div className="space-y-4">
-                  <Card>
-                    <CardContent className="p-4">
-                      <h3 className="font-bold mb-2">Infinite Possibilities Await</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Unlock endless opportunities with our multifunctional smart home ecosystem, designed to adapt
-                        and grow with your unique lifestyle.
-                      </p>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardContent className="p-4">
-                      <h3 className="font-bold mb-2">Compatible with Any Ecosystem</h3>
-                      <p className="text-sm text-muted-foreground">
-                        No matter which smart home platform you use, our devices seamlessly integrate to work perfectly
-                        for you.
-                      </p>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardContent className="p-4">
-                      <h3 className="font-bold mb-2">Smart Security Solutions</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Protect your home with advanced security features that keep you informed and your property safe
-                        at all times.
-                      </p>
-                    </CardContent>
-                  </Card>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Effortless Living Section */}
-        <section className="py-10 md:py-16">
-          <div className="container px-4 sm:px-6 lg:px-8">
-            {/* Desktop version (hidden on small screens) */}
-            <div className="hidden md:block relative rounded-lg overflow-hidden">
-              <div className="relative h-auto aspect-[16/10] lg:aspect-[16/7] w-full">
-                <Image
-                  src="/effortlessImage.svg?height=500&width=1200"
-                  alt="Modern smart home exterior"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-black/30" />
-              </div>
-
-              <div className="absolute inset-0 z-10">
-                <div className="h-full w-full p-6 md:p-8 lg:p-10 flex flex-col justify-center">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
-                    {/* Left column - Content */}
-                    <div className="bg-black/30 backdrop-blur-sm rounded-lg p-6">
-                      <h2 className="text-3xl lg:text-4xl font-bold text-white mb-3">
-                        Effortless Living with Smart Automation
-                      </h2>
-                      <p className="text-white/80 mb-6">Smarter Home, Seamless Living</p>
-
-                      <div className="space-y-4">
-                        <Card className="bg-white/90 border-0">
-                          <CardContent className="p-4">
-                            <h3 className="font-bold mb-1">Convenience</h3>
-                            <p className="text-sm text-muted-foreground">
-                              Transform your home with smart automation for ultimate convenience and control.
-                            </p>
-                          </CardContent>
-                        </Card>
-
-                        <Card className="bg-white/90 border-0">
-                          <CardContent className="p-4">
-                            <h3 className="font-bold mb-1">Comfort</h3>
-                            <p className="text-sm text-muted-foreground">
-                              Unlock a new level of comfort and efficiency with seamless home automation solutions.
-                            </p>
-                          </CardContent>
-                        </Card>
-
-                        <Card className="bg-white/90 border-0">
-                          <CardContent className="p-4">
-                            <h3 className="font-bold mb-1">Security</h3>
-                            <p className="text-sm text-muted-foreground">
-                              Enjoy increased security, and energy savings with effortless automation.
-                            </p>
-                          </CardContent>
-                        </Card>
-                      </div>
-                    </div>
-
-                    {/* Right column - Button for desktop */}
-                    <div className="flex items-center justify-center">
-                      <Link href="/blog">
-                        <Button className="rounded-full bg-green-200 text-green-800 hover:bg-green-300 hover:text-green-900 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg font-medium">
-                          Learn More
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Mobile version (shown only on small screens) */}
-            <div className="md:hidden bg-gray-100 rounded-lg overflow-hidden">
-              <div className="relative h-48 w-full">
-                <Image
-                  src="/effortlessImage.svg?height=500&width=1200"
-                  alt="Modern smart home exterior"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-black/30" />
-
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <h2 className="text-2xl font-bold text-white px-4 text-center">
-                    Effortless Living with Smart Automation
-                  </h2>
-                </div>
-              </div>
-
-              <div className="p-6">
-                <p className="text-center text-muted-foreground mb-6">Smarter Home, Seamless Living</p>
-
-                <div className="space-y-4 mb-8">
-                  <Card>
-                    <CardContent className="p-4">
-                      <h3 className="font-bold mb-1">Convenience</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Transform your home with smart automation for ultimate convenience and control.
-                      </p>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardContent className="p-4">
-                      <h3 className="font-bold mb-1">Comfort</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Unlock a new level of comfort and efficiency with seamless home automation solutions.
-                      </p>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardContent className="p-4">
-                      <h3 className="font-bold mb-1">Security</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Enjoy increased security, and energy savings with effortless automation.
-                      </p>
-                    </CardContent>
-                  </Card>
-                </div>
-
-                <div className="flex justify-center">
-                  <Link href="/blog">
-                    <Button className="rounded-full bg-green-200 text-green-800 hover:bg-green-300 hover:text-green-900 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg font-medium">
-                      Learn More
+                <Badge variant="outline" className="mb-6 px-4 py-1.5 border-primary/50 bg-primary/10 text-primary-foreground backdrop-blur-md rounded-full text-xs font-bold uppercase tracking-[0.2em]">
+                  Next-Gen Home Automation
+                </Badge>
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[0.9] tracking-tighter mb-8">
+                  SMARTER <br />
+                  <span className="text-primary italic">LIVING</span> <br />
+                  DEFINED.
+                </h1>
+                <p className="text-xl text-white/70 max-w-xl mb-10 leading-relaxed font-medium">
+                  Experience the pinnacle of luxury and convenience. Build your custom smart ecosystem with professional installation and 24/7 support.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Link href="/builder">
+                    <Button size="lg" className="h-16 px-10 rounded-2xl text-lg font-bold shadow-2xl shadow-primary/30 group">
+                      START BUILDING <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                     </Button>
                   </Link>
+                  <Button size="lg" variant="outline" className="h-16 px-10 rounded-2xl text-lg font-bold glass-dark text-white border-white/20 hover:bg-white/10">
+                    OUR SOLUTIONS
+                  </Button>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
+
+          {/* Floating Element for Hero */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5, duration: 1 }}
+            className="absolute bottom-20 right-[10%] hidden lg:block"
+          >
+            <div className="glass-dark p-6 rounded-[2.5rem] border-white/10 flex items-center gap-6 shadow-2xl">
+               <div className="p-4 bg-primary/20 rounded-[1.5rem] text-primary">
+                 <Cpu className="h-8 w-8" />
+               </div>
+               <div>
+                  <div className="flex items-center gap-1 mb-1">
+                    {[1, 2, 3, 4, 5].map(i => <Star key={i} className="h-3 w-3 fill-primary text-primary" />)}
+                  </div>
+                  <p className="text-white font-black text-xl italic uppercase tracking-tighter">1,200+ Homes</p>
+                  <p className="text-white/50 text-xs font-bold uppercase tracking-widest">Digitized locally</p>
+               </div>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* Brand Showcase - Marquee */}
+        <section className="py-12 bg-background border-y border-foreground/5">
+          <div className="container overflow-hidden">
+             <p className="text-center text-[10px] uppercase font-black tracking-[0.3em] text-muted-foreground mb-12">INTEGRATED ECOSYSTEM PARTNERS</p>
+             <div className="flex items-center gap-12 animate-marquee whitespace-nowrap">
+                {[...brands, ...brands].map((brand, i) => (
+                  <div key={i} className="flex items-center gap-2 px-8 grayscale hover:grayscale-0 transition-all opacity-40 hover:opacity-100">
+                    <Image src={brand.logo} alt={brand.name} width={100} height={40} className="h-8 object-contain" />
+                  </div>
+                ))}
+             </div>
+          </div>
+        </section>
+
+        {/* Visual Features Section */}
+        <section className="py-24 lg:py-40 relative">
+          <div className="container px-4">
+             <div className="grid lg:grid-cols-2 gap-24 items-center">
+                <div className="relative">
+                   <div className="aspect-square rounded-[3rem] overflow-hidden rotate-3 shadow-2xl relative z-10">
+                      <Image 
+                        src="/luxury_smart_home_hero_1775713596304.png" 
+                        alt="Security Focus" 
+                        fill 
+                        className="object-cover brightness-75 transition-transform hover:scale-110 duration-1000" 
+                      />
+                      <div className="absolute inset-0 bg-primary/10 mix-blend-overlay" />
+                   </div>
+                   <div className="absolute -inset-10 bg-primary/10 blur-[100px] rounded-full -z-10" />
+                   {/* Overlay Stats */}
+                   <div className="absolute -bottom-8 -left-8 glass p-8 rounded-3xl z-20 shadow-2xl animate-bounce-slow">
+                      <p className="text-3xl font-black italic tracking-tighter">0.02s</p>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Response Latency</p>
+                   </div>
+                </div>
+
+                <div className="space-y-12">
+                   <div>
+                      <Badge className="bg-primary/10 text-primary border-none mb-6">WHY CHOOSE US</Badge>
+                      <h2 className="text-4xl md:text-6xl font-black tracking-tighter leading-none mb-6">INTELLIGENCE THAT <br /><span className="text-muted-foreground/30">WORKS FOR YOU.</span></h2>
+                      <p className="text-muted-foreground text-lg leading-relaxed">Unlike off-the-shelf solutions, we engineer private, local-first environments that prioritize your privacy without sacrificing connectivity.</p>
+                   </div>
+
+                   <div className="grid gap-6">
+                      {[
+                        { title: "Military Grade Privacy", desc: "Local server processing, no cloud dependency.", icon: ShieldCheck },
+                        { title: "Matter Ready", desc: "Seamless cross-platform device interoperability.", icon: Zap },
+                        { title: "Adaptive Lighting", desc: "Circadian rhythms adjusted to your sleep cycle.", icon: Smartphone },
+                      ].map((item, i) => (
+                        <div key={i} className="group flex items-start gap-6 p-6 rounded-2xl hover:bg-muted/50 transition-colors border border-transparent hover:border-foreground/5">
+                           <div className="p-4 bg-muted rounded-xl group-hover:bg-primary/20 group-hover:text-primary transition-colors">
+                             <item.icon className="h-6 w-6" />
+                           </div>
+                           <div>
+                              <h3 className="font-bold text-xl mb-1">{item.title}</h3>
+                              <p className="text-muted-foreground">{item.desc}</p>
+                           </div>
+                        </div>
+                      ))}
+                   </div>
+                </div>
+             </div>
+          </div>
+        </section>
+
+        {/* The Builder CTA Section */}
+        <section className="py-24 container px-4">
+           <div className="relative rounded-[4rem] overflow-hidden bg-foreground text-background p-12 lg:p-24">
+              <div className="absolute top-0 right-0 w-1/2 h-full opacity-20 pointer-events-none">
+                 <div className="grid grid-cols-6 h-full border-l border-white/10">
+                    {Array.from({length: 24}).map((_, i) => <div key={i} className="border-r border-b border-white/5" />)}
+                 </div>
+              </div>
+              
+              <div className="relative z-10 max-w-2xl">
+                 <h2 className="text-4xl md:text-6xl font-black tracking-tighter leading-none mb-8">READY TO BUILD YOUR <br /><span className="text-primary italic">ZENITH HOME?</span></h2>
+                 <p className="text-background/60 text-xl mb-12">Our interactive builder helps you plan your smart conversion in minutes. Get an instant quote for your property type.</p>
+                 <Link href="/builder">
+                   <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 h-16 px-12 rounded-2xl font-black text-xl shadow-2xl shadow-primary/20">
+                     OPEN BUILDER <ChevronRight className="ml-2 h-6 w-6" />
+                   </Button>
+                 </Link>
+              </div>
+           </div>
         </section>
       </main>
 
@@ -495,4 +194,5 @@ export default function Home() {
     </div>
   )
 }
+
 
