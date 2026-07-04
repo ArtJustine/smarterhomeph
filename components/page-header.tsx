@@ -8,18 +8,19 @@ interface PageHeaderProps {
 
 export function PageHeader({ title, backgroundImage, alt }: PageHeaderProps) {
   return (
-    <section className="relative">
-      <div className="relative h-[300px] sm:h-[400px] w-full">
+    <section className="relative overflow-hidden border-b border-foreground/5 bg-black">
+      <div className="relative h-[250px] sm:h-[350px] w-full flex items-center justify-center">
         <Image 
           src={backgroundImage || "/placeholder.svg"}
           alt={alt}
           fill
-          className="object-cover brightness-95"
+          className="object-cover brightness-[0.35] scale-105 transition-transform duration-1000"
           priority
         />
-        <div className="absolute inset-0 bg-black/10" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black">
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/50" />
+        
+        <div className="container relative z-10 px-4 text-center">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tighter uppercase italic text-glow select-none animate-fade-in">
             {title}
           </h1>
         </div>

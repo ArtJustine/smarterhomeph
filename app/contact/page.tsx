@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
@@ -13,7 +13,9 @@ import {
   CheckCircle2, 
   Clock,
   MessageSquare,
-  Globe
+  Globe,
+  Sparkles,
+  Trash2
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { 
@@ -39,9 +41,16 @@ const formSchema = z.object({
   message: z.string().min(10, { message: "Message must be at least 10 characters." }),
 })
 
+interface BuilderConfig {
+  propertyType: string
+  rooms: Array<{ name: string; devices: string[] }>
+  totalPrice: number
+}
+
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [loadedConfig, setLoadedConfig] = useState<BuilderConfig | null>(null)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -54,6 +63,34 @@ export default function ContactPage() {
     },
   })
 
+  // Read configuration from LocalStorage on mount
+  useEffect(() => {
+    const raw = localStorage.getItem("smarterhome_builder_config")
+    if (raw) {
+      try {
+        const parsed = JSON.parse(raw) as BuilderConfig
+        setLoadedConfig(parsed)
+        
+        // Auto-populate form subject and message details
+        const roomsStr = parsed.rooms.map(r => `• ${r.name}: ${r.devices.join(", ")}`).join("\n")
+        const prepopulatedMessage = `I would like to request a professional installation consultation for my custom smart system.\n\nProperty Type: ${parsed.propertyType}\nRooms Setup:\n${roomsStr}\n\nEstimated Total Investment: $${parsed.totalPrice.toLocaleString()}`
+        
+        form.setValue("subject", `Custom Smart ${parsed.propertyType} Consultation`)
+        form.setValue("message", prepopulatedMessage)
+      } catch (e) {
+        console.error("Failed to parse smart builder configuration", e)
+      }
+    }
+  }, [form])
+
+  const handleClearConfig = () => {
+    localStorage.removeItem("smarterhome_builder_config")
+    setLoadedConfig(null)
+    form.setValue("subject", "")
+    form.setValue("message", "")
+    toast.success("Builder configuration cleared.")
+  }
+
   function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true)
     // Simulate API call
@@ -61,19 +98,21 @@ export default function ContactPage() {
       console.log(values)
       setIsSubmitting(false)
       setIsSubmitted(true)
-      toast.success("Message sent successfully!")
+      localStorage.removeItem("smarterhome_builder_config")
+      setLoadedConfig(null)
+      toast.success("Message transmitted successfully!")
     }, 2000)
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="flex min-h-screen flex-col bg-background selection:bg-primary selection:text-primary-foreground">
       <SiteHeader />
       
       <main className="flex-1 pt-32 pb-24">
         <div className="container px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-16 items-start">
-              {/* Left Column: Contact Info */}
+              {/* Left Column: Contact Info & Configuration */}
               <div className="space-y-12">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -88,11 +127,63 @@ export default function ContactPage() {
                   </p>
                 </motion.div>
 
+                {/* Display configuration if imported from LocalStorage */}
+                {loadedConfig && (
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="p-8 bg-primary/5 border border-primary/20 rounded-[2.5rem] space-y-6 relative overflow-hidden"
+                  >
+                    <div className="absolute top-0 right-0 w-24 h-24 bg-primary/10 blur-xl rounded-full" />
+                    
+                    <div className="flex justify-between items-center border-b border-white/10 pb-4">
+                      <div className="flex items-center gap-2 text-primary font-black uppercase tracking-widest text-xs">
+                        <Sparkles className="h-4 w-4" />
+                        <span>Custom Build Imported</span>
+                      </div>
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        onClick={handleClearConfig} 
+                        className="text-xs text-destructive hover:bg-destructive/10 hover:text-destructive h-auto p-2 rounded-xl font-bold flex gap-1 items-center"
+                      >
+                        <Trash2 className="h-3.5 w-3.5" /> CLEAR
+                      </Button>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center text-sm">
+                        <span className="text-white/50 font-bold uppercase tracking-wider">Property Class</span>
+                        <span className="font-bold text-white uppercase italic">{loadedConfig.propertyType}</span>
+                      </div>
+                      
+                      <div className="space-y-3 max-h-[160px] overflow-y-auto pr-2 border-y border-white/5 py-4">
+                        {loadedConfig.rooms.map((r, idx) => (
+                          <div key={idx} className="space-y-1">
+                            <p className="text-xs font-bold text-white/80 uppercase tracking-wider">{r.name}</p>
+                            <p className="text-[11px] text-white/45 truncate leading-relaxed">{r.devices.join(", ")}</p>
+                          </div>
+                        ))}
+                      </div>
+                      
+                      <div className="flex justify-between items-end">
+                        <div>
+                          <p className="text-[10px] text-white/40 font-bold uppercase tracking-wider">Configuration Total</p>
+                          <p className="text-3xl font-black text-primary italic tracking-tighter text-glow">${loadedConfig.totalPrice.toLocaleString()}</p>
+                        </div>
+                        <Badge variant="outline" className="border-primary/30 bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest px-3 py-1">
+                          Specs Attached
+                        </Badge>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+
                 <div className="grid gap-8">
                   {[
                     { title: "Email Us", desc: "hello@smarterhomeph.com", icon: Mail },
-                    { title: "Call Us", desc: "+1 (555) 000-0000", icon: Phone },
-                    { title: "Visit Us", desc: "123 Innovation Way, Tech City", icon: MapPin },
+                    { title: "Call Us", desc: "+63 (2) 8000-0000", icon: Phone },
+                    { title: "Visit Us", desc: "123 Innovation Way, Taguig City", icon: MapPin },
                     { title: "Support", desc: "24/7 Priority Support", icon: Clock },
                   ].map((item, i) => (
                     <motion.div 
@@ -103,10 +194,10 @@ export default function ContactPage() {
                       className="flex gap-6 group"
                     >
                       <div className="p-4 bg-muted rounded-2xl group-hover:bg-primary/20 group-hover:text-primary transition-colors h-fit">
-                        <item.icon className="h-6 w-6" />
+                        <item.icon className="h-6 w-6 text-white" />
                       </div>
                       <div>
-                        <h3 className="font-bold text-lg mb-1">{item.title}</h3>
+                        <h3 className="font-bold text-lg text-white mb-1">{item.title}</h3>
                         <p className="text-muted-foreground font-medium">{item.desc}</p>
                       </div>
                     </motion.div>
@@ -134,12 +225,12 @@ export default function ContactPage() {
                      <div className="mx-auto w-20 h-20 bg-primary/20 text-primary rounded-full flex items-center justify-center">
                         <CheckCircle2 className="h-10 w-10" />
                      </div>
-                     <h2 className="text-3xl font-bold italic tracking-tighter">MESSAGE RECEIVED!</h2>
-                     <p className="text-muted-foreground">Thank you for reaching out. One of our smart home specialists will contact you within 24 hours.</p>
+                     <h2 className="text-3xl font-black italic tracking-tighter text-white">TRANSMISSION SECURED!</h2>
+                     <p className="text-muted-foreground">Thank you for reaching out. One of our lead automation engineers will contact you within 24 hours.</p>
                      <Button 
                        variant="outline" 
                        onClick={() => setIsSubmitted(false)} 
-                       className="rounded-xl px-8"
+                       className="rounded-xl px-8 border-white/10 hover:bg-white/5 text-white"
                      >
                        Send Another Message
                      </Button>
@@ -153,9 +244,9 @@ export default function ContactPage() {
                           name="name"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="font-bold uppercase tracking-widest text-[10px]">Full Name</FormLabel>
+                              <FormLabel className="font-bold uppercase tracking-widest text-[10px] text-white">Full Name</FormLabel>
                               <FormControl>
-                                <Input placeholder="John Doe" {...field} className="h-14 bg-background/50 rounded-xl" />
+                                <Input placeholder="John Doe" {...field} className="h-14 bg-background/50 border-white/10 text-white rounded-xl" />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -166,9 +257,9 @@ export default function ContactPage() {
                           name="email"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="font-bold uppercase tracking-widest text-[10px]">Email Address</FormLabel>
+                              <FormLabel className="font-bold uppercase tracking-widest text-[10px] text-white">Email Address</FormLabel>
                               <FormControl>
-                                <Input placeholder="john@example.com" {...field} className="h-14 bg-background/50 rounded-xl" />
+                                <Input placeholder="john@example.com" {...field} className="h-14 bg-background/50 border-white/10 text-white rounded-xl" />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -182,9 +273,9 @@ export default function ContactPage() {
                           name="phone"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="font-bold uppercase tracking-widest text-[10px]">Phone Number</FormLabel>
+                              <FormLabel className="font-bold uppercase tracking-widest text-[10px] text-white">Phone Number</FormLabel>
                               <FormControl>
-                                <Input placeholder="+1 (555) 000-0000" {...field} className="h-14 bg-background/50 rounded-xl" />
+                                <Input placeholder="09170000000" {...field} className="h-14 bg-background/50 border-white/10 text-white rounded-xl" />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -195,9 +286,9 @@ export default function ContactPage() {
                           name="subject"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="font-bold uppercase tracking-widest text-[10px]">Interest</FormLabel>
+                              <FormLabel className="font-bold uppercase tracking-widest text-[10px] text-white">Subject</FormLabel>
                               <FormControl>
-                                <Input placeholder="Security System" {...field} className="h-14 bg-background/50 rounded-xl" />
+                                <Input placeholder="Consultation Request" {...field} className="h-14 bg-background/50 border-white/10 text-white rounded-xl" />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -210,11 +301,11 @@ export default function ContactPage() {
                         name="message"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="font-bold uppercase tracking-widest text-[10px]">Your Message</FormLabel>
+                            <FormLabel className="font-bold uppercase tracking-widest text-[10px] text-white">Your Project Details</FormLabel>
                             <FormControl>
                               <Textarea 
-                                placeholder="Tell us about your project..." 
-                                className="min-h-[150px] bg-background/50 rounded-xl py-4" 
+                                placeholder="Describe your smart home vision..." 
+                                className="min-h-[180px] bg-background/50 border-white/10 text-white rounded-xl py-4" 
                                 {...field} 
                               />
                             </FormControl>

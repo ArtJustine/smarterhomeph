@@ -116,7 +116,13 @@ export default function ServicesPage() {
                             </li>
                           ))}
                        </ul>
-                       <Link href={`/devices?category=${cat.id}`}>
+                       <Link href={`/devices?category=${
+                         cat.id === "lighting" ? "Lighting" :
+                         cat.id === "security" ? "Security" :
+                         cat.id === "climate" ? "Climate" :
+                         cat.id === "automation" ? "Sensors" :
+                         cat.id === "entertainment" ? "Power" : "Power"
+                       }`}>
                          <Button variant="outline" className="rounded-xl w-full h-12 border-foreground/10 hover:bg-primary hover:text-primary-foreground transition-all">
                            EXPLORE <ArrowRight className="ml-2 h-4 w-4" />
                          </Button>

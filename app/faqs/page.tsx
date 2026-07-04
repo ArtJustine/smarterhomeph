@@ -11,7 +11,7 @@ export default function FAQsPage() {
       <main className="flex-1">
         <PageHeader
           title="FREQUENTLY ASKED QUESTIONS"
-          backgroundImage="/placeholder.svg?height=500&width=1200"
+          backgroundImage="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200&auto=format&fit=crop"
           alt="Customer support"
         />
 

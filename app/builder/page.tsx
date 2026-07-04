@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { 
   Building2, 
@@ -26,6 +27,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Progress } from "@/components/ui/progress"
+import { toast } from "sonner"
 
 // Types
 type PropertyType = "condo" | "townhouse" | "house" | "office"
@@ -37,6 +39,7 @@ interface Device {
   price: number
   category: DeviceCategory
   icon: any
+  image: string
 }
 
 interface Room {
@@ -53,13 +56,13 @@ const PROPERTY_TYPES = [
 ]
 
 const AVAILABLE_DEVICES: Device[] = [
-  { id: "l1", name: "Smart Bulb White", price: 15, category: "lighting", icon: Lightbulb },
-  { id: "l2", name: "Smart RGB Strip", price: 45, category: "lighting", icon: Sparkles },
-  { id: "s1", name: "Indoor Camera", price: 89, category: "security", icon: ShieldCheck },
-  { id: "s2", name: "Smart Lock", price: 199, category: "security", icon: Zap },
-  { id: "c1", name: "Smart Thermostat", price: 149, category: "climate", icon: Thermometer },
-  { id: "e1", name: "Smart Speaker", price: 59, category: "entertainment", icon: Music },
-  { id: "e2", name: "TV Controller", price: 35, category: "entertainment", icon: Tv },
+  { id: "l1", name: "Smart Bulb White", price: 15, category: "lighting", icon: Lightbulb, image: "https://images.unsplash.com/photo-1550524514-9b50228b3a7b?q=80&w=150&auto=format&fit=crop" },
+  { id: "l2", name: "Smart RGB Strip", price: 45, category: "lighting", icon: Sparkles, image: "https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?q=80&w=150&auto=format&fit=crop" },
+  { id: "s1", name: "Indoor Camera", price: 89, category: "security", icon: ShieldCheck, image: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?q=80&w=150&auto=format&fit=crop" },
+  { id: "s2", name: "Smart Lock Pro", price: 199, category: "security", icon: Zap, image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=150&auto=format&fit=crop" },
+  { id: "c1", name: "Smart Thermostat", price: 149, category: "climate", icon: Thermometer, image: "https://images.unsplash.com/photo-1595814433015-e6f548d5120a?q=80&w=150&auto=format&fit=crop" },
+  { id: "e1", name: "Smart Speaker", price: 59, category: "entertainment", icon: Music, image: "https://images.unsplash.com/photo-1543512214-318c7553f230?q=80&w=150&auto=format&fit=crop" },
+  { id: "e2", name: "TV Controller", price: 35, category: "entertainment", icon: Tv, image: "https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?q=80&w=150&auto=format&fit=crop" },
 ]
 
 export default function BuilderPage() {
@@ -88,6 +91,7 @@ export default function BuilderPage() {
       }
       return room
     }))
+    toast.success(`Added ${device.name} to ${activeRoom?.name}`)
   }
 
   const removeDeviceFromRoom = (roomId: string, deviceInstanceId: string) => {
@@ -115,6 +119,21 @@ export default function BuilderPage() {
     if (activeRoomId === id) setActiveRoomId(rooms[0].id)
   }
 
+  // Export configuration to LocalStorage and navigate
+  const handleSaveAndRedirect = () => {
+    const config = {
+      propertyType: PROPERTY_TYPES.find(p => p.id === propertyType)?.name || propertyType,
+      rooms: rooms.filter(r => r.devices.length > 0).map(r => ({
+        name: r.name,
+        devices: r.devices.map(d => d.name)
+      })),
+      totalPrice
+    }
+    localStorage.setItem("smarterhome_builder_config", JSON.stringify(config))
+    toast.success("Design exported successfully! Loading consultation request...")
+    window.location.href = "/contact"
+  }
+
   return (
     <div className="flex min-h-screen flex-col bg-background selection:bg-primary selection:text-primary-foreground">
       <SiteHeader />
@@ -122,7 +141,7 @@ export default function BuilderPage() {
       <main className="flex-1 container py-8 mt-16 max-w-6xl">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-12">
           <div>
-            <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/50">
+            <h1 className="text-4xl font-black tracking-tight lg:text-5xl uppercase italic text-glow">
               Home Builder
             </h1>
             <p className="text-muted-foreground mt-2">Design your dream smart home in 4 easy steps.</p>
@@ -130,13 +149,16 @@ export default function BuilderPage() {
           <div className="flex items-center gap-6 glass p-6 rounded-2xl">
             <div className="text-right">
               <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Estimated Total</p>
-              <p className="text-3xl font-bold text-primary">${totalPrice.toLocaleString()}</p>
+              <p className="text-3xl font-black text-primary italic text-glow">${totalPrice.toLocaleString()}</p>
             </div>
-            <Link href="/contact">
-              <Button size="lg" className="rounded-xl shadow-lg shadow-primary/20" disabled={step < 3}>
-                Save Config <ChevronRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
+            <Button 
+              size="lg" 
+              className="rounded-xl shadow-lg shadow-primary/20 font-bold" 
+              disabled={step < 3}
+              onClick={handleSaveAndRedirect}
+            >
+              Save Config <ChevronRight className="ml-2 h-4 w-4" />
+            </Button>
           </div>
         </div>
 
@@ -153,7 +175,7 @@ export default function BuilderPage() {
                     </div>
                 ))}
             </div>
-            <Progress value={(step / 4) * 100} className="h-1" />
+            <Progress value={(step / 4) * 100} className="h-1 bg-muted [&>div]:bg-primary" />
         </div>
 
         <AnimatePresence mode="wait">
@@ -168,7 +190,7 @@ export default function BuilderPage() {
               {PROPERTY_TYPES.map((type) => (
                 <Card 
                   key={type.id} 
-                  className={`relative overflow-hidden cursor-pointer transition-all hover:ring-2 hover:ring-primary/50 ${propertyType === type.id ? 'ring-2 ring-primary bg-primary/5' : ''}`}
+                  className={`relative overflow-hidden cursor-pointer transition-all hover:ring-2 hover:ring-primary/50 bg-black/40 border-white/10 ${propertyType === type.id ? 'ring-2 ring-primary bg-primary/5' : ''}`}
                   onClick={() => {
                     setPropertyType(type.id as PropertyType)
                     setStep(2)
@@ -176,8 +198,8 @@ export default function BuilderPage() {
                 >
                   <CardHeader className="pb-4">
                     <type.icon className="h-10 w-10 text-primary mb-2" />
-                    <CardTitle>{type.name}</CardTitle>
-                    <CardDescription>Starting from ${type.basePrice}</CardDescription>
+                    <CardTitle className="font-bold text-white">{type.name}</CardTitle>
+                    <CardDescription className="text-white/60">Starting from ${type.basePrice}</CardDescription>
                   </CardHeader>
                 </Card>
               ))}
@@ -194,10 +216,10 @@ export default function BuilderPage() {
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {rooms.map((room) => (
-                  <Card key={room.id} className="group relative">
+                  <Card key={room.id} className="group relative bg-black/40 border-white/10">
                     <CardHeader className="p-4">
                       <input 
-                        className="bg-transparent font-bold text-lg outline-none focus:text-primary transition-colors"
+                        className="bg-transparent font-bold text-lg outline-none text-white focus:text-primary transition-colors border-b border-transparent focus:border-primary/20 pb-1"
                         value={room.name}
                         onChange={(e) => {
                            setRooms(rooms.map(r => r.id === room.id ? {...r, name: e.target.value} : r))
@@ -205,11 +227,11 @@ export default function BuilderPage() {
                       />
                     </CardHeader>
                     <CardFooter className="p-4 pt-0 justify-between items-center">
-                      <span className="text-xs text-muted-foreground">{room.devices.length} Devices</span>
+                      <span className="text-xs text-white/50">{room.devices.length} Devices</span>
                       <Button 
                         variant="ghost" 
                         size="icon" 
-                        className="opacity-0 group-hover:opacity-100 transition-opacity text-destructive"
+                        className="opacity-0 group-hover:opacity-100 transition-opacity text-destructive hover:bg-destructive/10 hover:text-destructive"
                         onClick={() => deleteRoom(room.id)}
                       >
                         <Trash2 className="h-4 w-4" />
@@ -219,7 +241,7 @@ export default function BuilderPage() {
                 ))}
                 <Button 
                   variant="outline" 
-                  className="h-32 border-dashed rounded-xl flex flex-col gap-2 hover:border-primary hover:text-primary hover:bg-primary/5 transition-all"
+                  className="h-32 border-dashed border-white/20 rounded-xl flex flex-col gap-2 hover:border-primary hover:text-primary hover:bg-primary/5 transition-all text-white/70"
                   onClick={addRoom}
                 >
                   <Plus className="h-6 w-6" />
@@ -227,7 +249,7 @@ export default function BuilderPage() {
                 </Button>
               </div>
               <div className="flex justify-end">
-                <Button size="lg" onClick={() => setStep(3)} className="rounded-xl">
+                <Button size="lg" onClick={() => setStep(3)} className="rounded-xl font-bold">
                   Next: Add Devices <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </div>
@@ -243,12 +265,12 @@ export default function BuilderPage() {
               className="grid grid-cols-1 lg:grid-cols-12 gap-8"
             >
               <div className="lg:col-span-3 space-y-4">
-                <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-4">Select Room</p>
+                <p className="text-sm font-bold uppercase tracking-widest text-white/40 mb-4">Select Room</p>
                 {rooms.map((room) => (
                   <Button
                     key={room.id}
                     variant={activeRoomId === room.id ? "default" : "ghost"}
-                    className="w-full justify-start rounded-xl py-6"
+                    className={`w-full justify-start rounded-xl py-6 border border-white/5 ${activeRoomId === room.id ? 'bg-primary text-black' : 'text-white hover:bg-white/5'}`}
                     onClick={() => setActiveRoomId(room.id)}
                   >
                     <div className="flex flex-col items-start gap-0.5">
@@ -261,29 +283,29 @@ export default function BuilderPage() {
 
               <div className="lg:col-span-6">
                 <Tabs defaultValue="lighting" className="w-full">
-                  <TabsList className="grid grid-cols-4 h-12 rounded-xl mb-6">
-                    <TabsTrigger value="lighting" className="rounded-lg">Lighting</TabsTrigger>
-                    <TabsTrigger value="security" className="rounded-lg">Security</TabsTrigger>
-                    <TabsTrigger value="climate" className="rounded-lg">Climate</TabsTrigger>
-                    <TabsTrigger value="entertainment" className="rounded-lg">AV</TabsTrigger>
+                  <TabsList className="grid grid-cols-4 h-12 bg-black/40 border border-white/10 rounded-xl mb-6 p-1">
+                    <TabsTrigger value="lighting" className="rounded-lg text-white/60 data-[state=active]:bg-primary data-[state=active]:text-black font-bold">Lighting</TabsTrigger>
+                    <TabsTrigger value="security" className="rounded-lg text-white/60 data-[state=active]:bg-primary data-[state=active]:text-black font-bold">Security</TabsTrigger>
+                    <TabsTrigger value="climate" className="rounded-lg text-white/60 data-[state=active]:bg-primary data-[state=active]:text-black font-bold">Climate</TabsTrigger>
+                    <TabsTrigger value="entertainment" className="rounded-lg text-white/60 data-[state=active]:bg-primary data-[state=active]:text-black font-bold">AV</TabsTrigger>
                   </TabsList>
                   
                   {["lighting", "security", "climate", "entertainment"].map((cat) => (
-                    <TabsContent key={cat} value={cat} className="mt-0">
+                    <TabsContent key={cat} value={cat} className="mt-0 outline-none">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {AVAILABLE_DEVICES.filter(d => d.category === cat).map((device) => (
-                          <Card key={device.id} className="hover:ring-1 hover:ring-primary/50 transition-all">
+                          <Card key={device.id} className="hover:ring-1 hover:ring-primary/50 transition-all bg-black/20 border-white/10 overflow-hidden">
                             <CardContent className="p-4 flex items-center justify-between">
                               <div className="flex items-center gap-3">
-                                <div className="p-2 bg-primary/10 rounded-lg">
-                                  <device.icon className="h-5 w-5 text-primary" />
+                                <div className="relative h-12 w-12 rounded-lg overflow-hidden flex-shrink-0 bg-muted border border-white/5">
+                                  <Image src={device.image} alt={device.name} fill className="object-cover" />
                                 </div>
                                 <div>
-                                  <p className="font-bold text-sm">{device.name}</p>
-                                  <p className="text-xs text-muted-foreground">${device.price}</p>
+                                  <p className="font-bold text-sm text-white">{device.name}</p>
+                                  <p className="text-xs text-white/60">${device.price}</p>
                                 </div>
                               </div>
-                              <Button size="icon" variant="outline" className="rounded-lg" onClick={() => addDeviceToRoom(device)}>
+                              <Button size="icon" variant="outline" className="rounded-lg h-8 w-8 border-white/10 text-white hover:bg-primary hover:text-black transition-colors" onClick={() => addDeviceToRoom(device)}>
                                 <Plus className="h-4 w-4" />
                               </Button>
                             </CardContent>
@@ -298,20 +320,20 @@ export default function BuilderPage() {
               <div className="lg:col-span-3">
                 <Card className="rounded-2xl border-primary/20 bg-primary/5 sticky top-24">
                   <CardHeader>
-                    <CardTitle className="text-lg">{activeRoom?.name} Devices</CardTitle>
+                    <CardTitle className="text-lg text-white font-bold">{activeRoom?.name} Devices</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-3">
+                  <CardContent className="space-y-3 max-h-[300px] overflow-y-auto pr-2">
                     {activeRoom?.devices.length === 0 ? (
                       <div className="text-center py-8">
-                        <Plus className="h-8 w-8 text-muted-foreground/30 mx-auto mb-2" />
-                        <p className="text-xs text-muted-foreground">No devices added to this room yet.</p>
+                        <Plus className="h-8 w-8 text-white/20 mx-auto mb-2" />
+                        <p className="text-xs text-white/55">No devices added to this room yet.</p>
                       </div>
                     ) : (
                       activeRoom?.devices.map((d) => (
-                        <div key={d.id} className="flex items-center justify-between text-sm bg-background/50 p-2 rounded-lg border border-border/50">
-                          <span className="font-medium truncate max-w-[120px]">{d.name}</span>
+                        <div key={d.id} className="flex items-center justify-between text-sm bg-black/40 p-2 rounded-lg border border-white/5">
+                          <span className="font-medium text-white truncate max-w-[120px]">{d.name}</span>
                           <div className="flex items-center gap-2">
-                            <span className="text-muted-foreground">${d.price}</span>
+                            <span className="text-white/60">${d.price}</span>
                             <button 
                               onClick={() => removeDeviceFromRoom(activeRoomId, d.id)}
                               className="text-destructive hover:bg-destructive/10 p-1 rounded transition-colors"
@@ -323,12 +345,12 @@ export default function BuilderPage() {
                       ))
                     )}
                   </CardContent>
-                  <CardFooter className="flex-col gap-4 border-t pt-4">
-                    <div className="flex justify-between w-full font-bold">
+                  <CardFooter className="flex-col gap-4 border-t border-white/10 pt-4">
+                    <div className="flex justify-between w-full font-bold text-white">
                        <span>Room Total</span>
-                       <span>${activeRoom?.devices.reduce((acc, d) => acc + d.price, 0)}</span>
+                       <span className="text-primary">${activeRoom?.devices.reduce((acc, d) => acc + d.price, 0)}</span>
                     </div>
-                    <Button className="w-full rounded-xl" onClick={() => setStep(4)}>
+                    <Button className="w-full rounded-xl font-bold" onClick={() => setStep(4)}>
                       Review Order
                     </Button>
                   </CardFooter>
@@ -347,11 +369,11 @@ export default function BuilderPage() {
             >
               <div className="text-center space-y-2">
                 <Badge variant="outline" className="text-primary border-primary/20 px-3 py-1 rounded-full uppercase tracking-widest text-[10px] font-bold">Summary</Badge>
-                <h2 className="text-3xl font-bold">Your Smart System Configuration</h2>
+                <h2 className="text-3xl font-black text-white uppercase italic tracking-tighter">Your Smart System Configuration</h2>
               </div>
 
               <div className="glass p-8 rounded-3xl space-y-6">
-                <div className="flex justify-between items-center border-b pb-4 border-foreground/10">
+                <div className="flex justify-between items-center border-b pb-4 border-white/10">
                   <div className="flex items-center gap-3">
                     <div className="p-3 bg-primary/10 rounded-2xl">
                         {PROPERTY_TYPES.find(p => p.id === propertyType)?.icon && 
@@ -362,39 +384,41 @@ export default function BuilderPage() {
                         }
                     </div>
                     <div>
-                      <p className="font-bold text-lg">{PROPERTY_TYPES.find(p => p.id === propertyType)?.name}</p>
-                      <p className="text-sm text-muted-foreground italic">Installation & Hub Setup Included</p>
+                      <p className="font-bold text-lg text-white">{PROPERTY_TYPES.find(p => p.id === propertyType)?.name}</p>
+                      <p className="text-sm text-white/50 italic">Installation & Hub Setup Included</p>
                     </div>
                   </div>
-                  <span className="font-bold text-xl">${PROPERTY_TYPES.find(p => p.id === propertyType)?.basePrice}</span>
+                  <span className="font-black text-2xl text-white italic text-glow">${PROPERTY_TYPES.find(p => p.id === propertyType)?.basePrice}</span>
                 </div>
 
                 <div className="space-y-4">
                   {rooms.filter(r => r.devices.length > 0).map(room => (
                     <div key={room.id} className="space-y-2">
-                       <h4 className="font-bold text-sm uppercase tracking-wider opacity-60 flex justify-between items-center">
+                       <h4 className="font-bold text-xs uppercase tracking-wider text-white/50 flex justify-between items-center">
                          {room.name}
-                         <span className="text-xs">${room.devices.reduce((acc, d) => acc + d.price, 0)}</span>
+                         <span className="text-xs text-white/70 font-semibold">${room.devices.reduce((acc, d) => acc + d.price, 0)}</span>
                        </h4>
                        <div className="flex flex-wrap gap-2">
-                         {room.devices.map(d => (
-                           <Badge key={d.id} variant="secondary" className="font-normal border-none bg-background/30">{d.name}</Badge>
-                         ))}
+                          {room.devices.map(d => (
+                            <Badge key={d.id} variant="secondary" className="font-normal border-none bg-white/5 text-white/80">{d.name}</Badge>
+                          ))}
                        </div>
                     </div>
                   ))}
                 </div>
 
-                <div className="pt-6 border-t border-foreground/10 flex justify-between items-end">
+                <div className="pt-6 border-t border-white/10 flex justify-between items-end">
                    <div>
-                     <p className="text-sm text-muted-foreground font-medium">Final Investment</p>
-                     <p className="text-4xl font-black text-primary tracking-tighter">${totalPrice.toLocaleString()}</p>
+                     <p className="text-sm text-white/50 font-medium">Final Investment</p>
+                     <p className="text-4xl font-black text-primary tracking-tighter italic text-glow">${totalPrice.toLocaleString()}</p>
                    </div>
-                   <Link href="/contact">
-                     <Button size="lg" className="rounded-2xl px-12 h-14 text-lg font-bold shadow-2xl shadow-primary/30">
-                       Book Consultation
-                     </Button>
-                   </Link>
+                   <Button 
+                     size="lg" 
+                     className="rounded-2xl px-12 h-14 text-lg font-bold shadow-2xl shadow-primary/30"
+                     onClick={handleSaveAndRedirect}
+                   >
+                     Book Consultation
+                   </Button>
                 </div>
               </div>
 
@@ -404,13 +428,13 @@ export default function BuilderPage() {
                    { title: "24/7 Support", desc: "Always here for you", icon: ShieldCheck },
                    { title: "App Access", desc: "Control everywhere", icon: Home },
                  ].map((feat, i) => (
-                   <div key={i} className="flex items-center gap-3 p-4 rounded-2xl border border-divider">
-                     <div className="p-2 bg-muted rounded-xl">
-                       <feat.icon className="h-4 w-4 text-muted-foreground" />
+                   <div key={i} className="flex items-center gap-3 p-4 rounded-2xl border border-white/5 bg-black/25">
+                     <div className="p-2 bg-white/5 rounded-xl">
+                       <feat.icon className="h-4 w-4 text-primary" />
                      </div>
                      <div>
-                        <p className="font-bold text-xs">{feat.title}</p>
-                        <p className="text-[10px] text-muted-foreground">{feat.desc}</p>
+                        <p className="font-bold text-xs text-white">{feat.title}</p>
+                        <p className="text-[10px] text-white/50">{feat.desc}</p>
                      </div>
                    </div>
                  ))}
@@ -421,13 +445,13 @@ export default function BuilderPage() {
 
         <div className="mt-20 flex justify-between items-center">
             {step > 1 && (
-                <Button variant="ghost" onClick={() => setStep(step - 1)} className="rounded-xl">
+                <Button variant="ghost" onClick={() => setStep(step - 1)} className="rounded-xl font-bold text-white hover:bg-white/5">
                     Back
                 </Button>
             )}
             <div className="flex-1" />
             {step === 1 && propertyType && (
-                 <Button size="lg" onClick={() => setStep(2)} className="rounded-xl">
+                 <Button size="lg" onClick={() => setStep(2)} className="rounded-xl font-bold">
                     Continue <ArrowRight className="ml-2 h-4 w-4" />
                  </Button>
             )}

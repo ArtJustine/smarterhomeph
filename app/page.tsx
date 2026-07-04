@@ -39,7 +39,7 @@ export default function Home() {
           {/* Background Image with Overlay */}
           <div className="absolute inset-0 z-0">
              <Image
-               src="/luxury_smart_home_hero_1775713596304.png"
+               src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop"
                alt="Luxury Smart Home"
                fill
                className="object-cover scale-105"
@@ -126,7 +126,7 @@ export default function Home() {
                 <div className="relative">
                    <div className="aspect-square rounded-[3rem] overflow-hidden rotate-3 shadow-2xl relative z-10">
                       <Image 
-                        src="/luxury_smart_home_hero_1775713596304.png" 
+                        src="https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=1000&auto=format&fit=crop" 
                         alt="Security Focus" 
                         fill 
                         className="object-cover brightness-75 transition-transform hover:scale-110 duration-1000" 

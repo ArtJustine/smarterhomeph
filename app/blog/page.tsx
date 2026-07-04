@@ -20,6 +20,7 @@ export default function BlogPage() {
       date: "March 20, 2025",
       author: "Emma Johnson",
       category: "Vision",
+      image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=800&auto=format&fit=crop",
     },
     {
       id: 2,
@@ -29,6 +30,7 @@ export default function BlogPage() {
       date: "March 15, 2025",
       author: "Michael Chen",
       category: "Security",
+      image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=800&auto=format&fit=crop",
     },
     {
       id: 3,
@@ -38,6 +40,7 @@ export default function BlogPage() {
       date: "March 10, 2025",
       author: "Sarah Williams",
       category: "Intelligence",
+      image: "https://images.unsplash.com/photo-1543512214-318c7553f230?q=80&w=800&auto=format&fit=crop",
     },
     {
       id: 4,
@@ -47,6 +50,7 @@ export default function BlogPage() {
       date: "March 5, 2025",
       author: "David Rodriguez",
       category: "Efficiency",
+      image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=800&auto=format&fit=crop",
     },
     {
       id: 5,
@@ -56,6 +60,7 @@ export default function BlogPage() {
       date: "February 28, 2025",
       author: "Lisa Thompson",
       category: "Ecosystems",
+      image: "https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?q=80&w=800&auto=format&fit=crop",
     },
     {
       id: 6,
@@ -64,6 +69,7 @@ export default function BlogPage() {
       date: "February 23, 2025",
       author: "Robert Garcia",
       category: "Accessibility",
+      image: "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=800&auto=format&fit=crop",
     },
   ]
 
@@ -103,7 +109,7 @@ export default function BlogPage() {
                 <Card className="group glass h-full rounded-[2.5rem] border-foreground/5 hover:border-primary/50 transition-all duration-500 overflow-hidden flex flex-col">
                   <div className="aspect-[16/10] relative bg-muted overflow-hidden">
                     <Image
-                      src={`/placeholder.svg?height=400&width=600&text=Blog+${post.id}`}
+                      src={post.image}
                       alt={post.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100"

@@ -1,10 +1,11 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useMemo, Suspense } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { useSearchParams } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
-import { ChevronDown, X, Filter, ShoppingBag, Search, Sparkles } from "lucide-react"
+import { ChevronDown, X, Filter, ShoppingBag, Search, Sparkles, SlidersHorizontal, Eye } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { SiteHeader } from "@/components/site-header"
@@ -14,68 +15,107 @@ import { Badge } from "@/components/ui/badge"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
+import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { toast } from "sonner"
 
-// Sample device data
+// Premium device data with Unsplash images & detailed specs
 const sampleDevices = [
   {
     id: 1,
     name: "Smart Thermostat Pro",
-    description: "Control your home temperature from anywhere",
+    description: "Control your home temperature and monitor air quality from anywhere.",
     price: 129.99,
     brand: "Ecobee",
     category: "Climate",
     ecosystems: ["HomeKit", "Alexa", "Google Home"],
-    image: "/placeholder.svg?height=400&width=400&text=Thermostat",
+    image: "https://images.unsplash.com/photo-1595814433015-e6f548d5120a?q=80&w=600&auto=format&fit=crop",
+    specs: [
+      "Circadian temperature adaptation",
+      "Built-in indoor air quality monitor",
+      "Saves up to 23% on heating & cooling",
+      "Smart sensor occupancy tracking"
+    ]
   },
   {
     id: 2,
     name: "Security Camera 2K",
-    description: "HD security with night vision and motion detection",
+    description: "Ultra-sharp HD security camera with smart AI notifications and zero cloud fees.",
     price: 89.99,
     brand: "Reolink",
     category: "Security",
     ecosystems: ["Alexa", "Google Home"],
-    image: "/placeholder.svg?height=400&width=400&text=Camera",
+    image: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?q=80&w=600&auto=format&fit=crop",
+    specs: [
+      "2K Super HD recording resolution",
+      "Smart human/vehicle detection alerts",
+      "Full-color infrared night vision",
+      "Supports local micro SD storage (up to 256GB)"
+    ]
   },
   {
     id: 3,
-    name: "Smart Light Bulb",
-    description: "Multicolor LED with voice control",
+    name: "Smart Light Bulb E26",
+    description: "Multicolor dimmable LED bulb supporting seamless scene synchronization.",
     price: 24.99,
     brand: "Philips",
     category: "Lighting",
     ecosystems: ["HomeKit", "Alexa", "Google Home", "Matter"],
-    image: "/placeholder.svg?height=400&width=400&text=Bulb",
+    image: "https://images.unsplash.com/photo-1550524514-9b50228b3a7b?q=80&w=600&auto=format&fit=crop",
+    specs: [
+      "16 million colors + warm to cool whites",
+      "Instant response over Zigbee or Bluetooth",
+      "Circadian sync automatic sleep schedules",
+      "Voice control compatibility out of the box"
+    ]
   },
   {
     id: 4,
     name: "Smart Lock Pro",
-    description: "Keyless entry with fingerprint and PIN",
+    description: "Keyless deadbolt replacement supporting biometric fingerprint access.",
     price: 199.99,
     brand: "August",
     category: "Security",
     ecosystems: ["HomeKit", "Alexa"],
-    image: "/placeholder.svg?height=400&width=400&text=Lock",
+    image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=600&auto=format&fit=crop",
+    specs: [
+      "Biometric fingerprint scanner storage",
+      "Auto-unlocks as you approach the door",
+      "Bank-level 256-bit AES encryption",
+      "Log history tracking door status"
+    ]
   },
   {
     id: 5,
-    name: "Motion Sensor",
-    description: "Detect movement and trigger automations",
+    name: "Aesthetic Motion Sensor",
+    description: "Micro automation sensor to trigger scenes and alert system changes.",
     price: 39.99,
     brand: "Aqara",
     category: "Sensors",
     ecosystems: ["HomeKit", "Alexa", "Google Home", "Matter"],
-    image: "/placeholder.svg?height=400&width=400&text=Sensor",
+    image: "https://images.unsplash.com/photo-1626244278553-0870992a1294?q=80&w=600&auto=format&fit=crop",
+    specs: [
+      "Sub-second latency motion triggering",
+      "Built-in light sensor for illumination rules",
+      "Up to 5 years battery life on CR2450",
+      "Multi-directional mounting brackets"
+    ]
   },
   {
     id: 6,
     name: "Smart Plug Mini",
-    description: "Control any device with scheduling and energy monitoring",
+    description: "Compact smart outlet with detailed energy monitoring indicators.",
     price: 19.99,
     brand: "TP-Link",
     category: "Power",
     ecosystems: ["Alexa", "Google Home"],
-    image: "/placeholder.svg?height=400&width=400&text=Plug",
+    image: "https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?q=80&w=600&auto=format&fit=crop",
+    specs: [
+      "Ultra-compact plug blocks no adjacent outlets",
+      "Real-time energy consumption statistics",
+      "Away mode simulates presence automatically",
+      "Supports voice commands and schedules"
+    ]
   },
 ]
 
@@ -83,13 +123,24 @@ const brands = ["Ecobee", "Reolink", "Philips", "August", "Aqara", "TP-Link"]
 const categoriesArr = ["Climate", "Security", "Lighting", "Sensors", "Power"]
 const ecosystemsArr = ["HomeKit", "Alexa", "Google Home", "Matter"]
 
-export default function DevicesPage() {
+function DevicesCatalogContent() {
+  const searchParams = useSearchParams()
   const [expandedFilter, setExpandedFilter] = useState<string | null>("brand")
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 500])
   const [selectedBrands, setSelectedBrands] = useState<string[]>([])
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
   const [selectedEcosystems, setSelectedEcosystems] = useState<string[]>([])
   const [searchQuery, setSearchQuery] = useState("")
+  const [sortBy, setSortBy] = useState("featured")
+  const [quickViewDevice, setQuickViewDevice] = useState<typeof sampleDevices[0] | null>(null)
+
+  // Read URL query parameter for pre-filtering category
+  useEffect(() => {
+    const categoryParam = searchParams.get("category")
+    if (categoryParam && categoriesArr.includes(categoryParam)) {
+      setSelectedCategories([categoryParam])
+    }
+  }, [searchParams])
 
   const toggleFilter = (filter: string) => {
     setExpandedFilter(expandedFilter === filter ? null : filter)
@@ -109,17 +160,38 @@ export default function DevicesPage() {
     setSelectedEcosystems([])
     setPriceRange([0, 500])
     setSearchQuery("")
+    setSortBy("featured")
   }
 
-  const filteredDevices = sampleDevices.filter((device) => {
-    const matchesBrand = selectedBrands.length === 0 || selectedBrands.includes(device.brand)
-    const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(device.category)
-    const matchesEcosystem = selectedEcosystems.length === 0 || device.ecosystems.some((eco) => selectedEcosystems.includes(eco))
-    const matchesPrice = device.price >= priceRange[0] && device.price <= priceRange[1]
-    const matchesSearch = device.name.toLowerCase().includes(searchQuery.toLowerCase()) || device.brand.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredDevices = useMemo(() => {
+    return sampleDevices.filter((device) => {
+      const matchesBrand = selectedBrands.length === 0 || selectedBrands.includes(device.brand)
+      const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(device.category)
+      const matchesEcosystem = selectedEcosystems.length === 0 || device.ecosystems.some((eco) => selectedEcosystems.includes(eco))
+      const matchesPrice = device.price >= priceRange[0] && device.price <= priceRange[1]
+      const matchesSearch = 
+        device.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+        device.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        device.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        device.ecosystems.some(e => e.toLowerCase().includes(searchQuery.toLowerCase()))
 
-    return matchesBrand && matchesCategory && matchesEcosystem && matchesPrice && matchesSearch
-  })
+      return matchesBrand && matchesCategory && matchesEcosystem && matchesPrice && matchesSearch
+    })
+  }, [selectedBrands, selectedCategories, selectedEcosystems, priceRange, searchQuery])
+
+  const sortedDevices = useMemo(() => {
+    const result = [...filteredDevices]
+    if (sortBy === "price-asc") {
+      result.sort((a, b) => a.price - b.price)
+    } else if (sortBy === "price-desc") {
+      result.sort((a, b) => b.price - a.price)
+    } else if (sortBy === "name-asc") {
+      result.sort((a, b) => a.name.localeCompare(b.name))
+    } else if (sortBy === "brand-asc") {
+      result.sort((a, b) => a.brand.localeCompare(b.brand))
+    }
+    return result
+  }, [filteredDevices, sortBy])
 
   return (
     <div className="flex min-h-screen flex-col bg-background selection:bg-primary selection:text-primary-foreground">
@@ -137,14 +209,33 @@ export default function DevicesPage() {
                     </div>
                     <h1 className="text-4xl md:text-6xl font-black tracking-tighter uppercase italic">DEVICES <span className="text-primary">&</span> HARDWARE</h1>
                  </div>
-                 <div className="w-full md:w-96 relative">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                    <Input 
-                      placeholder="Search ecosystem..." 
-                      className="h-14 pl-12 bg-muted/50 border-none rounded-2xl"
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                    />
+                 
+                 <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+                    {/* Search Field */}
+                    <div className="relative w-full sm:w-80">
+                       <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                       <Input 
+                         placeholder="Search catalog or protocols..." 
+                         className="h-14 pl-12 bg-muted/50 border-none rounded-2xl"
+                         value={searchQuery}
+                         onChange={(e) => setSearchQuery(e.target.value)}
+                       />
+                    </div>
+                    
+                    {/* Sort Selector */}
+                    <Select value={sortBy} onValueChange={setSortBy}>
+                      <SelectTrigger className="h-14 bg-muted/50 border-none rounded-2xl w-full sm:w-56 font-medium text-sm text-foreground">
+                        <SlidersHorizontal className="h-4 w-4 mr-2 text-muted-foreground" />
+                        <SelectValue placeholder="Sort by" />
+                      </SelectTrigger>
+                      <SelectContent className="glass-dark border-white/10 text-white rounded-xl">
+                        <SelectItem value="featured">Featured</SelectItem>
+                        <SelectItem value="price-asc">Price: Low to High</SelectItem>
+                        <SelectItem value="price-desc">Price: High to Low</SelectItem>
+                        <SelectItem value="name-asc">Name: A to Z</SelectItem>
+                        <SelectItem value="brand-asc">Brand: A to Z</SelectItem>
+                      </SelectContent>
+                    </Select>
                  </div>
               </div>
            </div>
@@ -226,9 +317,9 @@ export default function DevicesPage() {
 
             {/* Products Grid */}
             <div className="lg:col-span-3">
-              {filteredDevices.length > 0 ? (
+              {sortedDevices.length > 0 ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
-                  {filteredDevices.map((device) => (
+                  {sortedDevices.map((device) => (
                     <motion.div
                       layout
                       key={device.id}
@@ -236,30 +327,50 @@ export default function DevicesPage() {
                       animate={{ opacity: 1, scale: 1 }}
                     >
                       <Card className="group glass-dark h-full rounded-[2.5rem] border-foreground/5 hover:border-primary/50 transition-all duration-500 overflow-hidden flex flex-col">
-                        <div className="aspect-[4/5] relative bg-muted relative overflow-hidden">
+                        <div className="aspect-[4/5] relative bg-muted overflow-hidden">
                            <Image 
                             src={device.image} 
                             alt={device.name} 
                             fill 
                             className="object-cover group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-100" 
                            />
+                           
+                           {/* Quick View Button overlay on hover */}
+                           <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                             <Button 
+                               onClick={() => setQuickViewDevice(device)} 
+                               variant="outline" 
+                               className="rounded-xl border-white/20 text-white bg-black/40 hover:bg-primary hover:text-black transition-all gap-2"
+                             >
+                               <Eye className="h-4 w-4" /> Quick View
+                             </Button>
+                           </div>
+
                            <div className="absolute top-4 right-4 flex flex-col gap-2">
                               {device.ecosystems.slice(0, 2).map(eco => (
                                  <Badge key={eco} className="bg-white/10 backdrop-blur-md text-white border-white/10 text-[10px] font-black uppercase tracking-widest">{eco}</Badge>
                               ))}
                            </div>
                         </div>
+                        
                         <CardContent className="p-8 flex flex-col flex-1">
                           <div className="text-[10px] font-black uppercase tracking-widest text-primary mb-2 italic">{device.brand}</div>
                           <h3 className="text-xl font-bold tracking-tight mb-2 group-hover:text-primary transition-colors">{device.name}</h3>
                           <p className="text-sm text-muted-foreground mb-8 flex-1 leading-relaxed">{device.description}</p>
                           <div className="flex justify-between items-center pt-6 border-t border-foreground/5">
                             <span className="text-2xl font-black tracking-tighter italic">${device.price}</span>
-                            <Link href="/contact">
-                              <Button size="icon" className="h-12 w-12 rounded-xl bg-foreground text-background hover:bg-primary hover:text-foreground transition-all">
-                                <ShoppingBag className="h-5 w-5" />
-                              </Button>
-                            </Link>
+                            <div className="flex gap-2">
+                              <Link href="/builder">
+                                <Button size="sm" variant="outline" className="h-12 rounded-xl text-xs font-bold border-foreground/10 hover:bg-primary/10">
+                                  BUILDER
+                                </Button>
+                              </Link>
+                              <Link href="/contact">
+                                <Button size="icon" className="h-12 w-12 rounded-xl bg-foreground text-background hover:bg-primary hover:text-foreground transition-all">
+                                  <ShoppingBag className="h-5 w-5" />
+                                </Button>
+                              </Link>
+                            </div>
                           </div>
                         </CardContent>
                       </Card>
@@ -281,9 +392,76 @@ export default function DevicesPage() {
         </section>
       </main>
 
+      {/* Quick View Modal */}
+      <Dialog open={!!quickViewDevice} onOpenChange={(open) => !open && setQuickViewDevice(null)}>
+        <DialogContent className="glass-dark border-primary/20 text-white rounded-[2.5rem] max-w-2xl overflow-hidden p-0">
+          {quickViewDevice && (
+            <div className="grid md:grid-cols-2">
+              <div className="relative aspect-[4/5] md:aspect-auto md:h-full bg-muted min-h-[300px]">
+                <Image src={quickViewDevice.image} alt={quickViewDevice.name} fill className="object-cover" />
+              </div>
+              <div className="p-8 space-y-6 flex flex-col justify-between">
+                <div className="space-y-4">
+                  <div>
+                    <Badge className="bg-primary text-primary-foreground text-[10px] font-black uppercase tracking-widest px-2.5 py-1 mb-2">{quickViewDevice.brand}</Badge>
+                    <h2 className="text-3xl font-black italic tracking-tighter uppercase leading-tight">{quickViewDevice.name}</h2>
+                  </div>
+                  <p className="text-sm text-white/70 leading-relaxed">{quickViewDevice.description}</p>
+                  <div className="space-y-2">
+                    <p className="text-xs font-black uppercase tracking-widest text-primary">Key Specifications:</p>
+                    <ul className="grid grid-cols-1 gap-1 text-xs text-white/60">
+                      {quickViewDevice.specs?.map((spec, i) => (
+                        <li key={i} className="flex items-center gap-1.5">
+                          <span className="h-1 w-1 bg-primary rounded-full" />
+                          {spec}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                
+                <div className="space-y-4 pt-6 border-t border-white/10">
+                  <div className="flex justify-between items-end">
+                    <span className="text-xs text-white/40 font-bold uppercase tracking-wider">Invest Cost</span>
+                    <span className="text-3xl font-black italic text-glow">${quickViewDevice.price}</span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <Link href="/builder" className="w-full">
+                      <Button onClick={() => setQuickViewDevice(null)} className="w-full h-12 rounded-xl font-bold">
+                        ADD TO BUILDER
+                      </Button>
+                    </Link>
+                    <Button variant="outline" onClick={() => setQuickViewDevice(null)} className="h-12 rounded-xl border-white/10 text-white hover:bg-white/5 font-bold">
+                      CLOSE
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
       <SiteFooter />
     </div>
   )
 }
 
-
+export default function DevicesPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-background flex flex-col justify-between selection:bg-primary selection:text-primary-foreground">
+        <SiteHeader />
+        <div className="flex-1 flex items-center justify-center text-white">
+          <div className="text-center space-y-4">
+            <Sparkles className="h-8 w-8 text-primary animate-pulse mx-auto" />
+            <p className="font-bold uppercase tracking-widest text-xs opacity-50">Transmitting catalog parameters...</p>
+          </div>
+        </div>
+        <SiteFooter />
+      </div>
+    }>
+      <DevicesCatalogContent />
+    </Suspense>
+  )
+}

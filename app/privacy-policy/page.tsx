@@ -10,7 +10,7 @@ export default function PrivacyPolicyPage() {
       <main className="flex-1">
         <PageHeader
           title="PRIVACY POLICY"
-          backgroundImage="/placeholder.svg?height=500&width=1200"
+          backgroundImage="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1200&auto=format&fit=crop"
           alt="Privacy concept"
         />
 
