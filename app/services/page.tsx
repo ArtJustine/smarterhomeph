@@ -60,10 +60,10 @@ export default function ServicesPage() {
           eyebrow="Services"
           title={
             <>
-              From first plan to <span className="italic text-primary-ink">final test.</span>
+              Smart home installation, <span className="italic text-primary-ink">start to finish.</span>
             </>
           }
-          intro="Planning, supply, installation and setup, for any size of home or small office."
+          intro="Planning, supply, installation and setup of smart lighting, locks, cameras and aircon control for homes and small offices in Pampanga, Tarlac and Bulacan."
         />
 
         <section className="container py-12 lg:py-20">

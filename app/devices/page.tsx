@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { toast } from "sonner"
+import { BrandLogo } from "@/components/brand-logo"
 
 // Premium device data with Unsplash images & detailed specs
 const sampleDevices = [
@@ -204,7 +205,7 @@ function DevicesCatalogContent() {
               <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                  <div className="space-y-2">
                     <p className="eyebrow">Catalog</p>
-                    <h1 className="text-5xl leading-none sm:text-6xl lg:text-7xl">Devices we <span className="italic text-primary-ink">install.</span></h1>
+                    <h1 className="text-5xl leading-none sm:text-6xl lg:text-7xl">Smart home devices we <span className="italic text-primary-ink">install.</span></h1>
                  </div>
                  
                  <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
@@ -279,7 +280,7 @@ function DevicesCatalogContent() {
                                   className="h-5 w-5 rounded-lg border-primary/20 data-[state=checked]:bg-primary"
                                 />
                                 <Label htmlFor={`${sec.id}-${item}`} className="text-sm cursor-pointer hover:text-primary-ink transition-colors">
-                                  {item}
+                                  {sec.id === "brand" ? <BrandLogo name={item} heightClass="h-4" className="text-base" /> : item}
                                 </Label>
                               </div>
                             ))}
@@ -351,7 +352,7 @@ function DevicesCatalogContent() {
                         </div>
                         
                         <CardContent className="p-8 flex flex-col flex-1">
-                          <div className="text-[10px] font-semibold uppercase tracking-widest text-primary-ink mb-2">{device.brand}</div>
+                          <div className="mb-3 flex h-6 items-center"><BrandLogo name={device.brand} heightClass="h-5" /></div>
                           <h3 className="text-xl  tracking-tight mb-2 group-hover:text-primary-ink transition-colors">{device.name}</h3>
                           <p className="text-sm text-muted-foreground mb-8 flex-1 leading-relaxed">{device.description}</p>
                           <div className="flex justify-between items-center pt-6 border-t border-foreground/5">
@@ -400,7 +401,7 @@ function DevicesCatalogContent() {
               <div className="p-8 space-y-6 flex flex-col justify-between">
                 <div className="space-y-4">
                   <div>
-                    <Badge className="bg-primary text-primary-foreground text-[10px] font-semibold uppercase tracking-widest px-2.5 py-1 mb-2">{quickViewDevice.brand}</Badge>
+                    <div className="mb-3 flex h-7 items-center"><BrandLogo name={quickViewDevice.brand} heightClass="h-6" /></div>
                     <h2 className="text-3xl  tracking-tight  leading-tight">{quickViewDevice.name}</h2>
                   </div>
                   <p className="text-sm text-muted-foreground leading-relaxed">{quickViewDevice.description}</p>

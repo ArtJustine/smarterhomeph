@@ -69,7 +69,7 @@ export default function ReviewsPage() {
           eyebrow="Reviews"
           title={
             <>
-              What homeowners <span className="italic text-primary-ink">say.</span>
+              Smart home reviews from <span className="italic text-primary-ink">homeowners.</span>
             </>
           }
           intro="Notes from people who had a setup installed."

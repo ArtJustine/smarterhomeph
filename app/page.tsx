@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { ArrowRight, ArrowUpRight } from "lucide-react"
@@ -8,15 +7,9 @@ import { Button } from "@/components/ui/button"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { InteractiveHome } from "@/components/interactive-home"
+import { BrandLogo } from "@/components/brand-logo"
 
-const brands = [
-  { name: "Aqara", logo: "/aqara-logo 1.svg" },
-  { name: "Govee", logo: "/Govee-Logo 1.svg" },
-  { name: "Eve", logo: "/eve.svg" },
-  { name: "Reolink", logo: "/reolink.svg" },
-  { name: "Abode", logo: "/abode.svg" },
-  { name: "YoLink", logo: "/yolink.svg" },
-]
+const brands = ["Aqara", "Govee", "Eve", "Reolink", "Philips", "TP-Link", "YoLink"]
 
 const steps = [
   {
@@ -38,18 +31,18 @@ const steps = [
 
 const setups = [
   {
-    title: "Lighting",
+    title: "Smart lighting",
     body: "Bulbs, strips and switches that follow a schedule or a scene, and still work with the wall switch.",
     href: "/devices?category=Lighting",
   },
   {
-    title: "Security",
-    body: "Door locks and cameras with alerts on your phone, so you can check the gate from the office.",
+    title: "Smart locks and cameras",
+    body: "Smart door locks and CCTV cameras with alerts on your phone, so you can check the gate from the office.",
     href: "/devices?category=Security",
   },
   {
-    title: "Climate",
-    body: "Aircon control and temperature sensors, so the room is cool when you get there, not all day.",
+    title: "Aircon control",
+    body: "Smart aircon control and temperature sensors, so the room is cool when you get there, not all day.",
     href: "/devices?category=Climate",
   },
   {
@@ -60,9 +53,9 @@ const setups = [
 ]
 
 const areas = [
-  { name: "Pampanga", note: "Angeles, Mabalacat, San Fernando and nearby" },
-  { name: "Tarlac", note: "Tarlac City and nearby" },
-  { name: "Bulacan", note: "Malolos, Meycauayan and nearby" },
+  { name: "Pampanga", note: "Smart home installation in Angeles, Mabalacat, San Fernando and nearby" },
+  { name: "Tarlac", note: "Smart home installation in Tarlac City and nearby" },
+  { name: "Bulacan", note: "Smart home installation in Malolos, Meycauayan and nearby" },
 ]
 
 const fade = {
@@ -80,22 +73,22 @@ export default function Home() {
         <section className="container grid grid-cols-1 items-center gap-12 pb-20 pt-12 lg:grid-cols-12 lg:gap-10 lg:pb-28 lg:pt-20">
           <div className="min-w-0 lg:col-span-5">
             <motion.p {...fade} transition={{ duration: 0.5 }} className="eyebrow mb-6">
-              Smart home setup · Central Luzon
+              Smart home installer · Central Luzon
             </motion.p>
             <motion.h1
               {...fade}
               transition={{ duration: 0.6, delay: 0.05 }}
-              className="text-balance text-6xl leading-[0.98] sm:text-7xl lg:text-[5.25rem]"
+              className="text-balance text-5xl leading-[1.02] sm:text-6xl lg:text-[3.6rem] xl:text-[4rem]"
             >
-              A home that looks <span className="italic text-primary-ink">after itself.</span>
+              Smart home setup in <span className="italic text-primary-ink">Pampanga, Tarlac and Bulacan.</span>
             </motion.h1>
             <motion.p
               {...fade}
               transition={{ duration: 0.6, delay: 0.12 }}
               className="mt-7 max-w-md text-lg leading-relaxed text-muted-foreground"
             >
-              We plan, supply and install smart lights, locks, cameras and aircon control for homes in
-              Pampanga, Tarlac and Bulacan. Tap the house to see how it feels.
+              We plan, supply and install smart lights, door locks, CCTV cameras and aircon control that work
+              with Alexa, Google Home and Home Assistant. Tap the house to see how it feels.
             </motion.p>
             <motion.div
               {...fade}
@@ -128,9 +121,9 @@ export default function Home() {
           <div className="container flex flex-col items-start gap-6 py-8 md:flex-row md:items-center md:justify-between">
             <p className="eyebrow shrink-0">Works with</p>
             <ul className="flex flex-wrap items-center gap-x-10 gap-y-5">
-              {brands.map((b) => (
-                <li key={b.name} className="opacity-60 grayscale transition hover:opacity-100 hover:grayscale-0">
-                  <Image src={b.logo} alt={b.name} width={100} height={32} className="h-6 w-auto object-contain" />
+              {brands.map((name) => (
+                <li key={name} className="opacity-70 transition hover:opacity-100">
+                  <BrandLogo name={name} heightClass="h-6" />
                 </li>
               ))}
             </ul>
@@ -142,7 +135,7 @@ export default function Home() {
           <div className="grid gap-12 lg:grid-cols-12">
             <div className="lg:col-span-4">
               <p className="eyebrow mb-4">How it works</p>
-              <h2 className="text-balance text-4xl leading-tight sm:text-5xl">Three steps, no surprises.</h2>
+              <h2 className="text-balance text-4xl leading-tight sm:text-5xl">How a smart home install works.</h2>
             </div>
             <ol className="lg:col-span-8">
               {steps.map((s) => (
@@ -165,7 +158,7 @@ export default function Home() {
               <div>
                 <p className="eyebrow mb-4">What we set up</p>
                 <h2 className="max-w-xl text-balance text-4xl leading-tight sm:text-5xl">
-                  Start with one thing. Add the rest later.
+                  Smart home devices we install.
                 </h2>
               </div>
               <Link href="/services" className="inline-flex items-center gap-1 text-sm underline-offset-4 hover:underline">
@@ -196,7 +189,7 @@ export default function Home() {
         <section className="container py-24 lg:py-32">
           <p className="eyebrow mb-4">Where we work</p>
           <h2 className="max-w-2xl text-balance text-4xl leading-tight sm:text-5xl">
-            Local installs, so you can actually reach us after.
+            Smart home installation across Central Luzon.
           </h2>
           <div className="mt-14 grid gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-3">
             {areas.map((a) => (
@@ -220,7 +213,7 @@ export default function Home() {
             />
             <p className="eyebrow relative mb-5 !text-background/50">Home builder</p>
             <h2 className="relative max-w-2xl text-balance text-5xl leading-[1.02] sm:text-6xl">
-              Price it before you <span className="italic text-primary">call anyone.</span>
+              Estimate your smart home cost <span className="italic text-primary">before you call anyone.</span>
             </h2>
             <p className="relative mt-6 max-w-lg text-lg text-background/70">
               Pick your property, add rooms, drop in devices and watch the total change. Send it to us when

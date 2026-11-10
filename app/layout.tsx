@@ -4,6 +4,7 @@ import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import './globals.css'
 import { Toaster } from 'sonner'
+import { SITE_NAME, SITE_URL, SERVICE_AREAS } from '@/lib/site'
 
 const display = localFont({
   src: [
@@ -23,9 +24,44 @@ const display = localFont({
 })
 
 export const metadata: Metadata = {
-  title: 'Smarter Home PH | Smart home setup in the Philippines',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: 'Smart Home Installation in Pampanga, Tarlac & Bulacan',
+    template: `%s | ${SITE_NAME}`,
+  },
   description:
-    'Smart lights, locks, cameras and automation, planned and installed for Philippine homes. Build your setup, get a quote.',
+    'Smarter Home PH plans, supplies and installs smart lights, door locks, CCTV cameras and aircon control for homes in Pampanga, Tarlac and Bulacan. Price your setup online.',
+  keywords: [
+    'smart home Philippines',
+    'smart home installation Pampanga',
+    'smart home Tarlac',
+    'smart home Bulacan',
+    'smart lock Philippines',
+    'Home Assistant installer Philippines',
+  ],
+  alternates: { canonical: '/' },
+  openGraph: {
+    title: 'Smart Home Installation in Pampanga, Tarlac & Bulacan',
+    description:
+      'Smart lights, locks, cameras and aircon control, planned and installed for homes in Central Luzon.',
+    url: '/',
+    siteName: SITE_NAME,
+    locale: 'en_PH',
+    type: 'website',
+  },
+  twitter: { card: 'summary' },
+  robots: { index: true, follow: true },
+}
+
+const localBusinessJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: SITE_NAME,
+  url: SITE_URL,
+  description:
+    'Smart home planning, supply and installation: lighting, door locks, cameras, aircon control and automation.',
+  areaServed: SERVICE_AREAS.map((name) => ({ '@type': 'AdministrativeArea', name: `${name}, Philippines` })),
+  knowsAbout: ['Smart home installation', 'Home automation', 'Home Assistant', 'Smart locks', 'Security cameras'],
 }
 
 export default function RootLayout({
@@ -35,10 +71,14 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="en-PH"
       className={`${GeistSans.variable} ${GeistMono.variable} ${display.variable}`}
     >
       <body className="font-sans antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+        />
         {children}
         <Toaster position="top-right" />
       </body>

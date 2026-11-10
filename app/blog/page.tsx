@@ -65,7 +65,7 @@ export default function BlogPage() {
           eyebrow="Journal"
           title={
             <>
-              Notes from the <span className="italic text-primary-ink">install side.</span>
+              Smart home guides and <span className="italic text-primary-ink">tips.</span>
             </>
           }
           intro="Guides on lighting, security, climate and keeping it all talking to each other."

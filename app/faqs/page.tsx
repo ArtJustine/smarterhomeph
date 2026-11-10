@@ -1,7 +1,61 @@
+import Link from "next/link"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { PageHeader } from "@/components/page-header"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+
+const faqs = [
+  {
+    q: "How much does smart home installation cost in the Philippines?",
+    a: "It depends on the size of the house and what you want automated. A few smart bulbs and a plug cost far less than a full setup with locks, cameras and aircon control. Use the home builder to get a running estimate, then send it to us and we will confirm a quote before anything is bought.",
+  },
+  {
+    q: "Do you install smart homes in Pampanga, Tarlac and Bulacan?",
+    a: "Yes. We work in Pampanga (Angeles, Mabalacat, San Fernando and nearby), Tarlac City and nearby, and Bulacan (Malolos, Meycauayan and nearby). Somewhere else in Luzon? Message us first and we will tell you honestly if we can help.",
+  },
+  {
+    q: "What is a smart home system?",
+    a: "A smart home is a set of connected devices, like lights, locks, cameras and aircon controllers, that you control from your phone or by voice and that can run on schedules or scenes. For example, one tap for movie night can dim the lights and turn on the TV.",
+  },
+  {
+    q: "Do I need special wiring for smart home devices?",
+    a: "Usually no. Most devices connect over WiFi, Zigbee or Matter and run from a normal outlet or battery. Smart switches and some locks need a little electrical work, and a hub or router upgrade helps in bigger houses. We check this when we plan your setup.",
+  },
+  {
+    q: "Will my smart home work during a brownout or when the internet is down?",
+    a: "Devices need power, so during a brownout the router and hub need to stay on, and a small UPS is a cheap fix for that. When the internet drops, setups built on a local hub (like Home Assistant) keep running scenes and schedules. Remote access from outside the house needs internet.",
+  },
+  {
+    q: "Does it work with Alexa, Google Home and Apple HomeKit?",
+    a: "Most of the devices we install work with Alexa and Google Home, and many support HomeKit and Matter. Each product page lists what it supports, so you can pick devices that fit the assistant you already use.",
+  },
+  {
+    q: "Can I control my aircon with a smart home setup?",
+    a: "Yes. A smart aircon controller lets you switch the unit on and off, set the temperature and schedule it from your phone, so the room is cool when you arrive instead of running all day. It works with most split-type units.",
+  },
+  {
+    q: "Can I install smart home devices myself?",
+    a: "Plugs, bulbs, cameras and sensors are easy to set up yourself. Anything that touches your home wiring, like smart switches or a hardwired lock, is better left to an installer. We also help with the part people get stuck on, which is making everything work together in one app.",
+  },
+  {
+    q: "Are smart home devices safe from hackers?",
+    a: "They can be, if they are set up properly. We use unique passwords, turn on two-factor sign-in where it exists, keep firmware updated and prefer devices that can run locally. Where a camera can record to local storage instead of the cloud, we set it up that way.",
+  },
+  {
+    q: "Can I control everything from one app?",
+    a: "Yes. We tie devices from different brands together in one place, such as Home Assistant, Google Home or Alexa, so you are not juggling a separate app for every gadget.",
+  },
+]
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+}
 
 export default function FAQsPage() {
   return (
@@ -9,82 +63,44 @@ export default function FAQsPage() {
       <SiteHeader />
 
       <main className="flex-1">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+
         <PageHeader
           eyebrow="FAQs"
-          title={<>Questions we get <span className="italic text-primary-ink">a lot.</span></>}
-          intro="Short answers. If yours is not here, message us."
+          title={
+            <>
+              Smart home questions, <span className="italic text-primary-ink">answered.</span>
+            </>
+          }
+          intro="Short answers for Philippine homes. If yours is not here, message us."
         />
 
         <section className="container py-12 md:py-16">
           <div className="max-w-3xl">
             <Accordion type="single" collapsible className="w-full">
-              <AccordionItem value="item-1">
-                <AccordionTrigger className="py-6 text-left font-display text-2xl font-normal hover:no-underline">What is a smart home system?</AccordionTrigger>
-                <AccordionContent className="max-w-2xl pb-6 text-base leading-relaxed text-muted-foreground">
-                  A smart home system is a network of connected devices and appliances that can be remotely controlled
-                  and automated. These systems allow you to manage various aspects of your home, such as lighting,
-                  security, climate, and entertainment, through a central interface like a smartphone app or voice
-                  assistant.
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="item-2">
-                <AccordionTrigger className="py-6 text-left font-display text-2xl font-normal hover:no-underline">
-                  Do I need special wiring for smart home devices?
-                </AccordionTrigger>
-                <AccordionContent className="max-w-2xl pb-6 text-base leading-relaxed text-muted-foreground">
-                  Most modern smart home devices are wireless and connect via Wi-Fi, Bluetooth, Zigbee, or Z-Wave
-                  protocols, eliminating the need for special wiring. However, some systems may require a hub or
-                  controller that connects to your router. Certain devices like smart switches or thermostats might need
-                  installation that involves your home's existing wiring.
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="item-3">
-                <AccordionTrigger className="py-6 text-left font-display text-2xl font-normal hover:no-underline">
-                  Can I install smart home devices myself?
-                </AccordionTrigger>
-                <AccordionContent className="max-w-2xl pb-6 text-base leading-relaxed text-muted-foreground">
-                  Many smart home devices are designed for DIY installation and come with user-friendly instructions.
-                  Devices like smart plugs, bulbs, cameras, and sensors are typically easy to set up. However, for
-                  devices that require electrical work, such as smart switches or hardwired security systems, we
-                  recommend professional installation if you're not experienced with electrical work.
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="item-4">
-                <AccordionTrigger className="py-6 text-left font-display text-2xl font-normal hover:no-underline">
-                  Will smart home devices work if my internet goes down?
-                </AccordionTrigger>
-                <AccordionContent className="max-w-2xl pb-6 text-base leading-relaxed text-muted-foreground">
-                  Most smart home devices will continue to function at a basic level without internet, but you'll lose
-                  remote control capabilities and cloud-based features. Many systems can still operate on your local
-                  network even when internet connectivity is lost. Some devices also have backup modes that allow for
-                  manual operation during outages.
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="item-5">
-                <AccordionTrigger className="py-6 text-left font-display text-2xl font-normal hover:no-underline">Are smart home devices secure?</AccordionTrigger>
-                <AccordionContent className="max-w-2xl pb-6 text-base leading-relaxed text-muted-foreground">
-                  We take security seriously and implement multiple layers of protection in our devices. This includes
-                  encrypted communications, secure boot processes, and regular security updates. To maximize security,
-                  we recommend using strong, unique passwords, enabling two-factor authentication when available, and
-                  keeping your devices updated with the latest firmware.
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="item-6">
-                <AccordionTrigger className="py-6 text-left font-display text-2xl font-normal hover:no-underline">
-                  Can I control multiple smart home devices from one app?
-                </AccordionTrigger>
-                <AccordionContent className="max-w-2xl pb-6 text-base leading-relaxed text-muted-foreground">
-                  Yes, our SmartHome app allows you to control all compatible devices from a single interface.
-                  Additionally, many of our devices work with popular smart home platforms like Apple HomeKit, Google
-                  Home, and Amazon Alexa, which provide unified control across multiple brands and device types.
-                </AccordionContent>
-              </AccordionItem>
+              {faqs.map((f, i) => (
+                <AccordionItem key={f.q} value={`item-${i + 1}`}>
+                  <AccordionTrigger className="py-6 text-left font-display text-2xl font-normal hover:no-underline">
+                    {f.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="max-w-2xl pb-6 text-base leading-relaxed text-muted-foreground">
+                    {f.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
             </Accordion>
+
+            <p className="mt-10 text-muted-foreground">
+              Want a number for your own house? Try the{" "}
+              <Link href="/builder" className="text-foreground underline underline-offset-4">
+                home builder
+              </Link>{" "}
+              or{" "}
+              <Link href="/contact" className="text-foreground underline underline-offset-4">
+                ask us directly
+              </Link>
+              .
+            </p>
           </div>
         </section>
       </main>
@@ -93,4 +109,3 @@ export default function FAQsPage() {
     </div>
   )
 }
-

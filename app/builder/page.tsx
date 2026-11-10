@@ -142,7 +142,7 @@ export default function BuilderPage() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-12">
           <div>
             <p className="eyebrow mb-3">Home builder</p>
-            <h1 className="text-5xl leading-none sm:text-6xl">Plan it, price it.</h1>
+            <h1 className="text-5xl leading-none sm:text-6xl">Smart home cost estimator.</h1>
             <p className="mt-3 text-muted-foreground">Four short steps. Nothing is bought until you say so.</p>
           </div>
           <div className="flex items-center gap-6 bg-card border p-6 rounded-lg">

@@ -22,7 +22,7 @@ export default function AboutPage() {
           eyebrow="About"
           title={
             <>
-              We set up smart homes that <span className="italic text-primary-ink">stay simple.</span>
+              Central Luzon smart home installers who <span className="italic text-primary-ink">keep it simple.</span>
             </>
           }
           intro="We don't just sell gadgets. We plan, install and support setups that work together."

@@ -119,7 +119,7 @@ export default function ContactPage() {
                   animate={{ opacity: 1, y: 0 }}
                 >
                   <p className="eyebrow mb-5">Contact</p>
-                  <h1 className="mb-6 text-5xl leading-[1.02] sm:text-6xl">Tell us about <span className="italic text-primary-ink">your house.</span></h1>
+                  <h1 className="mb-6 text-5xl leading-[1.02] sm:text-6xl">Get a smart home quote for <span className="italic text-primary-ink">your house.</span></h1>
                   <p className="text-xl text-muted-foreground leading-relaxed">
                     A studio, a townhouse or a small office. Send a few lines and we will reply with next steps.
                   </p>
