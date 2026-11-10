@@ -1,101 +1,115 @@
 "use client"
 
 import Link from "next/link"
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Menu, X, Rocket } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
+import { AnimatePresence, motion } from "framer-motion"
+import { Menu, X } from "lucide-react"
+import { Button } from "@/components/ui/button"
+
+const navLinks = [
+  { name: "Devices", href: "/devices" },
+  { name: "Services", href: "/services" },
+  { name: "Builder", href: "/builder" },
+  { name: "Reviews", href: "/reviews" },
+  { name: "Blog", href: "/blog" },
+]
+
+export function Wordmark({ className = "" }: { className?: string }) {
+  return (
+    <span className={`inline-flex items-baseline gap-2 ${className}`}>
+      <span className="relative top-[-1px] inline-block h-2 w-2 rounded-full bg-primary shadow-[0_0_12px_3px_hsl(var(--primary)/0.55)]" />
+      <span className="font-display text-2xl leading-none tracking-tight">Smarter Home</span>
+      <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">PH</span>
+    </span>
+  )
+}
 
 export function SiteHeader() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
-  const navLinks = [
-    { name: "Devices", href: "/devices" },
-    { name: "Builder", href: "/builder", highlight: true },
-    { name: "Services", href: "/services" },
-    { name: "About", href: "/about" },
-    { name: "Blog", href: "/blog" },
-  ]
+  useEffect(() => setOpen(false), [pathname])
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${scrolled ? "glass border-b py-2" : "bg-transparent py-4 text-white"}`}>
-      <div className="container flex items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-2 text-2xl font-black tracking-tighter">
-          <div className="p-1.5 bg-primary rounded-lg text-primary-foreground">
-            <Rocket className="h-5 w-5" />
-          </div>
-          <span>SMARTER HOME PH</span>
+    <header
+      className={`sticky top-0 z-50 w-full bg-background/90 backdrop-blur transition-colors ${
+        scrolled || open ? "border-b" : "border-b border-transparent"
+      }`}
+    >
+      <div className="container flex h-16 items-center justify-between">
+        <Link href="/" aria-label="Smarter Home PH, home">
+          <Wordmark />
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
+        <nav className="hidden items-center gap-8 md:flex" aria-label="Main">
           {navLinks.map((link) => {
-            const isActive = pathname === link.href
+            const active = pathname === link.href
             return (
-              <Link 
-                key={link.name} 
-                href={link.href} 
-                className={`text-sm font-bold uppercase tracking-widest transition-colors hover:text-primary ${isActive ? "text-primary" : scrolled ? "text-foreground" : "text-white opacity-80"}`}
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={active ? "page" : undefined}
+                className={`relative text-sm transition-colors hover:text-foreground ${
+                  active ? "text-foreground" : "text-muted-foreground"
+                }`}
               >
                 {link.name}
+                {active && (
+                  <span className="absolute -bottom-[21px] left-0 right-0 h-px bg-foreground" />
+                )}
               </Link>
             )
           })}
         </nav>
 
-        {/* Action Buttons */}
-        <div className="flex items-center gap-4">
-          <Link href="/builder">
-            <Button size="sm" className="rounded-full px-6 font-bold hidden sm:flex">
-              GET STARTED
-            </Button>
-          </Link>
-          <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            <span className="sr-only">Toggle menu</span>
+        <div className="flex items-center gap-2">
+          <Button asChild size="sm" className="hidden rounded-full px-5 sm:inline-flex">
+            <Link href="/contact">Get a quote</Link>
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            aria-expanded={open}
+            aria-label="Toggle menu"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
         </div>
       </div>
 
-      {/* Mobile Navigation */}
       <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div 
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass border-t overflow-hidden"
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden md:hidden"
           >
-            <nav className="flex flex-col space-y-4 p-6">
-              {navLinks.map((link) => {
-                const isActive = pathname === link.href
-                return (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    className={`text-lg font-bold uppercase tracking-widest transition-colors hover:text-primary ${isActive ? "text-primary" : "text-foreground"}`}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {link.name}
-                  </Link>
-                )
-              })}
-              <Link href="/builder" onClick={() => setMobileMenuOpen(false)}>
-                <Button className="rounded-xl w-full py-6 text-lg font-bold">
-                  BUILD YOUR HOME
-                </Button>
-              </Link>
+            <nav className="container flex flex-col py-2" aria-label="Mobile">
+              {[...navLinks, { name: "About", href: "/about" }, { name: "FAQs", href: "/faqs" }].map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="border-b py-4 font-display text-2xl last:border-b-0"
+                >
+                  {link.name}
+                </Link>
+              ))}
+              <Button asChild className="my-4 h-12 rounded-full">
+                <Link href="/contact">Get a quote</Link>
+              </Button>
             </nav>
           </motion.div>
         )}
@@ -103,5 +117,3 @@ export function SiteHeader() {
     </header>
   )
 }
-
-

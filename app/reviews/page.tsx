@@ -1,11 +1,6 @@
-"use client"
-
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
-import { motion } from "framer-motion"
-import { Card, CardContent } from "@/components/ui/card"
-import { Star, Quote, Sparkles, CheckCircle } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
+import { PageHeader } from "@/components/page-header"
 
 export default function ReviewsPage() {
   const reviews = [
@@ -66,81 +61,36 @@ export default function ReviewsPage() {
   ]
 
   return (
-    <div className="flex min-h-screen flex-col bg-background selection:bg-primary selection:text-primary-foreground">
+    <div className="flex min-h-screen flex-col">
       <SiteHeader />
 
       <main className="flex-1">
-        {/* Review Hero */}
-        <section className="pt-40 pb-20 container px-4 sm:px-6 lg:px-8">
-           <div className="max-w-4xl mx-auto text-center space-y-6">
-              <Badge variant="outline" className="px-4 py-1.5 border-primary/50 text-primary rounded-full text-xs font-bold uppercase tracking-widest">
-                Testimonials
-              </Badge>
-              <h1 className="text-5xl md:text-7xl font-black tracking-tighter leading-none mb-4">
-                TRUSTED BY <br />
-                <span className="text-primary italic">VISIONARY HOMEOWNERS.</span>
-              </h1>
-              <div className="flex justify-center gap-2 mb-8">
-                 {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-6 w-6 fill-primary text-primary" />
-                 ))}
-              </div>
-              <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-                Join thousands of families who have already elevated their living standards with our intelligent home solutions.
-              </p>
-           </div>
-        </section>
+        <PageHeader
+          eyebrow="Reviews"
+          title={
+            <>
+              What homeowners <span className="italic text-primary-ink">say.</span>
+            </>
+          }
+          intro="Notes from people who had a setup installed."
+        />
 
-        {/* Reviews Masonry-ish Grid */}
-        <section className="py-24 bg-muted/30">
-          <div className="container px-4 sm:px-6 lg:px-8">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {reviews.map((review, i) => (
-                <motion.div
-                  key={review.id}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                >
-                  <Card className="glass h-full rounded-[2.5rem] border-foreground/5 hover:border-primary/50 transition-all duration-500 overflow-hidden flex flex-col group">
-                    <CardContent className="p-10 flex flex-col h-full">
-                       <Quote className="h-8 w-8 text-primary mb-6 opacity-40 group-hover:opacity-100 transition-opacity" />
-                       <div className="flex mb-6">
-                         {Array.from({ length: 5 }).map((_, i) => (
-                           <Star key={i} className={`h-4 w-4 ${i < review.rating ? "fill-primary text-primary" : "text-primary/10"}`} />
-                         ))}
-                       </div>
-                       <p className="text-lg font-medium leading-relaxed italic mb-8 flex-1">"{review.review}"</p>
-                       <div className="pt-8 border-t border-foreground/5 flex items-center justify-between">
-                          <div className="space-y-1">
-                             <div className="font-black italic uppercase tracking-tighter flex items-center gap-2">
-                                {review.name} <CheckCircle className="h-3 w-3 text-primary" />
-                             </div>
-                             <div className="text-[10px] font-black uppercase tracking-widest opacity-40">{review.location}</div>
-                          </div>
-                          <div className="text-[10px] font-black uppercase tracking-widest text-primary italic text-right max-w-[100px] leading-tight">
-                             {review.product}
-                          </div>
-                       </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Brand Shoutout */}
-        <section className="py-40 container text-center space-y-12">
-           <div className="inline-flex items-center gap-2 text-primary">
-              <Sparkles className="h-5 w-5" />
-              <span className="text-xs font-black uppercase tracking-[0.3em]">RELIABILITY AS STANDARD</span>
-           </div>
-           <h2 className="text-4xl md:text-6xl font-black tracking-tighter italic">99.9% UPTIME FOR YOUR <br />SMART ECOSYSTEM.</h2>
-           <p className="text-muted-foreground max-w-xl mx-auto">
-             Our enterprise-grade hubs and localized processing ensure your home stays intelligent even during network outages.
-           </p>
+        <section className="container py-12 lg:py-20">
+          <ul className="grid gap-px overflow-hidden rounded-lg border bg-border md:grid-cols-2">
+            {reviews.map((r) => (
+              <li key={r.id} className="flex flex-col bg-background p-8 transition-colors hover:bg-card sm:p-10">
+                <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-primary-ink">
+                  {r.rating}/5 · {r.product}
+                </p>
+                <blockquote className="mt-5 flex-1 font-display text-2xl leading-snug sm:text-[1.7rem]">
+                  “{r.review}”
+                </blockquote>
+                <p className="mt-8 text-sm">
+                  {r.name} <span className="text-muted-foreground">· {r.location}</span>
+                </p>
+              </li>
+            ))}
+          </ul>
         </section>
       </main>
 
@@ -148,5 +98,3 @@ export default function ReviewsPage() {
     </div>
   )
 }
-
-

@@ -1,95 +1,75 @@
 import Link from "next/link"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Facebook, Instagram, Linkedin, Youtube, Rocket, Github, Twitter } from "lucide-react"
+
+const columns = [
+  {
+    title: "Shop",
+    links: [
+      { name: "Devices", href: "/devices" },
+      { name: "Services", href: "/services" },
+      { name: "Home builder", href: "/builder" },
+    ],
+  },
+  {
+    title: "Learn",
+    links: [
+      { name: "Blog", href: "/blog" },
+      { name: "Reviews", href: "/reviews" },
+      { name: "FAQs", href: "/faqs" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { name: "About", href: "/about" },
+      { name: "Contact", href: "/contact" },
+      { name: "Privacy policy", href: "/privacy-policy" },
+    ],
+  },
+]
 
 export function SiteFooter() {
   return (
-    <footer className="bg-foreground text-background py-24 relative overflow-hidden">
-      {/* Abstract Design Elements */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-20" />
-      
-      <div className="container px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-16 lg:gap-24">
-          {/* Brand and Newsletter */}
-          <div className="md:col-span-12 lg:col-span-5 space-y-8">
-            <Link href="/" className="flex items-center gap-2 text-3xl font-black tracking-tighter">
-              <div className="p-1.5 bg-primary rounded-lg text-primary-foreground">
-                <Rocket className="h-6 w-6" />
-              </div>
-              <span className="text-white uppercase">SMARTER HOME PH</span>
-            </Link>
-            <p className="text-background/60 text-lg max-w-md leading-relaxed">
-              Engineering the next generation of private, secure, and intuitive smart home environments for the modern lifestyle.
+    <footer className="bg-foreground text-background">
+      <div className="container py-16 lg:py-24">
+        <div className="grid gap-16 lg:grid-cols-12">
+          <div className="lg:col-span-6">
+            <p className="font-display text-5xl leading-[1.05] sm:text-6xl">
+              Make the house<br />
+              <span className="italic text-primary">do the boring stuff.</span>
             </p>
-            <div className="space-y-4">
-              <p className="text-xs font-black uppercase tracking-[0.2em] text-primary">Stay updated</p>
-              <div className="flex w-full max-w-sm items-center gap-2 p-1 bg-white/5 rounded-2xl border border-white/10 focus-within:border-primary/50 transition-colors">
-                <Input 
-                  type="email" 
-                  placeholder="name@email.com" 
-                  className="bg-transparent border-none focus-visible:ring-0 text-white placeholder:text-white/20 h-12" 
-                />
-                <Button className="rounded-xl px-6 font-bold shadow-xl shadow-primary/20">
-                  JOIN
-                </Button>
+            <Link
+              href="/contact"
+              className="mt-10 inline-flex h-12 items-center rounded-full bg-primary px-6 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5"
+            >
+              Talk to us
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:col-span-6 lg:pl-12">
+            {columns.map((col) => (
+              <div key={col.title}>
+                <h3 className="font-mono text-[11px] uppercase tracking-[0.14em] text-background/50">
+                  {col.title}
+                </h3>
+                <ul className="mt-5 space-y-3">
+                  {col.links.map((l) => (
+                    <li key={l.href}>
+                      <Link href={l.href} className="text-sm text-background/80 transition-colors hover:text-primary">
+                        {l.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </div>
+            ))}
           </div>
+        </div>
 
-          {/* Links Sections */}
-          <div className="md:col-span-4 lg:col-span-2 space-y-6">
-            <h3 className="text-xs font-black uppercase tracking-[0.2em] text-white">Platform</h3>
-            <ul className="space-y-4">
-              {['Devices', 'Builder', 'Services', 'Pricing'].map(item => (
-                <li key={item}>
-                  <Link href={`/${item.toLowerCase()}`} className="text-background/50 hover:text-primary transition-colors font-medium">
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="md:col-span-4 lg:col-span-2 space-y-6">
-            <h3 className="text-xs font-black uppercase tracking-[0.2em] text-white">Company</h3>
-            <ul className="space-y-4">
-              {['About', 'Blog', 'Careers', 'Contact'].map(item => (
-                <li key={item}>
-                  <Link href={`/${item.toLowerCase()}`} className="text-background/50 hover:text-primary transition-colors font-medium">
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Social and Legal */}
-          <div className="md:col-span-4 lg:col-span-3 space-y-8">
-            <h3 className="text-xs font-black uppercase tracking-[0.2em] text-white">Follow the vision</h3>
-            <div className="flex gap-4">
-               {[
-                 { icon: Twitter, href: "#" },
-                 { icon: Instagram, href: "#" },
-                 { icon: Github, href: "#" },
-                 { icon: Linkedin, href: "#" },
-               ].map((social, i) => (
-                 <Link key={i} href={social.href} className="p-3 bg-white/5 rounded-xl text-white/40 hover:text-primary hover:bg-white/10 transition-all border border-white/5">
-                    <social.icon className="h-5 w-5" />
-                 </Link>
-               ))}
-            </div>
-            <div className="pt-4 border-t border-white/10">
-               <p className="text-[10px] text-background/30 uppercase font-black tracking-widest leading-loose">
-                 © {new Date().getFullYear()} SMARTER HOME PH.<br />
-                 INTELLIGENT LIVING, PHILIPPINES.
-               </p>
-            </div>
-          </div>
+        <div className="mt-20 flex flex-col gap-3 border-t border-background/15 pt-6 font-mono text-[11px] uppercase tracking-[0.12em] text-background/50 sm:flex-row sm:justify-between">
+          <p>Serving Pampanga, Tarlac and Bulacan</p>
+          <p>© {new Date().getFullYear()} Smarter Home PH</p>
         </div>
       </div>
     </footer>
   )
 }
-
-

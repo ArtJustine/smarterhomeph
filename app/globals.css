@@ -4,48 +4,51 @@
 
 @layer base {
   :root {
-    --background: 220 33% 98%;
-    --foreground: 224 71% 4%;
-    --card: 0 0% 100%;
-    --card-foreground: 224 71% 4%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 224 71% 4%;
-    --primary: 172 66% 50%;
-    --primary-foreground: 224 71% 4%;
-    --secondary: 220 14% 96%;
-    --secondary-foreground: 224 71% 4%;
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 9% 46%;
-    --accent: 172 66% 50%;
-    --accent-foreground: 224 71% 4%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 172 66% 50%;
-    --radius: 1rem;
+    /* Warm paper + ink, one lamp-amber accent */
+    --background: 42 33% 95%;
+    --foreground: 36 14% 9%;
+    --card: 42 40% 98%;
+    --card-foreground: 36 14% 9%;
+    --popover: 42 40% 98%;
+    --popover-foreground: 36 14% 9%;
+    --primary: 33 92% 52%;
+    --primary-foreground: 36 14% 9%;
+    --primary-ink: 27 90% 38%;
+    --secondary: 40 22% 90%;
+    --secondary-foreground: 36 14% 9%;
+    --muted: 40 22% 90%;
+    --muted-foreground: 36 8% 38%;
+    --accent: 40 22% 90%;
+    --accent-foreground: 36 14% 9%;
+    --destructive: 8 70% 46%;
+    --destructive-foreground: 42 40% 98%;
+    --border: 38 16% 83%;
+    --input: 38 16% 83%;
+    --ring: 33 92% 52%;
+    --radius: 0.5rem;
   }
 
   .dark {
-    --background: 224 71% 4%;
-    --foreground: 210 40% 98%;
-    --card: 224 71% 4%;
-    --card-foreground: 210 40% 98%;
-    --popover: 224 71% 4%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 172 66% 50%;
-    --primary-foreground: 224 71% 4%;
-    --secondary: 215 28% 17%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 215 28% 17%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 172 66% 50%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 215 28% 17%;
-    --input: 215 28% 17%;
-    --ring: 172 66% 50%;
+    --background: 36 14% 9%;
+    --foreground: 42 33% 95%;
+    --card: 36 12% 12%;
+    --card-foreground: 42 33% 95%;
+    --popover: 36 12% 12%;
+    --popover-foreground: 42 33% 95%;
+    --primary: 33 92% 55%;
+    --primary-foreground: 36 14% 9%;
+    --primary-ink: 33 92% 55%;
+    --secondary: 36 10% 17%;
+    --secondary-foreground: 42 33% 95%;
+    --muted: 36 10% 17%;
+    --muted-foreground: 38 10% 64%;
+    --accent: 36 10% 17%;
+    --accent-foreground: 42 33% 95%;
+    --destructive: 8 70% 55%;
+    --destructive-foreground: 42 33% 95%;
+    --border: 36 9% 22%;
+    --input: 36 9% 22%;
+    --ring: 33 92% 55%;
   }
 }
 
@@ -53,21 +56,46 @@
   * {
     @apply border-border;
   }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
-    @apply bg-background text-foreground antialiased;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    @apply bg-background text-foreground antialiased font-sans;
+    font-feature-settings: "ss01" 1, "cv11" 1;
+  }
+  h1, h2, h3 {
+    @apply font-display font-normal tracking-tight;
+  }
+  ::selection {
+    background: hsl(var(--primary) / 0.35);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Small mono label used above headings and in data rows */
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground;
+  }
+  /* Hairline-bordered surface instead of glass cards */
+  .panel {
+    @apply rounded-lg border bg-card;
+  }
+  .rule {
+    @apply border-t border-border;
   }
 }
 
 @layer utilities {
-  .glass {
-    @apply bg-white/10 backdrop-blur-md border border-white/20;
-  }
-  .glass-dark {
-    @apply bg-black/40 backdrop-blur-xl border border-white/10;
-  }
-  .text-glow {
-    text-shadow: 0 0 10px rgba(172, 255, 237, 0.5);
+  .text-balance {
+    text-wrap: balance;
   }
   .animate-marquee {
     animation: marquee 40s linear infinite;
@@ -79,14 +107,10 @@
   100% { transform: translateX(-50%); }
 }
 
-.gradient-bg {
-  background: radial-gradient(circle at top right, hsla(172, 66%, 50%, 0.15), transparent),
-              radial-gradient(circle at bottom left, hsla(224, 71%, 4%, 0.05), transparent);
+/* Lamp glow used by the interactive house */
+@keyframes flicker-on {
+  0% { opacity: 0; }
+  40% { opacity: 0.6; }
+  55% { opacity: 0.25; }
+  100% { opacity: 1; }
 }
-
-.dark .gradient-bg {
-  background: radial-gradient(circle at top right, hsla(172, 66%, 50%, 0.1), transparent),
-              radial-gradient(circle at bottom left, hsla(224, 71%, 4%, 1), transparent);
-}
-
-

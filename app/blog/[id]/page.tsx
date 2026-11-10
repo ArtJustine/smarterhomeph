@@ -1,15 +1,11 @@
 "use client"
 
 import { use } from "react"
-import Image from "next/image"
 import Link from "next/link"
-import { motion } from "framer-motion"
-import { Calendar, User, ArrowLeft, ArrowRight, Clock, Tag, Share2, Bookmark } from "lucide-react"
+import { ArrowLeft, ArrowRight, Share2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
-import { Card, CardContent } from "@/components/ui/card"
 import { toast } from "sonner"
 
 // Structured blog articles content
@@ -37,21 +33,21 @@ const BLOG_POSTS_DETAIL: Record<number, {
     image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1200&auto=format&fit=crop",
     content: (
       <>
-        <p className="text-lg leading-relaxed text-muted-foreground">
+        <p className="text-xl leading-relaxed text-foreground">
           The concept of a "smart home" has evolved rapidly over the last decade. What once seemed like science fiction—controlling your lights with your voice, checking cameras from across the world, or having your thermostat learn your schedule—is now a routine part of modern home design.
         </p>
-        <h2 className="text-3xl font-black italic tracking-tighter uppercase mt-12 mb-6">1. The Brain: Next-Gen Automation Hubs</h2>
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">1. The Brain: Next-Gen Automation Hubs</h2>
         <p className="leading-relaxed text-muted-foreground">
           A truly smart home starts with a centralized ecosystem. Hubs that support modern local protocols like Matter and Thread ensure that your devices communicate locally without requiring a round-trip to the cloud. This means near-zero latency, robust offline operation, and bulletproof security.
         </p>
-        <h2 className="text-3xl font-black italic tracking-tighter uppercase mt-12 mb-6">2. Smart Lighting That Flows with the Day</h2>
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">2. Smart Lighting That Flows with the Day</h2>
         <p className="leading-relaxed text-muted-foreground">
           Lighting does more than help us see; it influences our mood, sleep cycles, and productivity. Circadian lighting systems automatically adjust their color temperature and brightness throughout the day—shifting from energizing cool white in the morning to a warm, cozy amber in the evening.
         </p>
-        <blockquote className="border-l-4 border-primary bg-primary/5 p-6 rounded-r-2xl italic font-medium my-8 text-white/90">
+        <blockquote className="my-10 border-l-2 border-primary pl-6 font-display text-2xl italic leading-snug sm:text-3xl">
           "The best smart home devices are the ones you forget exist because they adapt to your life automatically."
         </blockquote>
-        <h2 className="text-3xl font-black italic tracking-tighter uppercase mt-12 mb-6">3. Seamless Climate Intelligence</h2>
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">3. Seamless Climate Intelligence</h2>
         <p className="leading-relaxed text-muted-foreground">
           Intelligent thermostats like the Ecobee Smart Thermostat Pro analyze indoor air quality, humidity, and room occupancy to deliver balanced comfort. Rather than running continuously, they adjust dynamically to optimize energy usage, saving homeowners up to 23% in annual heating and cooling costs.
         </p>
@@ -70,18 +66,18 @@ const BLOG_POSTS_DETAIL: Record<number, {
     image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1200&auto=format&fit=crop",
     content: (
       <>
-        <p className="text-lg leading-relaxed text-muted-foreground">
+        <p className="text-xl leading-relaxed text-foreground">
           Keeping your home secure is a top priority, but traditional professional security systems can cost thousands of dollars upfront, plus heavy recurring monthly contracts. Fortunately, the rise of modular smart security devices has made it possible to build a premium, self-monitored system on a highly accessible budget.
         </p>
-        <h2 className="text-3xl font-black italic tracking-tighter uppercase mt-12 mb-6">Start with Key Entryways: Smart Locks</h2>
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Start with Key Entryways: Smart Locks</h2>
         <p className="leading-relaxed text-muted-foreground">
           A smart lock is the first line of defense. By installing a retrofit smart lock on your existing deadbolt, you can manage access codes, monitor logs, and grant remote entry to guests. Brand names like August or Aqara offer high-end security standards like bank-level encryption.
         </p>
-        <h2 className="text-3xl font-black italic tracking-tighter uppercase mt-12 mb-6">Add Targeted Surveillance</h2>
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Add Targeted Surveillance</h2>
         <p className="leading-relaxed text-muted-foreground">
           Instead of wiring cameras everywhere, focus on key choke points: the front porch, the backyard entrance, and main interior hallways. Smart cameras from Reolink offer 2K clarity and local storage (on SD cards or local hard drives) so you can avoid monthly cloud storage fees.
         </p>
-        <blockquote className="border-l-4 border-primary bg-primary/5 p-6 rounded-r-2xl italic font-medium my-8 text-white/90">
+        <blockquote className="my-10 border-l-2 border-primary pl-6 font-display text-2xl italic leading-snug sm:text-3xl">
           "Security isn't about how much you spend; it's about eliminating blind spots and securing entryways locally."
         </blockquote>
         <p className="leading-relaxed text-muted-foreground">
@@ -102,18 +98,18 @@ const BLOG_POSTS_DETAIL: Record<number, {
     image: "https://images.unsplash.com/photo-1543512214-318c7553f230?q=80&w=1200&auto=format&fit=crop",
     content: (
       <>
-        <p className="text-lg leading-relaxed text-muted-foreground">
+        <p className="text-xl leading-relaxed text-foreground">
           For years, voice control in the smart home has been somewhat transactional: "Turn on the lights," "What is the weather today?" or "Set a timer for 10 minutes." However, the integration of Large Language Models (LLMs) and advanced local processing is changing everything, turning smart assistants into proactive, contextual home co-pilots.
         </p>
-        <h2 className="text-3xl font-black italic tracking-tighter uppercase mt-12 mb-6">From Commands to Conversations</h2>
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">From Commands to Conversations</h2>
         <p className="leading-relaxed text-muted-foreground">
           The next generation of voice assistants won't require rigid, exact commands. You can simply state, "The room feels a bit stuffy," and the assistant will intelligently correlate your request with ambient temperature and air quality data, deciding to turn on the ceiling fan or adjust the ventilation system.
         </p>
-        <h2 className="text-3xl font-black italic tracking-tighter uppercase mt-12 mb-6">Local Processing & Absolute Privacy</h2>
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Local Processing & Absolute Privacy</h2>
         <p className="leading-relaxed text-muted-foreground">
           One of the biggest concerns with voice assistants has been data privacy—audio clips being transmitted to cloud servers for analysis. Future integrations utilize powerful neural processors built directly into home automation servers, allowing voice recognition to occur completely offline. Your conversations remain inside your home.
         </p>
-        <blockquote className="border-l-4 border-primary bg-primary/5 p-6 rounded-r-2xl italic font-medium my-8 text-white/90">
+        <blockquote className="my-10 border-l-2 border-primary pl-6 font-display text-2xl italic leading-snug sm:text-3xl">
           "Artificial intelligence in the home should be felt, not seen, operating behind the scenes to streamline your day."
         </blockquote>
       </>
@@ -131,18 +127,18 @@ const BLOG_POSTS_DETAIL: Record<number, {
     image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200&auto=format&fit=crop",
     content: (
       <>
-        <p className="text-lg leading-relaxed text-muted-foreground">
+        <p className="text-xl leading-relaxed text-foreground">
           With utility bills rising and climate awareness at an all-time high, homeowners are searching for ways to decrease energy consumption. Fortunately, smart home technology offers powerful tools to automate energy efficiency without sacrificing comfort.
         </p>
-        <h2 className="text-3xl font-black italic tracking-tighter uppercase mt-12 mb-6">Automating Standby Power Cuts</h2>
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Automating Standby Power Cuts</h2>
         <p className="leading-relaxed text-muted-foreground">
           Many electronics (TVs, gaming consoles, chargers) draw energy even when turned off—a phenomenon known as "vampire load." By plugging these devices into smart plugs with built-in energy monitoring, you can automate schedules to completely cut off their power supply when you go to bed or leave for work.
         </p>
-        <h2 className="text-3xl font-black italic tracking-tighter uppercase mt-12 mb-6">Sun-Tracking Window Coverings</h2>
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Sun-Tracking Window Coverings</h2>
         <p className="leading-relaxed text-muted-foreground">
           By integrating smart blinds with temperature sensors, your home can automatically close the shades during the hottest hours of the summer day, reducing the load on your air conditioning. In winter, they open up to let in free thermal heat from the sun.
         </p>
-        <blockquote className="border-l-4 border-primary bg-primary/5 p-6 rounded-r-2xl italic font-medium my-8 text-white/90">
+        <blockquote className="my-10 border-l-2 border-primary pl-6 font-display text-2xl italic leading-snug sm:text-3xl">
           "Sustainability doesn't require compromises. Automation enables energy efficiency to become a passive, background operation."
         </blockquote>
       </>
@@ -160,18 +156,18 @@ const BLOG_POSTS_DETAIL: Record<number, {
     image: "https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?q=80&w=1200&auto=format&fit=crop",
     content: (
       <>
-        <p className="text-lg leading-relaxed text-muted-foreground">
+        <p className="text-xl leading-relaxed text-foreground">
           One of the biggest frustrations in home automation is fragmentation. Buying devices that require separate apps can turn a "smart home" into an exhausting chore. A seamless home automation experience relies on connecting different platforms together into a single, unified interface.
         </p>
-        <h2 className="text-3xl font-black italic tracking-tighter uppercase mt-12 mb-6">The Matter Standard: Unified Connectivity</h2>
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">The Matter Standard: Unified Connectivity</h2>
         <p className="leading-relaxed text-muted-foreground">
           The introduction of the Matter standard marks a historic shift. Sponsored by major industry players like Apple, Google, Amazon, and Samsung, Matter allows certified devices to work cross-platform out of the box. You can now control a Matter smart bulb using Apple HomeKit, Alexa, and Google Assistant simultaneously.
         </p>
-        <h2 className="text-3xl font-black italic tracking-tighter uppercase mt-12 mb-6">Bridging Older Hardware</h2>
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Bridging Older Hardware</h2>
         <p className="leading-relaxed text-muted-foreground">
           If you have older Zigbee, Z-Wave, or proprietary smart gadgets, you don't need to throw them away. Automation gateways and custom smart hubs can translate these legacy protocols, exposing them as standard Matter-compatible accessories on your modern network.
         </p>
-        <blockquote className="border-l-4 border-primary bg-primary/5 p-6 rounded-r-2xl italic font-medium my-8 text-white/90">
+        <blockquote className="my-10 border-l-2 border-primary pl-6 font-display text-2xl italic leading-snug sm:text-3xl">
           "A unified home system is the difference between owning twenty separate smart gadgets and living in an integrated, smart ecosystem."
         </blockquote>
       </>
@@ -189,18 +185,18 @@ const BLOG_POSTS_DETAIL: Record<number, {
     image: "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=1200&auto=format&fit=crop",
     content: (
       <>
-        <p className="text-lg leading-relaxed text-muted-foreground">
+        <p className="text-xl leading-relaxed text-foreground">
           Home automation is often associated with gadget enthusiasts, but its most profound impact lies in assistive care and accessibility. For older adults who wish to "age in place" independently, smart technology provides a supportive framework that ensures safety, comfort, and peace of mind.
         </p>
-        <h2 className="text-3xl font-black italic tracking-tighter uppercase mt-12 mb-6">Passive Fall Detection & Motion Mapping</h2>
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Passive Fall Detection & Motion Mapping</h2>
         <p className="leading-relaxed text-muted-foreground">
           Modern sensors can detect movement patterns without intrusive cameras. Radar-based motion sensors (like the Aqara Presence Sensor FP2) can detect falls and map room occupancy in real-time. If a fall is detected, the system can automatically send alerts to family members or dispatch local emergency services.
         </p>
-        <h2 className="text-3xl font-black italic tracking-tighter uppercase mt-12 mb-6">Simplified Environmental Adjustments</h2>
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Simplified Environmental Adjustments</h2>
         <p className="leading-relaxed text-muted-foreground">
           Voice control and automated routines reduce the need for physical bending or reaching. Automations like "Good Morning" can automatically open blinds, adjust the thermostat to a comfortable setting, turn on hall lighting, and pre-heat the coffee maker.
         </p>
-        <blockquote className="border-l-4 border-primary bg-primary/5 p-6 rounded-r-2xl italic font-medium my-8 text-white/90">
+        <blockquote className="my-10 border-l-2 border-primary pl-6 font-display text-2xl italic leading-snug sm:text-3xl">
           "Smart technology isn't just about luxury; it represents a major leap forward in accessibility, dignity, and independent living."
         </blockquote>
       </>
@@ -211,20 +207,23 @@ const BLOG_POSTS_DETAIL: Record<number, {
 export default function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = use(params)
   const id = parseInt(resolvedParams.id)
-  
+
   const post = BLOG_POSTS_DETAIL[id]
 
   if (!post) {
     return (
-      <div className="flex min-h-screen flex-col bg-background text-foreground justify-center items-center">
+      <div className="flex min-h-screen flex-col">
         <SiteHeader />
-        <div className="text-center space-y-6 max-w-md px-6 py-20 glass rounded-[2.5rem]">
-          <h2 className="text-3xl font-black italic tracking-tighter uppercase text-primary">Post Not Found</h2>
-          <p className="text-muted-foreground">The article you are looking for does not exist or has been archived.</p>
-          <Link href="/blog">
-            <Button className="rounded-xl w-full">BACK TO JOURNAL</Button>
-          </Link>
-        </div>
+        <main className="container flex flex-1 flex-col items-start justify-center gap-6 py-24">
+          <p className="eyebrow">404</p>
+          <h1 className="text-5xl sm:text-6xl">Post not found.</h1>
+          <p className="max-w-md text-muted-foreground">
+            The article you are looking for does not exist or has been archived.
+          </p>
+          <Button asChild className="rounded-full">
+            <Link href="/blog">Back to the journal</Link>
+          </Button>
+        </main>
         <SiteFooter />
       </div>
     )
@@ -232,14 +231,12 @@ export default function BlogPostPage({ params }: { params: Promise<{ id: string 
 
   const handleShare = () => {
     if (navigator.share) {
-      navigator.share({
-        title: post.title,
-        text: post.subtitle,
-        url: window.location.href
-      }).catch(console.error)
+      navigator
+        .share({ title: post.title, text: post.subtitle, url: window.location.href })
+        .catch(console.error)
     } else {
       navigator.clipboard.writeText(window.location.href)
-      toast.success("Article link copied to clipboard!")
+      toast.success("Article link copied to clipboard")
     }
   }
 
@@ -249,135 +246,78 @@ export default function BlogPostPage({ params }: { params: Promise<{ id: string 
     .map(([key, val]) => ({ id: parseInt(key), ...val }))
 
   return (
-    <div className="flex min-h-screen flex-col bg-background selection:bg-primary selection:text-primary-foreground">
+    <div className="flex min-h-screen flex-col">
       <SiteHeader />
 
       <main className="flex-1">
-        {/* Article Hero */}
-        <section className="relative min-h-[60vh] flex items-end pt-32 pb-16 overflow-hidden">
-          <div className="absolute inset-0 z-0">
-            <Image
-              src={post.image}
-              alt={post.title}
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-black/60" />
-          </div>
-
-          <div className="container relative z-10 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl space-y-6">
-              <Link href="/blog">
-                <Button variant="ghost" className="text-white hover:text-primary gap-2 p-0 h-auto font-bold uppercase tracking-widest text-xs italic bg-transparent hover:bg-transparent">
-                  <ArrowLeft className="h-4 w-4" /> Back to Journal
-                </Button>
+        <article>
+          <header className="border-b">
+            <div className="container pb-12 pt-12 md:pb-16 md:pt-16"><div className="max-w-4xl">
+              <Link
+                href="/blog"
+                className="eyebrow inline-flex items-center gap-2 transition-colors hover:text-foreground"
+              >
+                <ArrowLeft className="h-3.5 w-3.5" /> Journal
               </Link>
-              
-              <div className="flex flex-wrap gap-3">
-                <Badge className="bg-primary text-primary-foreground text-[10px] font-black uppercase tracking-widest px-3 py-1">
-                  {post.category}
-                </Badge>
-                <Badge variant="outline" className="border-white/20 text-white backdrop-blur-md bg-white/5 text-[10px] font-black uppercase tracking-widest px-3 py-1">
-                  {post.readTime}
-                </Badge>
-              </div>
-
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white leading-none tracking-tighter uppercase italic text-glow">
-                {post.title}
-              </h1>
-
-              <p className="text-lg sm:text-xl text-white/70 font-medium leading-relaxed max-w-3xl">
-                {post.subtitle}
+              <p className="eyebrow mt-10 text-primary-ink">
+                {post.category} · {post.readTime}
               </p>
+              <h1 className="mt-4 text-balance text-5xl leading-[1.03] sm:text-6xl lg:text-7xl">{post.title}</h1>
+              <p className="mt-6 max-w-2xl text-xl leading-relaxed text-muted-foreground">{post.subtitle}</p>
+              <p className="eyebrow mt-8">
+                By {post.author}, {post.authorRole} · {post.date}
+              </p>
+            </div></div>
+          </header>
 
-              <div className="flex items-center gap-6 pt-4 border-t border-white/10 w-fit">
-                <div className="flex items-center gap-3">
-                  <div className="relative h-10 w-10 rounded-full overflow-hidden border border-primary/20">
-                    <Image
-                      src={post.authorAvatar}
-                      alt={post.author}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold text-white uppercase tracking-wider">{post.author}</p>
-                    <p className="text-[10px] text-white/50 font-bold uppercase tracking-widest">{post.authorRole}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-1.5 text-xs text-white/40 font-bold uppercase tracking-widest">
-                  <Calendar className="h-3.5 w-3.5" />
-                  <span>{post.date}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Article Body */}
-        <section className="py-20 container px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-12 gap-16">
-            <div className="lg:col-span-8 space-y-8 text-foreground prose dark:prose-invert max-w-none">
+          <div className="container grid gap-16 py-16 lg:grid-cols-12 lg:py-20">
+            <div className="max-w-2xl space-y-6 lg:col-span-8">
               {post.content}
-              
-              {/* Interaction Panel */}
-              <div className="flex justify-between items-center py-6 border-y border-foreground/5 mt-16">
-                <div className="flex items-center gap-2">
-                  <Button variant="outline" size="sm" onClick={handleShare} className="rounded-xl font-bold text-xs gap-2">
-                    <Share2 className="h-3.5 w-3.5" /> SHARE
-                  </Button>
-                  <Button variant="outline" size="sm" onClick={() => toast.success("Article bookmarked!")} className="rounded-xl font-bold text-xs gap-2">
-                    <Bookmark className="h-3.5 w-3.5" /> SAVE
-                  </Button>
-                </div>
-                <Link href="/blog">
-                  <Button variant="ghost" className="text-xs font-black uppercase tracking-widest italic hover:text-primary">
-                    View all posts
-                  </Button>
+
+              <div className="!mt-16 flex items-center justify-between border-y py-5">
+                <Button variant="outline" size="sm" onClick={handleShare} className="gap-2 rounded-full">
+                  <Share2 className="h-3.5 w-3.5" /> Share
+                </Button>
+                <Link href="/blog" className="text-sm underline-offset-4 hover:underline">
+                  All posts
                 </Link>
               </div>
             </div>
 
-            {/* Side Callouts / CTAs */}
-            <div className="lg:col-span-4 space-y-8">
-              <Card className="glass-dark border-primary/20 rounded-[2rem] p-8 space-y-6">
-                <div className="p-3 bg-primary/10 rounded-2xl w-fit text-primary">
-                  <Tag className="h-6 w-6" />
-                </div>
-                <h3 className="text-2xl font-black italic tracking-tighter uppercase text-white leading-tight">Ready to build your smart space?</h3>
-                <p className="text-white/60 text-sm leading-relaxed">
-                  Design a custom system tailored to your budget and property type in less than 5 minutes using our interactive Home Builder.
+            <aside className="space-y-12 lg:col-span-4">
+              <div className="rounded-xl bg-foreground p-8 text-background">
+                <h2 className="text-3xl leading-tight">Ready to price your own setup?</h2>
+                <p className="mt-3 text-sm leading-relaxed text-background/70">
+                  Pick your property type and rooms in the builder and see a running total.
                 </p>
-                <Link href="/builder">
-                  <Button className="w-full rounded-xl py-6 font-bold flex gap-2">
-                    OPEN BUILDER <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </Link>
-              </Card>
-
-              {/* Related posts */}
-              <div className="space-y-6">
-                <h4 className="text-xs font-black uppercase tracking-widest opacity-40">Related Articles</h4>
-                <div className="grid gap-6">
-                  {otherPosts.map(other => (
-                    <Link key={other.id} href={`/blog/${other.id}`}>
-                      <div className="group flex gap-4 p-4 glass rounded-2xl border border-transparent hover:border-primary/20 transition-all cursor-pointer">
-                        <div className="relative h-20 w-20 rounded-xl overflow-hidden bg-muted flex-shrink-0">
-                          <Image src={other.image} alt={other.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                        </div>
-                        <div className="space-y-1">
-                          <Badge className="bg-primary/10 text-primary border-none text-[8px] font-black uppercase tracking-widest px-2 py-0.5">{other.category}</Badge>
-                          <h5 className="font-bold text-sm text-foreground group-hover:text-primary transition-colors leading-snug line-clamp-2">{other.title}</h5>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
+                <Button
+                  asChild
+                  className="mt-6 h-11 w-full rounded-full bg-primary text-primary-foreground hover:bg-primary/90"
+                >
+                  <Link href="/builder">
+                    Open the builder <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
               </div>
-            </div>
+
+              <div>
+                <p className="eyebrow mb-2">Keep reading</p>
+                <ul>
+                  {otherPosts.map((other) => (
+                    <li key={other.id} className="border-t last:border-b">
+                      <Link href={`/blog/${other.id}`} className="group block py-5">
+                        <p className="eyebrow text-primary-ink">{other.category}</p>
+                        <p className="mt-2 font-display text-2xl leading-snug transition-transform duration-300 group-hover:translate-x-1">
+                          {other.title}
+                        </p>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </aside>
           </div>
-        </section>
+        </article>
       </main>
 
       <SiteFooter />

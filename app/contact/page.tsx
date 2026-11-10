@@ -100,15 +100,15 @@ export default function ContactPage() {
       setIsSubmitted(true)
       localStorage.removeItem("smarterhome_builder_config")
       setLoadedConfig(null)
-      toast.success("Message transmitted successfully!")
+      toast.success("Message sent. We will be in touch.")
     }, 2000)
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-background selection:bg-primary selection:text-primary-foreground">
+    <div className="flex min-h-screen flex-col">
       <SiteHeader />
       
-      <main className="flex-1 pt-32 pb-24">
+      <main className="flex-1 pb-24 pt-14 md:pt-20">
         <div className="container px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-16 items-start">
@@ -118,12 +118,10 @@ export default function ContactPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                 >
-                  <h1 className="text-5xl md:text-6xl font-black tracking-tighter leading-none mb-6">
-                    LET'S START <br />
-                    <span className="text-primary italic">THE CONVERSATION.</span>
-                  </h1>
+                  <p className="eyebrow mb-5">Contact</p>
+                  <h1 className="mb-6 text-5xl leading-[1.02] sm:text-6xl">Tell us about <span className="italic text-primary-ink">your house.</span></h1>
                   <p className="text-xl text-muted-foreground leading-relaxed">
-                    Whether you're looking to automate a studio apartment or a commercial complex, our experts are ready to assist.
+                    A studio, a townhouse or a small office. Send a few lines and we will reply with next steps.
                   </p>
                 </motion.div>
 
@@ -132,12 +130,12 @@ export default function ContactPage() {
                   <motion.div 
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="p-8 bg-primary/5 border border-primary/20 rounded-[2.5rem] space-y-6 relative overflow-hidden"
+                    className="p-8 bg-primary/5 border border-primary/20 rounded-xl space-y-6 relative overflow-hidden"
                   >
                     <div className="absolute top-0 right-0 w-24 h-24 bg-primary/10 blur-xl rounded-full" />
                     
-                    <div className="flex justify-between items-center border-b border-white/10 pb-4">
-                      <div className="flex items-center gap-2 text-primary font-black uppercase tracking-widest text-xs">
+                    <div className="flex justify-between items-center border-b border-border pb-4">
+                      <div className="flex items-center gap-2 text-primary-ink font-semibold uppercase tracking-widest text-xs">
                         <Sparkles className="h-4 w-4" />
                         <span>Custom Build Imported</span>
                       </div>
@@ -153,25 +151,25 @@ export default function ContactPage() {
                     
                     <div className="space-y-4">
                       <div className="flex justify-between items-center text-sm">
-                        <span className="text-white/50 font-bold uppercase tracking-wider">Property Class</span>
-                        <span className="font-bold text-white uppercase italic">{loadedConfig.propertyType}</span>
+                        <span className="text-muted-foreground font-bold uppercase tracking-wider">Property Class</span>
+                        <span className="font-bold text-foreground uppercase">{loadedConfig.propertyType}</span>
                       </div>
                       
-                      <div className="space-y-3 max-h-[160px] overflow-y-auto pr-2 border-y border-white/5 py-4">
+                      <div className="space-y-3 max-h-[160px] overflow-y-auto pr-2 border-y border-border py-4">
                         {loadedConfig.rooms.map((r, idx) => (
                           <div key={idx} className="space-y-1">
-                            <p className="text-xs font-bold text-white/80 uppercase tracking-wider">{r.name}</p>
-                            <p className="text-[11px] text-white/45 truncate leading-relaxed">{r.devices.join(", ")}</p>
+                            <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{r.name}</p>
+                            <p className="text-[11px] text-muted-foreground truncate leading-relaxed">{r.devices.join(", ")}</p>
                           </div>
                         ))}
                       </div>
                       
                       <div className="flex justify-between items-end">
                         <div>
-                          <p className="text-[10px] text-white/40 font-bold uppercase tracking-wider">Configuration Total</p>
-                          <p className="text-3xl font-black text-primary italic tracking-tighter text-glow">${loadedConfig.totalPrice.toLocaleString()}</p>
+                          <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider">Configuration Total</p>
+                          <p className="text-3xl font-semibold text-primary-ink tracking-tight">${loadedConfig.totalPrice.toLocaleString()}</p>
                         </div>
-                        <Badge variant="outline" className="border-primary/30 bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest px-3 py-1">
+                        <Badge variant="outline" className="border-primary/30 bg-primary/10 text-primary-ink text-[10px] font-semibold uppercase tracking-widest px-3 py-1">
                           Specs Attached
                         </Badge>
                       </div>
@@ -193,11 +191,11 @@ export default function ContactPage() {
                       transition={{ delay: i * 0.1 }}
                       className="flex gap-6 group"
                     >
-                      <div className="p-4 bg-muted rounded-2xl group-hover:bg-primary/20 group-hover:text-primary transition-colors h-fit">
-                        <item.icon className="h-6 w-6 text-white" />
+                      <div className="h-fit rounded-full border bg-card p-3 transition-colors group-hover:bg-primary">
+                        <item.icon className="h-5 w-5" strokeWidth={1.75} />
                       </div>
                       <div>
-                        <h3 className="font-bold text-lg text-white mb-1">{item.title}</h3>
+                        <h3 className=" text-lg text-foreground mb-1">{item.title}</h3>
                         <p className="text-muted-foreground font-medium">{item.desc}</p>
                       </div>
                     </motion.div>
@@ -205,8 +203,8 @@ export default function ContactPage() {
                 </div>
 
                 <div className="pt-8 flex gap-4">
-                   <div className="p-3 glass rounded-xl text-muted-foreground hover:text-primary transition-colors cursor-pointer"><Globe className="h-5 w-5" /></div>
-                   <div className="p-3 glass rounded-xl text-muted-foreground hover:text-primary transition-colors cursor-pointer"><MessageSquare className="h-5 w-5" /></div>
+                   <div className="p-3 bg-card border rounded-xl text-muted-foreground hover:text-primary-ink transition-colors cursor-pointer"><Globe className="h-5 w-5" /></div>
+                   <div className="p-3 bg-card border rounded-xl text-muted-foreground hover:text-primary-ink transition-colors cursor-pointer"><MessageSquare className="h-5 w-5" /></div>
                 </div>
               </div>
 
@@ -214,7 +212,7 @@ export default function ContactPage() {
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="glass p-8 md:p-12 rounded-[2.5rem] shadow-2xl relative overflow-hidden"
+                className="bg-card border p-8 md:p-12 rounded-xl relative overflow-hidden"
               >
                 <div className="absolute top-0 right-0 p-8 opacity-5">
                    <Send className="h-32 w-32" />
@@ -222,15 +220,15 @@ export default function ContactPage() {
 
                 {isSubmitted ? (
                   <div className="text-center py-12 space-y-6">
-                     <div className="mx-auto w-20 h-20 bg-primary/20 text-primary rounded-full flex items-center justify-center">
+                     <div className="mx-auto w-20 h-20 bg-primary/20 text-primary-ink rounded-full flex items-center justify-center">
                         <CheckCircle2 className="h-10 w-10" />
                      </div>
-                     <h2 className="text-3xl font-black italic tracking-tighter text-white">TRANSMISSION SECURED!</h2>
-                     <p className="text-muted-foreground">Thank you for reaching out. One of our lead automation engineers will contact you within 24 hours.</p>
+                     <h2 className="text-4xl">Message sent.</h2>
+                     <p className="text-muted-foreground">Thank you for reaching out. We will get back to you soon.</p>
                      <Button 
                        variant="outline" 
                        onClick={() => setIsSubmitted(false)} 
-                       className="rounded-xl px-8 border-white/10 hover:bg-white/5 text-white"
+                       className="rounded-xl px-8 border-border hover:bg-secondary text-foreground"
                      >
                        Send Another Message
                      </Button>
@@ -244,9 +242,9 @@ export default function ContactPage() {
                           name="name"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="font-bold uppercase tracking-widest text-[10px] text-white">Full Name</FormLabel>
+                              <FormLabel className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground font-normal">Full Name</FormLabel>
                               <FormControl>
-                                <Input placeholder="John Doe" {...field} className="h-14 bg-background/50 border-white/10 text-white rounded-xl" />
+                                <Input placeholder="John Doe" {...field} className="h-14 bg-background/50 border-border text-foreground rounded-xl" />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -257,9 +255,9 @@ export default function ContactPage() {
                           name="email"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="font-bold uppercase tracking-widest text-[10px] text-white">Email Address</FormLabel>
+                              <FormLabel className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground font-normal">Email Address</FormLabel>
                               <FormControl>
-                                <Input placeholder="john@example.com" {...field} className="h-14 bg-background/50 border-white/10 text-white rounded-xl" />
+                                <Input placeholder="john@example.com" {...field} className="h-14 bg-background/50 border-border text-foreground rounded-xl" />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -273,9 +271,9 @@ export default function ContactPage() {
                           name="phone"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="font-bold uppercase tracking-widest text-[10px] text-white">Phone Number</FormLabel>
+                              <FormLabel className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground font-normal">Phone Number</FormLabel>
                               <FormControl>
-                                <Input placeholder="09170000000" {...field} className="h-14 bg-background/50 border-white/10 text-white rounded-xl" />
+                                <Input placeholder="09170000000" {...field} className="h-14 bg-background/50 border-border text-foreground rounded-xl" />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -286,9 +284,9 @@ export default function ContactPage() {
                           name="subject"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="font-bold uppercase tracking-widest text-[10px] text-white">Subject</FormLabel>
+                              <FormLabel className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground font-normal">Subject</FormLabel>
                               <FormControl>
-                                <Input placeholder="Consultation Request" {...field} className="h-14 bg-background/50 border-white/10 text-white rounded-xl" />
+                                <Input placeholder="Consultation Request" {...field} className="h-14 bg-background/50 border-border text-foreground rounded-xl" />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -301,11 +299,11 @@ export default function ContactPage() {
                         name="message"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="font-bold uppercase tracking-widest text-[10px] text-white">Your Project Details</FormLabel>
+                            <FormLabel className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground font-normal">Your Project Details</FormLabel>
                             <FormControl>
                               <Textarea 
                                 placeholder="Describe your smart home vision..." 
-                                className="min-h-[180px] bg-background/50 border-white/10 text-white rounded-xl py-4" 
+                                className="min-h-[180px] bg-background/50 border-border text-foreground rounded-xl py-4" 
                                 {...field} 
                               />
                             </FormControl>
@@ -317,9 +315,9 @@ export default function ContactPage() {
                       <Button 
                         type="submit" 
                         disabled={isSubmitting}
-                        className="w-full h-16 rounded-2xl font-black text-xl italic tracking-tighter"
+                        className="w-full h-16 rounded-lg font-semibold text-xl tracking-tight"
                       >
-                        {isSubmitting ? "TRANSMITTING..." : "SEND MESSAGE"}
+                        {isSubmitting ? "Sending..." : "Send message"}
                       </Button>
                     </form>
                   </Form>

@@ -1,29 +1,27 @@
-import Image from "next/image"
+import type { ReactNode } from "react"
 
 interface PageHeaderProps {
-  title: string
-  backgroundImage: string
-  alt: string
+  eyebrow?: string
+  title: ReactNode
+  intro?: ReactNode
+  children?: ReactNode
 }
 
-export function PageHeader({ title, backgroundImage, alt }: PageHeaderProps) {
+/** Plain editorial page header: small label, big serif title, optional intro. No hero image. */
+export function PageHeader({ eyebrow, title, intro, children }: PageHeaderProps) {
   return (
-    <section className="relative overflow-hidden border-b border-foreground/5 bg-black">
-      <div className="relative h-[250px] sm:h-[350px] w-full flex items-center justify-center">
-        <Image 
-          src={backgroundImage || "/placeholder.svg"}
-          alt={alt}
-          fill
-          className="object-cover brightness-[0.35] scale-105 transition-transform duration-1000"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/50" />
-        
-        <div className="container relative z-10 px-4 text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tighter uppercase italic text-glow select-none animate-fade-in">
-            {title}
-          </h1>
+    <section className="border-b">
+      <div className="container grid gap-8 pb-12 pt-14 md:pb-16 md:pt-20 lg:grid-cols-12 lg:items-end">
+        <div className="lg:col-span-8">
+          {eyebrow && <p className="eyebrow mb-5">{eyebrow}</p>}
+          <h1 className="text-balance text-5xl leading-[1.02] sm:text-6xl lg:text-7xl">{title}</h1>
         </div>
+        {(intro || children) && (
+          <div className="lg:col-span-4">
+            {intro && <p className="max-w-sm leading-relaxed text-muted-foreground">{intro}</p>}
+            {children}
+          </div>
+        )}
       </div>
     </section>
   )

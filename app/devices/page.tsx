@@ -194,20 +194,17 @@ function DevicesCatalogContent() {
   }, [filteredDevices, sortBy])
 
   return (
-    <div className="flex min-h-screen flex-col bg-background selection:bg-primary selection:text-primary-foreground">
+    <div className="flex min-h-screen flex-col bg-background ">
       <SiteHeader />
 
       <main className="flex-1">
         {/* Simple Page Header */}
-        <div className="pt-32 pb-12 border-b border-foreground/5 mb-12">
+        <div className="mb-12 border-b pb-10 pt-14 md:pt-20">
            <div className="container px-4">
               <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                  <div className="space-y-2">
-                    <div className="flex items-center gap-2 text-primary">
-                       <Sparkles className="h-4 w-4" />
-                       <span className="text-[10px] uppercase font-black tracking-widest">CURATED CATALOG</span>
-                    </div>
-                    <h1 className="text-4xl md:text-6xl font-black tracking-tighter uppercase italic">DEVICES <span className="text-primary">&</span> HARDWARE</h1>
+                    <p className="eyebrow">Catalog</p>
+                    <h1 className="text-5xl leading-none sm:text-6xl lg:text-7xl">Devices we <span className="italic text-primary-ink">install.</span></h1>
                  </div>
                  
                  <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
@@ -215,8 +212,8 @@ function DevicesCatalogContent() {
                     <div className="relative w-full sm:w-80">
                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                        <Input 
-                         placeholder="Search catalog or protocols..." 
-                         className="h-14 pl-12 bg-muted/50 border-none rounded-2xl"
+                         placeholder="Search brand, type or Alexa, HomeKit..." 
+                         className="h-12 pl-12 bg-card border rounded-full"
                          value={searchQuery}
                          onChange={(e) => setSearchQuery(e.target.value)}
                        />
@@ -224,11 +221,11 @@ function DevicesCatalogContent() {
                     
                     {/* Sort Selector */}
                     <Select value={sortBy} onValueChange={setSortBy}>
-                      <SelectTrigger className="h-14 bg-muted/50 border-none rounded-2xl w-full sm:w-56 font-medium text-sm text-foreground">
+                      <SelectTrigger className="h-12 bg-card border rounded-full w-full sm:w-56 text-sm text-foreground">
                         <SlidersHorizontal className="h-4 w-4 mr-2 text-muted-foreground" />
                         <SelectValue placeholder="Sort by" />
                       </SelectTrigger>
-                      <SelectContent className="glass-dark border-white/10 text-white rounded-xl">
+                      <SelectContent className="bg-card border border-border text-foreground rounded-xl">
                         <SelectItem value="featured">Featured</SelectItem>
                         <SelectItem value="price-asc">Price: Low to High</SelectItem>
                         <SelectItem value="price-desc">Price: High to Low</SelectItem>
@@ -246,8 +243,8 @@ function DevicesCatalogContent() {
             {/* Filters Sidebar */}
             <div className="space-y-6">
               <div className="flex items-center justify-between">
-                <h3 className="text-sm font-black uppercase tracking-widest opacity-50">Filter Options</h3>
-                <Button variant="ghost" size="sm" onClick={clearAllFilters} className="text-xs hover:text-primary">RESET</Button>
+                <p className="eyebrow">Filter</p>
+                <Button variant="ghost" size="sm" onClick={clearAllFilters} className="text-xs hover:text-primary-ink">Reset</Button>
               </div>
 
               <div className="space-y-3">
@@ -256,7 +253,7 @@ function DevicesCatalogContent() {
                   { id: "category", label: "Categories", items: categoriesArr, state: selectedCategories, setState: setSelectedCategories },
                   { id: "ecosystem", label: "Ecosystems", items: ecosystemsArr, state: selectedEcosystems, setState: setSelectedEcosystems },
                 ].map((sec) => (
-                  <div key={sec.id} className="glass rounded-[1.5rem] overflow-hidden">
+                  <div key={sec.id} className="bg-card border rounded-xl overflow-hidden">
                     <button
                       className="w-full p-5 flex justify-between items-center text-sm font-bold uppercase tracking-tight"
                       onClick={() => toggleFilter(sec.id)}
@@ -281,7 +278,7 @@ function DevicesCatalogContent() {
                                   onCheckedChange={() => toggleItem(sec.state, sec.setState, item)}
                                   className="h-5 w-5 rounded-lg border-primary/20 data-[state=checked]:bg-primary"
                                 />
-                                <Label htmlFor={`${sec.id}-${item}`} className="text-sm cursor-pointer hover:text-primary transition-colors">
+                                <Label htmlFor={`${sec.id}-${item}`} className="text-sm cursor-pointer hover:text-primary-ink transition-colors">
                                   {item}
                                 </Label>
                               </div>
@@ -294,8 +291,8 @@ function DevicesCatalogContent() {
                 ))}
 
                 {/* Price Filter */}
-                <div className="glass rounded-[1.5rem] p-5 space-y-4">
-                  <h3 className="text-sm font-bold uppercase tracking-tight">Price Range</h3>
+                <div className="bg-card border rounded-xl p-5 space-y-4">
+                  <h3 className="text-sm   tracking-tight">Price Range</h3>
                   <div className="space-y-6">
                     <Slider
                       defaultValue={[0, 500]}
@@ -306,9 +303,9 @@ function DevicesCatalogContent() {
                       className="py-4"
                     />
                     <div className="flex justify-between items-center bg-background/50 p-3 rounded-xl border border-foreground/5">
-                      <span className="text-xs font-black tracking-tight">${priceRange[0]}</span>
+                      <span className="text-xs font-semibold tracking-tight">${priceRange[0]}</span>
                       <span className="text-xs opacity-20">—</span>
-                      <span className="text-xs font-black tracking-tight">${priceRange[1]}</span>
+                      <span className="text-xs font-semibold tracking-tight">${priceRange[1]}</span>
                     </div>
                   </div>
                 </div>
@@ -326,7 +323,7 @@ function DevicesCatalogContent() {
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
                     >
-                      <Card className="group glass-dark h-full rounded-[2.5rem] border-foreground/5 hover:border-primary/50 transition-all duration-500 overflow-hidden flex flex-col">
+                      <Card className="group bg-card border h-full rounded-xl border-foreground/5 hover:border-primary/50 transition-all duration-500 overflow-hidden flex flex-col">
                         <div className="aspect-[4/5] relative bg-muted overflow-hidden">
                            <Image 
                             src={device.image} 
@@ -336,11 +333,11 @@ function DevicesCatalogContent() {
                            />
                            
                            {/* Quick View Button overlay on hover */}
-                           <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                           <div className="absolute inset-0 bg-card opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                              <Button 
                                onClick={() => setQuickViewDevice(device)} 
                                variant="outline" 
-                               className="rounded-xl border-white/20 text-white bg-black/40 hover:bg-primary hover:text-black transition-all gap-2"
+                               className="rounded-full border-border text-foreground bg-card hover:bg-primary hover:text-primary-foreground transition-all gap-2"
                              >
                                <Eye className="h-4 w-4" /> Quick View
                              </Button>
@@ -348,17 +345,17 @@ function DevicesCatalogContent() {
 
                            <div className="absolute top-4 right-4 flex flex-col gap-2">
                               {device.ecosystems.slice(0, 2).map(eco => (
-                                 <Badge key={eco} className="bg-white/10 backdrop-blur-md text-white border-white/10 text-[10px] font-black uppercase tracking-widest">{eco}</Badge>
+                                 <Badge key={eco} className="bg-secondary  text-foreground border-border text-[10px] font-semibold uppercase tracking-widest">{eco}</Badge>
                               ))}
                            </div>
                         </div>
                         
                         <CardContent className="p-8 flex flex-col flex-1">
-                          <div className="text-[10px] font-black uppercase tracking-widest text-primary mb-2 italic">{device.brand}</div>
-                          <h3 className="text-xl font-bold tracking-tight mb-2 group-hover:text-primary transition-colors">{device.name}</h3>
+                          <div className="text-[10px] font-semibold uppercase tracking-widest text-primary-ink mb-2">{device.brand}</div>
+                          <h3 className="text-xl  tracking-tight mb-2 group-hover:text-primary-ink transition-colors">{device.name}</h3>
                           <p className="text-sm text-muted-foreground mb-8 flex-1 leading-relaxed">{device.description}</p>
                           <div className="flex justify-between items-center pt-6 border-t border-foreground/5">
-                            <span className="text-2xl font-black tracking-tighter italic">${device.price}</span>
+                            <span className="text-2xl font-semibold tracking-tight">${device.price}</span>
                             <div className="flex gap-2">
                               <Link href="/builder">
                                 <Button size="sm" variant="outline" className="h-12 rounded-xl text-xs font-bold border-foreground/10 hover:bg-primary/10">
@@ -382,9 +379,9 @@ function DevicesCatalogContent() {
                    <div className="p-6 bg-muted/50 rounded-full">
                       <Search className="h-10 w-10 text-muted-foreground opacity-20" />
                    </div>
-                   <h3 className="text-2xl font-bold">No hardware found</h3>
+                   <h3 className="text-2xl ">No hardware found</h3>
                    <p className="text-muted-foreground">Try adjusting your filters or search query.</p>
-                   <Button variant="outline" onClick={clearAllFilters} className="rounded-xl mt-4">CLEAR ALL FILTERS</Button>
+                   <Button variant="outline" onClick={clearAllFilters} className="rounded-xl mt-4">Clear all filters</Button>
                 </div>
               )}
             </div>
@@ -394,7 +391,7 @@ function DevicesCatalogContent() {
 
       {/* Quick View Modal */}
       <Dialog open={!!quickViewDevice} onOpenChange={(open) => !open && setQuickViewDevice(null)}>
-        <DialogContent className="glass-dark border-primary/20 text-white rounded-[2.5rem] max-w-2xl overflow-hidden p-0">
+        <DialogContent className="bg-card border border-primary/20 text-foreground rounded-xl max-w-2xl overflow-hidden p-0">
           {quickViewDevice && (
             <div className="grid md:grid-cols-2">
               <div className="relative aspect-[4/5] md:aspect-auto md:h-full bg-muted min-h-[300px]">
@@ -403,13 +400,13 @@ function DevicesCatalogContent() {
               <div className="p-8 space-y-6 flex flex-col justify-between">
                 <div className="space-y-4">
                   <div>
-                    <Badge className="bg-primary text-primary-foreground text-[10px] font-black uppercase tracking-widest px-2.5 py-1 mb-2">{quickViewDevice.brand}</Badge>
-                    <h2 className="text-3xl font-black italic tracking-tighter uppercase leading-tight">{quickViewDevice.name}</h2>
+                    <Badge className="bg-primary text-primary-foreground text-[10px] font-semibold uppercase tracking-widest px-2.5 py-1 mb-2">{quickViewDevice.brand}</Badge>
+                    <h2 className="text-3xl  tracking-tight  leading-tight">{quickViewDevice.name}</h2>
                   </div>
-                  <p className="text-sm text-white/70 leading-relaxed">{quickViewDevice.description}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{quickViewDevice.description}</p>
                   <div className="space-y-2">
-                    <p className="text-xs font-black uppercase tracking-widest text-primary">Key Specifications:</p>
-                    <ul className="grid grid-cols-1 gap-1 text-xs text-white/60">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-primary-ink">Key Specifications:</p>
+                    <ul className="grid grid-cols-1 gap-1 text-xs text-muted-foreground">
                       {quickViewDevice.specs?.map((spec, i) => (
                         <li key={i} className="flex items-center gap-1.5">
                           <span className="h-1 w-1 bg-primary rounded-full" />
@@ -420,10 +417,10 @@ function DevicesCatalogContent() {
                   </div>
                 </div>
                 
-                <div className="space-y-4 pt-6 border-t border-white/10">
+                <div className="space-y-4 pt-6 border-t border-border">
                   <div className="flex justify-between items-end">
-                    <span className="text-xs text-white/40 font-bold uppercase tracking-wider">Invest Cost</span>
-                    <span className="text-3xl font-black italic text-glow">${quickViewDevice.price}</span>
+                    <span className="text-xs text-muted-foreground font-bold uppercase tracking-wider">Price</span>
+                    <span className="text-3xl font-semibold">${quickViewDevice.price}</span>
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <Link href="/builder" className="w-full">
@@ -431,7 +428,7 @@ function DevicesCatalogContent() {
                         ADD TO BUILDER
                       </Button>
                     </Link>
-                    <Button variant="outline" onClick={() => setQuickViewDevice(null)} className="h-12 rounded-xl border-white/10 text-white hover:bg-white/5 font-bold">
+                    <Button variant="outline" onClick={() => setQuickViewDevice(null)} className="h-12 rounded-xl border-border text-foreground hover:bg-secondary font-bold">
                       CLOSE
                     </Button>
                   </div>
@@ -450,12 +447,12 @@ function DevicesCatalogContent() {
 export default function DevicesPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-background flex flex-col justify-between selection:bg-primary selection:text-primary-foreground">
+      <div className="min-h-screen bg-background flex flex-col justify-between ">
         <SiteHeader />
-        <div className="flex-1 flex items-center justify-center text-white">
+        <div className="flex-1 flex items-center justify-center text-foreground">
           <div className="text-center space-y-4">
-            <Sparkles className="h-8 w-8 text-primary animate-pulse mx-auto" />
-            <p className="font-bold uppercase tracking-widest text-xs opacity-50">Transmitting catalog parameters...</p>
+            <Sparkles className="h-8 w-8 text-primary-ink animate-pulse mx-auto" />
+            <p className="eyebrow">Loading catalog...</p>
           </div>
         </div>
         <SiteFooter />

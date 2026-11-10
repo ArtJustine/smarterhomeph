@@ -1,89 +1,75 @@
-"use client"
-
-import { motion } from "framer-motion"
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
-import { Badge } from "@/components/ui/badge"
+import { PageHeader } from "@/components/page-header"
 import { Button } from "@/components/ui/button"
-import { Users, Target, Shield, Heart, ArrowRight, Mail } from "lucide-react"
-import Link from "next/link"
+
+const values = [
+  { title: "Privacy first", desc: "Where a device can run locally, we set it up that way, so your data stays in your home." },
+  { title: "Done properly", desc: "Our technicians are trained on the protocols we install, and we test every scene before we leave." },
+  { title: "Simple to live with", desc: "If your lola can't use it, we haven't finished. Every setup ends with a walkthrough for the whole household." },
+  { title: "Room to grow", desc: "From a studio to a full house, you can start small and add devices later without starting over." },
+]
 
 export default function AboutPage() {
   return (
-    <div className="flex min-h-screen flex-col bg-background selection:bg-primary selection:text-primary-foreground">
+    <div className="flex min-h-screen flex-col">
       <SiteHeader />
 
       <main className="flex-1">
-        {/* Simple Premium Hero */}
-        <section className="pt-40 pb-20 container px-4 sm:px-6 lg:px-8">
-           <div className="max-w-4xl mx-auto text-center space-y-6">
-              <Badge variant="outline" className="px-4 py-1.5 border-primary/50 text-primary rounded-full text-xs font-bold uppercase tracking-widest">
-                Our Vision
-              </Badge>
-              <h1 className="text-5xl md:text-7xl font-black tracking-tighter leading-none">
-                DEFINING THE FUTURE OF <br />
-                <span className="text-primary italic">SMARTER HOME PH.</span>
-              </h1>
-              <p className="text-xl text-muted-foreground leading-relaxed">
-                We don't just sell gadgets; we engineer private, secure, and intuitive smart home environments for the modern lifestyle.
-              </p>
-           </div>
+        <PageHeader
+          eyebrow="About"
+          title={
+            <>
+              We set up smart homes that <span className="italic text-primary-ink">stay simple.</span>
+            </>
+          }
+          intro="We don't just sell gadgets. We plan, install and support setups that work together."
+        />
+
+        <section className="container grid gap-12 py-20 lg:grid-cols-12 lg:py-28">
+          <p className="eyebrow lg:col-span-4">What we care about</p>
+          <ul className="lg:col-span-8">
+            {values.map((v, i) => (
+              <li key={v.title} className="grid gap-3 border-t py-8 first:border-t-0 first:pt-0 sm:grid-cols-[4rem_1fr_1.4fr] sm:gap-8">
+                <span className="font-mono text-sm text-primary-ink">0{i + 1}</span>
+                <h3 className="text-3xl leading-tight">{v.title}</h3>
+                <p className="leading-relaxed text-muted-foreground">{v.desc}</p>
+              </li>
+            ))}
+          </ul>
         </section>
 
-        {/* Values Grid */}
-        <section className="py-24 bg-muted/30">
-          <div className="container px-4 sm:px-6 lg:px-8">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {[
-                { title: "Privacy First", desc: "Local-first processing ensures your data never leaves your home.", icon: Shield },
-                { title: "Expert Engineering", desc: "Our technicians are certified in top automation protocols.", icon: Target },
-                { title: "User Centered", desc: "Every interface we build is designed for absolute simplicity.", icon: Heart },
-                { title: "Scaleable Support", desc: "From studios to estates, we grow with your automation needs.", icon: Users },
-              ].map((val, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="glass p-8 rounded-[2rem] space-y-4 hover:border-primary/50 transition-colors"
-                >
-                  <div className="p-3 bg-primary/10 rounded-xl w-fit text-primary">
-                    <val.icon className="h-6 w-6" />
-                  </div>
-                  <h3 className="text-xl font-bold italic tracking-tight">{val.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{val.desc}</p>
-                  <Link href="/contact">
-                    <Button variant="ghost" className="w-fit p-0 h-auto hover:bg-transparent hover:text-primary font-black uppercase tracking-widest text-xs group/btn italic">
-                      LEARN MORE <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-                    </Button>
-                  </Link>
-                </motion.div>
-              ))}
+        <section className="border-y bg-secondary/60">
+          <div className="container grid gap-12 py-20 lg:grid-cols-12 lg:py-28">
+            <p className="eyebrow lg:col-span-4">Our story</p>
+            <div className="max-w-2xl space-y-8 lg:col-span-8">
+              <p className="font-display text-3xl leading-snug sm:text-4xl">
+                Founded in 2015, Smarter Home PH began with a simple idea: technology should work for people, not
+                the other way around.
+              </p>
+              <p className="text-lg leading-relaxed text-muted-foreground">
+                Our team of engineers, designers and home automation enthusiasts came together to build smart
+                home solutions that are both powerful and easy to use.
+              </p>
+              <p className="text-lg leading-relaxed text-muted-foreground">
+                We favour setups where devices work together instead of isolated gadgets. They are flexible,
+                scalable and compatible with the leading platforms like Matter, HomeKit and Home Assistant.
+              </p>
             </div>
           </div>
         </section>
 
-        <section className="py-24 container px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto space-y-16">
-            <div className="space-y-6">
-              <h2 className="text-3xl font-black italic tracking-tighter uppercase">Our Story</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Founded in 2015, Smarter Home PH began with a simple idea: that technology should work for people, not the other
-                way around. Our team of engineers, designers, and home automation enthusiasts came together with a shared
-                vision of creating smart home solutions that are both powerful and easy to use.
-              </p>
-            </div>
-
-            <div className="space-y-6">
-              <h2 className="text-3xl font-black italic tracking-tighter uppercase">Our Approach</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                We believe in a holistic approach to smart home technology. Rather than offering isolated gadgets, we
-                create ecosystems where devices work together seamlessly. Our solutions are designed to be flexible,
-                scalable, and compatible with the leading smart home platforms like Matter, HomeKit, and Home Assistant.
-              </p>
-            </div>
-          </div>
+        <section className="container py-20 text-center lg:py-28">
+          <h2 className="mx-auto max-w-2xl text-balance text-4xl leading-tight sm:text-5xl">
+            Got a house and a list of annoyances?
+          </h2>
+          <Button asChild size="lg" className="mt-8 h-12 rounded-full px-7">
+            <Link href="/contact">
+              Tell us about it <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
         </section>
       </main>
 
@@ -91,5 +77,3 @@ export default function AboutPage() {
     </div>
   )
 }
-
-

@@ -3,21 +3,11 @@
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { 
-  ArrowRight, 
-  ShieldCheck, 
-  Zap, 
-  Smartphone, 
-  Cpu, 
-  ChevronRight,
-  Play,
-  Star
-} from "lucide-react"
+import { ArrowRight, ArrowUpRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { InteractiveHome } from "@/components/interactive-home"
 
 const brands = [
   { name: "Aqara", logo: "/aqara-logo 1.svg" },
@@ -28,167 +18,224 @@ const brands = [
   { name: "YoLink", logo: "/yolink.svg" },
 ]
 
+const steps = [
+  {
+    n: "01",
+    title: "Tell us about your home",
+    body: "Pick your property type and rooms in the builder, or just message us what annoys you most. Lights you forget, a door you worry about, an aircon you leave on.",
+  },
+  {
+    n: "02",
+    title: "We plan it and quote it",
+    body: "You get a list of what goes where and what it costs, before anything is bought. Change it as many times as you like.",
+  },
+  {
+    n: "03",
+    title: "We install and set it up",
+    body: "Devices get mounted, connected to your WiFi and tied together, then we show you the app and the scenes so the whole household can use it.",
+  },
+]
+
+const setups = [
+  {
+    title: "Lighting",
+    body: "Bulbs, strips and switches that follow a schedule or a scene, and still work with the wall switch.",
+    href: "/devices?category=Lighting",
+  },
+  {
+    title: "Security",
+    body: "Door locks and cameras with alerts on your phone, so you can check the gate from the office.",
+    href: "/devices?category=Security",
+  },
+  {
+    title: "Climate",
+    body: "Aircon control and temperature sensors, so the room is cool when you get there, not all day.",
+    href: "/devices?category=Climate",
+  },
+  {
+    title: "Sensors and plugs",
+    body: "Motion, door and power sensors that trigger the rest. Turn off the iron from your phone.",
+    href: "/devices?category=Sensors",
+  },
+]
+
+const areas = [
+  { name: "Pampanga", note: "Angeles, Mabalacat, San Fernando and nearby" },
+  { name: "Tarlac", note: "Tarlac City and nearby" },
+  { name: "Bulacan", note: "Malolos, Meycauayan and nearby" },
+]
+
+const fade = {
+  initial: { opacity: 0, y: 14 },
+  animate: { opacity: 1, y: 0 },
+}
+
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col overflow-x-hidden selection:bg-primary selection:text-primary-foreground">
+    <div className="flex min-h-screen flex-col">
       <SiteHeader />
-      
+
       <main className="flex-1">
-        {/* Breathtaking Hero Section */}
-        <section className="relative min-h-screen flex items-center pt-24 pb-12 overflow-hidden">
-          {/* Background Image with Overlay */}
-          <div className="absolute inset-0 z-0">
-             <Image
-               src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop"
-               alt="Luxury Smart Home"
-               fill
-               className="object-cover scale-105"
-               priority
-             />
-             <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-background" />
-             <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent hidden lg:block" />
+        {/* Hero */}
+        <section className="container grid grid-cols-1 items-center gap-12 pb-20 pt-12 lg:grid-cols-12 lg:gap-10 lg:pb-28 lg:pt-20">
+          <div className="min-w-0 lg:col-span-5">
+            <motion.p {...fade} transition={{ duration: 0.5 }} className="eyebrow mb-6">
+              Smart home setup · Central Luzon
+            </motion.p>
+            <motion.h1
+              {...fade}
+              transition={{ duration: 0.6, delay: 0.05 }}
+              className="text-balance text-6xl leading-[0.98] sm:text-7xl lg:text-[5.25rem]"
+            >
+              A home that looks <span className="italic text-primary-ink">after itself.</span>
+            </motion.h1>
+            <motion.p
+              {...fade}
+              transition={{ duration: 0.6, delay: 0.12 }}
+              className="mt-7 max-w-md text-lg leading-relaxed text-muted-foreground"
+            >
+              We plan, supply and install smart lights, locks, cameras and aircon control for homes in
+              Pampanga, Tarlac and Bulacan. Tap the house to see how it feels.
+            </motion.p>
+            <motion.div
+              {...fade}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="mt-9 flex flex-wrap items-center gap-3"
+            >
+              <Button asChild size="lg" className="h-12 rounded-full px-7">
+                <Link href="/builder">
+                  Price my home <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="ghost" className="h-12 rounded-full px-5">
+                <Link href="/devices">Browse devices</Link>
+              </Button>
+            </motion.div>
           </div>
 
-          <div className="container relative z-10 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-              >
-                <Badge variant="outline" className="mb-6 px-4 py-1.5 border-primary/50 bg-primary/10 text-primary-foreground backdrop-blur-md rounded-full text-xs font-bold uppercase tracking-[0.2em]">
-                  Next-Gen Home Automation
-                </Badge>
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[0.9] tracking-tighter mb-8">
-                  SMARTER <br />
-                  <span className="text-primary italic">LIVING</span> <br />
-                  DEFINED.
-                </h1>
-                <p className="text-xl text-white/70 max-w-xl mb-10 leading-relaxed font-medium">
-                  Experience the pinnacle of luxury and convenience. Build your custom smart ecosystem with professional installation and 24/7 support.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Link href="/builder">
-                    <Button size="lg" className="h-16 px-10 rounded-2xl text-lg font-bold shadow-2xl shadow-primary/30 group">
-                      START BUILDING <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                    </Button>
-                  </Link>
-                  <Link href="/services">
-                    <Button size="lg" variant="outline" className="h-16 px-10 rounded-2xl text-lg font-bold glass-dark text-white border-white/20 hover:bg-white/10">
-                      OUR SOLUTIONS
-                    </Button>
-                  </Link>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-
-          {/* Floating Element for Hero */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.5, duration: 1 }}
-            className="absolute bottom-20 right-[10%] hidden lg:block"
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="min-w-0 lg:col-span-7"
           >
-            <div className="glass-dark p-6 rounded-[2.5rem] border-white/10 flex items-center gap-6 shadow-2xl">
-               <div className="p-4 bg-primary/20 rounded-[1.5rem] text-primary">
-                 <Cpu className="h-8 w-8" />
-               </div>
-               <div>
-                  <div className="flex items-center gap-1 mb-1">
-                    {[1, 2, 3, 4, 5].map(i => <Star key={i} className="h-3 w-3 fill-primary text-primary" />)}
-                  </div>
-                  <p className="text-white font-black text-xl italic uppercase tracking-tighter">1,200+ Homes</p>
-                  <p className="text-white/50 text-xs font-bold uppercase tracking-widest">Digitized locally</p>
-               </div>
-            </div>
+            <InteractiveHome />
           </motion.div>
         </section>
 
-        {/* Brand Showcase - Marquee */}
-        <section className="py-12 bg-background border-y border-foreground/5">
-          <div className="container overflow-hidden">
-             <p className="text-center text-[10px] uppercase font-black tracking-[0.3em] text-muted-foreground mb-12">INTEGRATED ECOSYSTEM PARTNERS</p>
-             <div className="flex items-center gap-12 animate-marquee whitespace-nowrap">
-                {[...brands, ...brands].map((brand, i) => (
-                  <div key={i} className="flex items-center gap-2 px-8 grayscale hover:grayscale-0 transition-all opacity-40 hover:opacity-100">
-                    <Image src={brand.logo} alt={brand.name} width={100} height={40} className="h-8 object-contain" />
+        {/* Works with */}
+        <section className="border-y">
+          <div className="container flex flex-col items-start gap-6 py-8 md:flex-row md:items-center md:justify-between">
+            <p className="eyebrow shrink-0">Works with</p>
+            <ul className="flex flex-wrap items-center gap-x-10 gap-y-5">
+              {brands.map((b) => (
+                <li key={b.name} className="opacity-60 grayscale transition hover:opacity-100 hover:grayscale-0">
+                  <Image src={b.logo} alt={b.name} width={100} height={32} className="h-6 w-auto object-contain" />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* How it works */}
+        <section className="container py-24 lg:py-32">
+          <div className="grid gap-12 lg:grid-cols-12">
+            <div className="lg:col-span-4">
+              <p className="eyebrow mb-4">How it works</p>
+              <h2 className="text-balance text-4xl leading-tight sm:text-5xl">Three steps, no surprises.</h2>
+            </div>
+            <ol className="lg:col-span-8">
+              {steps.map((s) => (
+                <li key={s.n} className="grid gap-4 border-t py-8 first:border-t-0 first:pt-0 sm:grid-cols-[5rem_1fr] sm:gap-8">
+                  <span className="font-mono text-sm text-primary-ink">{s.n}</span>
+                  <div>
+                    <h3 className="text-3xl leading-tight">{s.title}</h3>
+                    <p className="mt-3 max-w-xl leading-relaxed text-muted-foreground">{s.body}</p>
                   </div>
-                ))}
-             </div>
+                </li>
+              ))}
+            </ol>
           </div>
         </section>
 
-        {/* Visual Features Section */}
-        <section className="py-24 lg:py-40 relative">
-          <div className="container px-4">
-             <div className="grid lg:grid-cols-2 gap-24 items-center">
-                <div className="relative">
-                   <div className="aspect-square rounded-[3rem] overflow-hidden rotate-3 shadow-2xl relative z-10">
-                      <Image 
-                        src="https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=1000&auto=format&fit=crop" 
-                        alt="Security Focus" 
-                        fill 
-                        className="object-cover brightness-75 transition-transform hover:scale-110 duration-1000" 
-                      />
-                      <div className="absolute inset-0 bg-primary/10 mix-blend-overlay" />
-                   </div>
-                   <div className="absolute -inset-10 bg-primary/10 blur-[100px] rounded-full -z-10" />
-                   {/* Overlay Stats */}
-                   <div className="absolute -bottom-8 -left-8 glass p-8 rounded-3xl z-20 shadow-2xl animate-bounce-slow">
-                      <p className="text-3xl font-black italic tracking-tighter">0.02s</p>
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Response Latency</p>
-                   </div>
-                </div>
+        {/* What we set up */}
+        <section className="bg-secondary/60">
+          <div className="container py-24 lg:py-32">
+            <div className="mb-14 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
+              <div>
+                <p className="eyebrow mb-4">What we set up</p>
+                <h2 className="max-w-xl text-balance text-4xl leading-tight sm:text-5xl">
+                  Start with one thing. Add the rest later.
+                </h2>
+              </div>
+              <Link href="/services" className="inline-flex items-center gap-1 text-sm underline-offset-4 hover:underline">
+                All services <ArrowUpRight className="h-4 w-4" />
+              </Link>
+            </div>
 
-                <div className="space-y-12">
-                   <div>
-                      <Badge className="bg-primary/10 text-primary border-none mb-6">WHY CHOOSE US</Badge>
-                      <h2 className="text-4xl md:text-6xl font-black tracking-tighter leading-none mb-6">INTELLIGENCE THAT <br /><span className="text-muted-foreground/30">WORKS FOR YOU.</span></h2>
-                      <p className="text-muted-foreground text-lg leading-relaxed">Unlike off-the-shelf solutions, we engineer private, local-first environments that prioritize your privacy without sacrificing connectivity.</p>
-                   </div>
-
-                   <div className="grid gap-6">
-                      {[
-                        { title: "Military Grade Privacy", desc: "Local server processing, no cloud dependency.", icon: ShieldCheck },
-                        { title: "Matter Ready", desc: "Seamless cross-platform device interoperability.", icon: Zap },
-                        { title: "Adaptive Lighting", desc: "Circadian rhythms adjusted to your sleep cycle.", icon: Smartphone },
-                      ].map((item, i) => (
-                        <div key={i} className="group flex items-start gap-6 p-6 rounded-2xl hover:bg-muted/50 transition-colors border border-transparent hover:border-foreground/5">
-                           <div className="p-4 bg-muted rounded-xl group-hover:bg-primary/20 group-hover:text-primary transition-colors">
-                             <item.icon className="h-6 w-6" />
-                           </div>
-                           <div>
-                              <h3 className="font-bold text-xl mb-1">{item.title}</h3>
-                              <p className="text-muted-foreground">{item.desc}</p>
-                           </div>
-                        </div>
-                      ))}
-                   </div>
-                </div>
-             </div>
+            <ul className="border-b border-foreground/20">
+              {setups.map((item) => (
+                <li key={item.title} className="border-t border-foreground/20">
+                  <Link
+                    href={item.href}
+                    className="group grid items-baseline gap-2 py-7 transition-colors hover:bg-background/60 sm:grid-cols-[1fr_1.2fr_auto] sm:gap-10 sm:px-2"
+                  >
+                    <h3 className="text-4xl leading-none transition-transform duration-300 group-hover:translate-x-2 sm:text-5xl">
+                      {item.title}
+                    </h3>
+                    <p className="max-w-md text-muted-foreground">{item.body}</p>
+                    <ArrowUpRight className="hidden h-6 w-6 transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-primary-ink sm:block" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 
-        {/* The Builder CTA Section */}
-        <section className="py-24 container px-4">
-           <div className="relative rounded-[4rem] overflow-hidden bg-foreground text-background p-12 lg:p-24">
-              <div className="absolute top-0 right-0 w-1/2 h-full opacity-20 pointer-events-none">
-                 <div className="grid grid-cols-6 h-full border-l border-white/10">
-                    {Array.from({length: 24}).map((_, i) => <div key={i} className="border-r border-b border-white/5" />)}
-                 </div>
+        {/* Where we work */}
+        <section className="container py-24 lg:py-32">
+          <p className="eyebrow mb-4">Where we work</p>
+          <h2 className="max-w-2xl text-balance text-4xl leading-tight sm:text-5xl">
+            Local installs, so you can actually reach us after.
+          </h2>
+          <div className="mt-14 grid gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-3">
+            {areas.map((a) => (
+              <div key={a.name} className="bg-background p-8 transition-colors hover:bg-card">
+                <p className="font-display text-5xl leading-none">{a.name}</p>
+                <p className="mt-4 text-sm text-muted-foreground">{a.note}</p>
               </div>
-              
-              <div className="relative z-10 max-w-2xl">
-                 <h2 className="text-4xl md:text-6xl font-black tracking-tighter leading-none mb-8">READY TO BUILD YOUR <br /><span className="text-primary italic">SMARTER HOME?</span></h2>
-                 <p className="text-background/60 text-xl mb-12">Our interactive builder helps you plan your smart conversion in minutes. Get an instant quote for your property type.</p>
-                 <Link href="/builder">
-                   <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 h-16 px-12 rounded-2xl font-black text-xl shadow-2xl shadow-primary/20">
-                     OPEN BUILDER <ChevronRight className="ml-2 h-6 w-6" />
-                   </Button>
-                 </Link>
-              </div>
-           </div>
+            ))}
+          </div>
+          <p className="mt-6 text-sm text-muted-foreground">
+            Somewhere else in Luzon? Message us first and we will tell you honestly if we can help.
+          </p>
+        </section>
+
+        {/* Builder CTA */}
+        <section className="container pb-24 lg:pb-32">
+          <div className="relative overflow-hidden rounded-xl bg-foreground px-8 py-16 text-background sm:px-14 lg:py-24">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-primary/25 blur-3xl"
+            />
+            <p className="eyebrow relative mb-5 !text-background/50">Home builder</p>
+            <h2 className="relative max-w-2xl text-balance text-5xl leading-[1.02] sm:text-6xl">
+              Price it before you <span className="italic text-primary">call anyone.</span>
+            </h2>
+            <p className="relative mt-6 max-w-lg text-lg text-background/70">
+              Pick your property, add rooms, drop in devices and watch the total change. Send it to us when
+              it looks right.
+            </p>
+            <Button
+              asChild
+              size="lg"
+              className="relative mt-10 h-12 rounded-full bg-primary px-7 text-primary-foreground hover:bg-primary/90"
+            >
+              <Link href="/builder">
+                Open the builder <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
         </section>
       </main>
 
@@ -196,5 +243,3 @@ export default function Home() {
     </div>
   )
 }
-
-
