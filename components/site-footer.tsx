@@ -5,6 +5,9 @@ const columns = [
     title: "Shop",
     links: [
       { name: "Devices", href: "/devices" },
+      { name: "Alexa setup", href: "/alexa" },
+      { name: "Apple Home setup", href: "/apple-home" },
+      { name: "Google Home setup", href: "/google-home" },
       { name: "Services", href: "/services" },
       { name: "Home builder", href: "/builder" },
     ],

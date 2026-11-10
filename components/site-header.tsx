@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
 import { AnimatePresence, motion } from "framer-motion"
-import { Menu, X } from "lucide-react"
+import { ChevronDown, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const navLinks = [
@@ -13,6 +13,12 @@ const navLinks = [
   { name: "Builder", href: "/builder" },
   { name: "Reviews", href: "/reviews" },
   { name: "Blog", href: "/blog" },
+]
+
+const platformLinks = [
+  { name: "Alexa", href: "/alexa", note: "Voice-first, widest brand support" },
+  { name: "Apple Home", href: "/apple-home", note: "Private, built around iPhone" },
+  { name: "Google Home", href: "/google-home", note: "Routines on Android and iPhone" },
 ]
 
 export function Wordmark({ className = "" }: { className?: string }) {
@@ -51,7 +57,48 @@ export function SiteHeader() {
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Main">
-          {navLinks.map((link) => {
+          {navLinks.slice(0, 1).map((link) => {
+            const active = pathname === link.href
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={active ? "page" : undefined}
+                className={`relative text-sm transition-colors hover:text-foreground ${
+                  active ? "text-foreground" : "text-muted-foreground"
+                }`}
+              >
+                {link.name}
+                {active && <span className="absolute -bottom-[21px] left-0 right-0 h-px bg-foreground" />}
+              </Link>
+            )
+          })}
+
+          <div className="group relative">
+            <button
+              type="button"
+              aria-haspopup="true"
+              className={`flex items-center gap-1 text-sm transition-colors hover:text-foreground ${
+                platformLinks.some((l) => l.href === pathname) ? "text-foreground" : "text-muted-foreground"
+              }`}
+            >
+              Platforms <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180 group-focus-within:rotate-180" />
+            </button>
+            <div className="invisible absolute left-1/2 top-full z-50 w-72 -translate-x-1/2 pt-4 opacity-0 transition-opacity group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+              <ul className="rounded-lg border bg-background p-2 shadow-lg">
+                {platformLinks.map((l) => (
+                  <li key={l.href}>
+                    <Link href={l.href} className="block rounded-md px-3 py-3 transition-colors hover:bg-secondary">
+                      <span className="font-display text-xl leading-none">{l.name}</span>
+                      <span className="mt-1 block text-xs text-muted-foreground">{l.note}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {navLinks.slice(1).map((link) => {
             const active = pathname === link.href
             return (
               <Link
@@ -98,7 +145,7 @@ export function SiteHeader() {
             className="overflow-hidden md:hidden"
           >
             <nav className="container flex flex-col py-2" aria-label="Mobile">
-              {[...navLinks, { name: "About", href: "/about" }, { name: "FAQs", href: "/faqs" }].map((link) => (
+              {[...navLinks.slice(0, 1), ...platformLinks.map((l) => ({ name: `${l.name} setup`, href: l.href })), ...navLinks.slice(1), { name: "About", href: "/about" }, { name: "FAQs", href: "/faqs" }].map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}

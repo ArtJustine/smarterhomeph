@@ -8,6 +8,7 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { InteractiveHome } from "@/components/interactive-home"
 import { BrandLogo } from "@/components/brand-logo"
+import { platformList } from "@/lib/platforms"
 
 const brands = ["Aqara", "Govee", "Eve", "Reolink", "Philips", "TP-Link", "YoLink"]
 
@@ -127,6 +128,27 @@ export default function Home() {
                 </li>
               ))}
             </ul>
+          </div>
+        </section>
+
+        {/* Platforms */}
+        <section className="container py-24 lg:py-32">
+          <div className="mb-14 max-w-2xl">
+            <p className="eyebrow mb-4">Pick your platform</p>
+            <h2 className="text-balance text-4xl leading-tight sm:text-5xl">
+              Alexa, Apple Home or Google Home. We set up all three.
+            </h2>
+          </div>
+          <div className="grid gap-px overflow-hidden rounded-lg border bg-border md:grid-cols-3">
+            {platformList.map((p) => (
+              <Link key={p.slug} href={`/${p.slug}`} className="group bg-background p-8 transition-colors hover:bg-card">
+                <p className="font-display text-5xl leading-none">{p.name}</p>
+                <p className="mt-5 min-h-[3.5rem] max-w-xs text-muted-foreground">{p.short}</p>
+                <p className="mt-8 inline-flex items-center gap-1 text-sm underline-offset-4 group-hover:underline">
+                  {p.name} setup <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </p>
+              </Link>
+            ))}
           </div>
         </section>
 

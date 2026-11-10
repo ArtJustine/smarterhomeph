@@ -141,6 +141,10 @@ function DevicesCatalogContent() {
     if (categoryParam && categoriesArr.includes(categoryParam)) {
       setSelectedCategories([categoryParam])
     }
+    const ecosystemParam = searchParams.get("ecosystem")
+    if (ecosystemParam && ecosystemsArr.includes(ecosystemParam)) {
+      setSelectedEcosystems([ecosystemParam])
+    }
   }, [searchParams])
 
   const toggleFilter = (filter: string) => {

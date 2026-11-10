@@ -47,7 +47,8 @@ const watts = (s: HomeState) =>
 
 const ink = "hsl(var(--foreground))"
 const paper = "hsl(var(--card))"
-const amber = "hsl(var(--primary))"
+const amber = "hsl(38 95% 62%)" // warm bulb colour, independent of the brand green
+const brand = "hsl(var(--primary))"
 const hush = "hsl(var(--muted))"
 
 function Pill({
@@ -255,7 +256,7 @@ export function InteractiveHome() {
           {/* camera + view cone */}
           <polygon
             points="32,203 -80,150 -80,262"
-            style={{ fill: amber, opacity: s.camera ? 0.2 : 0, stroke: ink, strokeWidth: 1, strokeDasharray: "4 4", transition: "opacity .35s" }}
+            style={{ fill: brand, opacity: s.camera ? 0.2 : 0, stroke: ink, strokeWidth: 1, strokeDasharray: "4 4", transition: "opacity .35s" }}
           />
           <rect x="34" y="195" width="30" height="16" rx="3" style={{ fill: paper, stroke: ink, strokeWidth: 1.5 }} />
           <circle cx="36" cy="203" r="4" style={{ fill: ink }} />
