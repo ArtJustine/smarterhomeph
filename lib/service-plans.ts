@@ -20,6 +20,7 @@ export interface ServicePlan {
 }
 
 export const ROOMS = [
+  "Entire home",
   "Living room",
   "Kitchen",
   "Dining area",
