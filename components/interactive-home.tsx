@@ -1,7 +1,7 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { Camera, DoorClosed, Lightbulb, Snowflake, Tv, type LucideIcon } from "lucide-react"
+import { Blinds, Bot, Camera, DoorClosed, Lightbulb, Radar, Snowflake, Tv, type LucideIcon } from "lucide-react"
 
 type HomeState = {
   living: boolean
@@ -10,32 +10,45 @@ type HomeState = {
   camera: boolean
   ac: number // 0 = off, otherwise target temp in °C
   tv: boolean
+  curtains: boolean // true = open
+  vacuum: boolean // true = cleaning, false = docked
+  motion: boolean // true = motion detected
 }
 
 const AC_CYCLE = [0, 24, 25, 26, 27]
 
-const START: HomeState = { living: true, bedroom: false, locked: true, camera: false, ac: 0, tv: false }
+const START: HomeState = {
+  living: true,
+  bedroom: false,
+  locked: true,
+  camera: false,
+  ac: 0,
+  tv: false,
+  curtains: true,
+  vacuum: false,
+  motion: false,
+}
 
 const SCENES: { name: string; state: HomeState; note: string }[] = [
   {
     name: "Morning",
-    state: { living: true, bedroom: true, locked: true, camera: false, ac: 0, tv: false },
-    note: "Morning: lights up, camera off, door stays locked.",
+    state: { living: true, bedroom: true, locked: true, camera: false, ac: 0, tv: false, curtains: true, vacuum: false, motion: false },
+    note: "Morning: lights up, curtains open, camera off, door stays locked.",
   },
   {
     name: "Movie night",
-    state: { living: false, bedroom: false, locked: true, camera: false, ac: 24, tv: true },
-    note: "Movie night: lights off, TV on, aircon at 24°C.",
+    state: { living: false, bedroom: false, locked: true, camera: false, ac: 24, tv: true, curtains: false, vacuum: false, motion: false },
+    note: "Movie night: lights off, curtains closed, TV on, aircon at 24°C.",
   },
   {
     name: "Goodnight",
-    state: { living: false, bedroom: false, locked: true, camera: true, ac: 25, tv: false },
-    note: "Goodnight: lights off, door locked, camera armed, aircon at 25°C.",
+    state: { living: false, bedroom: false, locked: true, camera: true, ac: 25, tv: false, curtains: false, vacuum: false, motion: false },
+    note: "Goodnight: lights off, curtains closed, door locked, camera armed, aircon at 25°C.",
   },
   {
     name: "Away",
-    state: { living: false, bedroom: false, locked: true, camera: true, ac: 0, tv: false },
-    note: "Away: everything off, door locked, camera armed.",
+    state: { living: false, bedroom: false, locked: true, camera: true, ac: 0, tv: false, curtains: false, vacuum: true, motion: false },
+    note: "Away: lights off, curtains closed, door locked, camera armed, vacuum cleaning.",
   },
 ]
 
@@ -43,7 +56,12 @@ const same = (a: HomeState, b: HomeState) => (Object.keys(a) as (keyof HomeState
 
 // Rough watts for the little readout. Example numbers only.
 const watts = (s: HomeState) =>
-  (s.living ? 9 : 0) + (s.bedroom ? 9 : 0) + (s.tv ? 85 : 0) + (s.ac ? 650 : 0) + (s.camera ? 4 : 0)
+  (s.living ? 9 : 0) +
+  (s.bedroom ? 9 : 0) +
+  (s.tv ? 85 : 0) +
+  (s.ac ? 650 : 0) +
+  (s.camera ? 4 : 0) +
+  (s.vacuum ? 30 : 0)
 
 const ink = "hsl(var(--foreground))"
 const paper = "hsl(var(--card))"
@@ -51,21 +69,23 @@ const amber = "hsl(38 95% 62%)" // warm bulb colour, independent of the brand gr
 const brand = "hsl(var(--primary))"
 const hush = "hsl(var(--muted))"
 
+// Pill width follows the label length so the text never overflows.
+const pillWidth = (label: string) => Math.round(34 + label.length * 6.4)
+
 function Pill({
   x,
   y,
-  w,
   label,
   on,
   onClick,
 }: {
   x: number
   y: number
-  w: number
   label: string
   on: boolean
   onClick: () => void
 }) {
+  const w = pillWidth(label)
   return (
     // Mouse affordance only. Keyboard and screen reader users get the real buttons below the house.
     <g aria-hidden="true" onClick={onClick} style={{ cursor: "pointer" }} className="max-sm:hidden">
@@ -106,6 +126,12 @@ export function InteractiveHome() {
     update({ locked: !s.locked }, s.locked ? "Front door unlocked." : "Front door locked.")
   const toggleCamera = () => update({ camera: !s.camera }, s.camera ? "Camera disarmed." : "Camera armed.")
   const toggleTv = () => update({ tv: !s.tv }, `TV ${s.tv ? "off" : "on"}.`)
+  const toggleCurtains = () => update({ curtains: !s.curtains }, s.curtains ? "Curtains closing." : "Curtains opening.")
+  const toggleVacuum = () => update({ vacuum: !s.vacuum }, s.vacuum ? "Vacuum back on its dock." : "Vacuum started cleaning.")
+  const toggleMotion = () =>
+    s.motion
+      ? update({ motion: false }, "Motion sensor clear.")
+      : update({ motion: true, living: true }, "Motion detected in the living room. Lights come on.")
   const cycleAc = () => {
     const next = AC_CYCLE[(AC_CYCLE.indexOf(s.ac) + 1) % AC_CYCLE.length]
     update({ ac: next }, next === 0 ? "Aircon off." : `Aircon set to ${next}°C.`)
@@ -125,6 +151,9 @@ export function InteractiveHome() {
     { key: "camera", label: "Camera", value: s.camera ? "Armed" : "Off", on: s.camera, icon: Camera, onClick: toggleCamera },
     { key: "ac", label: "Aircon", value: s.ac ? `${s.ac}°C` : "Off", on: s.ac > 0, icon: Snowflake, onClick: cycleAc },
     { key: "tv", label: "TV", value: s.tv ? "On" : "Off", on: s.tv, icon: Tv, onClick: toggleTv },
+    { key: "curtains", label: "Curtains", value: s.curtains ? "Open" : "Closed", on: s.curtains, icon: Blinds, onClick: toggleCurtains },
+    { key: "vacuum", label: "Vacuum", value: s.vacuum ? "Cleaning" : "Docked", on: s.vacuum, icon: Bot, onClick: toggleVacuum },
+    { key: "motion", label: "Motion", value: s.motion ? "Detected" : "Clear", on: s.motion, icon: Radar, onClick: toggleMotion },
   ]
 
   return (
@@ -156,7 +185,7 @@ export function InteractiveHome() {
         <svg
           viewBox="-96 40 796 340"
           role="img"
-          aria-label="Cutaway of a house with a living room and a bedroom. The lights, door lock, camera, aircon and TV react to the controls below."
+          aria-label="Cutaway of a house with a living room and a bedroom. The lights, door lock, camera, aircon, TV, curtains, robot vacuum and motion sensor react to the controls below."
           className="block h-auto w-full select-none"
         >
           <defs>
@@ -221,6 +250,61 @@ export function InteractiveHome() {
           )}
           <rect x="258" y="312" width="90" height="28" style={{ fill: paper, stroke: ink, strokeWidth: 1.5 }} />
 
+          {/* living room window + motorised curtains */}
+          <g onClick={toggleCurtains} style={{ cursor: "pointer" }} aria-hidden="true">
+            <rect x="240" y="184" width="76" height="46" style={{ fill: "hsl(205 70% 90%)", stroke: ink, strokeWidth: 1.5 }} />
+            <line x1="278" y1="184" x2="278" y2="230" style={{ stroke: ink, strokeWidth: 1 }} />
+            {/* curtain panels: scale toward the edges when open */}
+            <rect
+              x="240"
+              y="186"
+              width="38"
+              height="44"
+              style={{
+                fill: brand,
+                opacity: 0.6,
+                stroke: ink,
+                strokeWidth: 1,
+                transformBox: "fill-box",
+                transformOrigin: "left center",
+                transform: s.curtains ? "scaleX(0.28)" : "scaleX(1)",
+                transition: "transform .5s ease",
+              }}
+            />
+            <rect
+              x="278"
+              y="186"
+              width="38"
+              height="44"
+              style={{
+                fill: brand,
+                opacity: 0.6,
+                stroke: ink,
+                strokeWidth: 1,
+                transformBox: "fill-box",
+                transformOrigin: "right center",
+                transform: s.curtains ? "scaleX(0.28)" : "scaleX(1)",
+                transition: "transform .5s ease",
+              }}
+            />
+            {/* rod + motor */}
+            <line x1="234" y1="185" x2="322" y2="185" style={{ stroke: ink, strokeWidth: 2 }} />
+            <rect x="322" y="180" width="14" height="10" rx="2" style={{ fill: s.curtains ? paper : amber, stroke: ink, strokeWidth: 1.5, transition: "fill .3s" }} />
+          </g>
+
+          {/* motion sensor + detection arcs */}
+          <g onClick={toggleMotion} style={{ cursor: "pointer" }} aria-hidden="true">
+            <rect x="76" y="184" width="16" height="12" rx="3" style={{ fill: paper, stroke: ink, strokeWidth: 1.5 }} />
+            <circle cx="87" cy="190" r="2.5" style={{ fill: s.motion ? "hsl(var(--destructive))" : ink }} className={s.motion ? "animate-pulse" : undefined} />
+          </g>
+          {s.motion && (
+            <g style={{ stroke: "hsl(38 90% 45%)", strokeWidth: 1.75, fill: "none", strokeLinecap: "round" }} className="animate-pulse">
+              <path d="M98 186c7 2 11 7 11 12" />
+              <path d="M103 180c11 3 17 11 17 22" />
+              <path d="M108 174c15 4 24 15 24 32" />
+            </g>
+          )}
+
           {/* bedroom lamp */}
           <line x1="420" y1="172" x2="420" y2="196" style={{ stroke: ink, strokeWidth: 1.5 }} />
           <polygon
@@ -244,6 +328,24 @@ export function InteractiveHome() {
             </g>
           )}
 
+          {/* robot vacuum: docks in the bedroom corner, runs along the floor when cleaning */}
+          <g onClick={toggleVacuum} style={{ cursor: "pointer" }} aria-hidden="true">
+            <rect x="566" y="344" width="14" height="16" rx="2" style={{ fill: paper, stroke: ink, strokeWidth: 1.5 }} />
+            <g>
+              {s.vacuum && (
+                <animateTransform
+                  attributeName="transform"
+                  type="translate"
+                  values="0 0;-170 0;0 0"
+                  dur="8s"
+                  repeatCount="indefinite"
+                />
+              )}
+              <circle cx="552" cy="349" r="10" style={{ fill: s.vacuum ? brand : paper, stroke: ink, strokeWidth: 1.5, transition: "fill .3s" }} />
+              <circle cx="552" cy="349" r="3" style={{ fill: ink }} />
+            </g>
+          </g>
+
           {/* front door + padlock */}
           <rect x="58" y="262" width="24" height="98" style={{ fill: paper, stroke: ink, strokeWidth: 1.5 }} />
           <circle cx="66" cy="314" r="2.5" style={{ fill: ink }} />
@@ -264,12 +366,15 @@ export function InteractiveHome() {
           <line x1="64" y1="203" x2="70" y2="203" style={{ stroke: ink, strokeWidth: 1.5 }} />
 
           {/* pills (mouse shortcuts) */}
-          <Pill x={-90} y={116} w={124} label={`Camera · ${s.camera ? "Armed" : "Off"}`} on={s.camera} onClick={toggleCamera} />
-          <Pill x={-90} y={330} w={116} label={`Door · ${s.locked ? "Locked" : "Open"}`} on={!s.locked} onClick={toggleDoor} />
-          <Pill x={118} y={216} w={104} label={`Living · ${s.living ? "On" : "Off"}`} on={s.living} onClick={toggleLiving} />
-          <Pill x={366} y={216} w={108} label={`Bedroom · ${s.bedroom ? "On" : "Off"}`} on={s.bedroom} onClick={toggleBedroom} />
-          <Pill x={254} y={236} w={88} label={`TV · ${s.tv ? "On" : "Off"}`} on={s.tv} onClick={toggleTv} />
-          <Pill x={488} y={256} w={98} label={`AC · ${s.ac ? s.ac + "°C" : "Off"}`} on={s.ac > 0} onClick={cycleAc} />
+          <Pill x={-90} y={116} label={`Camera · ${s.camera ? "Armed" : "Off"}`} on={s.camera} onClick={toggleCamera} />
+          <Pill x={-90} y={330} label={`Door · ${s.locked ? "Locked" : "Open"}`} on={!s.locked} onClick={toggleDoor} />
+          <Pill x={118} y={216} label={`Living · ${s.living ? "On" : "Off"}`} on={s.living} onClick={toggleLiving} />
+          <Pill x={96} y={248} label={`Motion · ${s.motion ? "Detected" : "Clear"}`} on={s.motion} onClick={toggleMotion} />
+          <Pill x={140} y={144} label={`Curtains · ${s.curtains ? "Open" : "Closed"}`} on={s.curtains} onClick={toggleCurtains} />
+          <Pill x={254} y={236} label={`TV · ${s.tv ? "On" : "Off"}`} on={s.tv} onClick={toggleTv} />
+          <Pill x={364} y={216} label={`Bedroom · ${s.bedroom ? "On" : "Off"}`} on={s.bedroom} onClick={toggleBedroom} />
+          <Pill x={364} y={250} label={`Vacuum · ${s.vacuum ? "Active" : "Docked"}`} on={s.vacuum} onClick={toggleVacuum} />
+          <Pill x={498} y={256} label={`AC · ${s.ac ? s.ac + "°C" : "Off"}`} on={s.ac > 0} onClick={cycleAc} />
         </svg>
       </div>
 

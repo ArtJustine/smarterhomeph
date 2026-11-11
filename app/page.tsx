@@ -32,22 +32,22 @@ const setups = [
   {
     title: "Smart lighting",
     body: "Bulbs, strips and switches that follow a schedule or a scene, and still work with the wall switch.",
-    href: "/services",
+    href: "/services/lighting",
   },
   {
     title: "Smart locks and cameras",
     body: "Smart door locks and CCTV cameras with alerts on your phone, so you can check the gate from the office.",
-    href: "/services",
+    href: "/services/security",
   },
   {
     title: "Aircon control",
     body: "Smart aircon control and temperature sensors, so the room is cool when you get there, not all day.",
-    href: "/services",
+    href: "/services/climate",
   },
   {
     title: "Sensors and plugs",
     body: "Motion, door and power sensors that trigger the rest. Turn off the iron from your phone.",
-    href: "/services",
+    href: "/services/appliances",
   },
 ]
 
@@ -96,7 +96,7 @@ export default function Home() {
             >
               <Button asChild size="lg" className="h-12 rounded-full px-7">
                 <Link href="/services">
-                  Plan my home <ArrowRight className="ml-2 h-4 w-4" />
+                  Get a quote <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <Button asChild size="lg" variant="ghost" className="h-12 rounded-full px-5">
