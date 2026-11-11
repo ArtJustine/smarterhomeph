@@ -25,9 +25,9 @@ const BLOG_POSTS_DETAIL: Record<number, {
     title: "10 Smart Home Devices That Will Transform Your Living Space",
     subtitle: "Discover the latest smart home innovations that can make your home more comfortable, efficient, and secure.",
     date: "March 20, 2025",
-    author: "Emma Johnson",
-    authorRole: "Interior Automation Architect",
-    authorAvatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop",
+    author: "Art Gonzales",
+    authorRole: "Smarter Home PH",
+    authorAvatar: "",
     readTime: "6 min read",
     category: "Vision",
     image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1200&auto=format&fit=crop",
@@ -58,9 +58,9 @@ const BLOG_POSTS_DETAIL: Record<number, {
     title: "How to Set Up a Smart Home Security System on a Budget",
     subtitle: "Learn how to create an effective home security system without breaking the bank using affordable smart devices.",
     date: "March 15, 2025",
-    author: "Michael Chen",
-    authorRole: "Principal Security Specialist",
-    authorAvatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop",
+    author: "Art Gonzales",
+    authorRole: "Smarter Home PH",
+    authorAvatar: "",
     readTime: "8 min read",
     category: "Security",
     image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1200&auto=format&fit=crop",
@@ -90,9 +90,9 @@ const BLOG_POSTS_DETAIL: Record<number, {
     title: "The Future of Voice Assistants in Smart Homes",
     subtitle: "Explore how voice assistant technology is evolving and what it means for the future of home automation.",
     date: "March 10, 2025",
-    author: "Sarah Williams",
-    authorRole: "Lead AI Interaction Designer",
-    authorAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150&auto=format&fit=crop",
+    author: "Art Gonzales",
+    authorRole: "Smarter Home PH",
+    authorAvatar: "",
     readTime: "5 min read",
     category: "Intelligence",
     image: "https://images.unsplash.com/photo-1543512214-318c7553f230?q=80&w=1200&auto=format&fit=crop",
@@ -119,9 +119,9 @@ const BLOG_POSTS_DETAIL: Record<number, {
     title: "Energy Saving Tips with Smart Home Automation",
     subtitle: "Discover how smart thermostats, lighting, and appliances can help reduce your energy consumption.",
     date: "March 5, 2025",
-    author: "David Rodriguez",
-    authorRole: "Sustainability & Energy Consultant",
-    authorAvatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop",
+    author: "Art Gonzales",
+    authorRole: "Smarter Home PH",
+    authorAvatar: "",
     readTime: "7 min read",
     category: "Efficiency",
     image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200&auto=format&fit=crop",
@@ -148,9 +148,9 @@ const BLOG_POSTS_DETAIL: Record<number, {
     title: "Integrating Smart Home Systems: A Comprehensive Guide",
     subtitle: "Learn how to make different smart home ecosystems work together for a seamless experience.",
     date: "February 28, 2025",
-    author: "Lisa Thompson",
-    authorRole: "System Integration Specialist",
-    authorAvatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=150&auto=format&fit=crop",
+    author: "Art Gonzales",
+    authorRole: "Smarter Home PH",
+    authorAvatar: "",
     readTime: "9 min read",
     category: "Ecosystems",
     image: "https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?q=80&w=1200&auto=format&fit=crop",
@@ -174,31 +174,114 @@ const BLOG_POSTS_DETAIL: Record<number, {
     )
   },
   6: {
-    title: "Smart Home Innovations for Aging in Place",
-    subtitle: "How smart technology can help seniors live independently and safely in their homes for longer.",
+    title: "Smart Home Setup for Aging in Place: A Practical Guide for Families",
+    subtitle: "Seven small upgrades that make a parent's or grandparent's home safer, plus the privacy and brownout details most guides skip.",
     date: "February 23, 2025",
-    author: "Robert Garcia",
-    authorRole: "Assistive Technology Consultant",
-    authorAvatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=150&auto=format&fit=crop",
-    readTime: "7 min read",
+    author: "Art Gonzales",
+    authorRole: "Smarter Home PH",
+    authorAvatar: "",
+    readTime: "5 min read",
     category: "Accessibility",
     image: "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=1200&auto=format&fit=crop",
     content: (
       <>
         <p className="text-xl leading-relaxed text-foreground">
-          Home automation is often associated with gadget enthusiasts, but its most profound impact lies in assistive care and accessibility. For older adults who wish to "age in place" independently, smart technology provides a supportive framework that ensures safety, comfort, and peace of mind.
+          If your parents or grandparents want to stay in their own home, a few small devices can make that safer. Most of them work over normal home wifi.
         </p>
-        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Passive Fall Detection & Motion Mapping</h2>
         <p className="leading-relaxed text-muted-foreground">
-          Modern sensors can detect movement patterns without intrusive cameras. Radar-based motion sensors (like the Aqara Presence Sensor FP2) can detect falls and map room occupancy in real-time. If a fall is detected, the system can automatically send alerts to family members or dispatch local emergency services.
+          One honest note first. Smart devices help with daily safety, but they don't replace a caregiver or medical care.
         </p>
-        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Simplified Environmental Adjustments</h2>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Start with the problem, not the gadget</h2>
         <p className="leading-relaxed text-muted-foreground">
-          Voice control and automated routines reduce the need for physical bending or reaching. Automations like "Good Morning" can automatically open blinds, adjust the thermostat to a comfortable setting, turn on hall lighting, and pre-heat the coffee maker.
+          Ask what actually worries you. For most families it's one of these:
         </p>
-        <blockquote className="my-10 border-l-2 border-primary pl-6 font-display text-2xl italic leading-snug sm:text-3xl">
-          "Smart technology isn't just about luxury; it represents a major leap forward in accessibility, dignity, and independent living."
-        </blockquote>
+        <ul className="list-disc space-y-2 pl-5 leading-relaxed text-muted-foreground">
+          <li>Falls on the way to the bathroom at night.</li>
+          <li>Not knowing if they're okay when you're not there.</li>
+          <li>Doors left unlocked or lost keys.</li>
+          <li>Things left on, like an iron or a fan.</li>
+          <li>Switches that are hard to reach.</li>
+        </ul>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Seven upgrades worth doing, in order</h2>
+        <ol className="list-decimal space-y-4 pl-5 leading-relaxed text-muted-foreground">
+          <li>
+            <strong className="text-foreground">Motion-activated night lights.</strong> Light the path from bedroom to bathroom automatically. Nobody has to find a switch in the dark.
+          </li>
+          <li>
+            <strong className="text-foreground">Voice control.</strong> "Turn on the living room light" is easier than a switch for someone with sore hands. Keep the commands short and few. See our <Link href="/alexa" className="underline underline-offset-4">Alexa</Link> and <Link href="/google-home" className="underline underline-offset-4">Google Home</Link> pages.
+          </li>
+          <li>
+            <strong className="text-foreground">A video doorbell.</strong> They can see and talk to a visitor from a chair, and you can check from your phone.
+          </li>
+          <li>
+            <strong className="text-foreground">A smart lock with a PIN.</strong> No lost keys. You can give a helper a code and remove it later. Always keep a physical key as a backup.
+          </li>
+          <li>
+            <strong className="text-foreground">Door and motion sensors for check-ins.</strong> They tell you someone is moving around without using a camera. A set-up like "no kitchen motion by 10am, send me a message" works well.
+          </li>
+          <li>
+            <strong className="text-foreground">Smoke and leak sensors.</strong> A smart smoke alarm sends an alert to your phone, not only a loud noise in the house.
+          </li>
+          <li>
+            <strong className="text-foreground">A smart plug with an auto-off timer.</strong> Good for a fan or small appliance that gets forgotten. Check the plug's wattage rating and don't use it for heavy loads like aircon.
+          </li>
+        </ol>
+        <p className="leading-relaxed text-muted-foreground">
+          Before buying sensors, check that the app can send an alert when nothing moves. Not every app can.
+        </p>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Use sensors, not cameras, inside the home</h2>
+        <p className="leading-relaxed text-muted-foreground">
+          Cameras inside a parent's home can feel like surveillance. Motion and door sensors answer the question you actually have: are they up and moving?
+        </p>
+        <p className="leading-relaxed text-muted-foreground">
+          A housing project in Hong Kong uses this idea. Door sensors text volunteers if a resident's front door shows no movement for 48 hours. At home you'd set a much shorter window.
+        </p>
+        <ul className="list-disc space-y-2 pl-5 leading-relaxed text-muted-foreground">
+          <li>Tell them what is installed and why.</li>
+          <li>Never put cameras in bedrooms or bathrooms.</li>
+          <li>Agree on who gets the alerts.</li>
+        </ul>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Plan for brownouts and weak wifi</h2>
+        <p className="leading-relaxed text-muted-foreground">
+          When the power goes out, the router goes off and your alerts stop.
+        </p>
+        <p className="leading-relaxed text-muted-foreground">
+          A mini UPS for the modem and router fixes most of it. Units under ₱1,000 can keep a router on for roughly 1 to 2 hours, depending on the model.
+        </p>
+        <ul className="list-disc space-y-2 pl-5 leading-relaxed text-muted-foreground">
+          <li>Make sure wifi reaches the bedroom and the bathroom.</li>
+          <li>Keep a physical key for the smart lock.</li>
+          <li>Set a reminder to check sensor and lock batteries every few months.</li>
+        </ul>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">If you live far away</h2>
+        <p className="leading-relaxed text-muted-foreground">
+          Many families have someone working abroad or in another city. Shared access lets you see alerts, check the door and let in a helper without calling anyone.
+        </p>
+        <p className="leading-relaxed text-muted-foreground">
+          Pick one platform for the whole house so there is only one app to learn.
+        </p>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">What it costs</h2>
+        <p className="leading-relaxed text-muted-foreground">
+          Smart plugs and bulbs start at a few hundred pesos each. Locks, doorbells and sensors vary a lot by brand, so ask for a written quote instead of guessing.
+        </p>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Test it together</h2>
+        <p className="leading-relaxed text-muted-foreground">
+          Sit down with them and try every device once. Leave a printed card with the three or four voice commands they'll use most.
+        </p>
+        <p className="leading-relaxed text-muted-foreground">
+          Then check in a week later and ask what annoys them. If a device is annoying, they'll switch it off.
+        </p>
+
+        <p className="leading-relaxed text-muted-foreground">
+          If you're in Pampanga, Tarlac or Bulacan and want help planning it, use our <Link href="/services" className="underline underline-offset-4">services page</Link> to list what you want room by room and send it for a quote.
+        </p>
       </>
     )
   },
@@ -206,8 +289,8 @@ const BLOG_POSTS_DETAIL: Record<number, {
     title: "How to Start a Smart Home in the Philippines (and What to Buy First)",
     subtitle: "A plain guide to what a smart home is, what it costs to begin, and the Philippine details most guides skip.",
     date: "November 11, 2026",
-    author: "Smarter Home PH",
-    authorRole: "Planning and installation team",
+    author: "Art Gonzales",
+    authorRole: "Smarter Home PH",
     authorAvatar: "",
     readTime: "5 min read",
     category: "Getting started",

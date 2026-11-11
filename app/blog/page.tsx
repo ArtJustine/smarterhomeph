@@ -12,7 +12,7 @@ const blogPosts = [
     title: "How to Start a Smart Home in the Philippines (and What to Buy First)",
     excerpt: "What to buy first, what it costs to begin, and the Philippine details to check before you order: voltage, 2.4GHz wifi and brownouts.",
     date: "November 11, 2026",
-    author: "Smarter Home PH",
+    author: "Art Gonzales",
     category: "Getting started",
   },
   {
@@ -20,7 +20,7 @@ const blogPosts = [
     title: "10 Smart Home Devices That Will Transform Your Living Space",
     excerpt: "Discover the latest smart home innovations that can make your home more comfortable, efficient, and secure.",
     date: "March 20, 2025",
-    author: "Emma Johnson",
+    author: "Art Gonzales",
     category: "Vision",
   },
   {
@@ -28,7 +28,7 @@ const blogPosts = [
     title: "How to Set Up a Smart Home Security System on a Budget",
     excerpt: "Learn how to create an effective home security system without breaking the bank using affordable smart devices.",
     date: "March 15, 2025",
-    author: "Michael Chen",
+    author: "Art Gonzales",
     category: "Security",
   },
   {
@@ -36,7 +36,7 @@ const blogPosts = [
     title: "The Future of Voice Assistants in Smart Homes",
     excerpt: "Explore how voice assistant technology is evolving and what it means for the future of home automation.",
     date: "March 10, 2025",
-    author: "Sarah Williams",
+    author: "Art Gonzales",
     category: "Intelligence",
   },
   {
@@ -44,7 +44,7 @@ const blogPosts = [
     title: "Energy Saving Tips with Smart Home Automation",
     excerpt: "Discover how smart thermostats, lighting, and appliances can help reduce your energy consumption.",
     date: "March 5, 2025",
-    author: "David Rodriguez",
+    author: "Art Gonzales",
     category: "Efficiency",
   },
   {
@@ -52,15 +52,15 @@ const blogPosts = [
     title: "Integrating Smart Home Systems: A Comprehensive Guide",
     excerpt: "Learn how to make different smart home ecosystems work together for a seamless experience.",
     date: "February 28, 2025",
-    author: "Lisa Thompson",
+    author: "Art Gonzales",
     category: "Ecosystems",
   },
   {
     id: 6,
-    title: "Smart Home Innovations for Aging in Place",
-    excerpt: "How smart technology can help seniors live independently and safely in their homes for longer.",
+    title: "Smart Home Setup for Aging in Place: A Practical Guide for Families",
+    excerpt: "Seven small upgrades that make a parent's home safer, plus the privacy and brownout details most guides skip.",
     date: "February 23, 2025",
-    author: "Robert Garcia",
+    author: "Art Gonzales",
     category: "Accessibility",
   },
 ]

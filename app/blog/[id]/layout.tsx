@@ -30,8 +30,8 @@ const posts: Record<string, { title: string; description: string; published: str
     published: "2025-02-28",
   },
   "6": {
-    title: "Smart Home Tech for Aging in Place",
-    description: "How smart technology can help seniors live independently and safely at home for longer.",
+    title: "Smart Home Setup for Aging in Place",
+    description: "Seven practical smart home upgrades for an aging parent's home, plus privacy, brownout and wifi tips for Filipino families.",
     published: "2025-02-23",
   },
   "7": {
