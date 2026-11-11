@@ -5,6 +5,8 @@ import { GeistMono } from 'geist/font/mono'
 import './globals.css'
 import { Toaster } from 'sonner'
 import { SITE_NAME, SITE_URL, SERVICE_AREAS, SERVICE_CITIES } from '@/lib/site'
+import { BUSINESS_ID, WEBSITE_ID, graph } from '@/lib/schema'
+import { JsonLd } from '@/components/json-ld'
 
 const display = localFont({
   src: [
@@ -53,9 +55,9 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
-const localBusinessJsonLd = {
-  '@context': 'https://schema.org',
+const localBusiness = {
   '@type': 'LocalBusiness',
+  '@id': BUSINESS_ID,
   name: SITE_NAME,
   url: SITE_URL,
   description:
@@ -65,7 +67,22 @@ const localBusinessJsonLd = {
     ...SERVICE_CITIES.flatMap((a) => a.cities.map((c) => ({ '@type': 'City', name: c }))),
   ],
   knowsAbout: ['Smart home installation', 'Home automation', 'Home Assistant', 'Smart locks', 'Security cameras'],
+  makesOffer: ['Alexa', 'Apple Home', 'Google Home'].map((p) => ({
+    '@type': 'Offer',
+    itemOffered: { '@type': 'Service', name: `${p} smart home installation` },
+  })),
 }
+
+const webSite = {
+  '@type': 'WebSite',
+  '@id': WEBSITE_ID,
+  url: SITE_URL,
+  name: SITE_NAME,
+  inLanguage: 'en-PH',
+  publisher: { '@id': BUSINESS_ID },
+}
+
+const siteJsonLd = graph(localBusiness, webSite)
 
 export default function RootLayout({
   children,
@@ -78,10 +95,7 @@ export default function RootLayout({
       className={`${GeistSans.variable} ${GeistMono.variable} ${display.variable}`}
     >
       <body className="font-sans antialiased">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
-        />
+        <JsonLd data={siteJsonLd} />
         {children}
         <Toaster position="top-right" />
       </body>

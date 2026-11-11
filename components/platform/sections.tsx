@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { platformList, type Platform } from "@/lib/platforms"
 import { platformDevices, type HubDevice } from "@/lib/platform-devices"
-import { SERVICE_CITIES, SITE_NAME, SITE_URL } from "@/lib/site"
+import { SERVICE_CITIES, SITE_URL } from "@/lib/site"
+import { BUSINESS_ID } from "@/lib/schema"
 
 export function SetupList({ platform, heading }: { platform: Platform; heading: string }) {
   return (
@@ -206,7 +207,7 @@ export function ServiceJsonLd({ platform }: { platform: Platform }) {
     serviceType: `${platform.name} smart home setup`,
     description: platform.short,
     url: `${SITE_URL}/${platform.slug}`,
-    provider: { "@type": "LocalBusiness", name: SITE_NAME, url: SITE_URL },
+    provider: { "@id": BUSINESS_ID },
     areaServed: SERVICE_CITIES.flatMap((a) => [
       { "@type": "AdministrativeArea", name: `${a.province}, Philippines` },
       ...a.cities.map((c) => ({ "@type": "City", name: c })),

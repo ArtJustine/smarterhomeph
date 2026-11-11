@@ -4,6 +4,8 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { PageHeader } from "@/components/page-header"
 import { Button } from "@/components/ui/button"
+import { JsonLd } from "@/components/json-ld"
+import { BUSINESS_ID, abs, graph } from "@/lib/schema"
 
 const categories = [
   {
@@ -56,6 +58,24 @@ export default function ServicesPage() {
       <SiteHeader />
 
       <main className="flex-1">
+        <JsonLd
+          data={graph({
+            "@type": "ItemList",
+            name: "Smart home services",
+            itemListElement: categories.map((c, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              item: {
+                "@type": "Service",
+                name: `Smart ${c.title.toLowerCase()} installation`,
+                description: c.description,
+                url: abs(c.href),
+                provider: { "@id": BUSINESS_ID },
+                areaServed: ["Pampanga", "Tarlac", "Bulacan"].map((n) => ({ "@type": "AdministrativeArea", name: `${n}, Philippines` })),
+              },
+            })),
+          })}
+        />
         <PageHeader
           eyebrow="Services"
           title={

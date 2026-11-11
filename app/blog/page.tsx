@@ -3,6 +3,8 @@ import { ArrowUpRight } from "lucide-react"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { PageHeader } from "@/components/page-header"
+import { JsonLd } from "@/components/json-ld"
+import { abs, breadcrumb, graph, webPage } from "@/lib/schema"
 
 const blogPosts = [
   {
@@ -61,6 +63,27 @@ export default function BlogPage() {
       <SiteHeader />
 
       <main className="flex-1">
+        <JsonLd
+          data={graph(
+            webPage({
+              type: "Blog",
+              path: "/blog",
+              name: "Smart Home Guides and Tips",
+              description:
+                "Practical guides on smart lighting, security, climate control and getting devices from different brands to work together.",
+            }),
+            breadcrumb([{ name: "Blog", path: "/blog" }]),
+            {
+              "@type": "ItemList",
+              itemListElement: blogPosts.map((post, i) => ({
+                "@type": "ListItem",
+                position: i + 1,
+                url: abs(`/blog/${post.id}`),
+                name: post.title,
+              })),
+            },
+          )}
+        />
         <PageHeader
           eyebrow="Journal"
           title={
