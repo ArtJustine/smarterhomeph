@@ -34,6 +34,11 @@ const posts: Record<string, { title: string; description: string; published: str
     description: "How smart technology can help seniors live independently and safely at home for longer.",
     published: "2025-02-23",
   },
+  "7": {
+    title: "How to Start a Smart Home in the Philippines",
+    description: "What a smart home is, what to buy first, what it costs to begin, and the Philippine details to check: voltage, 2.4GHz wifi, brownouts and installers.",
+    published: "2026-11-11",
+  },
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {

@@ -10,7 +10,6 @@ const routes: { path: string; priority: number }[] = [
   { path: "/google-home", priority: 0.9 },
   { path: "/contact", priority: 0.8 },
   { path: "/about", priority: 0.6 },
-  { path: "/reviews", priority: 0.6 },
   { path: "/faqs", priority: 0.7 },
   { path: "/blog", priority: 0.7 },
   { path: "/blog/1", priority: 0.5 },
@@ -19,6 +18,7 @@ const routes: { path: string; priority: number }[] = [
   { path: "/blog/4", priority: 0.5 },
   { path: "/blog/5", priority: 0.5 },
   { path: "/blog/6", priority: 0.5 },
+  { path: "/blog/7", priority: 0.6 },
   { path: "/privacy-policy", priority: 0.2 },
 ]
 

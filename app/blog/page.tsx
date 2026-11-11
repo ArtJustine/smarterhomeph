@@ -8,6 +8,14 @@ import { abs, breadcrumb, graph, webPage } from "@/lib/schema"
 
 const blogPosts = [
   {
+    id: 7,
+    title: "How to Start a Smart Home in the Philippines (and What to Buy First)",
+    excerpt: "What to buy first, what it costs to begin, and the Philippine details to check before you order: voltage, 2.4GHz wifi and brownouts.",
+    date: "November 11, 2026",
+    author: "Smarter Home PH",
+    category: "Getting started",
+  },
+  {
     id: 1,
     title: "10 Smart Home Devices That Will Transform Your Living Space",
     excerpt: "Discover the latest smart home innovations that can make your home more comfortable, efficient, and secure.",

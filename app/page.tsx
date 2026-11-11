@@ -7,10 +7,8 @@ import { Button } from "@/components/ui/button"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { InteractiveHome } from "@/components/interactive-home"
-import { BrandLogo } from "@/components/brand-logo"
 import { platformList } from "@/lib/platforms"
 
-const brands = ["Aqara", "Govee", "Eve", "Reolink", "Philips", "TP-Link", "YoLink"]
 
 const steps = [
   {
@@ -115,20 +113,6 @@ export default function Home() {
           >
             <InteractiveHome />
           </motion.div>
-        </section>
-
-        {/* Works with */}
-        <section className="border-y">
-          <div className="container flex flex-col items-start gap-6 py-8 md:flex-row md:items-center md:justify-between">
-            <p className="eyebrow shrink-0">Works with</p>
-            <ul className="flex flex-wrap items-center gap-x-10 gap-y-5">
-              {brands.map((name) => (
-                <li key={name} className="opacity-70 transition hover:opacity-100">
-                  <BrandLogo name={name} heightClass="h-6" />
-                </li>
-              ))}
-            </ul>
-          </div>
         </section>
 
         {/* Platforms */}

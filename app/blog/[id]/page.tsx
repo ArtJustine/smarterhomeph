@@ -201,6 +201,98 @@ const BLOG_POSTS_DETAIL: Record<number, {
         </blockquote>
       </>
     )
+  },
+  7: {
+    title: "How to Start a Smart Home in the Philippines (and What to Buy First)",
+    subtitle: "A plain guide to what a smart home is, what it costs to begin, and the Philippine details most guides skip.",
+    date: "November 11, 2026",
+    author: "Smarter Home PH",
+    authorRole: "Planning and installation team",
+    authorAvatar: "",
+    readTime: "5 min read",
+    category: "Getting started",
+    image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1200&auto=format&fit=crop",
+    content: (
+      <>
+        <p className="text-xl leading-relaxed text-foreground">
+          A smart home is a house where lights, locks, cameras and aircon respond to your phone, your voice or a schedule. You can start with one or two cheap devices and add more later.
+        </p>
+        <p className="leading-relaxed text-muted-foreground">
+          Most guides to smart homes in the Philippines talk about market growth. This one covers what you do on day one.
+        </p>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">What you need before you buy anything</h2>
+        <ul className="list-disc space-y-2 pl-5 leading-relaxed text-muted-foreground">
+          <li>Home wifi that reaches the rooms you want to automate.</li>
+          <li>A phone (Android or iPhone).</li>
+          <li>A voice assistant you already use: Alexa, Google Home or Apple Home.</li>
+        </ul>
+        <p className="leading-relaxed text-muted-foreground">
+          That's it. Most starter devices don't need a separate hub.
+        </p>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Check the box before you pay</h2>
+        <p className="leading-relaxed text-muted-foreground">
+          Three things trip up first-time buyers here.
+        </p>
+        <ul className="list-disc space-y-2 pl-5 leading-relaxed text-muted-foreground">
+          <li><strong className="text-foreground">Voltage.</strong> Some listings are for the US market and are rated for 100 to 125V only. Look for 220 to 240V on bulbs and plugs sold for Philippine homes.</li>
+          <li><strong className="text-foreground">2.4GHz wifi.</strong> Many cheap smart devices only connect to 2.4GHz, not 5GHz. Your router needs to have it switched on during setup.</li>
+          <li><strong className="text-foreground">Bulb base.</strong> Check whether your fixtures take E27 or another base before you order a pack.</li>
+        </ul>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">What to buy first, in order</h2>
+        <ol className="list-decimal space-y-3 pl-5 leading-relaxed text-muted-foreground">
+          <li><strong className="text-foreground">A smart plug.</strong> It turns a fan, lamp or charger into something you can schedule. Listings we checked in November 2026 ran from about ₱490 to ₱690.</li>
+          <li><strong className="text-foreground">A smart bulb.</strong> A wifi colour bulb with no hub was listed at about ₱310 at a local retailer.</li>
+          <li><strong className="text-foreground">A camera or video doorbell.</strong> This is where most people feel the biggest day-to-day difference.</li>
+          <li><strong className="text-foreground">A smart lock.</strong> Worth doing once the basics are working.</li>
+          <li><strong className="text-foreground">An aircon controller.</strong> It lets you cool the room before you get home instead of leaving the unit on all day.</li>
+        </ol>
+        <p className="leading-relaxed text-muted-foreground">
+          Prices move and stock sells out, so treat these as a rough guide. Locks, cameras and aircon controllers vary a lot by brand, so ask for a written quote instead of guessing.
+        </p>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Plan for brownouts</h2>
+        <p className="leading-relaxed text-muted-foreground">
+          No power means no router, and no router means your smart devices go offline.
+        </p>
+        <p className="leading-relaxed text-muted-foreground">
+          A small UPS for your modem and router fixes most of it. Units for under ₱1,000 can keep a router running for roughly 1 to 2 hours, depending on the model.
+        </p>
+        <p className="leading-relaxed text-muted-foreground">
+          Two more habits help. Keep a physical key or PIN backup on any smart lock. And leave the wall switch on for smart bulbs, since cutting power at the switch makes them unreachable.
+        </p>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Pick one platform and stay with it</h2>
+        <p className="leading-relaxed text-muted-foreground">
+          Mixing five brands with five apps is the fastest way to give up on a smart home.
+        </p>
+        <p className="leading-relaxed text-muted-foreground">
+          Choose one: <Link href="/alexa" className="underline underline-offset-4">Alexa</Link>, <Link href="/apple-home" className="underline underline-offset-4">Apple Home</Link> or <Link href="/google-home" className="underline underline-offset-4">Google Home</Link>. Devices that support Matter work across all three, so look for that label when you have a choice.
+        </p>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">DIY or get an installer?</h2>
+        <p className="leading-relaxed text-muted-foreground">
+          Plugs and bulbs are easy to do yourself. You screw them in, open the app and follow the prompts.
+        </p>
+        <p className="leading-relaxed text-muted-foreground">
+          Call someone for the jobs that can go wrong: door locks, wired cameras, aircon controllers, and wifi that doesn't reach every room. A bad install on a lock or a camera costs more than the install itself.
+        </p>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Mistakes to avoid</h2>
+        <ul className="list-disc space-y-2 pl-5 leading-relaxed text-muted-foreground">
+          <li>Buying a full kit before testing one plug.</li>
+          <li>Ignoring weak wifi in the far bedroom or the garage.</li>
+          <li>Skipping the backup key on a smart lock.</li>
+          <li>Buying a device that only works with an app you'll never open again.</li>
+        </ul>
+
+        <p className="leading-relaxed text-muted-foreground">
+          If you're in Pampanga, Tarlac or Bulacan and want help planning it, our <Link href="/services" className="underline underline-offset-4">services page</Link> lets you list what you want room by room and send it for a quote.
+        </p>
+      </>
+    )
   }
 }
 
