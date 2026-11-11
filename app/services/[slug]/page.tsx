@@ -51,11 +51,11 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       <main className="flex-1">
         <PageHeader eyebrow="Services" title={<>{plan.title}, <span className="italic text-primary-ink">room by room.</span></>} intro={plan.intro} />
 
-        <section className="container py-12 lg:py-16">
+        <section className="container pt-12 pb-20 lg:pt-16 lg:pb-28">
           <ServicePlanner plan={plan} />
         </section>
 
-        <section className="container pb-16">
+        <section className="container pb-20 lg:pb-28">
           <div className="grid gap-8 border-t pt-12 md:grid-cols-2">
             <h2 className="text-4xl leading-tight">Planned and installed locally.</h2>
             <div className="space-y-4 leading-relaxed text-muted-foreground">
@@ -66,7 +66,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           </div>
         </section>
 
-        <section className="container pb-24">
+        <section className="container pb-24 lg:pb-32">
           <p className="eyebrow mb-4">Other services</p>
           <ul className="flex flex-wrap gap-2">
             {others.map((o) => (

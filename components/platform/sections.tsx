@@ -69,7 +69,7 @@ export function FitAndLimits({ platform }: { platform: Platform }) {
 
 export function DevicesLink({ platform }: { platform: Platform }) {
   return (
-    <section className="container py-16 lg:py-20">
+    <section className="container py-20 lg:py-28">
       <Link
         href={`/devices?ecosystem=${encodeURIComponent(platform.ecosystem)}`}
         className="group flex flex-col justify-between gap-4 rounded-xl border p-8 transition-colors hover:bg-card sm:flex-row sm:items-center sm:p-10"

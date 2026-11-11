@@ -102,7 +102,7 @@ export default function BlogPage() {
           intro="Guides on lighting, security, climate and keeping it all talking to each other."
         />
 
-        <section className="container py-12 lg:py-20">
+        <section className="container pt-12 pb-24 lg:pt-20 lg:pb-32">
           <ul className="border-b">
             {blogPosts.map((post) => (
               <li key={post.id} className="border-t">

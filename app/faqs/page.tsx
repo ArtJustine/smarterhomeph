@@ -75,7 +75,7 @@ export default function FAQsPage() {
           intro="Short answers for Philippine homes. If yours is not here, message us."
         />
 
-        <section className="container py-12 md:py-16">
+        <section className="container pt-12 pb-20 md:pt-16 md:pb-28">
           <div className="max-w-3xl">
             <Accordion type="single" collapsible className="w-full">
               {faqs.map((f, i) => (

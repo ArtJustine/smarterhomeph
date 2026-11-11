@@ -19,7 +19,7 @@ export default function AppleHomePage() {
       <SiteHeader />
       <main className="flex-1">
         <ServiceJsonLd platform={p} />
-        <section className="container pb-16 pt-14 text-center md:pt-24">
+        <section className="container pb-20 pt-14 lg:pb-28 text-center md:pt-24">
           <p className="eyebrow mb-6">Apple Home and HomeKit setup · Philippines</p>
           <h1 className="mx-auto max-w-4xl text-balance text-5xl leading-[1.02] sm:text-6xl lg:text-[4.75rem]">
             Apple Home setup that is <span className="italic text-primary-ink">private and quiet.</span>

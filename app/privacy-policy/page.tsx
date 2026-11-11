@@ -10,7 +10,7 @@ export default function PrivacyPolicyPage() {
       <main className="flex-1">
         <PageHeader eyebrow="Legal" title="Privacy policy" />
 
-        <section className="container py-12 md:py-16">
+        <section className="container pt-12 pb-20 md:pt-16 md:pb-28">
           <div className="max-w-3xl">
             <p className="text-sm text-muted-foreground mb-8">Last Updated: March 24, 2025</p>
 

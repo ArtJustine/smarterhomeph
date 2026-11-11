@@ -7,6 +7,7 @@ import { Toaster } from 'sonner'
 import { SITE_NAME, SITE_URL, SERVICE_AREAS, SERVICE_CITIES } from '@/lib/site'
 import { BUSINESS_ID, WEBSITE_ID, graph } from '@/lib/schema'
 import { JsonLd } from '@/components/json-ld'
+import { ScrollReveal } from '@/components/scroll-reveal'
 
 const display = localFont({
   src: [
@@ -97,6 +98,7 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         <JsonLd data={siteJsonLd} />
         {children}
+        <ScrollReveal />
         <Toaster position="top-right" />
       </body>
     </html>

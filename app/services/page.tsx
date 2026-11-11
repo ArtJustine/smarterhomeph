@@ -86,7 +86,7 @@ export default function ServicesPage() {
           intro="Planning, supply, installation and setup of smart lighting, locks, cameras and aircon control for homes and small offices in Pampanga, Tarlac and Bulacan."
         />
 
-        <section className="container py-12 lg:py-20">
+        <section className="container pt-12 pb-20 lg:pt-20 lg:pb-28">
           <ul className="border-b">
             {categories.map((cat, i) => (
               <li key={cat.id} className="border-t">
@@ -115,7 +115,7 @@ export default function ServicesPage() {
           </ul>
         </section>
 
-        <section className="container pb-24">
+        <section className="container pb-24 lg:pb-32">
           <div className="rounded-xl bg-foreground px-8 py-14 text-background sm:px-14">
             <h2 className="max-w-xl text-balance text-4xl leading-tight sm:text-5xl">
               Bigger project? <span className="italic text-primary">Let's talk it through.</span>

@@ -75,7 +75,7 @@ export default function ReviewsPage() {
           intro="Notes from people who had a setup installed."
         />
 
-        <section className="container py-12 lg:py-20">
+        <section className="container pt-12 pb-24 lg:pt-20 lg:pb-32">
           <ul className="grid gap-px overflow-hidden rounded-lg border bg-border md:grid-cols-2">
             {reviews.map((r) => (
               <li key={r.id} className="flex flex-col bg-background p-8 transition-colors hover:bg-card sm:p-10">
