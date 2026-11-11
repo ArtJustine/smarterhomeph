@@ -222,6 +222,19 @@ function DeviceCard({ d }: { d: HubDevice }) {
   const Icon = kindIcon[d.kind]
   return (
     <article className="flex flex-col rounded-xl border bg-card p-7 transition-shadow hover:shadow-md">
+      {d.image && (
+        <div className="-mx-7 -mt-7 mb-7 aspect-square overflow-hidden rounded-t-xl bg-secondary">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={d.image}
+            alt={`${d.maker} ${d.name}`}
+            width={600}
+            height={600}
+            loading="lazy"
+            className="h-full w-full object-cover"
+          />
+        </div>
+      )}
       <div className="flex items-start justify-between gap-4">
         <span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/15 text-primary-ink">
           <Icon className="h-5 w-5" aria-hidden />

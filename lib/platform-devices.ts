@@ -7,6 +7,8 @@ export interface HubDevice {
   /** Hub and radio capabilities shown as chips */
   hub: string[]
   ourTake: string
+  /** Square product photo (600x600) in /public/devices */
+  image?: string
 }
 
 /**
@@ -18,6 +20,7 @@ export const platformDevices: Record<"alexa" | "apple-home" | "google-home", Hub
   alexa: [
     {
       name: "Echo Dot",
+      image: "/devices/alexa/echo-dot.webp",
       maker: "Amazon",
       kind: "Speaker",
       bestFor: "Bedrooms, study rooms and guest rooms",
@@ -31,6 +34,7 @@ export const platformDevices: Record<"alexa" | "apple-home" | "google-home", Hub
     },
     {
       name: "Echo Show 8",
+      image: "/devices/alexa/echo-show.webp",
       maker: "Amazon",
       kind: "Display",
       bestFor: "Kitchen, living room or family area",
@@ -44,6 +48,7 @@ export const platformDevices: Record<"alexa" | "apple-home" | "google-home", Hub
     },
     {
       name: "Echo Hub",
+      image: "/devices/alexa/echo-hub.webp",
       maker: "Amazon",
       kind: "Wall panel",
       bestFor: "Entryway, hallway or a central wall",
@@ -57,6 +62,7 @@ export const platformDevices: Record<"alexa" | "apple-home" | "google-home", Hub
     },
     {
       name: "Echo Studio",
+      image: "/devices/alexa/echo-studio.webp",
       maker: "Amazon",
       kind: "Speaker",
       bestFor: "Living rooms where sound matters",
