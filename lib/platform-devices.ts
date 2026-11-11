@@ -122,6 +122,7 @@ export const platformDevices: Record<"alexa" | "apple-home" | "google-home", Hub
   "google-home": [
     {
       name: "Google Home Speaker",
+      image: "/devices/google-home/google-home-speaker.webp",
       maker: "Google",
       kind: "Speaker",
       bestFor: "Living rooms and bedrooms",
@@ -135,6 +136,7 @@ export const platformDevices: Record<"alexa" | "apple-home" | "google-home", Hub
     },
     {
       name: "Nest Hub (2nd gen)",
+      image: "/devices/google-home/nest-hub.webp",
       maker: "Google",
       kind: "Display",
       bestFor: "Bedside tables, kitchens and desks",
@@ -148,6 +150,7 @@ export const platformDevices: Record<"alexa" | "apple-home" | "google-home", Hub
     },
     {
       name: "Nest Hub Max",
+      image: "/devices/google-home/nest-hub-max.webp",
       maker: "Google",
       kind: "Display",
       bestFor: "Kitchen, family room or home office",
