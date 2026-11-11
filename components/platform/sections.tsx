@@ -1,8 +1,9 @@
 import Link from "next/link"
-import { ArrowRight, ArrowUpRight, Check, Minus } from "lucide-react"
+import { ArrowRight, ArrowUpRight, Check, LayoutPanelTop, Minus, Speaker, Tablet, Tv } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { platformList, type Platform } from "@/lib/platforms"
+import { platformDevices, type HubDevice } from "@/lib/platform-devices"
 import { SERVICE_CITIES, SITE_NAME, SITE_URL } from "@/lib/site"
 
 export function SetupList({ platform, heading }: { platform: Platform; heading: string }) {
@@ -212,4 +213,87 @@ export function ServiceJsonLd({ platform }: { platform: Platform }) {
     ]),
   }
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+}
+
+const kindIcon = { Speaker, Display: Tablet, "Wall panel": LayoutPanelTop, "TV box": Tv }
+
+function DeviceCard({ d }: { d: HubDevice }) {
+  const Icon = kindIcon[d.kind]
+  return (
+    <article className="flex flex-col rounded-xl border bg-card p-7 transition-shadow hover:shadow-md">
+      <div className="flex items-start justify-between gap-4">
+        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/15 text-primary-ink">
+          <Icon className="h-5 w-5" aria-hidden />
+        </span>
+        <p className="eyebrow pt-1">
+          {d.maker} · {d.kind}
+        </p>
+      </div>
+
+      <h3 className="mt-6 text-3xl leading-tight">{d.name}</h3>
+      <p className="mt-2 text-sm text-muted-foreground">
+        <span className="text-foreground">Best for:</span> {d.bestFor}
+      </p>
+
+      <ul className="mt-5 space-y-3">
+        {d.benefits.map((b) => (
+          <li key={b} className="flex gap-3 leading-snug">
+            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+            {b}
+          </li>
+        ))}
+      </ul>
+
+      <div className="mt-6 flex flex-wrap gap-2" aria-label="Built-in hub support">
+        {d.hub.map((h) => (
+          <span key={h} className="rounded-full border px-3 py-1 font-mono text-[11px] text-muted-foreground">
+            {h}
+          </span>
+        ))}
+      </div>
+
+      <p className="mt-6 border-t pt-5 font-display text-xl leading-snug">{d.ourTake}</p>
+    </article>
+  )
+}
+
+export function PlatformDevices({ platform, plain = false }: { platform: Platform; plain?: boolean }) {
+  const devices = platformDevices[platform.slug]
+  const maker = devices[0].maker
+  return (
+    <section className={plain ? "" : "border-y bg-secondary/60"}>
+      <div className="container py-20 lg:py-28">
+        <div className="mb-12 grid gap-6 lg:grid-cols-12">
+          <div className="lg:col-span-7">
+            <p className="eyebrow mb-4">Made by {maker}</p>
+            <h2 className="text-balance text-4xl leading-tight sm:text-5xl">
+              The {platform.name} devices we build your home around.
+            </h2>
+          </div>
+          <p className="max-w-md leading-relaxed text-muted-foreground lg:col-span-5 lg:pt-8">
+            We use {maker}&apos;s own devices as the backbone of the system. They work with {platform.name} from day one,
+            get updates directly from the maker, and we place them where they work best in your home.
+          </p>
+        </div>
+
+        <div className={`grid gap-6 md:grid-cols-2 ${devices.length > 3 ? "xl:grid-cols-4" : "lg:grid-cols-3"}`}>
+          {devices.map((d) => (
+            <DeviceCard key={d.name} d={d} />
+          ))}
+        </div>
+
+        <div className="mt-10 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+          <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            Features are the maker&apos;s published capabilities and can change. Availability and pricing in the
+            Philippines vary, so we confirm stock and give you a written quote before anything is bought.
+          </p>
+          <Button asChild className="h-11 shrink-0 rounded-full px-6">
+            <Link href="/contact">
+              Ask about {platform.name} <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
+      </div>
+    </section>
+  )
 }

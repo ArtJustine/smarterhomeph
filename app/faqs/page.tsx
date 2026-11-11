@@ -7,7 +7,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 const faqs = [
   {
     q: "How much does smart home installation cost in the Philippines?",
-    a: "It depends on the size of the house and what you want automated. A few smart bulbs and a plug cost far less than a full setup with locks, cameras and aircon control. Use the home builder to get a running estimate, then send it to us and we will confirm a quote before anything is bought.",
+    a: "It depends on the size of the house, the rooms you want covered and the level of finish. A single-room setup costs far less than a whole house with locks, cameras and aircon control. Use the home builder for a running estimate, then send it to us and we will give you a written quote before anything is bought.",
   },
   {
     q: "Do you install smart homes in Pampanga, Tarlac and Bulacan?",
@@ -34,8 +34,8 @@ const faqs = [
     a: "Yes. A smart aircon controller lets you switch the unit on and off, set the temperature and schedule it from your phone, so the room is cool when you arrive instead of running all day. It works with most split-type units.",
   },
   {
-    q: "Can I install smart home devices myself?",
-    a: "Plugs, bulbs, cameras and sensors are easy to set up yourself. Anything that touches your home wiring, like smart switches or a hardwired lock, is better left to an installer. We also help with the part people get stuck on, which is making everything work together in one app.",
+    q: "Do I need to set anything up myself?",
+    a: "No. We plan, supply, install and test everything, then walk your household through how to use it. You do not need any technical skills, and we are local, so you can reach us if you want something adjusted later.",
   },
   {
     q: "Are smart home devices safe from hackers?",

@@ -2,7 +2,7 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { platforms } from "@/lib/platforms"
 import { AppleHubToggle } from "@/components/platform/apple-hub-toggle"
-import { SetupList, FitAndLimits, DevicesLink, PlatformFaq, OtherPlatforms, PlatformCta, LocalAreas, ServiceJsonLd } from "@/components/platform/sections"
+import { SetupList, FitAndLimits, DevicesLink, PlatformFaq, OtherPlatforms, PlatformCta, LocalAreas, ServiceJsonLd, PlatformDevices } from "@/components/platform/sections"
 
 const p = platforms["apple-home"]
 
@@ -50,6 +50,7 @@ export default function AppleHomePage() {
           </div>
         </section>
 
+        <PlatformDevices platform={p} plain />
         <SetupList platform={p} heading="Apple Home, set up the calm way." />
         <FitAndLimits platform={p} />
         <DevicesLink platform={p} />

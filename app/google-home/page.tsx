@@ -2,7 +2,7 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { platforms } from "@/lib/platforms"
 import { GoogleRoutineBuilder } from "@/components/platform/google-routine-builder"
-import { SetupList, FitAndLimits, DevicesLink, PlatformFaq, OtherPlatforms, PlatformCta, LocalAreas, ServiceJsonLd } from "@/components/platform/sections"
+import { SetupList, FitAndLimits, DevicesLink, PlatformFaq, OtherPlatforms, PlatformCta, LocalAreas, ServiceJsonLd, PlatformDevices } from "@/components/platform/sections"
 
 const p = platforms["google-home"]
 
@@ -30,6 +30,7 @@ export default function GoogleHomePage() {
           </div>
         </section>
 
+        <PlatformDevices platform={p} />
         <SetupList platform={p} heading="Google Home, set up to run itself." />
         <FitAndLimits platform={p} />
         <DevicesLink platform={p} />

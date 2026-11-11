@@ -2,7 +2,7 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { platforms } from "@/lib/platforms"
 import { AlexaVoiceDemo } from "@/components/platform/alexa-voice-demo"
-import { SetupList, FitAndLimits, DevicesLink, PlatformFaq, OtherPlatforms, PlatformCta, LocalAreas, ServiceJsonLd } from "@/components/platform/sections"
+import { SetupList, FitAndLimits, DevicesLink, PlatformFaq, OtherPlatforms, PlatformCta, LocalAreas, ServiceJsonLd, PlatformDevices } from "@/components/platform/sections"
 
 const p = platforms.alexa
 
@@ -28,6 +28,7 @@ export default function AlexaPage() {
           </div>
         </section>
 
+        <PlatformDevices platform={p} />
         <SetupList platform={p} heading="Alexa, set up around your home." />
         <FitAndLimits platform={p} />
         <DevicesLink platform={p} />
