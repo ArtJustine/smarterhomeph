@@ -78,6 +78,7 @@ export const platformDevices: Record<"alexa" | "apple-home" | "google-home", Hub
   "apple-home": [
     {
       name: "HomePod",
+      image: "/devices/apple-home/homepod.webp",
       maker: "Apple",
       kind: "Speaker",
       bestFor: "Living rooms and main family spaces",
@@ -91,6 +92,7 @@ export const platformDevices: Record<"alexa" | "apple-home" | "google-home", Hub
     },
     {
       name: "HomePod mini",
+      image: "/devices/apple-home/homepod-mini.webp",
       maker: "Apple",
       kind: "Speaker",
       bestFor: "Bedrooms, kitchen and study",
@@ -104,6 +106,7 @@ export const platformDevices: Record<"alexa" | "apple-home" | "google-home", Hub
     },
     {
       name: "Apple TV 4K",
+      image: "/devices/apple-home/apple-tv-4k.webp",
       maker: "Apple",
       kind: "TV box",
       bestFor: "Living room or home theatre",

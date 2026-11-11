@@ -95,7 +95,7 @@ export default function Home() {
               className="mt-9 flex flex-wrap items-center gap-3"
             >
               <Button asChild size="lg" className="h-12 rounded-full px-7">
-                <Link href="/services">
+                <Link href="/contact">
                   Get a quote <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
