@@ -27,7 +27,7 @@ const faqs = [
   },
   {
     q: "Does it work with Alexa, Google Home and Apple HomeKit?",
-    a: "Most of the devices we install work with Alexa and Google Home, and many support HomeKit and Matter. Each product page lists what it supports, so you can pick devices that fit the assistant you already use.",
+    a: "Most of the devices we install work with Alexa and Google Home, and many support HomeKit and Matter. We check compatibility for you, so everything fits the assistant you already use.",
   },
   {
     q: "Can I control my aircon with a smart home setup?",

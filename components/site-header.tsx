@@ -8,7 +8,6 @@ import { ChevronDown, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const navLinks = [
-  { name: "Devices", href: "/devices" },
   { name: "Services", href: "/services" },
   { name: "Builder", href: "/builder" },
   { name: "Reviews", href: "/reviews" },
@@ -76,23 +75,6 @@ export function SiteHeader() {
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Main">
-          {navLinks.slice(0, 1).map((link) => {
-            const active = pathname === link.href
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                aria-current={active ? "page" : undefined}
-                className={`relative text-sm transition-colors hover:text-foreground ${
-                  active ? "text-foreground" : "text-muted-foreground"
-                }`}
-              >
-                {link.name}
-                {active && <span className="absolute -bottom-[21px] left-0 right-0 h-px bg-foreground" />}
-              </Link>
-            )
-          })}
-
           <div ref={menuRef} className="relative">
             <button
               type="button"
@@ -126,7 +108,7 @@ export function SiteHeader() {
             )}
           </div>
 
-          {navLinks.slice(1).map((link) => {
+          {navLinks.map((link) => {
             const active = pathname === link.href
             return (
               <Link
@@ -173,9 +155,6 @@ export function SiteHeader() {
             className="overflow-hidden md:hidden"
           >
             <nav className="container flex flex-col py-2" aria-label="Mobile">
-              <Link href="/devices" className="border-b py-4 font-display text-2xl">
-                Devices
-              </Link>
               <div className="border-b py-4">
                 <p className="eyebrow mb-3">Platforms</p>
                 <div className="flex flex-col gap-3 pl-3">
@@ -186,7 +165,7 @@ export function SiteHeader() {
                   ))}
                 </div>
               </div>
-              {[...navLinks.slice(1), { name: "About", href: "/about" }, { name: "FAQs", href: "/faqs" }].map((link) => (
+              {[...navLinks, { name: "About", href: "/about" }, { name: "FAQs", href: "/faqs" }].map((link) => (
                 <Link key={link.href} href={link.href} className="border-b py-4 font-display text-2xl last:border-b-0">
                   {link.name}
                 </Link>
