@@ -8,7 +8,6 @@ const columns = [
       { name: "Apple Home setup", href: "/apple-home" },
       { name: "Google Home setup", href: "/google-home" },
       { name: "Services", href: "/services" },
-      { name: "Home builder", href: "/builder" },
     ],
   },
   {

@@ -8,7 +8,6 @@ const routes: { path: string; priority: number }[] = [
   { path: "/alexa", priority: 0.9 },
   { path: "/apple-home", priority: 0.9 },
   { path: "/google-home", priority: 0.9 },
-  { path: "/builder", priority: 0.8 },
   { path: "/contact", priority: 0.8 },
   { path: "/about", priority: 0.6 },
   { path: "/reviews", priority: 0.6 },

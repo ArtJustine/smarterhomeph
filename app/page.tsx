@@ -16,7 +16,7 @@ const steps = [
   {
     n: "01",
     title: "Tell us about your home",
-    body: "Pick your property type and rooms in the builder, or just message us what annoys you most. Lights you forget, a door you worry about, an aircon you leave on.",
+    body: "Pick a service and list what you want room by room, or just message us what annoys you most. Lights you forget, a door you worry about, an aircon you leave on.",
   },
   {
     n: "02",
@@ -97,8 +97,8 @@ export default function Home() {
               className="mt-9 flex flex-wrap items-center gap-3"
             >
               <Button asChild size="lg" className="h-12 rounded-full px-7">
-                <Link href="/builder">
-                  Price my home <ArrowRight className="ml-2 h-4 w-4" />
+                <Link href="/services">
+                  Plan my home <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <Button asChild size="lg" variant="ghost" className="h-12 rounded-full px-5">
@@ -233,12 +233,12 @@ export default function Home() {
               aria-hidden
               className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-primary/25 blur-3xl"
             />
-            <p className="eyebrow relative mb-5 !text-background/50">Home builder</p>
+            <p className="eyebrow relative mb-5 !text-background/50">Plan by room</p>
             <h2 className="relative max-w-2xl text-balance text-5xl leading-[1.02] sm:text-6xl">
-              Estimate your smart home cost <span className="italic text-primary">before you call anyone.</span>
+              Tell us what you want, <span className="italic text-primary">room by room.</span>
             </h2>
             <p className="relative mt-6 max-w-lg text-lg text-background/70">
-              Pick your property, add rooms, drop in devices and watch the total change. Send it to us when
+              Choose a service, pick a room, count the lights, locks, cameras or sensors. Send it to us when
               it looks right.
             </p>
             <Button
@@ -246,8 +246,8 @@ export default function Home() {
               size="lg"
               className="relative mt-10 h-12 rounded-full bg-primary px-7 text-primary-foreground hover:bg-primary/90"
             >
-              <Link href="/builder">
-                Open the builder <ArrowRight className="ml-2 h-4 w-4" />
+              <Link href="/services">
+                Start planning <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </div>

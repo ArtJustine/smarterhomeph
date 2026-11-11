@@ -7,10 +7,13 @@ try {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // The /devices catalogue is hidden for now. The page code is kept in app/devices.
+  // /devices and /builder are hidden for now. The page code is kept in app/devices and app/builder.
   // To bring it back: delete this redirects() block and restore the nav, footer and sitemap links.
   async redirects() {
-    return [{ source: '/devices', destination: '/services', permanent: false }]
+    return [
+      { source: '/devices', destination: '/services', permanent: false },
+      { source: '/builder', destination: '/services', permanent: false },
+    ]
   },
   eslint: {
     ignoreDuringBuilds: true,

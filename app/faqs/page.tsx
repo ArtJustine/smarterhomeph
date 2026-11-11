@@ -7,7 +7,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 const faqs = [
   {
     q: "How much does smart home installation cost in the Philippines?",
-    a: "It depends on the size of the house, the rooms you want covered and the level of finish. A single-room setup costs far less than a whole house with locks, cameras and aircon control. Use the home builder for a running estimate, then send it to us and we will give you a written quote before anything is bought.",
+    a: "It depends on the size of the house, the rooms you want covered and the level of finish. A single-room setup costs far less than a whole house with locks, cameras and aircon control. Pick a service, list what you want room by room, and send it to us. We give you a written quote before anything is bought.",
   },
   {
     q: "Do you install smart homes in Pampanga, Tarlac and Bulacan?",
@@ -91,9 +91,9 @@ export default function FAQsPage() {
             </Accordion>
 
             <p className="mt-10 text-muted-foreground">
-              Want a number for your own house? Try the{" "}
-              <Link href="/builder" className="text-foreground underline underline-offset-4">
-                home builder
+              Want a number for your own house? Plan it{" "}
+              <Link href="/services" className="text-foreground underline underline-offset-4">
+                room by room
               </Link>{" "}
               or{" "}
               <Link href="/contact" className="text-foreground underline underline-offset-4">

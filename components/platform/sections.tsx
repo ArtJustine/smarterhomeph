@@ -161,7 +161,7 @@ export function PlatformCta({ platform }: { platform: Platform }) {
             </Link>
           </Button>
           <Button asChild size="lg" variant="ghost" className="h-12 rounded-full px-5 text-background hover:bg-background/10 hover:text-background">
-            <Link href="/builder">Try the builder</Link>
+            <Link href="/services">Plan by room</Link>
           </Button>
         </div>
       </div>

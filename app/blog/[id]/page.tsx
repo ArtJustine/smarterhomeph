@@ -288,14 +288,14 @@ export default function BlogPostPage({ params }: { params: Promise<{ id: string 
               <div className="rounded-xl bg-foreground p-8 text-background">
                 <h2 className="text-3xl leading-tight">Ready to price your own setup?</h2>
                 <p className="mt-3 text-sm leading-relaxed text-background/70">
-                  Pick your property type and rooms in the builder and see a running total.
+                  Pick a service, list what you want in each room and send it to us for a written quote.
                 </p>
                 <Button
                   asChild
                   className="mt-6 h-11 w-full rounded-full bg-primary text-primary-foreground hover:bg-primary/90"
                 >
-                  <Link href="/builder">
-                    Open the builder <ArrowRight className="ml-2 h-4 w-4" />
+                  <Link href="/services">
+                    Plan by room <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
               </div>
