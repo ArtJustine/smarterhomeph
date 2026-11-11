@@ -3,6 +3,7 @@ import { ArrowRight, ArrowUpRight, Check, Minus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { platformList, type Platform } from "@/lib/platforms"
+import { SERVICE_CITIES, SITE_NAME, SITE_URL } from "@/lib/site"
 
 export function SetupList({ platform, heading }: { platform: Platform; heading: string }) {
   return (
@@ -167,4 +168,48 @@ export function PlatformCta({ platform }: { platform: Platform }) {
       </p>
     </section>
   )
+}
+
+export function LocalAreas({ platform }: { platform: Platform }) {
+  return (
+    <section className="container pb-20 lg:pb-28">
+      <p className="eyebrow mb-4">Where we work</p>
+      <h2 className="max-w-3xl text-balance text-4xl leading-tight sm:text-5xl">
+        {platform.name} setup in Pampanga, Tarlac and Bulacan.
+      </h2>
+      <div className="mt-12 grid gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-3">
+        {SERVICE_CITIES.map((a) => (
+          <div key={a.province} className="bg-background p-8">
+            <p className="font-display text-4xl leading-none">{a.province}</p>
+            <p className="mt-4 text-muted-foreground">
+              {platform.name} installation in {a.cities.join(", ").replace(/, ([^,]*)$/, " and $1")}, with the router
+              and WiFi checked as part of the job.
+            </p>
+          </div>
+        ))}
+      </div>
+      <p className="mt-6 text-sm text-muted-foreground">
+        Somewhere else in Luzon? <Link href="/contact" className="text-foreground underline underline-offset-4">Message us first</Link> and
+        we will tell you honestly if we can help. You can also see our other{" "}
+        <Link href="/services" className="text-foreground underline underline-offset-4">smart home services</Link>.
+      </p>
+    </section>
+  )
+}
+
+export function ServiceJsonLd({ platform }: { platform: Platform }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: `${platform.name} smart home installation`,
+    serviceType: `${platform.name} smart home setup`,
+    description: platform.short,
+    url: `${SITE_URL}/${platform.slug}`,
+    provider: { "@type": "LocalBusiness", name: SITE_NAME, url: SITE_URL },
+    areaServed: SERVICE_CITIES.flatMap((a) => [
+      { "@type": "AdministrativeArea", name: `${a.province}, Philippines` },
+      ...a.cities.map((c) => ({ "@type": "City", name: c })),
+    ]),
+  }
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 }

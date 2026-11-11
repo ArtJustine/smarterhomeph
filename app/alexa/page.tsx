@@ -2,7 +2,7 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { platforms } from "@/lib/platforms"
 import { AlexaVoiceDemo } from "@/components/platform/alexa-voice-demo"
-import { SetupList, FitAndLimits, DevicesLink, PlatformFaq, OtherPlatforms, PlatformCta } from "@/components/platform/sections"
+import { SetupList, FitAndLimits, DevicesLink, PlatformFaq, OtherPlatforms, PlatformCta, LocalAreas, ServiceJsonLd } from "@/components/platform/sections"
 
 const p = platforms.alexa
 
@@ -11,6 +11,7 @@ export default function AlexaPage() {
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
       <main className="flex-1">
+        <ServiceJsonLd platform={p} />
         <section className="container grid grid-cols-1 items-center gap-12 pb-20 pt-12 lg:grid-cols-12 lg:gap-10 lg:pb-28 lg:pt-20">
           <div className="min-w-0 lg:col-span-6">
             <p className="eyebrow mb-6">Alexa smart home setup · Philippines</p>
@@ -19,7 +20,7 @@ export default function AlexaPage() {
             </h1>
             <p className="mt-7 max-w-lg text-lg leading-relaxed text-muted-foreground">
               Say what you want and the house does it. We install and set up Alexa with your lights, door locks,
-              cameras and aircon, for homes in Pampanga, Tarlac and Bulacan.
+              cameras and aircon, for homes in Angeles, Mabalacat, San Fernando, Tarlac City, Malolos and across Pampanga, Tarlac and Bulacan.
             </p>
           </div>
           <div className="min-w-0 lg:col-span-6">
@@ -30,6 +31,7 @@ export default function AlexaPage() {
         <SetupList platform={p} heading="Alexa, set up around your home." />
         <FitAndLimits platform={p} />
         <DevicesLink platform={p} />
+        <LocalAreas platform={p} />
         <PlatformFaq platform={p} />
         <OtherPlatforms current="alexa" />
         <PlatformCta platform={p} />

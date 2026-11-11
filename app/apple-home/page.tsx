@@ -2,7 +2,7 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { platforms } from "@/lib/platforms"
 import { AppleHubToggle } from "@/components/platform/apple-hub-toggle"
-import { SetupList, FitAndLimits, DevicesLink, PlatformFaq, OtherPlatforms, PlatformCta } from "@/components/platform/sections"
+import { SetupList, FitAndLimits, DevicesLink, PlatformFaq, OtherPlatforms, PlatformCta, LocalAreas, ServiceJsonLd } from "@/components/platform/sections"
 
 const p = platforms["apple-home"]
 
@@ -18,14 +18,15 @@ export default function AppleHomePage() {
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
       <main className="flex-1">
+        <ServiceJsonLd platform={p} />
         <section className="container pb-16 pt-14 text-center md:pt-24">
           <p className="eyebrow mb-6">Apple Home and HomeKit setup · Philippines</p>
           <h1 className="mx-auto max-w-4xl text-balance text-5xl leading-[1.02] sm:text-6xl lg:text-[4.75rem]">
             Apple Home setup that is <span className="italic text-primary-ink">private and quiet.</span>
           </h1>
           <p className="mx-auto mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            We set up Apple Home and HomeKit for iPhone households in Pampanga, Tarlac and Bulacan, from the home
-            hub to the last scene.
+            We set up Apple Home and HomeKit for iPhone households in Angeles, Mabalacat, Tarlac City, Malolos and the rest of
+            Pampanga, Tarlac and Bulacan, from the home hub to the last scene.
           </p>
         </section>
 
@@ -52,6 +53,7 @@ export default function AppleHomePage() {
         <SetupList platform={p} heading="Apple Home, set up the calm way." />
         <FitAndLimits platform={p} />
         <DevicesLink platform={p} />
+        <LocalAreas platform={p} />
         <PlatformFaq platform={p} />
         <OtherPlatforms current="apple-home" />
         <PlatformCta platform={p} />

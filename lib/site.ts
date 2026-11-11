@@ -6,6 +6,13 @@ export const SITE_NAME = "Smarter Home PH"
 
 export const SERVICE_AREAS = ["Pampanga", "Tarlac", "Bulacan"]
 
+/** Towns we name in local copy and structured data. Confirm these match where you actually install. */
+export const SERVICE_CITIES = [
+  { province: "Pampanga", cities: ["Angeles City", "Mabalacat", "San Fernando"] },
+  { province: "Tarlac", cities: ["Tarlac City"] },
+  { province: "Bulacan", cities: ["Malolos", "Meycauayan"] },
+]
+
 /** Builds per-page metadata with a canonical URL and matching social tags. */
 export function pageMeta(path: string, title: string, description: string): Metadata {
   return {

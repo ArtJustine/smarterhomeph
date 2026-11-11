@@ -4,7 +4,7 @@ import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import './globals.css'
 import { Toaster } from 'sonner'
-import { SITE_NAME, SITE_URL, SERVICE_AREAS } from '@/lib/site'
+import { SITE_NAME, SITE_URL, SERVICE_AREAS, SERVICE_CITIES } from '@/lib/site'
 
 const display = localFont({
   src: [
@@ -60,7 +60,10 @@ const localBusinessJsonLd = {
   url: SITE_URL,
   description:
     'Smart home planning, supply and installation: lighting, door locks, cameras, aircon control and automation.',
-  areaServed: SERVICE_AREAS.map((name) => ({ '@type': 'AdministrativeArea', name: `${name}, Philippines` })),
+  areaServed: [
+    ...SERVICE_AREAS.map((name) => ({ '@type': 'AdministrativeArea', name: `${name}, Philippines` })),
+    ...SERVICE_CITIES.flatMap((a) => a.cities.map((c) => ({ '@type': 'City', name: c }))),
+  ],
   knowsAbout: ['Smart home installation', 'Home automation', 'Home Assistant', 'Smart locks', 'Security cameras'],
 }
 
