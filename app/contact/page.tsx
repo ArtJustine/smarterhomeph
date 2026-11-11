@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { Badge } from "@/components/ui/badge"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { Card, CardContent } from "@/components/ui/card"
@@ -73,9 +74,9 @@ export default function ContactPage() {
         
         // Auto-populate form subject and message details
         const roomsStr = parsed.rooms.map(r => `• ${r.name}: ${r.devices.join(", ")}`).join("\n")
-        const prepopulatedMessage = `I would like to request a professional installation consultation for my custom smart system.\n\nProperty Type: ${parsed.propertyType}\nRooms Setup:\n${roomsStr}\n\nEstimated Total Investment: $${parsed.totalPrice.toLocaleString()}`
+        const prepopulatedMessage = `I would like to request a professional installation consultation for my custom smart system.\n\nProperty Type: ${parsed.propertyType}\nRooms Setup:\n${roomsStr}${parsed.totalPrice > 0 ? `\n\nEstimated Total Investment: $${parsed.totalPrice.toLocaleString()}` : ""}`
         
-        form.setValue("subject", `Custom Smart ${parsed.propertyType} Consultation`)
+        form.setValue("subject", parsed.totalPrice > 0 ? `Custom Smart ${parsed.propertyType} Consultation` : `${parsed.propertyType} quote request`)
         form.setValue("message", prepopulatedMessage)
       } catch (e) {
         console.error("Failed to parse smart builder configuration", e)
@@ -165,10 +166,14 @@ export default function ContactPage() {
                       </div>
                       
                       <div className="flex justify-between items-end">
-                        <div>
-                          <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider">Configuration Total</p>
-                          <p className="text-3xl font-semibold text-primary-ink tracking-tight">${loadedConfig.totalPrice.toLocaleString()}</p>
-                        </div>
+                        {loadedConfig.totalPrice > 0 ? (
+                          <div>
+                            <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider">Configuration Total</p>
+                            <p className="text-3xl font-semibold text-primary-ink tracking-tight">${loadedConfig.totalPrice.toLocaleString()}</p>
+                          </div>
+                        ) : (
+                          <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider">Quote on request</p>
+                        )}
                         <Badge variant="outline" className="border-primary/30 bg-primary/10 text-primary-ink text-[10px] font-semibold uppercase tracking-widest px-3 py-1">
                           Specs Attached
                         </Badge>
