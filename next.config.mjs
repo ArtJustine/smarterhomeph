@@ -13,6 +13,8 @@ const nextConfig = {
     return [
       { source: '/devices', destination: '/services', permanent: false },
       { source: '/builder', destination: '/services', permanent: false },
+      { source: '/services/audio-video', destination: '/services/media-control', permanent: true },
+      { source: '/services/smart-plugs', destination: '/services/appliances', permanent: true },
     ]
   },
   eslint: {

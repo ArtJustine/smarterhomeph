@@ -38,17 +38,17 @@ const categories = [
   },
   {
     id: "entertainment",
-    title: "Audio and video",
+    title: "Media control",
     description: "Speakers and TV control that tie into scenes, like movie night in one tap.",
     features: ["Multi-room audio", "TV control", "Scene triggers"],
-    href: "/services/audio-video",
+    href: "/services/media-control",
   },
   {
     id: "appliances",
-    title: "Smart plugs",
-    description: "Make ordinary appliances switchable and see how much power they use.",
-    features: ["Energy monitoring", "Schedules", "Away mode"],
-    href: "/services/smart-plugs",
+    title: "Appliances",
+    description: "Plugs, power strips, pet feeders, humidifiers, purifiers and robot vacuums you can schedule and control.",
+    features: ["Smart plugs", "Air purifiers", "Robot vacuums"],
+    href: "/services/appliances",
   },
 ]
 
