@@ -145,11 +145,11 @@ export default async function ServiceTopicPage({ params }: { params: Promise<{ s
             <div>
               <p className="eyebrow mb-3">Try it</p>
               <h2 className="text-balance text-4xl leading-tight sm:text-5xl">
-                Tap the house, <span className="italic text-primary-ink">see what it does.</span>
+                When this happens, <span className="italic text-primary-ink">the house reacts.</span>
               </h2>
             </div>
             <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
-              Tap a device, or run one of the automations below. It is a demo, nothing here is connected.
+              Every automation is a trigger, a condition and an action. Tap the devices to set it off, or flip day and night to see it hold back. It is a demo, nothing here is connected.
             </p>
           </div>
           <TopicHome topic={t} />
