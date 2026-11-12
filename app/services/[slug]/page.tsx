@@ -9,6 +9,8 @@ import { JsonLd } from "@/components/json-ld"
 import { pageMeta } from "@/lib/site"
 import { BUSINESS_ID, abs, breadcrumb, graph, webPage } from "@/lib/schema"
 import { getPlan, servicePlans } from "@/lib/service-plans"
+import { getTopicsForService } from "@/lib/service-topics"
+import { TopicCards } from "@/components/service-topics/topic-cards"
 
 export const dynamicParams = false
 
@@ -29,6 +31,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   if (!plan) notFound()
   const path = `/services/${plan.slug}`
   const others = servicePlans.filter((p) => p.slug !== plan.slug)
+  const topics = getTopicsForService(plan.slug)
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -45,13 +48,26 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             provider: { "@id": BUSINESS_ID },
             areaServed: ["Pampanga", "Tarlac", "Bulacan"].map((n) => ({ "@type": "AdministrativeArea", name: `${n}, Philippines` })),
           },
+          {
+            "@type": "ItemList",
+            "@id": `${abs(path)}#topics`,
+            name: `${plan.title} devices`,
+            itemListElement: topics.map((t, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              name: t.name,
+              url: abs(`${path}/${t.slug}`),
+            })),
+          },
           breadcrumb([{ name: "Services", path: "/services" }, { name: plan.title, path }]),
         )}
       />
       <main className="flex-1">
         <PageHeader eyebrow="Services" title={<>{plan.title}, <span className="italic text-primary-ink">room by room.</span></>} intro={plan.intro} />
 
-        <section className="container pt-12 pb-20 lg:pt-16 lg:pb-28">
+        <TopicCards serviceTitle={plan.title} topics={topics} />
+
+        <section id="plan" className="container scroll-mt-20 pt-16 pb-20 lg:pt-24 lg:pb-28">
           <ServicePlanner plan={plan} />
         </section>
 

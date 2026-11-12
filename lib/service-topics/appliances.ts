@@ -1,0 +1,238 @@
+import type { ServiceTopic } from "./types"
+
+export const applianceTopics: ServiceTopic[] = [
+  {
+    slug: "smart-plugs",
+    service: "appliances",
+    icon: "plug",
+    name: "Smart plugs",
+    cardBlurb: "Schedule lamps, fans and small appliances from your phone.",
+    metaTitle: "Smart Plugs in Pampanga, Tarlac and Bulacan",
+    metaDescription:
+      "Smart plugs for lamps, fans and small appliances, with schedules and power tracking. Set up in Central Luzon.",
+    headline: "Smart plugs,",
+    headlineItalic: "the simplest upgrade.",
+    intro: "Plug it in, plug your appliance into it. Now it has a schedule, a phone switch and a voice command.",
+    why: [
+      "A smart plug makes any ordinary appliance controllable. A lamp, a fan, a rice cooker warmer, a phone charger. You can turn it off from your phone when you are at work and wonder if you left it on.",
+      "Some plugs also measure power use. That tells you what a device actually consumes, which is useful before you decide what to automate.",
+    ],
+    install: [
+      { title: "Choose where plugs help", body: "We look at what you plug in and what you forget to turn off. Lamps, fans, chargers and small kitchen items are good candidates." },
+      { title: "Check the load rating", body: "Every plug has a maximum load. We match it to the device and do not use standard plugs for high-power appliances like aircon or water heaters." },
+      { title: "Pair and name", body: "We connect each plug to your hub or app and give it a clear name, such as Bedroom lamp." },
+      { title: "Set schedules and rules", body: "We add timers and routines so each plug does something useful from day one." },
+    ],
+    automations: [
+      { title: "Lamp at sunset", body: "The living room lamp turns on at sunset and off at bedtime." },
+      { title: "Charger cutoff", body: "The phone charger turns off after a few hours so it does not stay on all night." },
+      { title: "Fan timer", body: "The fan plug turns off after you fall asleep." },
+    ],
+    goodToKnow: [
+      "Do not put aircon, water heaters, or other high-power appliances on a standard smart plug. Check the rating.",
+      "A plug can only turn power on and off. Appliances that need a button press to start may not work.",
+      "Plugs that are loose in the socket can get warm. Use quality plugs and make sure they sit firmly.",
+    ],
+    faqs: [
+      { q: "Can I use a smart plug for my aircon?", a: "Not a standard one. Aircon draws more power than most plugs are rated for, and many units need a proper start command. Use an aircon controller instead." },
+      { q: "Do they work with Alexa, Google and Apple?", a: "Most do, but not all. We pick plugs that work with the one you use." },
+      { q: "Can it track power use?", a: "Some models can. We choose them when you want to see usage." },
+      { q: "Will an appliance turn on after a power cut?", a: "It depends on the plug and the appliance. We check and set the behavior you want." },
+    ],
+  },
+  {
+    slug: "power-strips",
+    service: "appliances",
+    icon: "powerstrip",
+    name: "Power strips",
+    cardBlurb: "Switch each outlet separately, with one always-on socket.",
+    metaTitle: "Smart Power Strips in Pampanga, Tarlac and Bulacan",
+    metaDescription:
+      "Smart power strips with individual outlet control. Set up for TV areas and home offices in Central Luzon.",
+    headline: "Power strips,",
+    headlineItalic: "each outlet on its own.",
+    intro: "A strip where every socket can be switched separately. Good for TV areas and desks.",
+    why: [
+      "A TV area or a desk has many devices that draw power even when off. A smart power strip lets you cut them all with one command, or switch them one by one.",
+      "It also keeps things tidy. One strip replaces several plugs, and you can name each outlet.",
+    ],
+    install: [
+      { title: "Plan the layout", body: "We map what goes on the strip and which items must stay on, such as a router or a modem." },
+      { title: "Pick the strip", body: "We choose one with a safe total rating, surge protection and enough spacing for large adapters." },
+      { title: "Connect and label", body: "We pair the strip and name each outlet by what is plugged in." },
+      { title: "Set the rules", body: "We schedule the outlets that should turn off at night and keep the ones that should stay on." },
+    ],
+    automations: [
+      { title: "TV area off", body: "At midnight the TV, console and soundbar outlets turn off." },
+      { title: "Desk shutdown", body: "When you leave the home office, the monitor and chargers turn off." },
+      { title: "Router stays on", body: "One always-on outlet keeps your router and hub running." },
+    ],
+    goodToKnow: [
+      "Never put your router or hub on a switched outlet.",
+      "Total load matters. Do not plug heavy appliances into one strip.",
+      "A power strip with surge protection helps, but it does not replace proper wiring.",
+    ],
+    faqs: [
+      { q: "How is it different from a smart plug?", a: "A strip has several outlets, each controlled separately, and usually surge protection." },
+      { q: "Can I turn off only one outlet?", a: "Yes. That is the main point of the strip." },
+      { q: "Does it protect against surges?", a: "Many do. We choose models that include it and say so on the spec." },
+      { q: "Can I use it outdoors?", a: "Not unless it is rated for it. We use outdoor rated plugs where needed." },
+    ],
+  },
+  {
+    slug: "dog-feeders",
+    service: "appliances",
+    icon: "feeder",
+    name: "Dog feeders",
+    cardBlurb: "Scheduled meals, even when you are out.",
+    metaTitle: "Smart Dog Feeders in Pampanga, Tarlac and Bulacan",
+    metaDescription:
+      "Scheduled automatic dog feeders with phone alerts. Set up in Central Luzon by Smart Home Philippines.",
+    headline: "Dog feeders,",
+    headlineItalic: "dinner on time, every time.",
+    intro: "A feeder that serves measured meals on schedule, and tells your phone when it has.",
+    why: [
+      "Dogs notice routine. A feeder keeps meal times steady when your day does not: late meetings, traffic, a weekend away.",
+      "A measured portion also helps with weight. You set the amount once, rather than guessing each time.",
+    ],
+    install: [
+      { title: "Pick the feeder", body: "We choose a feeder that suits the size of your dog and the type of food. Large kibble and small kibble need different mechanisms." },
+      { title: "Place it well", body: "We choose a flat, stable spot near an outlet and a Wi-Fi signal, away from water bowls and heat." },
+      { title: "Set the schedule", body: "We set meal times and portion sizes. We suggest you check the amounts with your vet." },
+      { title: "Add alerts", body: "We set up alerts for low food, a jam or a missed meal." },
+    ],
+    automations: [
+      { title: "Meal time", body: "The feeder serves breakfast at 7 and dinner at 6." },
+      { title: "Low food", body: "You get a notice when the hopper is low." },
+      { title: "Away mode", body: "When you are out of town, a camera lets you check that the meal was served." },
+    ],
+    goodToKnow: [
+      "A feeder is a helper, not a replacement for care. Check on your dog daily.",
+      "A determined dog can tip or knock a light feeder. Choose a heavy or locking model.",
+      "Check portion sizes with your vet, especially for puppies and older dogs.",
+    ],
+    faqs: [
+      { q: "Does it work if the Wi-Fi is down?", a: "Many models keep their schedule on their own. We check this before you buy." },
+      { q: "Can it handle wet food?", a: "Most are for dry food only. Wet food needs a different type." },
+      { q: "What if the power goes out?", a: "Models with a battery backup continue to serve meals. We recommend one." },
+      { q: "Can my dog open it?", a: "Some dogs try. We choose a design that is hard to tip or open." },
+    ],
+  },
+  {
+    slug: "humidifiers",
+    service: "appliances",
+    icon: "humidifier",
+    name: "Humidifiers",
+    cardBlurb: "Schedules and humidity-based control for dry, aircon-heavy rooms.",
+    metaTitle: "Smart Humidifiers in Pampanga, Tarlac and Bulacan",
+    metaDescription:
+      "Humidifiers with schedules and humidity-based control. Set up for bedrooms and offices in Central Luzon.",
+    headline: "Humidifiers,",
+    headlineItalic: "air that is not too dry.",
+    intro: "A humidifier that turns on only when the air is dry, and off when it is comfortable.",
+    why: [
+      "Rooms that run aircon for hours can feel dry. A humidifier helps, but running one all night in an already humid room is a problem.",
+      "Linked to a humidity sensor, a smart humidifier runs only when the room needs it.",
+    ],
+    install: [
+      { title: "Check the room", body: "We read the humidity in the room for a day or two. If it is already high, you may not need one." },
+      { title: "Choose the humidifier", body: "We pick a model with the right tank size, easy cleaning and good control from your phone." },
+      { title: "Place it safely", body: "We set it on a flat, water safe surface, away from electronics and walls." },
+      { title: "Link it to a sensor", body: "We set a target humidity range so the unit turns on and off on its own." },
+    ],
+    automations: [
+      { title: "Dry room", body: "When humidity drops below your range, the humidifier turns on." },
+      { title: "Comfort range", body: "At the top of your range, it turns off." },
+      { title: "Empty tank", body: "You get a notice when the tank is low." },
+    ],
+    goodToKnow: [
+      "Humidifiers need regular cleaning. A dirty one spreads what grows in the tank.",
+      "In humid weather you may not need one at all.",
+      "Use clean water as recommended by the manufacturer.",
+    ],
+    faqs: [
+      { q: "Do I need a humidifier in the Philippines?", a: "Sometimes. Air conditioned bedrooms can get dry. A sensor will tell you if yours does." },
+      { q: "Can it turn off by itself?", a: "Yes, with a humidity sensor or a built-in hygrostat." },
+      { q: "How often do I clean it?", a: "Follow the maker's guide. Many need cleaning every week or two." },
+      { q: "Is it noisy?", a: "Ultrasonic models are quiet. We tell you what to expect for each model." },
+    ],
+  },
+  {
+    slug: "air-purifiers",
+    service: "appliances",
+    icon: "purifier",
+    name: "Air purifiers",
+    cardBlurb: "Auto mode and air quality alerts for cleaner indoor air.",
+    metaTitle: "Smart Air Purifiers in Pampanga, Tarlac and Bulacan",
+    metaDescription:
+      "Air purifiers with auto mode and air quality alerts. Chosen and set up for your home in Central Luzon.",
+    headline: "Air purifiers,",
+    headlineItalic: "cleaner air in the background.",
+    intro: "A purifier that speeds up when the air is bad and quiets down when it is clean.",
+    why: [
+      "Dust, cooking smoke and traffic fumes get into the house. A purifier with a good filter and an air quality sensor deals with it without you thinking about it.",
+      "Smart control matters because you do not want it loud at night. Auto mode and schedules keep it effective and quiet.",
+    ],
+    install: [
+      { title: "Size it to the room", body: "A purifier is rated for a room size. Too small for the room and it does very little. We match each unit to the room." },
+      { title: "Place it with space around it", body: "We place it away from walls and furniture so air can flow in and out." },
+      { title: "Connect and set auto mode", body: "We link the purifier to your hub and set auto mode so it adjusts to the air quality." },
+      { title: "Set quiet hours", body: "We schedule a low speed at night and a boost after cooking or cleaning." },
+    ],
+    automations: [
+      { title: "After cooking", body: "When the kitchen air quality drops, the purifier boosts to high." },
+      { title: "Night mode", body: "At bedtime it drops to its quietest setting." },
+      { title: "Filter reminder", body: "You get a notice when the filter needs replacing." },
+    ],
+    goodToKnow: [
+      "Filters need replacing. Factor that into the running cost.",
+      "A purifier works best in a closed room. An open door reduces what it can do.",
+      "Look for real filtration, not just ionizers.",
+    ],
+    faqs: [
+      { q: "What should I look for?", a: "A true HEPA filter, a size that fits the room and a quiet night mode." },
+      { q: "Does it work in an aircon room?", a: "Yes. A closed aircon room is where a purifier works best." },
+      { q: "How often do I replace the filter?", a: "It depends on the model and the air. The app usually tells you." },
+      { q: "Does it remove cooking smells?", a: "A carbon filter helps with smells. A HEPA filter handles fine particles." },
+    ],
+  },
+  {
+    slug: "robot-vacuums",
+    service: "appliances",
+    icon: "vacuum",
+    name: "Robot vacuums",
+    cardBlurb: "Cleaning runs when the house is empty.",
+    metaTitle: "Robot Vacuum Setup in Pampanga, Tarlac and Bulacan",
+    metaDescription:
+      "Robot vacuums set up with maps, schedules and no-go zones. Installed in Central Luzon by Smart Home Philippines.",
+    headline: "Robot vacuums,",
+    headlineItalic: "floors clean before you are home.",
+    intro: "A robot vacuum that maps your home, cleans on a schedule and leaves the rooms you choose alone.",
+    why: [
+      "Tile floors show dust quickly. A robot vacuum keeps up with it daily, so the weekly clean takes less effort.",
+      "Linked to your home, it can run when everyone has left and stop when someone comes back.",
+    ],
+    install: [
+      { title: "Check the floors", body: "We look at your floor types, rugs, thresholds and cables. High thresholds and thick rugs can stop some models." },
+      { title: "Choose the vacuum", body: "We pick a model with good mapping, suction for your floors and a dock that suits your space." },
+      { title: "Place the dock", body: "We put the dock on a hard floor against a wall, with free space around it and a good signal." },
+      { title: "Map the home and set zones", body: "We run a first clean to build the map, label rooms and set no-go zones around pet bowls, cables and fragile items." },
+    ],
+    automations: [
+      { title: "Clean while out", body: "When everyone leaves, the vacuum starts a clean." },
+      { title: "Stop when you return", body: "It returns to the dock when someone arrives home." },
+      { title: "Kitchen after dinner", body: "A short clean of the kitchen after the evening meal." },
+    ],
+    goodToKnow: [
+      "Pick up cables and small items first. A robot vacuum will find them.",
+      "Bins, brushes and filters need regular cleaning.",
+      "Pet accidents are a real risk. Keep it away from floors where this might happen.",
+    ],
+    faqs: [
+      { q: "Can it handle stairs?", a: "No. It cleans one floor at a time. You can carry it between floors and keep a map for each." },
+      { q: "Will it work on rugs?", a: "Most handle thin rugs. Thick rugs and fringe can be a problem. You can mark them as no-go zones." },
+      { q: "Does it work with my pets?", a: "Many are fine with pets. Keep bowls and any accident-prone spots in a no-go zone." },
+      { q: "Can I schedule it by room?", a: "Yes. Most mapped models let you clean a room or a set of rooms on a schedule." },
+    ],
+  },
+]

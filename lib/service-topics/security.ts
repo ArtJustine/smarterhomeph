@@ -1,0 +1,238 @@
+import type { ServiceTopic } from "./types"
+
+export const securityTopics: ServiceTopic[] = [
+  {
+    slug: "door-sensors",
+    service: "security",
+    icon: "door",
+    name: "Door sensors",
+    cardBlurb: "Know when the front, back or patio door opens, wherever you are.",
+    metaTitle: "Smart Door Sensors in Pampanga, Tarlac and Bulacan",
+    metaDescription:
+      "Door open and close sensors that alert your phone and trigger lights. Planned and installed by Smart Home Philippines across Central Luzon.",
+    headline: "Door sensors,",
+    headlineItalic: "quiet until it matters.",
+    intro: "A small sensor on each door tells your phone when it opens, and lets the rest of the house react.",
+    why: [
+      "A lot of worry starts at a door. A door sensor answers the question you keep asking yourself at work: did I close the gate door, did the kids get home, is the back door still open?",
+      "It also does more than alert. An open door can turn on the hallway light, pause the aircon, or log who came home and when. One cheap sensor ends up doing several jobs.",
+    ],
+    install: [
+      { title: "Walk the doors with you", body: "We list every door you care about: main, back, patio, garage, maid's room. We check the frame gap and the surface so the sensor sits flat and stays aligned." },
+      { title: "Match the sensor to the door", body: "Sliding doors, steel doors and wooden doors need different mounting. We pick a sensor type that fits, and one that works with your hub so it keeps running if the internet drops." },
+      { title: "Mount and test each one", body: "We fit the sensor and magnet, then open and close the door a few times to test the alert. Nothing sits on the door itself that your family would notice." },
+      { title: "Set the alerts with you", body: "You choose who gets a notification and when. Open alerts at night, a quiet log during the day, a different rule when you are home. We set it up before we leave." },
+    ],
+    automations: [
+      { title: "Hallway light on arrival", body: "The front door opens after sunset and the entry light comes on at a soft level." },
+      { title: "Nobody home alert", body: "If a door opens while everyone is out, you get a phone alert right away." },
+      { title: "Left open reminder", body: "The patio door has been open for 10 minutes with the aircon running. You get a nudge." },
+    ],
+    goodToKnow: [
+      "Sensors run on small batteries. They report low battery on your phone, so you change them before they stop.",
+      "A sensor tells you the door opened. It does not tell you who opened it. Pair it with a camera or smart lock if you want that.",
+      "Warped or very uneven doors can leave a wide gap. We check this during the visit so the magnet still lines up.",
+    ],
+    faqs: [
+      { q: "Do door sensors need wiring?", a: "No. They are battery powered and stick or screw onto the door and frame. There are no cables to run through the wall." },
+      { q: "Will it work if the internet goes out?", a: "If the sensor is paired to a local hub, the door event still reaches the hub and local automations still run. Phone alerts need internet, so you would not get the notification until it returns." },
+      { q: "Can it tell the difference between family and a stranger?", a: "Not on its own. For that, add a smart lock that logs which code or fingerprint was used, or a camera at the door." },
+      { q: "How many doors should I cover?", a: "Start with every door that leads outside, plus the garage door if it connects to the house. Interior doors are optional." },
+    ],
+  },
+  {
+    slug: "window-sensors",
+    service: "security",
+    icon: "window",
+    name: "Window sensors",
+    cardBlurb: "Know which ground floor windows are open before you leave or go to bed.",
+    metaTitle: "Smart Window Sensors in Pampanga, Tarlac and Bulacan",
+    metaDescription:
+      "Window open sensors and vibration alerts for ground floor windows. Planned and installed in Central Luzon by Smart Home Philippines.",
+    headline: "Window sensors,",
+    headlineItalic: "for the ones you forget.",
+    intro: "Know which windows are open before you leave the house or go to bed.",
+    why: [
+      "Doors get checked. Windows get forgotten. A window left open at night, or a ground floor window someone can reach from outside, is the weak spot most homes have.",
+      "Window sensors also help with the aircon. If a bedroom window is open while the aircon runs, you waste power and the room never cools.",
+    ],
+    install: [
+      { title: "Check each window type", body: "Casement, sliding and awning windows all work with a standard sensor. Jalousie and louver windows are different, so we check those one by one and pick another approach if needed." },
+      { title: "Pick which ones to cover", body: "You do not need every window. We cover ground floor windows, anything above a roof or balcony, and windows in bedrooms where you run the aircon." },
+      { title: "Fit and test", body: "We mount the sensor on the frame and the magnet on the sash, then test open and closed states so you do not get false alerts." },
+      { title: "Group them into one status", body: "We group the sensors so you can ask one question: are all the windows closed? Your phone and voice assistant answer it in a second." },
+    ],
+    automations: [
+      { title: "Goodnight check", body: "At bedtime the house tells you if any ground floor window is still open." },
+      { title: "Aircon pause", body: "A bedroom window opens and the aircon turns off after a few minutes. It resumes when the window closes." },
+      { title: "Rain warning", body: "A window is open and rain is forecast. You get a notice before the water gets in." },
+    ],
+    goodToKnow: [
+      "Jalousie and louver windows cannot hold a standard sensor. We tell you this at the survey instead of after the install.",
+      "A contact sensor only knows if the window is open. It will not catch someone breaking the glass. Glass break or vibration sensors cover that.",
+      "Many windows means many small batteries. We help you choose the windows that actually matter.",
+    ],
+    faqs: [
+      { q: "Do I need a sensor on every window?", a: "No. Focus on windows that someone can reach from outside, and windows where you run the aircon. Upper floor windows are low priority unless they sit above a roof." },
+      { q: "Can it work with my sliding windows?", a: "Yes. Sliding and casement windows suit a standard contact sensor." },
+      { q: "What about grilled windows?", a: "Grills block entry but not an open window letting in rain or mosquitoes. A sensor still helps with those." },
+      { q: "Can I get an alert only at night?", a: "Yes. You can set it to notify only after a time, or only when you are away." },
+    ],
+  },
+  {
+    slug: "smart-locks",
+    service: "security",
+    icon: "lock",
+    name: "Smart locks",
+    cardBlurb: "Keypad, fingerprint or app unlock, with a log of who came in.",
+    metaTitle: "Smart Door Locks in Pampanga, Tarlac and Bulacan",
+    metaDescription:
+      "Keypad, fingerprint and app smart locks, installed and set up for your door in Central Luzon. Smart Home Philippines.",
+    headline: "Smart locks,",
+    headlineItalic: "no keys to lose.",
+    intro: "Unlock with a code, fingerprint or your phone. Give your helper a code that works only on weekdays.",
+    why: [
+      "Keys get lost, copied and left under pots. A smart lock lets each person have their own code or fingerprint. When someone leaves, you delete their code. You never change a lock again.",
+      "It also fixes the everyday problems. Hands full of groceries, kids home before you, a helper who needs access on Tuesday and Friday only. The lock handles all of it.",
+    ],
+    install: [
+      { title: "Check your door first", body: "We look at the door thickness, the lock type already on it and the frame. Not every smart lock fits every door, so we choose one that does." },
+      { title: "Fit the lock", body: "We replace the existing lockset, align the latch and bolt, and make sure the door closes and locks smoothly. A smart lock on a door that sticks will fail." },
+      { title: "Add the codes and fingerprints", body: "We set up the owner account, enroll fingerprints and create codes for your family. We explain which method each person should use." },
+      { title: "Connect it to the rest of the house", body: "We connect the lock to your hub so you can see its state, get alerts, and use it in routines. We leave you the mechanical backup key and show you where it goes." },
+    ],
+    automations: [
+      { title: "Welcome home", body: "When your code is used, the entry light comes on and the aircon starts in the living room." },
+      { title: "Auto lock", body: "The door locks itself a minute after it closes, so you never have to wonder if you locked it." },
+      { title: "Helper schedule", body: "A temporary code works Monday to Saturday from 8 to 5 and does nothing outside those hours." },
+    ],
+    goodToKnow: [
+      "Door type matters. We check it before we quote, so you do not buy a lock that does not fit.",
+      "Most keypad and fingerprint locks work without internet. Remote unlock and phone alerts need a connection through your hub.",
+      "Locks run on batteries. They warn you in advance and most have a backup key or a way to power them from outside if the batteries die.",
+    ],
+    faqs: [
+      { q: "What happens if the batteries run out?", a: "The lock warns you on your phone and on the lock itself well before that. Many models also let you power them with a 9V battery from outside, and have a backup key." },
+      { q: "Can someone hack it?", a: "Any connected device has some risk. We use locks from known brands, set strong codes, keep the lock on your own hub, and do not expose it to the open internet." },
+      { q: "Will it fit my door?", a: "Usually, but not always. Door thickness and the existing lock hardware decide it. We check your door before quoting." },
+      { q: "Can I give a visitor a temporary code?", a: "Yes. You can create a code for a day, a week or a set schedule, and delete it afterward." },
+    ],
+  },
+  {
+    slug: "cameras",
+    service: "security",
+    icon: "camera",
+    name: "Cameras",
+    cardBlurb: "Indoor and outdoor cameras with clips saved locally.",
+    metaTitle: "Home CCTV and Smart Cameras in Pampanga, Tarlac and Bulacan",
+    metaDescription:
+      "Indoor and outdoor smart cameras with phone alerts and local recording. Installed by Smart Home Philippines in Central Luzon.",
+    headline: "Cameras,",
+    headlineItalic: "that record what matters.",
+    intro: "Clear video at the gate, the garage and the doors, saved on your own storage where the camera supports it.",
+    why: [
+      "A camera answers questions after the fact: who rang the bell, what happened in the driveway, did the delivery arrive. A visible camera can also make someone think twice.",
+      "Placement matters more than the camera model. A well placed camera at the right height beats an expensive one pointing at a wall.",
+    ],
+    install: [
+      { title: "Plan the view", body: "We walk the property and mark the entry points, the gate, the garage and any blind spots. We check light at night, glare, and what the camera will see at different times." },
+      { title: "Choose power and storage", body: "Some cameras use a power cable, some use PoE and some use a battery. We choose the right one for each spot and decide where the video is saved, such as a memory card or a local recorder." },
+      { title: "Mount and aim", body: "We mount at a height that is out of easy reach, aim for faces and plates where possible, and weatherproof every outdoor connection. Rainy season is the test." },
+      { title: "Set the alerts", body: "We tune motion zones so cats and passing cars do not trigger alerts. You get notifications for people, and a clean list of clips to review." },
+    ],
+    automations: [
+      { title: "Person at the gate", body: "A person is detected at the gate at night and the porch light turns on." },
+      { title: "Away mode", body: "When everyone leaves, indoor cameras start recording and alerts turn on. When you come back, indoor cameras pause." },
+      { title: "Doorbell ring", body: "Someone presses the doorbell and a snapshot goes to your phone and the living room display." },
+    ],
+    goodToKnow: [
+      "Where video is stored depends on the camera. Local storage means no monthly fee, but you must protect the storage device.",
+      "Indoor cameras raise privacy questions in a household. We keep bedrooms and bathrooms out of the plan unless you ask.",
+      "Cameras depend on a stable network. We check Wi-Fi coverage at each spot, or run a cable when it is better.",
+    ],
+    faqs: [
+      { q: "Do I have to pay a monthly fee?", a: "Not for cameras that record to a memory card or local recorder. Cloud storage is optional on many models and usually costs a monthly fee." },
+      { q: "Can I watch from outside the house?", a: "Yes. You can view live and recorded video on your phone through the camera app or your own hub, as long as it has internet." },
+      { q: "Wired or wireless?", a: "Wired or PoE cameras are more reliable. Wireless is easier when running a cable is hard. We pick per location." },
+      { q: "Will it work during a power outage?", a: "Only if the camera, router and recorder have power. A small UPS on the router and recorder keeps them running for a while. We can add one." },
+    ],
+  },
+  {
+    slug: "motion-sensors",
+    service: "security",
+    icon: "motion",
+    name: "Motion sensors",
+    cardBlurb: "Hallway, garage and garden sensors for alerts and lights.",
+    metaTitle: "Smart Motion Sensors in Pampanga, Tarlac and Bulacan",
+    metaDescription:
+      "Motion sensors that trigger lights and alerts in halls, garages and gardens. Planned and installed in Central Luzon.",
+    headline: "Motion sensors,",
+    headlineItalic: "lights that know you are there.",
+    intro: "Detect movement in halls, garages and gardens. Use it for alerts, or just for lights that come on when you walk in.",
+    why: [
+      "Motion sensors are the everyday workhorse. The hallway light at 2 a.m. without a switch. The garage light that comes on as you get out of the car. An alert when something moves in a room that should be empty.",
+      "They also make security smarter. A door sensor tells you a door opened. A motion sensor tells you whether someone is actually inside.",
+    ],
+    install: [
+      { title: "Find the right spots", body: "We choose corners and heights that see the whole room without pointing at windows, vents or fans that can cause false triggers." },
+      { title: "Pick indoor or outdoor", body: "Indoor sensors are not weatherproof. For gardens and carports we use outdoor rated sensors or a camera with motion zones." },
+      { title: "Tune the sensitivity", body: "We adjust sensitivity and timeout so lights stay on long enough, and pets do not trigger an alert." },
+      { title: "Link them to lights and alerts", body: "We connect each sensor to the lights or alerts you want, and test them at night when the result matters most." },
+    ],
+    automations: [
+      { title: "Night path", body: "Motion in the hallway after 11 p.m. turns on a dim light, then turns it off after a minute." },
+      { title: "Garage arrival", body: "Motion in the carport turns on the garage light as you park." },
+      { title: "Empty room alert", body: "When the house is set to away and the living room sees motion, you get an alert." },
+    ],
+    goodToKnow: [
+      "Pets can trigger standard sensors. Pet friendly settings and placement help, but no sensor is perfect.",
+      "Sensors cannot tell whether someone is sleeping or sitting still. For lights in a room you sit in, a presence sensor is better.",
+      "Heat sources, sunlight and air vents can cause false triggers, so placement is part of the job.",
+    ],
+    faqs: [
+      { q: "Will my dog set it off?", a: "It can. We set sensitivity and mount height to reduce this, and for larger pets we can use a sensor that ignores low movement." },
+      { q: "Can I use them for lights only?", a: "Yes. Many people use motion sensors only for lights in halls, bathrooms and garages, with no security alerts at all." },
+      { q: "Do they need wiring?", a: "Most are battery powered. Some outdoor models can be wired in if you prefer." },
+      { q: "How long do the lights stay on?", a: "You choose. A hallway might stay on for one minute after the last motion, a garage for five." },
+    ],
+  },
+  {
+    slug: "leak-sensors",
+    service: "security",
+    icon: "leak",
+    name: "Leak sensors",
+    cardBlurb: "Catch leaks under sinks and near water heaters early.",
+    metaTitle: "Smart Water Leak Sensors in Pampanga, Tarlac and Bulacan",
+    metaDescription:
+      "Water leak sensors for kitchens, bathrooms, laundry and water heaters. Planned and installed by Smart Home Philippines.",
+    headline: "Leak sensors,",
+    headlineItalic: "before it is a bigger problem.",
+    intro: "A small puck on the floor tells your phone the moment water appears, in places you rarely look.",
+    why: [
+      "Slow leaks do the most damage because nobody sees them. Under the kitchen sink, behind the washing machine, around the water heater and near the toilet supply line. By the time you notice, the cabinet is swollen and the wall is damp.",
+      "A leak sensor costs very little next to the repair. It also helps when you are away for a long weekend and the house is empty.",
+    ],
+    install: [
+      { title: "Find the risky spots", body: "We list every place water meets your home: sinks, dishwasher, washing machine, water heater, toilets, aircon drain lines and water tanks." },
+      { title: "Place the sensors low and flat", body: "Sensors sit on the floor or the lowest point where water would collect, not on the wall. We position them so the probes touch the surface." },
+      { title: "Choose the alert style", body: "You can get phone alerts, a loud local siren, or both. For a home with kids or helpers, a siren in the kitchen catches attention faster." },
+      { title: "Test with water", body: "We wet each sensor to confirm it triggers and the alert reaches your phone before we finish." },
+    ],
+    automations: [
+      { title: "Leak alarm", body: "Water is detected under the sink and your phone gets an urgent alert. A siren sounds in the kitchen." },
+      { title: "Lights on", body: "A leak at night turns the lights on in that area so you can find it." },
+      { title: "Weekly check", body: "A monthly reminder tells you if any leak sensor has a low battery or stopped reporting." },
+    ],
+    goodToKnow: [
+      "A sensor tells you there is water. It does not stop the water. An automatic shut-off valve is a separate add-on we can quote.",
+      "Dust and drying can cause false alerts. We mount them where they can sit clean.",
+      "Replace batteries on schedule. A dead sensor protects nothing.",
+    ],
+    faqs: [
+      { q: "Where should I put leak sensors?", a: "Under the kitchen sink, beside the washing machine, next to the water heater, behind toilets, and near any aircon drain line." },
+      { q: "Can it shut off the water?", a: "On its own, no. A smart shut-off valve can be added on the main supply, and the sensor can trigger it." },
+      { q: "Do they work in the garden or near water tanks?", a: "There are outdoor rated options. We check what suits your property." },
+      { q: "How often do I change the battery?", a: "Usually once a year or less often, depending on the model. You get a low battery notice on your phone." },
+    ],
+  },
+]
