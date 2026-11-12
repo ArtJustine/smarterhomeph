@@ -9,6 +9,7 @@ import { JsonLd } from "@/components/json-ld"
 import { Button } from "@/components/ui/button"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { TopicIconMark } from "@/components/service-topics/topic-icon"
+import { TopicHome } from "@/components/service-topics/topic-home"
 import { pageMeta } from "@/lib/site"
 import { BUSINESS_ID, abs, breadcrumb, graph, webPage } from "@/lib/schema"
 import { getPlan } from "@/lib/service-plans"
@@ -32,6 +33,7 @@ export async function generateMetadata({
 }
 
 const sections = [
+  { id: "demo", label: "Try it" },
   { id: "why", label: "Why it matters" },
   { id: "install", label: "How we install it" },
   { id: "automations", label: "Automations" },
@@ -138,7 +140,22 @@ export default async function ServiceTopicPage({ params }: { params: Promise<{ s
           </ul>
         </nav>
 
-        <section id="why" className="container scroll-mt-20 py-20 lg:py-28">
+        <section id="demo" className="container scroll-mt-20 py-16 lg:py-24">
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="eyebrow mb-3">Try it</p>
+              <h2 className="text-balance text-4xl leading-tight sm:text-5xl">
+                Tap the house, <span className="italic text-primary-ink">see what it does.</span>
+              </h2>
+            </div>
+            <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
+              Tap a device, or run one of the automations below. It is a demo, nothing here is connected.
+            </p>
+          </div>
+          <TopicHome topic={t} />
+        </section>
+
+        <section id="why" className="container scroll-mt-20 border-t py-20 lg:py-28">
           <div className="grid gap-8 md:grid-cols-2">
             <div>
               <p className="eyebrow mb-4">Why it matters</p>

@@ -137,3 +137,22 @@
   55% { opacity: 0.25; }
   100% { opacity: 1; }
 }
+
+/* Interactive house on the service sub pages */
+.demo-hit {
+  fill: transparent;
+  stroke: transparent;
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+  cursor: pointer;
+  transition: stroke 0.2s;
+}
+.demo-hit:hover,
+.demo-hit[data-hint="true"] {
+  stroke: hsl(var(--primary));
+}
+@keyframes fan-spin {
+  0% { transform: scaleX(1); }
+  50% { transform: scaleX(0.3); }
+  100% { transform: scaleX(1); }
+}
