@@ -50,12 +50,24 @@ export default function AboutPage() {
                 the other way around.
               </p>
               <p className="text-lg leading-relaxed text-muted-foreground">
-                Our team of engineers, designers and home automation enthusiasts came together to build smart
-                home solutions that are both powerful and easy to use.
+                I&apos;m Art Gonzales, a father of four, a lifelong nerd and a smart home enthusiast. A house with
+                four kids never sits still. Lights get left on, doors get left open and somebody always wants the
+                aircon colder. I started automating my own home to take some of that off my plate, and I never
+                stopped.
               </p>
               <p className="text-lg leading-relaxed text-muted-foreground">
-                We favour setups where devices work together instead of isolated gadgets. They are flexible,
-                scalable and compatible with the leading platforms like Matter, HomeKit and Home Assistant.
+                Over the years I tested more gadgets than I can count, and I learned which ones are worth your
+                money and which ones end up in a drawer. Now I set up the good ones for other families across
+                Central Luzon, so you get a home that just works without spending your weekends on it.
+              </p>
+              <p className="text-lg leading-relaxed text-muted-foreground">
+                I favour setups where devices work together instead of isolated gadgets. They run on the platform
+                your family already uses, whether that is Alexa, Apple Home or Google Home, and they can grow with
+                you through Matter and Home Assistant when you are ready for more.
+              </p>
+              <p className="text-lg leading-relaxed text-muted-foreground">
+                A smart home should be simple enough for everyone in the house, from the kids to the grandparents.
+                If it takes a manual to turn on the lights, I did it wrong.
               </p>
             </div>
           </div>
