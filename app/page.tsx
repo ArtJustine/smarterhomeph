@@ -137,23 +137,29 @@ export default function Home() {
         </section>
 
         {/* How it works */}
-        <section className="container py-24 lg:py-32">
-          <div className="grid gap-12 lg:grid-cols-12">
-            <div className="lg:col-span-4">
-              <p className="eyebrow mb-4">How it works</p>
-              <h2 className="text-balance text-4xl leading-tight sm:text-5xl">How a smart home install works.</h2>
+        <section className="container py-12 lg:py-16">
+          <div
+            className="relative overflow-hidden rounded-3xl bg-cover bg-center"
+            style={{ backgroundImage: "url('/images/how-it-works-bg.jpg')" }}
+          >
+            <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
+            <div className="relative grid gap-12 px-6 py-16 text-white sm:px-10 lg:grid-cols-12 lg:px-16 lg:py-24">
+              <div className="lg:col-span-4">
+                <p className="eyebrow mb-4 !text-white/70">How it works</p>
+                <h2 className="text-balance text-4xl leading-tight text-white sm:text-5xl">How a smart home install works.</h2>
+              </div>
+              <ol className="lg:col-span-8">
+                {steps.map((s) => (
+                  <li key={s.n} className="grid gap-4 border-t border-white/20 py-8 first:border-t-0 first:pt-0 sm:grid-cols-[5rem_1fr] sm:gap-8">
+                    <span className="font-mono text-sm text-white/70">{s.n}</span>
+                    <div>
+                      <h3 className="text-3xl leading-tight text-white">{s.title}</h3>
+                      <p className="mt-3 max-w-xl leading-relaxed text-white/80">{s.body}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
             </div>
-            <ol className="lg:col-span-8">
-              {steps.map((s) => (
-                <li key={s.n} className="grid gap-4 border-t py-8 first:border-t-0 first:pt-0 sm:grid-cols-[5rem_1fr] sm:gap-8">
-                  <span className="font-mono text-sm text-primary-ink">{s.n}</span>
-                  <div>
-                    <h3 className="text-3xl leading-tight">{s.title}</h3>
-                    <p className="mt-3 max-w-xl leading-relaxed text-muted-foreground">{s.body}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
           </div>
         </section>
 
