@@ -5,13 +5,13 @@ import { BUSINESS_ID, abs, breadcrumb, graph, webPage } from "@/lib/schema"
 
 const posts: Record<string, { title: string; description: string; published: string }> = {
   "1": {
-    title: "10 Smart Home Devices Worth Installing",
-    description: "Discover smart home devices that make a house more comfortable, efficient and secure, from automation hubs to lighting and climate control.",
+    title: "10 Smart Home Devices Worth Buying in the Philippines",
+    description: "Ten smart home devices in the order to buy them, with rough peso prices and the voltage, 2.4GHz wifi and brownout checks for Philippine homes.",
     published: "2025-03-20",
   },
   "2": {
-    title: "Smart Home Security on a Budget",
-    description: "How to build an effective smart home security system with affordable cameras, locks and sensors, without overspending.",
+    title: "Smart Home Security on a Budget in the Philippines",
+    description: "What to buy first for home security, what it costs in pesos, local vs cloud storage, brownout backup and privacy tips, with no monthly fees.",
     published: "2025-03-15",
   },
   "3": {

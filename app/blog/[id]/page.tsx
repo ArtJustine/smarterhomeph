@@ -22,66 +22,196 @@ const BLOG_POSTS_DETAIL: Record<number, {
   content: React.ReactNode
 }> = {
   1: {
-    title: "10 Smart Home Devices That Will Transform Your Living Space",
-    subtitle: "Discover the latest smart home innovations that can make your home more comfortable, efficient, and secure.",
+    title: "10 Smart Home Devices Worth Buying in the Philippines (and the Order to Buy Them)",
+    subtitle: "Ten devices that make a daily difference, what each one does, and the Philippine checks to make before you order.",
     date: "March 20, 2025",
     author: "Art Gonzales",
     authorRole: "Smarter Home PH",
     authorAvatar: "",
     readTime: "6 min read",
-    category: "Vision",
+    category: "Devices",
     image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1200&auto=format&fit=crop",
     content: (
       <>
         <p className="text-xl leading-relaxed text-foreground">
-          The concept of a "smart home" has evolved rapidly over the last decade. What once seemed like science fiction—controlling your lights with your voice, checking cameras from across the world, or having your thermostat learn your schedule—is now a routine part of modern home design.
+          You don't need a full smart home to feel the difference. These ten devices are the ones that change your day, listed in the order most homes should buy them.
         </p>
-        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">1. The Brain: Next-Gen Automation Hubs</h2>
         <p className="leading-relaxed text-muted-foreground">
-          A truly smart home starts with a centralized ecosystem. Hubs that support modern local protocols like Matter and Thread ensure that your devices communicate locally without requiring a round-trip to the cloud. This means near-zero latency, robust offline operation, and bulletproof security.
+          Every device here works over normal home wifi. Prices below come from local listings and a recent TP-Link Philippines guide, so treat them as rough numbers.
         </p>
-        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">2. Smart Lighting That Flows with the Day</h2>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">The ten, in buying order</h2>
+        <ol className="list-decimal space-y-4 pl-5 leading-relaxed text-muted-foreground">
+          <li>
+            <strong className="text-foreground">Smart plug.</strong> Schedule a fan, lamp or charger, or switch it off from your phone. Listings run from a few hundred pesos. Check the wattage rating first and skip it for aircon.
+          </li>
+          <li>
+            <strong className="text-foreground">Smart bulb.</strong> Set a schedule, dim it, or change the colour. Basic wifi bulbs can be found for under ₱700. Check for 220 to 240V and your base type, usually E27.
+          </li>
+          <li>
+            <strong className="text-foreground">Indoor wifi camera.</strong> Look in on a pet, a helper or a sleeping child. A good budget camera is about ₱1,500 to ₱3,000, and models with microSD recording save you monthly fees.
+          </li>
+          <li>
+            <strong className="text-foreground">Video doorbell.</strong> See and talk to whoever is at the gate without leaving the sofa. Good for deliveries and for anyone who can't get to the door quickly.
+          </li>
+          <li>
+            <strong className="text-foreground">Smart lock.</strong> Open with a PIN or fingerprint and stop worrying about lost keys. Always keep a physical key as a backup.
+          </li>
+          <li>
+            <strong className="text-foreground">Door and motion sensors.</strong> Small and cheap, and they trigger other devices. A door opens at night and a light comes on, for example.
+          </li>
+          <li>
+            <strong className="text-foreground">Aircon controller.</strong> Turn on your split-type aircon 20 minutes before you get home instead of leaving it running all day. Works with most remote-controlled units.
+          </li>
+          <li>
+            <strong className="text-foreground">Smart speaker.</strong> Voice control for everything above. "Turn off the lights" beats finding your phone. Pick the platform you'll stick with: <Link href="/alexa" className="underline underline-offset-4">Alexa</Link>, <Link href="/google-home" className="underline underline-offset-4">Google Home</Link> or <Link href="/apple-home" className="underline underline-offset-4">Apple Home</Link>.
+          </li>
+          <li>
+            <strong className="text-foreground">Robot vacuum.</strong> Set it to run while you're out. Works best in a mostly open floor plan with few cables on the floor.
+          </li>
+          <li>
+            <strong className="text-foreground">Curtain motor.</strong> Opens with the morning light and closes at night. Nice to have, not a first purchase.
+          </li>
+        </ol>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Check before you pay</h2>
+        <ul className="list-disc space-y-2 pl-5 leading-relaxed text-muted-foreground">
+          <li><strong className="text-foreground">Voltage.</strong> Some listings are made for 100 to 125V. Look for 220 to 240V.</li>
+          <li><strong className="text-foreground">2.4GHz wifi.</strong> Many cheap devices only connect to 2.4GHz.</li>
+          <li><strong className="text-foreground">Platform support.</strong> Make sure the box says it works with Alexa, Google Home or Apple Home. Matter devices work with all three.</li>
+          <li><strong className="text-foreground">Return policy.</strong> Buy from a seller you can return to if it doesn't fit your door, bulb base or aircon.</li>
+        </ul>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Which ones need an installer</h2>
         <p className="leading-relaxed text-muted-foreground">
-          Lighting does more than help us see; it influences our mood, sleep cycles, and productivity. Circadian lighting systems automatically adjust their color temperature and brightness throughout the day—shifting from energizing cool white in the morning to a warm, cozy amber in the evening.
+          You can do plugs, bulbs, speakers, sensors and indoor cameras yourself. Call someone for the smart lock, the video doorbell, the aircon controller and the curtain motor. Getting them wrong costs more than the install.
         </p>
-        <blockquote className="my-10 border-l-2 border-primary pl-6 font-display text-2xl italic leading-snug sm:text-3xl">
-          "The best smart home devices are the ones you forget exist because they adapt to your life automatically."
-        </blockquote>
-        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">3. Seamless Climate Intelligence</h2>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Don't forget brownouts</h2>
         <p className="leading-relaxed text-muted-foreground">
-          Intelligent thermostats like the Ecobee Smart Thermostat Pro analyze indoor air quality, humidity, and room occupancy to deliver balanced comfort. Rather than running continuously, they adjust dynamically to optimize energy usage, saving homeowners up to 23% in annual heating and cooling costs.
+          No power means no router, and no router means most of these devices go offline.
+        </p>
+        <p className="leading-relaxed text-muted-foreground">
+          A small UPS for your modem and router fixes most of it. Units under ₱1,000 can keep a router running for roughly 1 to 2 hours, depending on the model.
+        </p>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">What to skip at first</h2>
+        <ul className="list-disc space-y-2 pl-5 leading-relaxed text-muted-foreground">
+          <li>Buying the whole list at once.</li>
+          <li>Mixing five brands with five apps.</li>
+          <li>Anything that needs its own hub when you only have two or three devices.</li>
+        </ul>
+
+        <p className="leading-relaxed text-muted-foreground">
+          New to all this? Start with our <Link href="/blog/7" className="underline underline-offset-4">beginner guide</Link>. If you're in Pampanga, Tarlac or Bulacan and want help picking and installing, use our <Link href="/services" className="underline underline-offset-4">services page</Link> to send us a room by room list for a quote.
         </p>
       </>
     )
   },
   2: {
-    title: "How to Set Up a Smart Home Security System on a Budget",
-    subtitle: "Learn how to create an effective home security system without breaking the bank using affordable smart devices.",
+    title: "How to Set Up Smart Home Security on a Budget in the Philippines",
+    subtitle: "What to buy first, what it costs, and how to avoid monthly fees, with the brownout and privacy details most guides skip.",
     date: "March 15, 2025",
     author: "Art Gonzales",
     authorRole: "Smarter Home PH",
     authorAvatar: "",
-    readTime: "8 min read",
+    readTime: "6 min read",
     category: "Security",
     image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1200&auto=format&fit=crop",
     content: (
       <>
         <p className="text-xl leading-relaxed text-foreground">
-          Keeping your home secure is a top priority, but traditional professional security systems can cost thousands of dollars upfront, plus heavy recurring monthly contracts. Fortunately, the rise of modular smart security devices has made it possible to build a premium, self-monitored system on a highly accessible budget.
+          You can cover the main weak points of a home for a few thousand pesos. You don't need a monthly plan, and you don't need to wire anything.
         </p>
-        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Start with Key Entryways: Smart Locks</h2>
         <p className="leading-relaxed text-muted-foreground">
-          A smart lock is the first line of defense. By installing a retrofit smart lock on your existing deadbolt, you can manage access codes, monitor logs, and grant remote entry to guests. Brand names like August or Aqara offer high-end security standards like bank-level encryption.
+          The trick is buying in the right order and picking devices that store footage on your own card.
         </p>
-        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Add Targeted Surveillance</h2>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Start with how someone gets in</h2>
         <p className="leading-relaxed text-muted-foreground">
-          Instead of wiring cameras everywhere, focus on key choke points: the front porch, the backyard entrance, and main interior hallways. Smart cameras from Reolink offer 2K clarity and local storage (on SD cards or local hard drives) so you can avoid monthly cloud storage fees.
+          Walk around your home and list the entry points. For most houses it's:
         </p>
-        <blockquote className="my-10 border-l-2 border-primary pl-6 font-display text-2xl italic leading-snug sm:text-3xl">
-          "Security isn't about how much you spend; it's about eliminating blind spots and securing entryways locally."
-        </blockquote>
+        <ul className="list-disc space-y-2 pl-5 leading-relaxed text-muted-foreground">
+          <li>The front door.</li>
+          <li>The gate or carport.</li>
+          <li>The back door or kitchen door.</li>
+          <li>Ground floor windows.</li>
+        </ul>
         <p className="leading-relaxed text-muted-foreground">
-          By combining these devices with inexpensive contact sensors on your windows, you can configure automations that sound an alarm or flash your smart light bulbs red if a door is opened unexpectedly, creating a cohesive, budget-friendly defense network.
+          Cover these first. Skip anything that doesn't point at one of them.
+        </p>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">What to buy, in order</h2>
+        <ol className="list-decimal space-y-4 pl-5 leading-relaxed text-muted-foreground">
+          <li>
+            <strong className="text-foreground">One camera with a microSD slot.</strong> Budget indoor cameras run about ₱1,500 to ₱3,000. Point it at the main entrance from inside. Add a microSD card so recordings stay with you and there's no monthly fee.
+          </li>
+          <li>
+            <strong className="text-foreground">Door and window sensors.</strong> They're small, cheap and tell you the moment something opens. Put them on the front door, back door and one or two ground floor windows.
+          </li>
+          <li>
+            <strong className="text-foreground">An outdoor camera for the gate or carport.</strong> Look for an outdoor rating (IP65) and person detection, so you're not alerted for every cat.
+          </li>
+          <li>
+            <strong className="text-foreground">A smart lock.</strong> Use PIN codes, not keys, and remove a code when a helper leaves. Keep a physical key as a backup.
+          </li>
+          <li>
+            <strong className="text-foreground">Smart bulbs or plugs for lights.</strong> Lights that turn on when something opens do more to scare someone off than a camera does.
+          </li>
+        </ol>
+        <p className="leading-relaxed text-muted-foreground">
+          Starter kits can save time. When it launched, a Cherry Mobile kit with a camera, door sensors and a smart bulb started at around ₱2,300. Check what's in the box and that the app is still supported.
+        </p>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Local storage or cloud?</h2>
+        <ul className="list-disc space-y-2 pl-5 leading-relaxed text-muted-foreground">
+          <li><strong className="text-foreground">Local (microSD).</strong> No monthly fee. Footage stays on the card. If someone takes the camera, they take the footage too.</li>
+          <li><strong className="text-foreground">Cloud.</strong> Footage is safe off-site, but expect a recurring cost.</li>
+        </ul>
+        <p className="leading-relaxed text-muted-foreground">
+          On a budget, start local. Add cloud later only for the one camera that matters most.
+        </p>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Set up three alerts that matter</h2>
+        <p className="leading-relaxed text-muted-foreground">
+          More alerts means you'll start ignoring all of them. Start with these:
+        </p>
+        <ol className="list-decimal space-y-2 pl-5 leading-relaxed text-muted-foreground">
+          <li>Front door opens after you've gone to bed: send a phone alert and turn on the lights.</li>
+          <li>Person detected at the gate while you're away: send a phone alert with a clip.</li>
+          <li>Back door opens when no one's home: send a phone alert.</li>
+        </ol>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Plan for brownouts</h2>
+        <p className="leading-relaxed text-muted-foreground">
+          If the power goes out, the router goes out, and your phone alerts stop.
+        </p>
+        <p className="leading-relaxed text-muted-foreground">
+          A mini UPS for the modem and router costs under ₱1,000 and can keep a router on for roughly 1 to 2 hours, depending on the model. Cameras that record to a card keep their footage, but they stop recording when their own power is cut.
+        </p>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Lock down the devices themselves</h2>
+        <p className="leading-relaxed text-muted-foreground">
+          A camera is only secure if its account is.
+        </p>
+        <ul className="list-disc space-y-2 pl-5 leading-relaxed text-muted-foreground">
+          <li>Use a unique password and turn on two-step login.</li>
+          <li>Change the default wifi password on your router.</li>
+          <li>Install firmware updates when the app asks.</li>
+          <li>Never put cameras in bedrooms or bathrooms.</li>
+          <li>Remove access for anyone who no longer needs it.</li>
+        </ul>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Mistakes that waste money</h2>
+        <ul className="list-disc space-y-2 pl-5 leading-relaxed text-muted-foreground">
+          <li>Buying four cameras and no door sensors.</li>
+          <li>Pointing a camera at a window with strong sunlight.</li>
+          <li>Skipping the microSD card.</li>
+          <li>Leaving the camera in a spot your wifi barely reaches.</li>
+        </ul>
+
+        <p className="leading-relaxed text-muted-foreground">
+          Not sure where to start? See our <Link href="/services/security" className="underline underline-offset-4">security services</Link>. In Pampanga, Tarlac or Bulacan, you can send us a list of your entry points on the <Link href="/services" className="underline underline-offset-4">services page</Link> and get a quote.
         </p>
       </>
     )
