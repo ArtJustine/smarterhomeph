@@ -11,6 +11,7 @@ import { BUSINESS_ID, abs, breadcrumb, graph, webPage } from "@/lib/schema"
 import { getPlan, servicePlans } from "@/lib/service-plans"
 import { getTopicsForService } from "@/lib/service-topics"
 import { TopicCards } from "@/components/service-topics/topic-cards"
+import { ExplainerVideo } from "@/components/explainer-video"
 
 export const dynamicParams = false
 
@@ -64,6 +65,18 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       />
       <main className="flex-1">
         <PageHeader eyebrow="Services" title={<>{plan.title}, <span className="italic text-primary-ink">room by room.</span></>} intro={plan.intro} />
+
+        <section className="container pt-4 pb-16 lg:pb-20">
+          <div className="mx-auto max-w-3xl">
+            <p className="eyebrow mb-4">In action</p>
+            <h2 className="mb-6 text-balance text-3xl leading-tight sm:text-4xl">See {plan.title.toLowerCase()} at work.</h2>
+            <ExplainerVideo
+              src={`/videos/services/${plan.slug}.mp4`}
+              poster={`/videos/services/${plan.slug}-poster.webp`}
+              title={`${plan.title} in action`}
+            />
+          </div>
+        </section>
 
         <TopicCards serviceTitle={plan.title} topics={topics} />
 

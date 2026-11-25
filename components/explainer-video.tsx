@@ -11,7 +11,17 @@ import { Play } from "lucide-react"
  * - The 775 KB mp4 is not requested until the visitor presses play.
  * - The box has a fixed 16:9 ratio, so nothing jumps when the video swaps in.
  */
-export function ExplainerVideo() {
+interface ExplainerVideoProps {
+  src?: string
+  poster?: string
+  title?: string
+}
+
+export function ExplainerVideo({
+  src = "/smarter-home-explainer.mp4",
+  poster = "/smarter-home-explainer-poster.webp",
+  title = "Smarter Home PH: your home, but smarter",
+}: ExplainerVideoProps) {
   const [playing, setPlaying] = useState(false)
 
   return (
@@ -19,25 +29,25 @@ export function ExplainerVideo() {
       {playing ? (
         <video
           className="h-full w-full"
-          src="/smarter-home-explainer.mp4"
-          poster="/smarter-home-explainer-poster.webp"
+          src={src}
+          poster={poster}
           controls
           autoPlay
           playsInline
           preload="auto"
-          aria-label="Smarter Home PH explainer video"
+          aria-label={title}
         />
       ) : (
         <button
           type="button"
           onClick={() => setPlaying(true)}
           className="group absolute inset-0 h-full w-full"
-          aria-label="Play the Smarter Home PH explainer video"
+          aria-label={`Play video: ${title}`}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/smarter-home-explainer-poster.webp"
-            alt="Smarter Home PH: your home, but smarter"
+            src={poster}
+            alt={title}
             width={1280}
             height={720}
             loading="lazy"
