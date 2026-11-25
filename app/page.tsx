@@ -7,7 +7,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
-import { InteractiveHome } from "@/components/interactive-home"
+import { SmartHome3D } from "@/components/home-3d/smart-home-3d"
 import { ExplainerVideo } from "@/components/explainer-video"
 import { platformList } from "@/lib/platforms"
 
@@ -113,7 +113,7 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.15 }}
             className="min-w-0 lg:col-span-7"
           >
-            <InteractiveHome />
+            <SmartHome3D />
           </motion.div>
         </section>
 
