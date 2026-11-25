@@ -174,7 +174,7 @@ export function PlatformCta({ platform }: { platform: Platform }) {
 
 export function LocalAreas({ platform }: { platform: Platform }) {
   return (
-    <section className="container pb-20 lg:pb-28">
+    <section className="container py-20 lg:py-28">
       <p className="eyebrow mb-4">Where we work</p>
       <h2 className="max-w-3xl text-balance text-4xl leading-tight sm:text-5xl">
         {platform.name} setup in Pampanga, Tarlac and Bulacan.
@@ -276,7 +276,7 @@ export function PlatformDevices({ platform, plain = false }: { platform: Platfor
   const maker = devices[0].maker
   return (
     <section className={plain ? "" : "border-y bg-secondary/60"}>
-      <div className="container py-20 lg:py-28">
+      <div className={plain ? "container pt-20 lg:pt-28" : "container py-20 lg:py-28"}>
         <div className="mb-12 grid gap-6 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <p className="eyebrow mb-4">Made by {maker}</p>

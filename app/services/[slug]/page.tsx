@@ -66,7 +66,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       <main className="flex-1">
         <PageHeader eyebrow="Services" title={<>{plan.title}, <span className="italic text-primary-ink">room by room.</span></>} intro={plan.intro} />
 
-        <section className="container pt-4 pb-16 lg:pb-20">
+        <section className="container pt-12 pb-16 lg:pt-16 lg:pb-20">
           <div className="mx-auto max-w-3xl">
             <p className="eyebrow mb-4">In action</p>
             <h2 className="mb-6 text-balance text-3xl leading-tight sm:text-4xl">See {plan.title.toLowerCase()} at work.</h2>

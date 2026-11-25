@@ -128,7 +128,7 @@ export default function Home() {
         </section>
 
         {/* Platforms */}
-        <section className="container py-24 lg:py-32">
+        <section className="container pb-24 lg:pb-32">
           <div className="mb-14 max-w-2xl">
             <p className="eyebrow mb-4">Pick your platform</p>
             <h2 className="text-balance text-4xl leading-tight sm:text-5xl">
