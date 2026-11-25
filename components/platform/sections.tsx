@@ -5,6 +5,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { platformList, type Platform } from "@/lib/platforms"
 import { platformDevices, type HubDevice } from "@/lib/platform-devices"
 import { SERVICE_CITIES, SITE_URL } from "@/lib/site"
+import { cityPages } from "@/lib/cities"
 import { BUSINESS_ID } from "@/lib/schema"
 
 export function SetupList({ platform, heading }: { platform: Platform; heading: string }) {
@@ -192,7 +193,14 @@ export function LocalAreas({ platform }: { platform: Platform }) {
       </div>
       <p className="mt-6 text-sm text-muted-foreground">
         Somewhere else in Luzon? <Link href="/contact" className="text-foreground underline underline-offset-4">Message us first</Link> and
-        we will tell you honestly if we can help. You can also see our other{" "}
+        we will tell you honestly if we can help. See our city pages for{" "}
+        {cityPages.map((c, i) => (
+          <span key={c.slug}>
+            {i > 0 && (i === cityPages.length - 1 ? " and " : ", ")}
+            <Link href={`/smart-home-installation/${c.slug}`} className="text-foreground underline underline-offset-4">{c.name}</Link>
+          </span>
+        ))}
+        . You can also see our other{" "}
         <Link href="/services" className="text-foreground underline underline-offset-4">smart home services</Link>.
       </p>
     </section>

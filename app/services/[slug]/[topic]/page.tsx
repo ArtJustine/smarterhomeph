@@ -14,6 +14,7 @@ import { pageMeta } from "@/lib/site"
 import { BUSINESS_ID, abs, breadcrumb, graph, webPage } from "@/lib/schema"
 import { getPlan } from "@/lib/service-plans"
 import { getTopic, getTopicsForService, serviceTopics } from "@/lib/service-topics"
+import { homeDemos } from "@/lib/service-topics/home-demos"
 
 export const dynamicParams = false
 
@@ -57,6 +58,8 @@ export default async function ServiceTopicPage({ params }: { params: Promise<{ s
   const servicePath = `/services/${plan.slug}`
   const path = `${servicePath}/${t.slug}`
   const siblings = getTopicsForService(plan.slug).filter((s) => s.slug !== t.slug)
+  const hasDemo = Boolean(homeDemos[t.slug])
+  const pageSections = hasDemo ? sections : sections.filter((s) => s.id !== "demo")
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -127,7 +130,7 @@ export default async function ServiceTopicPage({ params }: { params: Promise<{ s
 
         <nav aria-label="On this page" className="border-b">
           <ul className="container flex gap-2 overflow-x-auto py-4">
-            {sections.map((s) => (
+            {pageSections.map((s) => (
               <li key={s.id} className="shrink-0">
                 <a
                   href={`#${s.id}`}
@@ -140,6 +143,7 @@ export default async function ServiceTopicPage({ params }: { params: Promise<{ s
           </ul>
         </nav>
 
+        {hasDemo && (
         <section id="demo" className="container scroll-mt-20 py-16 lg:py-24">
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
             <div>
@@ -154,8 +158,9 @@ export default async function ServiceTopicPage({ params }: { params: Promise<{ s
           </div>
           <TopicHome topic={t} />
         </section>
+        )}
 
-        <section id="why" className="container scroll-mt-20 border-t py-20 lg:py-28">
+        <section id="why" className={`container scroll-mt-20 py-20 lg:py-28${hasDemo ? " border-t" : ""}`}>
           <div className="grid gap-8 md:grid-cols-2">
             <div>
               <p className="eyebrow mb-4">Why it matters</p>

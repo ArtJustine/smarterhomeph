@@ -1,12 +1,15 @@
 import type { MetadataRoute } from "next"
 import { SITE_URL } from "@/lib/site"
 import { serviceTopics } from "@/lib/service-topics"
+import { cityPages } from "@/lib/cities"
 
 const routes: { path: string; priority: number }[] = [
   { path: "", priority: 1 },
   { path: "/services", priority: 0.9 },
   ...["lighting", "security", "climate", "automation", "media-control", "appliances"].map((s) => ({ path: `/services/${s}`, priority: 0.8 })),
   ...serviceTopics.map((t) => ({ path: `/services/${t.service}/${t.slug}`, priority: 0.6 })),
+  ...cityPages.map((c) => ({ path: `/smart-home-installation/${c.slug}`, priority: 0.8 })),
+  { path: "/for-builders", priority: 0.7 },
   { path: "/alexa", priority: 0.9 },
   { path: "/apple-home", priority: 0.9 },
   { path: "/google-home", priority: 0.9 },

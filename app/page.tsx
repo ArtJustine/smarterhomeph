@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { cityPages } from "@/lib/cities"
 import { motion } from "framer-motion"
 import { ArrowRight, ArrowUpRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -224,7 +225,15 @@ export default function Home() {
             ))}
           </div>
           <p className="mt-6 text-sm text-muted-foreground">
-            Somewhere else in Luzon? Message us first and we will tell you honestly if we can help.
+            Somewhere else in Luzon? Message us first and we will tell you honestly if we can help. City pages:{" "}
+            {cityPages.map((c, i) => (
+              <span key={c.slug}>
+                {i > 0 && ", "}
+                <Link href={`/smart-home-installation/${c.slug}`} className="text-foreground underline underline-offset-4">{c.name}</Link>
+              </span>
+            ))}
+            . Building a home?{" "}
+            <Link href="/for-builders" className="text-foreground underline underline-offset-4">Talk to us before the walls close</Link>.
           </p>
         </section>
 

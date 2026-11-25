@@ -1138,4 +1138,133 @@ export const homeDemos: Record<string, HomeDemo> = {
       },
     ],
   },
+  // ---------------------------------------------------------------- Added topics
+  "video-doorbells": {
+    rules: [
+      {
+        devices: ["visitor", "night", "porch"],
+        start: { visitor: false, night: true, porch: false, camera: true, living: false },
+        trigger: { label: "Someone rings the doorbell", icon: "visitor", when: { visitor: true } },
+        ifs: [NIGHT],
+        then: [
+          { label: "Turn on the porch light", icon: "porch", set: { porch: true } },
+          notify("Visitor at the door"),
+        ],
+        hint: "Send a visitor to the gate at night. The porch light comes on and your phone gets the alert. In daytime there is no need for the light.",
+      },
+      {
+        devices: ["visitor", "away"],
+        start: { visitor: false, away: true, camera: true, living: false },
+        trigger: { label: "Someone rings the doorbell", icon: "visitor", when: { visitor: true } },
+        ifs: [OUT],
+        then: [notify("Visitor at the door, tap to talk", "Send an alert with two-way talk")],
+        hint: "The house is set to Away. Ring the bell and the alert reaches you wherever you are.",
+      },
+      {
+        devices: ["visitor", "away", "speakers"],
+        start: { visitor: false, away: false, speakers: false, camera: true, living: false },
+        trigger: { label: "Someone rings the doorbell", icon: "visitor", when: { visitor: true } },
+        ifs: [HOME],
+        then: [{ label: "Chime on the living room speaker", icon: "speakers", set: { speakers: true } }],
+        hint: "Ring the bell with someone home and the speaker chimes. Set Away and the chime stays quiet, your phone gets it instead.",
+      },
+    ],
+  },
+  "smoke-gas-detectors": {
+    rules: [
+      {
+        devices: ["air", "living"],
+        start: { dusty: false, living: false, night: false },
+        trigger: { label: "Smoke in the kitchen", icon: "air", when: { dusty: true } },
+        ifs: [],
+        then: [
+          { label: "Turn on the lights", icon: "living", set: { living: true } },
+          notify("Smoke detected in the kitchen", "Send an urgent alert"),
+        ],
+        hint: "Tap Air quality to simulate smoke. There are no conditions. Smoke always matters.",
+      },
+      {
+        devices: ["air", "night", "living"],
+        start: { dusty: false, night: true, living: false },
+        trigger: { label: "Smoke in the hallway", icon: "air", when: { dusty: true } },
+        ifs: [NIGHT],
+        then: [
+          { label: "Light the way out", icon: "living", set: { living: true } },
+          notify("Smoke detected, lights on for the way out", "Send an urgent alert"),
+        ],
+        hint: "Make it smoky at night and the lights come on so everyone can see the way out. In daytime the alarm still sounds, you just do not need the lights.",
+      },
+      {
+        devices: ["air", "away"],
+        start: { dusty: false, away: true, living: false },
+        trigger: { label: "Smoke while nobody is home", icon: "air", when: { dusty: true } },
+        ifs: [OUT],
+        then: [notify("Smoke detected while nobody is home", "Send an urgent alert")],
+        hint: "The house is set to Away. Make it smoky and you get the alert right away, so you can call a neighbour.",
+      },
+    ],
+  },
+  "mesh-wifi": {
+    rules: [
+      {
+        devices: ["hub", "clock", "living"],
+        start: { living: false, away: false, internet: true },
+        trigger: { label: "Six thirty in the evening", icon: "clock", event: "clock", time: "6:30 pm" },
+        ifs: [HOME],
+        then: [{ label: "Turn on the living light", icon: "living", set: { living: true } }],
+        hint: "Take the internet offline first, then tap the clock. The routine still runs, because the hub handles it inside the house.",
+      },
+      {
+        devices: ["voice", "night", "living", "lock"],
+        start: { night: true, living: true, locked: false, voice: false, internet: true },
+        trigger: { label: "You say goodnight", icon: "voice", event: "voice", say: "Alexa, goodnight" },
+        ifs: [NIGHT],
+        then: [
+          { label: "Turn the lights off", icon: "living", set: { living: false } },
+          { label: "Lock the front door", icon: "lock", set: { locked: true } },
+        ],
+        hint: "Tap the speaker to talk to it. A steady signal in every room means it answers the first time.",
+      },
+      {
+        devices: ["away", "living", "lock", "hub"],
+        start: { away: false, living: true, locked: false, internet: true },
+        trigger: { label: "Everyone leaves", icon: "away", when: { away: true } },
+        ifs: [],
+        then: [
+          { label: "Turn the lights off", icon: "living", set: { living: false } },
+          { label: "Lock the front door", icon: "lock", set: { locked: true } },
+        ],
+        hint: "Set the house to Away. It works with the internet up or down.",
+      },
+    ],
+  },
+  "energy-plugs": {
+    rules: [
+      {
+        devices: ["clock", "plug"],
+        start: { plug: true, living: false },
+        trigger: { label: "Eleven at night", icon: "clock", event: "clock", time: "11:00 pm" },
+        ifs: [{ label: "The plug is on", icon: "plug", test: { plug: true } }],
+        then: [{ label: "Switch the appliance off", icon: "plug", set: { plug: false } }],
+        hint: "Tap the clock. The appliance on the plug switches off for the night, so no standby waste.",
+      },
+      {
+        devices: ["away", "plug"],
+        start: { plug: true, away: false, living: false },
+        trigger: { label: "Everyone leaves", icon: "away", when: { away: true } },
+        ifs: [{ label: "The plug is on", icon: "plug", test: { plug: true } }],
+        then: [{ label: "Switch the appliance off", icon: "plug", set: { plug: false } }],
+        hint: "Set the house to Away. Nothing stays on in an empty house.",
+      },
+      {
+        devices: ["clock", "plug"],
+        start: { plug: true, living: false },
+        trigger: { label: "Sunday evening", icon: "clock", event: "clock", time: "Sun 8:00 pm" },
+        ifs: [],
+        then: [notify("Your weekly usage report is ready", "Send the weekly usage report")],
+        hint: "Tap the clock. You get the week's numbers for each plug without opening the app.",
+      },
+    ],
+  },
+
 }

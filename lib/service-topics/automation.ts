@@ -196,4 +196,43 @@ export const automationTopics: ServiceTopic[] = [
       { q: "What if the screen breaks?", a: "Panels are replaceable. The dashboard lives on your hub, so a new panel loads the same layout." },
     ],
   },
+  {
+    slug: "mesh-wifi",
+    service: "automation",
+    icon: "wifi",
+    name: "Mesh WiFi setup",
+    cardBlurb: "WiFi that reaches every room, the gate and the garden, so devices stop dropping.",
+    metaTitle: "Mesh WiFi Setup for Smart Homes in Pampanga, Tarlac and Bulacan",
+    metaDescription:
+      "Mesh WiFi planned and installed so cameras, doorbells and smart devices stay connected in every room. Smarter Home PH, Central Luzon.",
+    headline: "Mesh WiFi,",
+    headlineItalic: "so every device stays online.",
+    intro: "One strong network across the house, the gate and the garden, set up so smart devices stop dropping.",
+    why: [
+      "Most smart home trouble is not the device, it is the WiFi. Concrete walls, two floors and a gate far from the router leave dead spots where a camera or doorbell keeps going offline.",
+      "A good mesh network fixes that at the source. Every room gets one network name and a steady signal, and your devices stay connected as you move around the house.",
+    ],
+    install: [
+      { title: "Test your signal first", body: "We walk the house and the gate with a signal test and look at where your provider's router sits. We mark dead spots, thick walls and where the cameras and doorbell will go." },
+      { title: "Plan the node positions", body: "Nodes go where they can still see the router and cover the weak spot, not inside the weak spot. Where we can, we link nodes with a LAN cable, which is faster and steadier than a wireless link." },
+      { title: "Set up the network", body: "We connect the mesh to your fiber router, set one clear network name, and keep the 2.4 GHz band that most smart devices need. We update the firmware and set a strong password that you keep." },
+      { title: "Walk through and test", body: "We test every room, the gate and the garden, then check each smart device is connected. You get a simple note with the network name, the password and where each node sits." },
+    ],
+    automations: [
+      { title: "Evening lights, even offline", body: "At 6:30 pm the living light turns on. It still runs if the internet is down, because the hub handles it inside the house." },
+      { title: "Goodnight by voice", body: "You say goodnight and the lights go off and the door locks, with no signal dropouts in the way." },
+      { title: "Leaving the house", body: "Everyone leaves. The lights go off and the front door locks, with or without the internet." },
+    ],
+    goodToKnow: [
+      "Mesh cannot fix a weak line from your internet provider. If the connection itself is slow or drops, talk to them. We help you work out which side the problem is on.",
+      "Wireless links between nodes lose speed. LAN cable between nodes is best, and in a finished house we plan the cable route with you or choose the next best option.",
+      "Many smart devices only use the 2.4 GHz band. We keep it on and clearly named so devices pair without trouble.",
+    ],
+    faqs: [
+      { q: "How many mesh nodes do I need?", a: "It depends on size, floors and wall thickness. A two-storey home often needs two or three. We test the signal before we decide." },
+      { q: "Will it work with my PLDT, Converge or Globe router?", a: "Yes. The mesh connects to the router your provider gave you. In some cases we set the provider router to bridge or access point mode, and we check that with your plan first." },
+      { q: "Can the WiFi stay up during a brownout?", a: "Only with backup power. A small UPS on the router and main node keeps it running through short outages." },
+      { q: "Do I need new smart devices?", a: "No. Your current devices keep working, and they usually connect better on a stronger network." },
+    ],
+  },
 ]

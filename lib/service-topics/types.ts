@@ -28,6 +28,11 @@ export type TopicIcon =
   | "humidifier"
   | "purifier"
   | "vacuum"
+  | "doorbell"
+  | "smoke"
+  | "wifi"
+  | "pump"
+  | "energy"
 
 export interface TopicStep {
   title: string

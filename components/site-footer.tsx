@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { cityPages } from "@/lib/cities"
 
 const columns = [
   {
@@ -11,6 +12,10 @@ const columns = [
     ],
   },
   {
+    title: "Areas",
+    links: cityPages.map((c) => ({ name: c.name, href: `/smart-home-installation/${c.slug}` })),
+  },
+  {
     title: "Learn",
     links: [
       { name: "Blog", href: "/blog" },
@@ -21,6 +26,7 @@ const columns = [
     title: "Company",
     links: [
       { name: "About", href: "/about" },
+      { name: "For builders", href: "/for-builders" },
       { name: "Contact", href: "/contact" },
       { name: "Privacy policy", href: "/privacy-policy" },
     ],
@@ -45,7 +51,7 @@ export function SiteFooter() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:col-span-6 lg:pl-12">
+          <div className="grid grid-cols-2 gap-10 sm:grid-cols-4 lg:col-span-6 lg:pl-8">
             {columns.map((col) => (
               <div key={col.title}>
                 <h3 className="font-mono text-[11px] uppercase tracking-[0.14em] text-background/50">

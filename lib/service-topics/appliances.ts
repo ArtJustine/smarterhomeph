@@ -235,4 +235,82 @@ export const applianceTopics: ServiceTopic[] = [
       { q: "Can I schedule it by room?", a: "Yes. Most mapped models let you clean a room or a set of rooms on a schedule." },
     ],
   },
+  {
+    slug: "water-pumps",
+    service: "appliances",
+    icon: "pump",
+    name: "Water pump and tank controllers",
+    cardBlurb: "Fill the tank on schedule, stop the pump before it runs dry and get an alert for leaks.",
+    metaTitle: "Smart Water Pump and Tank Controllers in Pampanga, Tarlac and Bulacan",
+    metaDescription:
+      "Smart controllers for water pumps and tanks: scheduled filling, run-time limits and leak alerts. Planned and installed in Central Luzon by Smarter Home PH.",
+    headline: "Pump and tank control,",
+    headlineItalic: "so you never run out.",
+    intro: "Fill the tank on a schedule, stop the pump before it runs dry and get an alert when something leaks.",
+    why: [
+      "Many homes here depend on a pump and a tank. Forget to switch the pump on and the shower runs dry. Leave it running and the tank overflows or the motor burns out.",
+      "A smart controller handles the routine for you. It starts and stops the pump on a schedule or by tank level, and tells you something is wrong before you find a wet floor.",
+    ],
+    install: [
+      { title: "Look at your pump and tank", body: "We check the pump type, the motor rating, the tank size, the pipes and where the power comes from. That decides which controller fits and whether the job needs an electrician." },
+      { title: "Choose the right control", body: "A pump is a heavy motor load, so we do not run it through an ordinary smart plug. We use a properly rated relay or contactor, with a water level sensor or float where it makes sense." },
+      { title: "Wire it safely", body: "Anything that touches the pump's power wiring is done to code by a licensed electrician, and we tell you up front if your job needs one. We add overload and dry-run protection where the setup allows." },
+      { title: "Set schedules and alerts", body: "We set filling times, a maximum run time and phone alerts for low water, overflow and leaks. A leak sensor near the pump or tank is a small extra that can pay for itself once." },
+    ],
+    automations: [
+      { title: "Morning fill", body: "At 5:30 am the pump starts and fills the tank before the family wakes up." },
+      { title: "Stop at the limit", body: "The pump has run for its set time and switches off. You get a notice that the tank is full." },
+      { title: "Leak at the pump", body: "Water is detected near the pump. The pump switches off and you get an urgent alert." },
+    ],
+    goodToKnow: [
+      "A smart controller needs power to work. In a brownout the pump stops, and it should restart safely when power returns. We set the restart behavior with you.",
+      "Phone control needs WiFi at the pump area, which is often outside the house. We plan for the signal there.",
+      "Smart control cannot fix low water pressure, an undersized pump or a failing motor. We tell you if the problem sits there.",
+    ],
+    faqs: [
+      { q: "Can I use a smart plug on my pump?", a: "Usually no. Pumps draw a heavy, spiky load that ordinary smart plugs are not built for. We use a rated relay or contactor instead." },
+      { q: "Do I need a level sensor?", a: "A schedule works for many homes. A level sensor is better if your supply is unpredictable or the tank is far from the house." },
+      { q: "Will it stop the pump if the tank runs dry?", a: "Dry-run protection depends on the pump and the setup. We add what fits and explain what it covers and what it does not." },
+      { q: "Can I control it from anywhere?", a: "Yes, when the controller has WiFi. We test the signal at the pump before we finish." },
+    ],
+  },
+  {
+    slug: "energy-plugs",
+    service: "appliances",
+    icon: "energy",
+    name: "Energy monitoring plugs",
+    cardBlurb: "See how much power each appliance uses and switch off the ones that waste it.",
+    metaTitle: "Smart Energy Monitoring Plugs in Pampanga, Tarlac and Bulacan",
+    metaDescription:
+      "Energy monitoring smart plugs that show watts and usage per appliance. Planned and set up in Central Luzon by Smarter Home PH.",
+    headline: "Energy monitoring plugs,",
+    headlineItalic: "to see where the kWh go.",
+    intro: "See how much power each appliance uses, then switch off the ones that quietly waste it.",
+    why: [
+      "Electricity is one of the biggest bills in a Filipino home, and the aircon takes all the blame. A monitoring plug shows real numbers for the water dispenser, the TV corner, the freezer and the PC, so you stop guessing.",
+      "Once you can see it, you can act on it. Plugs can switch off appliances that sit on standby, and you get a clear idea of what each one costs to run.",
+    ],
+    install: [
+      { title: "List what to measure", body: "We start with the appliances you suspect: the water dispenser, rice cooker, TV and PC corner, chest freezer. You do not need a plug on everything." },
+      { title: "Check the rating", body: "Every plug has a maximum load. Window and split aircons and other heavy appliances need a plug rated for them, or a circuit-level meter. We never push an appliance past a plug's rating." },
+      { title: "Install and name them", body: "We plug each one in, join it to the app and name it so you can find it by voice: Dispenser, TV corner, Bedroom fan." },
+      { title: "Set the rules", body: "We add a schedule to cut standby power, a usage alert when something draws more than normal, and a weekly summary on your phone." },
+    ],
+    automations: [
+      { title: "Night cut", body: "At 11 pm the TV corner and the water dispenser switch off." },
+      { title: "Away mode", body: "Everyone leaves and the plugged-in appliances switch off." },
+      { title: "Weekly report", body: "On Sunday evening your phone gets the week's usage for each plug." },
+    ],
+    goodToKnow: [
+      "A plug shows what it measures, not your whole bill. The meter from your power provider is still the official number.",
+      "Cheap plugs can read poorly at very low or very high loads. We pick models with dependable readings and tell you their limits.",
+      "Some appliances should never be cut off on a schedule, like a fridge or freezer. We help you decide what is safe to switch.",
+    ],
+    faqs: [
+      { q: "Can I put a monitoring plug on my aircon?", a: "Only if the plug is rated for it. Many aircons need a higher rated plug or a circuit-level meter. We check the label first." },
+      { q: "What happens in a brownout?", a: "The plug has no power during an outage. It usually returns to its last state when power comes back, and we set that on purpose for each appliance." },
+      { q: "How accurate are the readings?", a: "Good enough to compare appliances and spot waste. They will not match your electric meter to the decimal." },
+      { q: "Is a plug the only way to monitor power?", a: "No. A circuit-level meter in the breaker panel covers the whole house, and an electrician fits it. We can advise on both." },
+    ],
+  },
 ]

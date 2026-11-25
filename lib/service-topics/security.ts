@@ -235,4 +235,82 @@ export const securityTopics: ServiceTopic[] = [
       { q: "How often do I change the battery?", a: "Usually once a year or less often, depending on the model. You get a low battery notice on your phone." },
     ],
   },
+  {
+    slug: "video-doorbells",
+    service: "security",
+    icon: "doorbell",
+    name: "Video doorbells and intercoms",
+    cardBlurb: "See who is at the gate or door on your phone and talk to them without going out.",
+    metaTitle: "Smart Video Doorbells and Intercoms in Pampanga, Tarlac and Bulacan",
+    metaDescription:
+      "Video doorbells and gate intercoms with two-way talk and phone alerts. Planned and installed in Central Luzon by Smarter Home PH.",
+    headline: "Video doorbells,",
+    headlineItalic: "so you know before you open.",
+    intro: "See who is at the door or gate on your phone, and talk to them without going out.",
+    why: [
+      "In most Filipino homes the bell sits at the gate, not the door. Someone rings, and you walk out in the heat or the rain to find a delivery rider. A video doorbell or gate intercom lets you see and talk first, from the sofa or from the office.",
+      "It also covers the times you are not home. A delivery arrives, a relative visits, a stranger keeps ringing. You get a phone alert, and you can answer from anywhere you have a signal.",
+    ],
+    install: [
+      { title: "Check where it should go", body: "We look at the gate, the door and the path between them. The doorbell needs a clear view at the right height, and it has to be within reach of your WiFi. If the gate is far from the router, we plan for that first." },
+      { title: "Pick wired or battery", body: "Battery doorbells are quick to fit. Wired ones never need charging and suit homes with a bell cable or a nearby socket. A gate intercom with an indoor screen suits families who want a screen on the wall instead of a phone." },
+      { title: "Fit it and fix the signal", body: "We mount it, connect it to your WiFi, and add an access point or mesh node when the signal is weak at the gate. A doorbell with poor WiFi misses the visitor, so we test it at the gate itself." },
+      { title: "Set the chimes and alerts", body: "Indoor chime, phone alerts, a smart speaker announcement, and who in the family gets the call. We set motion zones so passing traffic on the street does not buzz your phone all day." },
+    ],
+    automations: [
+      { title: "Night visitor", body: "Someone rings after dark. The porch light comes on and you get a live view on your phone." },
+      { title: "Away from home", body: "You are out and someone rings. The alert reaches your phone and you can talk to them through the doorbell." },
+      { title: "Chime inside", body: "Someone rings while you are home. The living room speaker chimes so you do not miss it." },
+    ],
+    goodToKnow: [
+      "A video doorbell needs steady WiFi and power at the gate. In a brownout, a wired doorbell stops unless it is on a UPS, and a battery one keeps going until it needs a charge.",
+      "Saving video often needs a microSD card or a paid cloud plan, depending on the brand. We tell you which before you buy.",
+      "Point the camera at your own gate and path. Wide angles can catch the street or a neighbour's door, which raises privacy questions. We aim it with that in mind.",
+    ],
+    faqs: [
+      { q: "Can I answer the doorbell when I am not home?", a: "Yes, as long as the doorbell has internet. You get an alert on your phone and can see and talk to the visitor from wherever you have a signal." },
+      { q: "Will it work if my gate is far from the house?", a: "It can, but the WiFi signal usually needs help. We add a mesh node or access point near the gate and test it before we finish." },
+      { q: "Does it need a monthly fee?", a: "Some brands charge for cloud video history. Many also save clips to a microSD card with no fee. We pick based on how you want to store them." },
+      { q: "Can it ring my smart speaker?", a: "Many can announce on Alexa or Google Home speakers. Support differs by brand, so we check before you buy." },
+    ],
+  },
+  {
+    slug: "smoke-gas-detectors",
+    service: "security",
+    icon: "smoke",
+    name: "Smoke and gas detectors",
+    cardBlurb: "A loud alarm in the house and an alert on your phone for smoke or an LPG leak.",
+    metaTitle: "Smart Smoke and Gas Detectors in Pampanga, Tarlac and Bulacan",
+    metaDescription:
+      "Smoke and LPG gas detectors that sound a siren and alert your phone. Planned and installed in Central Luzon by Smarter Home PH.",
+    headline: "Smoke and gas detectors,",
+    headlineItalic: "to hear it before you smell it.",
+    intro: "A loud alarm in the house and a message on your phone when there is smoke or an LPG leak.",
+    why: [
+      "Most kitchens here cook on LPG, and many homes keep the tank right next to the stove. A slow leak has no obvious sign until it becomes a problem. A gas detector near the stove notices what your nose has not caught yet.",
+      "Smoke is the same story at night. A detector in the hallway wakes the house, and the phone alert reaches you if you are out and nobody next door notices.",
+    ],
+    install: [
+      { title: "Walk the kitchen and bedrooms", body: "We check where the stove, the tank and the sleeping areas are. Smoke detectors go near the bedrooms and the way out of the kitchen. The gas detector goes near the stove and the tank." },
+      { title: "Mount in the right spot", body: "LPG is heavier than air, so a gas detector sits low, usually about 30 cm above the floor and a short way from the stove. Smoke rises, so smoke detectors go high on the ceiling. We keep both away from steam and fans that cause false alarms." },
+      { title: "Connect and test", body: "We join each detector to your WiFi or hub, then use the maker's test button on every one. The siren, the phone alert and any linked lights all get checked before we leave." },
+      { title: "Plan what happens next", body: "We set who gets the alert and which lights turn on. We also talk through a short plan for your family: where to go, who to call and where the gas valve is." },
+    ],
+    automations: [
+      { title: "Smoke in the kitchen", body: "The detector senses smoke and the siren sounds. The lights come on and your phone gets an urgent alert." },
+      { title: "Night alarm", body: "Smoke at 2 am. The lights come on so everyone can see the way out, and you get an alert." },
+      { title: "Away alert", body: "Nobody is home and smoke is detected. You get an alert right away so you can call a neighbour." },
+    ],
+    goodToKnow: [
+      "A smart detector is an extra layer. It does not replace a proper fire alarm system, and it does not call the fire station for you. Keep the BFP number saved on your phone.",
+      "Detectors have a limited life, printed on the box. We note the replace-by date when we install.",
+      "Cooking smoke and steam can cause false alarms. Placement matters, and we test it with you while you cook.",
+    ],
+    faqs: [
+      { q: "Does it work during a brownout?", a: "Battery-backed detectors keep sounding the local alarm. Phone alerts need your WiFi and internet, so those can pause until power or the connection returns." },
+      { q: "Where does the gas detector go?", a: "LPG sinks, so it goes low, near the stove and the tank. We mark the spot with you at the survey." },
+      { q: "Can it shut the gas off?", a: "Not by itself. A rated automatic shutoff valve is a separate device and does not suit every kitchen. We tell you honestly if yours is a fit." },
+      { q: "How many detectors do I need?", a: "A smoke detector near each sleeping area and the kitchen exit, plus one gas detector near the stove. Bigger homes need more." },
+    ],
+  },
 ]

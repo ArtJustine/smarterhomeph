@@ -1,5 +1,6 @@
 import {
   AudioLines,
+  Bell,
   Blinds,
   Bot,
   Camera,
@@ -10,6 +11,7 @@ import {
   Droplet,
   Droplets,
   Fan,
+  Flame,
   Frame,
   Lightbulb,
   Lock,
@@ -27,7 +29,10 @@ import {
   ToggleRight,
   Tv,
   Users,
+  Waves,
+  Wifi,
   Wind,
+  Zap,
   type LucideIcon,
 } from "lucide-react"
 import type { TopicIcon } from "@/lib/service-topics"
@@ -62,6 +67,11 @@ const icons: Record<TopicIcon, LucideIcon> = {
   humidifier: Droplet,
   purifier: Wind,
   vacuum: Bot,
+  doorbell: Bell,
+  smoke: Flame,
+  wifi: Wifi,
+  pump: Waves,
+  energy: Zap,
 }
 
 export function TopicIconMark({ name, className }: { name: TopicIcon; className?: string }) {
