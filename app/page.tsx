@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { InteractiveHome } from "@/components/interactive-home"
+import { ExplainerVideo } from "@/components/explainer-video"
 import { platformList } from "@/lib/platforms"
 
 
@@ -113,6 +114,17 @@ export default function Home() {
           >
             <InteractiveHome />
           </motion.div>
+        </section>
+
+        {/* Explainer video */}
+        <section className="container pb-20 lg:pb-28">
+          <div className="mx-auto max-w-4xl">
+            <p className="eyebrow mb-4">60 second overview</p>
+            <h2 className="mb-8 max-w-2xl text-balance text-4xl leading-tight sm:text-5xl">
+              See how Smarter Home PH works.
+            </h2>
+            <ExplainerVideo />
+          </div>
         </section>
 
         {/* Platforms */}
