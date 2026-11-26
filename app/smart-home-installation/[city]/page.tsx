@@ -11,6 +11,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { pageMeta } from "@/lib/site"
 import { BUSINESS_ID, abs, breadcrumb, graph, webPage } from "@/lib/schema"
 import { cityPages, getCityPage } from "@/lib/cities"
+import { getProvinceByName } from "@/lib/provinces"
 import { servicePlans } from "@/lib/service-plans"
 
 export const dynamicParams = false
@@ -42,6 +43,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
 
   const path = `/smart-home-installation/${c.slug}`
   const others = cityPages.filter((o) => o.slug !== c.slug)
+  const prov = getProvinceByName(c.province)
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -69,7 +71,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
             })),
           },
           breadcrumb([
-            { name: "Services", path: "/services" },
+            ...(prov ? [{ name: prov.name, path: `/areas/${prov.slug}` }] : [{ name: "Services", path: "/services" }]),
             { name: `Smart home installation in ${c.name}`, path },
           ]),
         )}
@@ -128,7 +130,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
                       <p className="mt-3 text-muted-foreground">{serviceBlurbs[p.slug] ?? ""}</p>
                     </div>
                     <p className="inline-flex items-center gap-1 text-sm underline-offset-4 group-hover:underline">
-                      See {p.title.toLowerCase()} <ArrowUpRight className="h-4 w-4" />
+                      See {p.title} <ArrowUpRight className="h-4 w-4" />
                     </p>
                   </Link>
                 </li>
@@ -193,6 +195,12 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
         {/* Other cities */}
         <section className="container pb-20 lg:pb-28">
           <p className="eyebrow mb-6">Also serving</p>
+          {prov && (
+            <p className="mb-6 text-muted-foreground">
+              {c.name} is in {prov.name}.{" "}
+              <Link href={`/areas/${prov.slug}`} className="text-foreground underline underline-offset-4">See All {prov.name}</Link>
+            </p>
+          )}
           <div className="grid gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-3">
             {others.map((o) => (
               <Link key={o.slug} href={`/smart-home-installation/${o.slug}`} className="group bg-background p-8 transition-colors hover:bg-card">

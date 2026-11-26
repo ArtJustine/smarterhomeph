@@ -1,19 +1,22 @@
 import Link from "next/link"
 import { cityPages } from "@/lib/cities"
+import { provincePages } from "@/lib/provinces"
 
 const columns = [
   {
-    title: "Shop",
+    title: "Integration",
     links: [
-      { name: "Alexa setup", href: "/alexa" },
-      { name: "Apple Home setup", href: "/apple-home" },
-      { name: "Google Home setup", href: "/google-home" },
-      { name: "Services", href: "/services" },
+      { name: "Alexa Setup", href: "/alexa" },
+      { name: "Apple Home Setup", href: "/apple-home" },
+      { name: "Google Home Setup", href: "/google-home" },
     ],
   },
   {
     title: "Areas",
-    links: cityPages.map((c) => ({ name: c.name, href: `/smart-home-installation/${c.slug}` })),
+    links: [
+      ...provincePages.map((p) => ({ name: p.name, href: `/areas/${p.slug}` })),
+      ...cityPages.map((c) => ({ name: c.name, href: `/smart-home-installation/${c.slug}` })),
+    ],
   },
   {
     title: "Learn",
@@ -26,9 +29,9 @@ const columns = [
     title: "Company",
     links: [
       { name: "About", href: "/about" },
-      { name: "For builders", href: "/for-builders" },
+      { name: "For Builders", href: "/for-builders" },
       { name: "Contact", href: "/contact" },
-      { name: "Privacy policy", href: "/privacy-policy" },
+      { name: "Privacy Policy", href: "/privacy-policy" },
     ],
   },
 ]
@@ -45,7 +48,7 @@ export function SiteFooter() {
             </p>
             <Link
               href="/contact"
-              className="mt-10 inline-flex h-12 items-center rounded-full bg-primary px-6 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5"
+              className="mt-10 inline-flex h-12 items-center rounded-full bg-primary px-6 text-sm font-medium uppercase tracking-wide text-primary-foreground transition-transform hover:-translate-y-0.5"
             >
               Talk to us
             </Link>

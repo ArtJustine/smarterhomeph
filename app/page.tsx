@@ -1,7 +1,6 @@
 "use client"
 
 import Link from "next/link"
-import { cityPages } from "@/lib/cities"
 import { motion } from "framer-motion"
 import { ArrowRight, ArrowUpRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -54,9 +53,9 @@ const setups = [
 ]
 
 const areas = [
-  { name: "Pampanga", note: "Smart home installation in Angeles, Mabalacat, San Fernando and nearby" },
-  { name: "Tarlac", note: "Smart home installation in Tarlac City and nearby" },
-  { name: "Bulacan", note: "Smart home installation in Malolos, Meycauayan and nearby" },
+  { name: "Pampanga", href: "/areas/pampanga", note: "Smart home installation in Angeles, Mabalacat, San Fernando and nearby" },
+  { name: "Tarlac", href: "/areas/tarlac", note: "Smart home installation in Tarlac City and nearby" },
+  { name: "Bulacan", href: "/areas/bulacan", note: "Smart home installation in Malolos, Meycauayan and nearby" },
 ]
 
 const fade = {
@@ -218,21 +217,17 @@ export default function Home() {
           </h2>
           <div className="mt-14 grid gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-3">
             {areas.map((a) => (
-              <div key={a.name} className="bg-background p-8 transition-colors hover:bg-card">
+              <Link key={a.name} href={a.href} className="group bg-background p-8 transition-colors hover:bg-card">
                 <p className="font-display text-5xl leading-none">{a.name}</p>
                 <p className="mt-4 text-sm text-muted-foreground">{a.note}</p>
-              </div>
+                <p className="mt-6 inline-flex items-center gap-1 text-sm underline-offset-4 group-hover:underline">
+                  See {a.name} <ArrowUpRight className="h-4 w-4" />
+                </p>
+              </Link>
             ))}
           </div>
           <p className="mt-6 text-sm text-muted-foreground">
-            Somewhere else in Luzon? Message us first and we will tell you honestly if we can help. City pages:{" "}
-            {cityPages.map((c, i) => (
-              <span key={c.slug}>
-                {i > 0 && ", "}
-                <Link href={`/smart-home-installation/${c.slug}`} className="text-foreground underline underline-offset-4">{c.name}</Link>
-              </span>
-            ))}
-            . Building a home?{" "}
+            Somewhere else in Luzon? Message us first and we will tell you honestly if we can help. Building a home?{" "}
             <Link href="/for-builders" className="text-foreground underline underline-offset-4">Talk to us before the walls close</Link>.
           </p>
         </section>

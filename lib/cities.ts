@@ -129,6 +129,36 @@ export const cityPages: CityPage[] = [
       { q: "Is there a travel fee?", a: "We tell you about any travel cost in the written quote before anything is bought, so there are no surprises." },
     ],
   },
+  {
+    slug: "malolos",
+    name: "Malolos",
+    province: "Bulacan",
+    areas: ["Bulihan", "Sumapang Matanda", "Mojon", "Longos", "Atlag"],
+    metaTitle: "Smart Home Installation in Malolos, Bulacan",
+    metaDescription:
+      "Smart home installation in Malolos, Bulacan: lights, locks, cameras, WiFi and aircon control with Alexa, Apple Home or Google Home. Planned and installed by Smarter Home PH.",
+    headline: "Smart home installation in Malolos,",
+    headlineItalic: "close to our Pampanga base.",
+    intro:
+      "We plan, install and set up smart homes in Malolos, Bulacan, including Bulihan, Sumapang Matanda, Mojon, Longos and Atlag.",
+    localNotes: [
+      "Malolos is the provincial capital of Bulacan and one of the nearest cities to San Fernando, Pampanga, so it is an easy trip from our side of the border. Site visits and follow-ups here do not need a long wait.",
+      "Homes in the city range from older family houses to newer subdivisions and townhouses. We start with a short walk through, check your WiFi and your switches, and only then suggest what to buy.",
+    ],
+    focus: [
+      { title: "Older family houses", body: "Houses with older wiring and thick walls need a careful plan. We pick devices that work without rewiring and test your WiFi before anything is installed." },
+      { title: "New subdivisions", body: "Newer builds often have neutral wires and room for cable runs, which makes smart switches and a wired network much easier." },
+      { title: "Busy households", body: "Morning and evening routines, a doorbell at the gate and phone alerts that reach the right person make a full house easier to run." },
+    ],
+    faqs: [
+      { q: "Do you install smart homes in Malolos?", a: "Yes. We cover Malolos, including Bulihan, Sumapang Matanda, Mojon, Longos and Atlag. If yours is elsewhere in the city, message us and we will confirm." },
+      { q: "Is Malolos far from your base?", a: "No. Malolos is one of the nearest Bulacan cities to San Fernando, Pampanga, so we can visit, survey and follow up without long delays." },
+      { q: "Can you add smart devices to an older house?", a: "Yes. We choose devices that do not need rewiring, and we test your WiFi at the visit before we suggest anything." },
+      { q: "How do I get a quote?", a: "Plan your rooms with our room by room planner or send us a message. We reply with a written quote before anything is bought." },
+    ],
+  },
 ]
 
 export const getCityPage = (slug: string) => cityPages.find((c) => c.slug === slug)
+
+export const citiesInProvince = (province: string) => cityPages.filter((c) => c.province === province)
