@@ -35,13 +35,13 @@ const columns = [
 
 export function SiteFooter() {
   return (
-    <footer className="band tone-ink border-t">
+    <footer className="band shade-0 border-t">
       <div className="container py-16 lg:py-24">
         <div className="grid gap-16 lg:grid-cols-12">
           <div className="lg:col-span-6">
             <p className="font-display text-5xl leading-[1.05] sm:text-6xl">
               Make the house<br />
-              <span className="italic text-primary">do the boring stuff.</span>
+              <span className="italic text-primary-ink">do the boring stuff.</span>
             </p>
             <Link
               href="/contact"

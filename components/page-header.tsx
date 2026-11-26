@@ -10,7 +10,7 @@ interface PageHeaderProps {
 /** Plain editorial page header: small label, big serif title, optional intro. No hero image. */
 export function PageHeader({ eyebrow, title, intro, children }: PageHeaderProps) {
   return (
-    <section className="band tone-indigo border-b">
+    <section className="band shade-1 border-b">
       <div className="container grid gap-8 pb-12 pt-14 md:pb-16 md:pt-20 lg:grid-cols-12 lg:items-end">
         <div className="lg:col-span-8">
           {eyebrow && <p className="eyebrow mb-5">{eyebrow}</p>}

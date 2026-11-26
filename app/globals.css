@@ -4,29 +4,29 @@
 
 @layer base {
   :root {
-    /* Black-first. Sections tint the black with their own hue via .tone-* (see below). */
-    --background: 240 10% 4%;
+    /* Pure black and white. Sections vary by shade (.shade-*) or flip to paper (.paper-*). */
+    --background: 0 0% 4%;
     --foreground: 0 0% 98%;
-    --card: 240 8% 8%;
+    --card: 0 0% 9%;
     --card-foreground: 0 0% 98%;
-    --popover: 240 8% 8%;
+    --popover: 0 0% 9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 238 92% 72%;
-    --primary-foreground: 240 10% 5%;
-    --primary-ink: 238 95% 80%;
-    --secondary: 240 6% 12%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 4%;
+    --primary-ink: 0 0% 62%;
+    --secondary: 0 0% 12%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 240 6% 12%;
-    --muted-foreground: 240 5% 68%;
-    --accent: 240 6% 12%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 66%;
+    --accent: 0 0% 12%;
     --accent-foreground: 0 0% 98%;
-    --highlight: 32 100% 58%;
-    --highlight-foreground: 240 10% 5%;
-    --destructive: 6 72% 56%;
+    --highlight: 0 0% 90%;
+    --highlight-foreground: 0 0% 4%;
+    --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 100%;
-    --border: 240 6% 17%;
-    --input: 240 6% 17%;
-    --ring: 238 92% 72%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 0 0% 70%;
     --radius: 0.875rem;
   }
 }
@@ -142,36 +142,44 @@
 }
 
 
-/* Section tones: a full-width band of tinted black. Each tone also re-colours the accents inside it. */
+/* Section bands. Full-width, black shades or white paper. No hue anywhere. */
 @layer components {
   .band {
-    --band: 240 10% 5%;
+    --band: 0 0% 4%;
     background-color: hsl(var(--band));
     box-shadow: 0 0 0 100vmax hsl(var(--band));
     clip-path: inset(0 -100vmax);
+    color: hsl(var(--foreground));
   }
-  .tone-ink    { --tone: 238; --band: 240 10% 4%; }
-  .tone-indigo { --tone: 238; --band: 238 50% 9%; }
-  .tone-violet { --tone: 268; --band: 268 42% 9%; }
-  .tone-teal   { --tone: 174; --band: 176 52% 7%; }
-  .tone-amber  { --tone: 34;  --band: 30 50% 8%; }
-  .tone-rose   { --tone: 338; --band: 338 42% 9%; }
-  [class*="tone-"] {
-    --background: var(--band);
-    --primary: var(--tone) 90% 70%;
-    --primary-ink: var(--tone) 95% 78%;
-    --ring: var(--tone) 90% 70%;
-    --border: var(--tone) 26% 20%;
-    --input: var(--tone) 26% 20%;
-    --secondary: var(--tone) 30% 14%;
-    --muted: var(--tone) 30% 14%;
-    --accent: var(--tone) 30% 14%;
-    --card: var(--tone) 34% 12%;
-    --popover: var(--tone) 34% 12%;
+  .shade-0 { --band: 0 0% 0%;  --background: 0 0% 0%;  --card: 0 0% 7%; }
+  .shade-1 { --band: 0 0% 4%;  --background: 0 0% 4%;  --card: 0 0% 9%; }
+  .shade-2 { --band: 0 0% 8%;  --background: 0 0% 8%;  --card: 0 0% 13%; }
+  .shade-3 { --band: 0 0% 11%; --background: 0 0% 11%; --card: 0 0% 15%; }
+
+  .paper-0, .paper-1, .paper-2 {
+    --foreground: 0 0% 5%;
+    --card-foreground: 0 0% 5%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 5%;
+    --primary: 0 0% 6%;
+    --primary-foreground: 0 0% 98%;
+    --primary-ink: 0 0% 40%;
+    --secondary: 0 0% 91%;
+    --secondary-foreground: 0 0% 5%;
+    --muted: 0 0% 91%;
+    --muted-foreground: 0 0% 36%;
+    --accent: 0 0% 91%;
+    --accent-foreground: 0 0% 5%;
+    --border: 0 0% 83%;
+    --input: 0 0% 83%;
+    --ring: 0 0% 30%;
   }
+  .paper-0 { --band: 0 0% 100%; --background: 0 0% 100%; --card: 0 0% 96%; }
+  .paper-1 { --band: 0 0% 96%;  --background: 0 0% 96%;  --card: 0 0% 100%; }
+  .paper-2 { --band: 0 0% 92%;  --background: 0 0% 92%;  --card: 0 0% 98%; }
 }
 
-/* The explainer clips were drawn on a light background. Flip lightness, keep hue, so they sit on black. */
+/* The explainer clips were drawn on a light background. Greyscale, then flip lightness so they sit on black. */
 @layer utilities {
-  .video-dark { filter: invert(1) hue-rotate(180deg) brightness(0.92) contrast(1.05); }
+  .video-dark { filter: invert(1) brightness(0.92) contrast(1.05); }
 }

@@ -8,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Smart home planning, supply and installation in Pampanga, Tarlac and Bulacan.",
     start_url: "/",
     display: "standalone",
-    background_color: "#0a0a0d",
-    theme_color: "#0a0a0d",
+    background_color: "#0a0a0a",
+    theme_color: "#0a0a0a",
     lang: "en-PH",
     icons: [
       { src: "/icon.svg", type: "image/svg+xml", sizes: "any" },
