@@ -7,7 +7,6 @@ import { SiteFooter } from "@/components/site-footer"
 import { PageHeader } from "@/components/page-header"
 import { JsonLd } from "@/components/json-ld"
 import { Button } from "@/components/ui/button"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { pageMeta } from "@/lib/site"
 import { BUSINESS_ID, abs, breadcrumb, graph, webPage } from "@/lib/schema"
 import { cityPages, getCityPage } from "@/lib/cities"
@@ -176,18 +175,14 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
               <h2 className="text-4xl leading-tight sm:text-5xl">Quick answers.</h2>
             </div>
             <div className="lg:col-span-8">
-              <Accordion type="single" collapsible className="w-full">
-                {c.faqs.map((f, i) => (
-                  <AccordionItem key={f.q} value={`q-${i}`}>
-                    <AccordionTrigger className="py-6 text-left font-display text-2xl font-normal hover:no-underline">
-                      {f.q}
-                    </AccordionTrigger>
-                    <AccordionContent className="max-w-2xl pb-6 text-base leading-relaxed text-muted-foreground">
-                      {f.a}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
+              <div className="w-full divide-y border-y">
+        {c.faqs.map((f) => (
+          <div key={f.q} className="py-6">
+            <h3 className="text-left font-display text-2xl font-normal">{f.q}</h3>
+            <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground">{f.a}</p>
+          </div>
+        ))}
+      </div>
             </div>
           </div>
         </section>

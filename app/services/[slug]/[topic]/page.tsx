@@ -7,7 +7,6 @@ import { SiteFooter } from "@/components/site-footer"
 import { PageHeader } from "@/components/page-header"
 import { JsonLd } from "@/components/json-ld"
 import { Button } from "@/components/ui/button"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { TopicIconMark } from "@/components/service-topics/topic-icon"
 import { TopicHome } from "@/components/service-topics/topic-home"
 import { pageMeta } from "@/lib/site"
@@ -242,14 +241,14 @@ export default async function ServiceTopicPage({ params }: { params: Promise<{ s
               <h2 className="text-balance text-4xl leading-tight sm:text-5xl">Common questions.</h2>
             </div>
             <div className="lg:col-span-8">
-              <Accordion type="single" collapsible className="border-b">
-                {t.faqs.map((f, i) => (
-                  <AccordionItem key={f.q} value={`faq-${i}`}>
-                    <AccordionTrigger className="text-left text-lg">{f.q}</AccordionTrigger>
-                    <AccordionContent className="leading-relaxed text-muted-foreground">{f.a}</AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
+              <div className="w-full divide-y border-y">
+        {t.faqs.map((f) => (
+          <div key={f.q} className="py-6">
+            <h3 className="text-left text-lg">{f.q}</h3>
+            <p className="mt-3 leading-relaxed text-muted-foreground">{f.a}</p>
+          </div>
+        ))}
+      </div>
             </div>
           </div>
         </section>

@@ -4,7 +4,6 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { PageHeader } from "@/components/page-header"
 import { Button } from "@/components/ui/button"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 
 const offers = [
   { title: "A pre-wiring plan per house type", body: "We mark up your plans or a site visit with switch positions, network points, camera cable runs and power spots, so your crew knows exactly what to rough in." },
@@ -123,18 +122,14 @@ export default function ForBuildersPage() {
               <h2 className="text-4xl leading-tight sm:text-5xl">Quick answers.</h2>
             </div>
             <div className="lg:col-span-8">
-              <Accordion type="single" collapsible className="w-full">
-                {faqs.map((f, i) => (
-                  <AccordionItem key={f.q} value={`q-${i}`}>
-                    <AccordionTrigger className="py-6 text-left font-display text-2xl font-normal hover:no-underline">
-                      {f.q}
-                    </AccordionTrigger>
-                    <AccordionContent className="max-w-2xl pb-6 text-base leading-relaxed text-muted-foreground">
-                      {f.a}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
+              <div className="w-full divide-y border-y">
+        {faqs.map((f) => (
+          <div key={f.q} className="py-6">
+            <h3 className="text-left font-display text-2xl font-normal">{f.q}</h3>
+            <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground">{f.a}</p>
+          </div>
+        ))}
+      </div>
             </div>
           </div>
         </section>

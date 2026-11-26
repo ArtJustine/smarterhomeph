@@ -2,7 +2,6 @@ import Link from "next/link"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { PageHeader } from "@/components/page-header"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 
 const faqs = [
   {
@@ -77,18 +76,14 @@ export default function FAQsPage() {
 
         <section className="container pt-12 pb-20 md:pt-16 md:pb-28">
           <div className="max-w-3xl">
-            <Accordion type="single" collapsible className="w-full">
-              {faqs.map((f, i) => (
-                <AccordionItem key={f.q} value={`item-${i + 1}`}>
-                  <AccordionTrigger className="py-6 text-left font-display text-2xl font-normal hover:no-underline">
-                    {f.q}
-                  </AccordionTrigger>
-                  <AccordionContent className="max-w-2xl pb-6 text-base leading-relaxed text-muted-foreground">
-                    {f.a}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+            <div className="w-full divide-y border-y">
+        {faqs.map((f) => (
+          <div key={f.q} className="py-6">
+            <h3 className="text-left font-display text-2xl font-normal">{f.q}</h3>
+            <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground">{f.a}</p>
+          </div>
+        ))}
+      </div>
 
             <p className="mt-10 text-muted-foreground">
               Want a number for your own house? Plan it{" "}

@@ -1,7 +1,6 @@
 import Link from "next/link"
 import { ArrowRight, ArrowUpRight, Check, LayoutPanelTop, Minus, Speaker, Tablet, Tv } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { platformList, type Platform } from "@/lib/platforms"
 import { platformDevices, type HubDevice } from "@/lib/platform-devices"
 import { SERVICE_CITIES, SITE_URL } from "@/lib/site"
@@ -106,18 +105,14 @@ export function PlatformFaq({ platform }: { platform: Platform }) {
           <h2 className="text-4xl leading-tight sm:text-5xl">Quick answers.</h2>
         </div>
         <div className="lg:col-span-8">
-          <Accordion type="single" collapsible className="w-full">
-            {platform.faqs.map((f, i) => (
-              <AccordionItem key={f.q} value={`q-${i}`}>
-                <AccordionTrigger className="py-6 text-left font-display text-2xl font-normal hover:no-underline">
-                  {f.q}
-                </AccordionTrigger>
-                <AccordionContent className="max-w-2xl pb-6 text-base leading-relaxed text-muted-foreground">
-                  {f.a}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+          <div className="w-full divide-y border-y">
+        {platform.faqs.map((f) => (
+          <div key={f.q} className="py-6">
+            <h3 className="text-left font-display text-2xl font-normal">{f.q}</h3>
+            <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground">{f.a}</p>
+          </div>
+        ))}
+      </div>
         </div>
       </div>
     </section>
