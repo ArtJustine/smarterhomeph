@@ -20,11 +20,8 @@ const platformLinks = [
 
 export function Wordmark({ className = "" }: { className?: string }) {
   return (
-    <span className={`inline-flex items-baseline gap-2 ${className}`}>
-      <span className="relative top-[-1px] inline-block h-2 w-2 rounded-full bg-primary shadow-[0_0_12px_3px_hsl(var(--primary)/0.55)]" />
-      <span className="font-display text-2xl leading-none tracking-tight">Smarter Home</span>
-      <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">PH</span>
-    </span>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src="/logo.svg" alt="Smarter Home PH" width={44} height={44} className={`h-11 w-11 ${className}`} />
   )
 }
 
