@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import localFont from 'next/font/local'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
@@ -52,8 +52,14 @@ export const metadata: Metadata = {
     locale: 'en_PH',
     type: 'website',
   },
-  twitter: { card: 'summary' },
+  twitter: { card: 'summary_large_image' },
   robots: { index: true, follow: true },
+  applicationName: SITE_NAME,
+  formatDetection: { telephone: false },
+}
+
+export const viewport: Viewport = {
+  themeColor: '#29ad81',
 }
 
 const localBusiness = {
@@ -61,6 +67,8 @@ const localBusiness = {
   '@id': BUSINESS_ID,
   name: SITE_NAME,
   url: SITE_URL,
+  image: `${SITE_URL}/opengraph-image`,
+  logo: `${SITE_URL}/icon.svg`,
   description:
     'Smart home planning, supply and installation: lighting, door locks, cameras, aircon control and automation.',
   areaServed: [

@@ -11,6 +11,19 @@ const nextConfig = {
   // To bring it back: delete this redirects() block and restore the nav, footer and sitemap links.
   async redirects() {
     return [
+      // Send the old vercel.app address (and www) to the real domain so Google only sees one site.
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'smarterhomeph.vercel.app' }],
+        destination: 'https://smarterhomephilippines.com/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.smarterhomephilippines.com' }],
+        destination: 'https://smarterhomephilippines.com/:path*',
+        permanent: true,
+      },
       { source: '/devices', destination: '/services', permanent: false },
       { source: '/builder', destination: '/services', permanent: false },
       { source: '/services/audio-video', destination: '/services/media-control', permanent: true },

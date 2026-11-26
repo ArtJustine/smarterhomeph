@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
 
-/** Change this to the real domain once one is connected in Vercel. */
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://smarterhomeph.vercel.app"
+/** Canonical production domain. Hardcoded so a stray env var can never point SEO back at vercel.app. */
+export const SITE_URL = "https://smarterhomephilippines.com"
+export const SITE_HOST = "smarterhomephilippines.com"
 export const SITE_NAME = "Smarter Home PH"
 
 export const SERVICE_AREAS = ["Pampanga", "Tarlac", "Bulacan"]
@@ -27,6 +28,6 @@ export function pageMeta(path: string, title: string, description: string): Meta
       locale: "en_PH",
       type: "website",
     },
-    twitter: { card: "summary", title: `${title} | ${SITE_NAME}`, description },
+    twitter: { card: "summary_large_image", title: `${title} | ${SITE_NAME}`, description },
   }
 }
