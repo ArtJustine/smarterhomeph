@@ -28,7 +28,7 @@ export function ExplainerVideo({
     <div className="relative aspect-video w-full overflow-hidden rounded-xl border bg-card">
       {playing ? (
         <video
-          className="h-full w-full"
+          className="video-dark h-full w-full"
           src={src}
           poster={poster}
           controls
@@ -52,7 +52,7 @@ export function ExplainerVideo({
             height={720}
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-cover"
+            className="video-dark h-full w-full object-cover"
           />
           <span className="absolute inset-0 bg-black/10 transition-colors group-hover:bg-black/20" aria-hidden="true" />
           <span className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform group-hover:scale-105">

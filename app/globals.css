@@ -170,3 +170,8 @@
     --popover: var(--tone) 34% 12%;
   }
 }
+
+/* The explainer clips were drawn on a light background. Flip lightness, keep hue, so they sit on black. */
+@layer utilities {
+  .video-dark { filter: invert(1) hue-rotate(180deg) brightness(0.92) contrast(1.05); }
+}
