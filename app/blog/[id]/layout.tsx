@@ -41,6 +41,12 @@ const posts: Record<string, { title: string; description: string; published: str
   },
 }
 
+export const dynamicParams = false
+
+export function generateStaticParams() {
+  return Object.keys(posts).map((id) => ({ id }))
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params
   const post = posts[id]
