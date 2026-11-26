@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next'
-import localFont from 'next/font/local'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import './globals.css'
@@ -8,23 +7,6 @@ import { SITE_NAME, SITE_URL, SERVICE_AREAS, SERVICE_CITIES } from '@/lib/site'
 import { BUSINESS_ID, WEBSITE_ID, graph } from '@/lib/schema'
 import { JsonLd } from '@/components/json-ld'
 import { ScrollReveal } from '@/components/scroll-reveal'
-
-const display = localFont({
-  src: [
-    {
-      path: '../node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2',
-      weight: '400',
-      style: 'italic',
-    },
-  ],
-  variable: '--font-display',
-  display: 'swap',
-})
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -59,7 +41,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#29ad81',
+  themeColor: '#2a30df',
 }
 
 const localBusiness = {
@@ -101,7 +83,7 @@ export default function RootLayout({
   return (
     <html
       lang="en-PH"
-      className={`${GeistSans.variable} ${GeistMono.variable} ${display.variable}`}
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
     >
       <body className="font-sans antialiased">
         <JsonLd data={siteJsonLd} />

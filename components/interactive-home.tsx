@@ -65,7 +65,7 @@ const watts = (s: HomeState) =>
 
 const ink = "hsl(var(--foreground))"
 const paper = "hsl(var(--card))"
-const amber = "hsl(38 95% 62%)" // warm bulb colour, independent of the brand green
+const amber = "hsl(38 95% 62%)" // warm bulb colour, independent of the brand colours
 const brand = "hsl(var(--primary))"
 const hush = "hsl(var(--muted))"
 

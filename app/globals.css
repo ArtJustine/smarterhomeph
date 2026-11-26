@@ -4,51 +4,55 @@
 
 @layer base {
   :root {
-    /* Warm paper + ink, one lamp-amber accent */
-    --background: 42 33% 95%;
-    --foreground: 36 14% 9%;
-    --card: 42 40% 98%;
-    --card-foreground: 36 14% 9%;
-    --popover: 42 40% 98%;
-    --popover-foreground: 36 14% 9%;
-    --primary: 160 62% 42%;
-    --primary-foreground: 36 14% 9%;
-    --primary-ink: 162 85% 20%;
-    --secondary: 40 22% 90%;
-    --secondary-foreground: 36 14% 9%;
-    --muted: 40 22% 90%;
-    --muted-foreground: 36 8% 38%;
-    --accent: 40 22% 90%;
-    --accent-foreground: 36 14% 9%;
-    --destructive: 8 70% 46%;
-    --destructive-foreground: 42 40% 98%;
-    --border: 38 16% 83%;
-    --input: 38 16% 83%;
-    --ring: 160 62% 42%;
-    --radius: 0.5rem;
+    /* Cool paper + midnight ink, indigo primary, one amber "light on" accent */
+    --background: 220 33% 97%;
+    --foreground: 226 42% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 226 42% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 226 42% 10%;
+    --primary: 238 74% 52%;
+    --primary-foreground: 0 0% 100%;
+    --primary-ink: 238 72% 44%;
+    --secondary: 228 45% 94%;
+    --secondary-foreground: 226 42% 10%;
+    --muted: 228 40% 94%;
+    --muted-foreground: 226 14% 40%;
+    --accent: 228 45% 94%;
+    --accent-foreground: 226 42% 10%;
+    --highlight: 32 100% 54%;
+    --highlight-foreground: 226 42% 10%;
+    --destructive: 6 72% 46%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 226 24% 88%;
+    --input: 226 24% 88%;
+    --ring: 238 74% 52%;
+    --radius: 0.875rem;
   }
 
   .dark {
-    --background: 36 14% 9%;
-    --foreground: 42 33% 95%;
-    --card: 36 12% 12%;
-    --card-foreground: 42 33% 95%;
-    --popover: 36 12% 12%;
-    --popover-foreground: 42 33% 95%;
-    --primary: 160 62% 48%;
-    --primary-foreground: 36 14% 9%;
-    --primary-ink: 160 62% 55%;
-    --secondary: 36 10% 17%;
-    --secondary-foreground: 42 33% 95%;
-    --muted: 36 10% 17%;
-    --muted-foreground: 38 10% 64%;
-    --accent: 36 10% 17%;
-    --accent-foreground: 42 33% 95%;
-    --destructive: 8 70% 55%;
-    --destructive-foreground: 42 33% 95%;
-    --border: 36 9% 22%;
-    --input: 36 9% 22%;
-    --ring: 160 62% 48%;
+    --background: 228 36% 7%;
+    --foreground: 220 33% 96%;
+    --card: 228 30% 10%;
+    --card-foreground: 220 33% 96%;
+    --popover: 228 30% 10%;
+    --popover-foreground: 220 33% 96%;
+    --primary: 238 92% 72%;
+    --primary-foreground: 228 36% 7%;
+    --primary-ink: 238 92% 80%;
+    --secondary: 228 26% 15%;
+    --secondary-foreground: 220 33% 96%;
+    --muted: 228 26% 15%;
+    --muted-foreground: 226 14% 66%;
+    --accent: 228 26% 15%;
+    --accent-foreground: 220 33% 96%;
+    --highlight: 32 100% 60%;
+    --highlight-foreground: 228 36% 7%;
+    --destructive: 6 72% 56%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 228 20% 20%;
+    --input: 228 20% 20%;
+    --ring: 238 92% 72%;
   }
 }
 
@@ -61,10 +65,14 @@
   }
   body {
     @apply bg-background text-foreground antialiased font-sans;
-    font-feature-settings: "ss01" 1, "cv11" 1;
+    
   }
   h1, h2, h3 {
-    @apply font-display font-normal tracking-tight;
+    @apply font-display font-semibold tracking-tighter;
+  }
+  /* Headings used to switch to a serif italic for emphasis. Keep the emphasis, drop the slant. */
+  h1 .italic, h2 .italic, h3 .italic, .font-display .italic {
+    font-style: normal;
   }
   ::selection {
     background: hsl(var(--primary) / 0.35);

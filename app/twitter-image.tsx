@@ -15,17 +15,17 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "80px",
-          background: "linear-gradient(135deg, #f3f8f4 0%, #d9eadf 100%)",
-          color: "#14301f",
+          background: "linear-gradient(135deg, #0c0e24 0%, #23267f 100%)",
+          color: "#ffffff",
         }}
       >
-        <div style={{ fontSize: 30, letterSpacing: 4, textTransform: "uppercase", color: "#29ad81", display: "flex" }}>
+        <div style={{ fontSize: 30, letterSpacing: 4, textTransform: "uppercase", color: "#ff9f1c", display: "flex" }}>
           Smarter Home Philippines
         </div>
         <div style={{ fontSize: 76, fontWeight: 700, lineHeight: 1.1, marginTop: 24, display: "flex" }}>
           Smart home installation in Pampanga, Tarlac and Bulacan
         </div>
-        <div style={{ fontSize: 34, marginTop: 32, color: "#3d5a47", display: "flex" }}>
+        <div style={{ fontSize: 34, marginTop: 32, color: "#c7c9f5", display: "flex" }}>
           Lights, locks, cameras and aircon control, planned and installed.
         </div>
       </div>
