@@ -7,7 +7,6 @@ import { ArrowRight, ArrowUpRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
-import { SmartHome3D } from "@/components/home-3d/smart-home-3d"
 import { ExplainerVideo } from "@/components/explainer-video"
 import { platformList } from "@/lib/platforms"
 
@@ -89,7 +88,7 @@ export default function Home() {
               className="mt-7 max-w-md text-lg leading-relaxed text-muted-foreground"
             >
               We plan, supply and install smart lights, door locks, CCTV cameras and aircon control that work
-              with Alexa, Google Home and Home Assistant. Tap the house to see how it feels.
+              with Alexa, Google Home and Home Assistant.
             </motion.p>
             <motion.div
               {...fade}
@@ -113,7 +112,37 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.15 }}
             className="min-w-0 lg:col-span-7"
           >
-            <SmartHome3D />
+            <div className="relative overflow-hidden rounded-2xl border bg-card">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://images.unsplash.com/photo-1771558969707-45e93dfd2570?ixlib=rb-4.1.0&q=80&fm=jpg&crop=entropy&cs=srgb&w=1600&h=1100&fit=crop"
+                alt="Modern minimalist home exterior in Cavite, Philippines"
+                width={1600}
+                height={1100}
+                fetchPriority="high"
+                className="aspect-[16/11] h-full w-full object-cover"
+              />
+              <p className="absolute bottom-3 right-4 text-xs text-white/80">
+                Photo by{" "}
+                <a
+                  href="https://unsplash.com/@jemmbuilders?utm_source=smarterhomeph&utm_medium=referral"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-2"
+                >
+                  JEMM Builders
+                </a>{" "}
+                on{" "}
+                <a
+                  href="https://unsplash.com/?utm_source=smarterhomeph&utm_medium=referral"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-2"
+                >
+                  Unsplash
+                </a>
+              </p>
+            </div>
           </motion.div>
         </section>
 
