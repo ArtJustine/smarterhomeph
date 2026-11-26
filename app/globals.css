@@ -4,55 +4,30 @@
 
 @layer base {
   :root {
-    /* Cool paper + midnight ink, indigo primary, one amber "light on" accent */
-    --background: 220 33% 97%;
-    --foreground: 226 42% 10%;
-    --card: 0 0% 100%;
-    --card-foreground: 226 42% 10%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 226 42% 10%;
-    --primary: 238 74% 52%;
-    --primary-foreground: 0 0% 100%;
-    --primary-ink: 238 72% 44%;
-    --secondary: 228 45% 94%;
-    --secondary-foreground: 226 42% 10%;
-    --muted: 228 40% 94%;
-    --muted-foreground: 226 14% 40%;
-    --accent: 228 45% 94%;
-    --accent-foreground: 226 42% 10%;
-    --highlight: 32 100% 54%;
-    --highlight-foreground: 226 42% 10%;
-    --destructive: 6 72% 46%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 226 24% 88%;
-    --input: 226 24% 88%;
-    --ring: 238 74% 52%;
-    --radius: 0.875rem;
-  }
-
-  .dark {
-    --background: 228 36% 7%;
-    --foreground: 220 33% 96%;
-    --card: 228 30% 10%;
-    --card-foreground: 220 33% 96%;
-    --popover: 228 30% 10%;
-    --popover-foreground: 220 33% 96%;
+    /* Black-first. Sections tint the black with their own hue via .tone-* (see below). */
+    --background: 240 10% 4%;
+    --foreground: 0 0% 98%;
+    --card: 240 8% 8%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 8% 8%;
+    --popover-foreground: 0 0% 98%;
     --primary: 238 92% 72%;
-    --primary-foreground: 228 36% 7%;
-    --primary-ink: 238 92% 80%;
-    --secondary: 228 26% 15%;
-    --secondary-foreground: 220 33% 96%;
-    --muted: 228 26% 15%;
-    --muted-foreground: 226 14% 66%;
-    --accent: 228 26% 15%;
-    --accent-foreground: 220 33% 96%;
-    --highlight: 32 100% 60%;
-    --highlight-foreground: 228 36% 7%;
+    --primary-foreground: 240 10% 5%;
+    --primary-ink: 238 95% 80%;
+    --secondary: 240 6% 12%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 6% 12%;
+    --muted-foreground: 240 5% 68%;
+    --accent: 240 6% 12%;
+    --accent-foreground: 0 0% 98%;
+    --highlight: 32 100% 58%;
+    --highlight-foreground: 240 10% 5%;
     --destructive: 6 72% 56%;
     --destructive-foreground: 0 0% 100%;
-    --border: 228 20% 20%;
-    --input: 228 20% 20%;
+    --border: 240 6% 17%;
+    --input: 240 6% 17%;
     --ring: 238 92% 72%;
+    --radius: 0.875rem;
   }
 }
 
@@ -62,6 +37,7 @@
   }
   html {
     scroll-behavior: smooth;
+    color-scheme: dark;
   }
   body {
     @apply bg-background text-foreground antialiased font-sans;
@@ -163,4 +139,34 @@
   0% { transform: scaleX(1); }
   50% { transform: scaleX(0.3); }
   100% { transform: scaleX(1); }
+}
+
+
+/* Section tones: a full-width band of tinted black. Each tone also re-colours the accents inside it. */
+@layer components {
+  .band {
+    --band: 240 10% 5%;
+    background-color: hsl(var(--band));
+    box-shadow: 0 0 0 100vmax hsl(var(--band));
+    clip-path: inset(0 -100vmax);
+  }
+  .tone-ink    { --tone: 238; --band: 240 10% 4%; }
+  .tone-indigo { --tone: 238; --band: 238 50% 9%; }
+  .tone-violet { --tone: 268; --band: 268 42% 9%; }
+  .tone-teal   { --tone: 174; --band: 176 52% 7%; }
+  .tone-amber  { --tone: 34;  --band: 30 50% 8%; }
+  .tone-rose   { --tone: 338; --band: 338 42% 9%; }
+  [class*="tone-"] {
+    --background: var(--band);
+    --primary: var(--tone) 90% 70%;
+    --primary-ink: var(--tone) 95% 78%;
+    --ring: var(--tone) 90% 70%;
+    --border: var(--tone) 26% 20%;
+    --input: var(--tone) 26% 20%;
+    --secondary: var(--tone) 30% 14%;
+    --muted: var(--tone) 30% 14%;
+    --accent: var(--tone) 30% 14%;
+    --card: var(--tone) 34% 12%;
+    --popover: var(--tone) 34% 12%;
+  }
 }

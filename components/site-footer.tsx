@@ -35,7 +35,7 @@ const columns = [
 
 export function SiteFooter() {
   return (
-    <footer className="bg-foreground text-background">
+    <footer className="band tone-ink border-t">
       <div className="container py-16 lg:py-24">
         <div className="grid gap-16 lg:grid-cols-12">
           <div className="lg:col-span-6">
@@ -54,13 +54,13 @@ export function SiteFooter() {
           <div className="grid grid-cols-2 gap-10 sm:grid-cols-4 lg:col-span-6 lg:pl-8">
             {columns.map((col) => (
               <div key={col.title}>
-                <h3 className="font-mono text-[11px] uppercase tracking-[0.14em] text-background/50">
+                <h3 className="font-mono text-[11px] uppercase tracking-[0.14em] text-foreground/50">
                   {col.title}
                 </h3>
                 <ul className="mt-5 space-y-3">
                   {col.links.map((l) => (
                     <li key={l.href}>
-                      <Link href={l.href} className="text-sm text-background/80 transition-colors hover:text-primary">
+                      <Link href={l.href} className="text-sm text-foreground/80 transition-colors hover:text-primary">
                         {l.name}
                       </Link>
                     </li>
@@ -71,7 +71,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-20 flex flex-col gap-3 border-t border-background/15 pt-6 font-mono text-[11px] uppercase tracking-[0.12em] text-background/50 sm:flex-row sm:justify-between">
+        <div className="mt-20 flex flex-col gap-3 border-t border-foreground/15 pt-6 font-mono text-[11px] uppercase tracking-[0.12em] text-foreground/50 sm:flex-row sm:justify-between">
           <p>Serving Pampanga, Tarlac and Bulacan</p>
           <p>© {new Date().getFullYear()} Smarter Home PH</p>
         </div>

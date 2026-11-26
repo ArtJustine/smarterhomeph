@@ -116,11 +116,11 @@ export default function ServicesPage() {
         </section>
 
         <section className="container pb-24 lg:pb-32">
-          <div className="rounded-xl bg-foreground px-8 py-14 text-background sm:px-14">
+          <div className="rounded-xl border border-primary/30 bg-primary/10 px-8 py-14 text-foreground sm:px-14">
             <h2 className="max-w-xl text-balance text-4xl leading-tight sm:text-5xl">
               Bigger project? <span className="italic text-primary">Let's talk it through.</span>
             </h2>
-            <p className="mt-4 max-w-lg text-background/70">
+            <p className="mt-4 max-w-lg text-foreground/70">
               Whole-house setups, small offices and rentals each need a slightly different plan.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -129,7 +129,7 @@ export default function ServicesPage() {
                   Book a consultation <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="ghost" className="h-12 rounded-full px-5 text-background hover:bg-background/10 hover:text-background">
+              <Button asChild size="lg" variant="ghost" className="h-12 rounded-full px-5 text-foreground hover:bg-foreground/10 hover:text-foreground">
                 <Link href="/contact">Send us a message</Link>
               </Button>
             </div>

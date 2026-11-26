@@ -31,8 +31,8 @@ export function AlexaVoiceDemo() {
   const current = phrases[active]
 
   return (
-    <div className="rounded-xl bg-foreground p-6 text-background sm:p-8">
-      <p className="eyebrow !text-background/50">Try saying</p>
+    <div className="rounded-xl border border-primary/30 bg-primary/10 p-6 text-foreground sm:p-8">
+      <p className="eyebrow !text-foreground/60">Try saying</p>
 
       <div role="group" aria-label="Example voice commands" className="mt-4 flex flex-col gap-2">
         {phrases.map((p, i) => (
@@ -43,8 +43,8 @@ export function AlexaVoiceDemo() {
             aria-pressed={active === i}
             className={`flex items-center gap-3 rounded-lg border px-4 py-3 text-left transition-colors ${
               active === i
-                ? "border-primary bg-primary/15 text-background"
-                : "border-background/15 text-background/70 hover:border-background/40 hover:text-background"
+                ? "border-primary bg-primary/15 text-foreground"
+                : "border-foreground/15 text-foreground/70 hover:border-foreground/40 hover:text-foreground"
             }`}
           >
             <Mic className={`h-4 w-4 shrink-0 ${active === i ? "text-primary" : ""}`} />
@@ -53,7 +53,7 @@ export function AlexaVoiceDemo() {
         ))}
       </div>
 
-      <div className="mt-6 border-t border-background/15 pt-6" aria-live="polite">
+      <div className="mt-6 border-t border-foreground/15 pt-6" aria-live="polite">
         <div className="mb-4 flex h-8 items-center gap-1" aria-hidden>
           {bars.map((h, i) => (
             <motion.span
@@ -67,13 +67,13 @@ export function AlexaVoiceDemo() {
         </div>
         <ul className="space-y-2">
           {current.does.map((d) => (
-            <li key={d} className="flex items-center gap-3 text-background/90">
+            <li key={d} className="flex items-center gap-3 text-foreground/90">
               <span className="h-1.5 w-1.5 rounded-full bg-primary" />
               {d}
             </li>
           ))}
         </ul>
-        <p className="mt-5 font-mono text-[11px] uppercase tracking-wider text-background/40">
+        <p className="mt-5 font-mono text-[11px] uppercase tracking-wider text-foreground/40">
           Example routine. Nothing here is connected.
         </p>
       </div>

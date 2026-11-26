@@ -71,7 +71,7 @@ export default function Home() {
 
       <main className="flex-1">
         {/* Hero */}
-        <section className="container grid grid-cols-1 items-center gap-12 pb-20 pt-12 lg:grid-cols-12 lg:gap-10 lg:pb-28 lg:pt-20">
+        <section className="band tone-indigo container grid grid-cols-1 items-center gap-12 pb-20 pt-12 lg:grid-cols-12 lg:gap-10 lg:pb-28 lg:pt-20">
           <div className="min-w-0 lg:col-span-5">
             <motion.p {...fade} transition={{ duration: 0.5 }} className="eyebrow mb-6">
               Smart home installer · Central Luzon
@@ -118,7 +118,7 @@ export default function Home() {
         </section>
 
         {/* Explainer video */}
-        <section className="container pb-20 lg:pb-28">
+        <section className="band tone-violet container py-20 lg:py-28">
           <div className="mx-auto max-w-4xl">
             <p className="eyebrow mb-4">60 second overview</p>
             <h2 className="mb-8 max-w-2xl text-balance text-4xl leading-tight sm:text-5xl">
@@ -129,7 +129,7 @@ export default function Home() {
         </section>
 
         {/* Platforms */}
-        <section className="container pb-24 lg:pb-32">
+        <section className="band tone-teal container py-24 lg:py-32">
           <div className="mb-14 max-w-2xl">
             <p className="eyebrow mb-4">Pick your platform</p>
             <h2 className="text-balance text-4xl leading-tight sm:text-5xl">
@@ -150,7 +150,7 @@ export default function Home() {
         </section>
 
         {/* How it works */}
-        <section className="container py-12 lg:py-16">
+        <section className="band tone-amber container py-20 lg:py-28">
           <div
             className="relative overflow-hidden rounded-3xl bg-cover bg-center"
             style={{ backgroundImage: "url('/images/how-it-works-bg.jpg')" }}
@@ -177,7 +177,7 @@ export default function Home() {
         </section>
 
         {/* What we set up */}
-        <section className="bg-secondary/60">
+        <section className="band tone-rose">
           <div className="container py-24 lg:py-32">
             <div className="mb-14 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
               <div>
@@ -211,7 +211,7 @@ export default function Home() {
         </section>
 
         {/* Where we work */}
-        <section className="container py-24 lg:py-32">
+        <section className="band tone-indigo container py-24 lg:py-32">
           <p className="eyebrow mb-4">Where we work</p>
           <h2 className="max-w-2xl text-balance text-4xl leading-tight sm:text-5xl">
             Smart home installation across Central Luzon.
@@ -238,17 +238,17 @@ export default function Home() {
         </section>
 
         {/* Builder CTA */}
-        <section className="container pb-24 lg:pb-32">
-          <div className="relative overflow-hidden rounded-xl bg-foreground px-8 py-16 text-background sm:px-14 lg:py-24">
+        <section className="band tone-violet container py-24 lg:py-32">
+          <div className="relative overflow-hidden rounded-xl border border-primary/30 bg-primary/10 px-8 py-16 text-foreground sm:px-14 lg:py-24">
             <div
               aria-hidden
               className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-primary/25 blur-3xl"
             />
-            <p className="eyebrow relative mb-5 !text-background/50">Plan by room</p>
+            <p className="eyebrow relative mb-5 !text-foreground/60">Plan by room</p>
             <h2 className="relative max-w-2xl text-balance text-5xl leading-[1.02] sm:text-6xl">
               Tell us what you want, <span className="italic text-primary">room by room.</span>
             </h2>
-            <p className="relative mt-6 max-w-lg text-lg text-background/70">
+            <p className="relative mt-6 max-w-lg text-lg text-foreground/70">
               Choose a service, pick a room, count the lights, locks, cameras or sensors. Send it to us when
               it looks right.
             </p>

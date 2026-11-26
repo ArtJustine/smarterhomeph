@@ -208,12 +208,12 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
 
         {/* CTA */}
         <section className="container pb-24 lg:pb-32">
-          <div className="relative overflow-hidden rounded-xl bg-foreground px-8 py-16 text-background sm:px-14 lg:py-20">
+          <div className="relative overflow-hidden rounded-xl border border-primary/30 bg-primary/10 px-8 py-16 text-foreground sm:px-14 lg:py-20">
             <div aria-hidden className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-primary/25 blur-3xl" />
             <h2 className="relative max-w-2xl text-balance text-4xl leading-[1.05] sm:text-6xl">
               A smart home in {c.name}, <span className="italic text-primary">planned first.</span>
             </h2>
-            <p className="relative mt-5 max-w-lg text-lg text-background/70">
+            <p className="relative mt-5 max-w-lg text-lg text-foreground/70">
               Tell us about your house and we will plan the devices, the rooms and the routines, then send a written quote before anything is bought.
             </p>
             <div className="relative mt-8 flex flex-wrap gap-3">
@@ -222,7 +222,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
                   Get a quote <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="ghost" className="h-12 rounded-full px-5 text-background hover:bg-background/10 hover:text-background">
+              <Button asChild size="lg" variant="ghost" className="h-12 rounded-full px-5 text-foreground hover:bg-foreground/10 hover:text-foreground">
                 <Link href="/services">Plan by room</Link>
               </Button>
             </div>

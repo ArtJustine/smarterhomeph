@@ -141,12 +141,12 @@ export default function ForBuildersPage() {
 
         {/* CTA */}
         <section className="container pb-24 lg:pb-32">
-          <div className="relative overflow-hidden rounded-xl bg-foreground px-8 py-16 text-background sm:px-14 lg:py-20">
+          <div className="relative overflow-hidden rounded-xl border border-primary/30 bg-primary/10 px-8 py-16 text-foreground sm:px-14 lg:py-20">
             <div aria-hidden className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-primary/25 blur-3xl" />
             <h2 className="relative max-w-2xl text-balance text-4xl leading-[1.05] sm:text-6xl">
               Building in Central Luzon? <span className="italic text-primary">Let us plan the smart part.</span>
             </h2>
-            <p className="relative mt-5 max-w-lg text-lg text-background/70">
+            <p className="relative mt-5 max-w-lg text-lg text-foreground/70">
               Send a floor plan or the project location. We reply with a short pre-wiring plan and what it involves, before anything is agreed.
             </p>
             <div className="relative mt-8 flex flex-wrap gap-3">
@@ -155,7 +155,7 @@ export default function ForBuildersPage() {
                   Send a project <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="ghost" className="h-12 rounded-full px-5 text-background hover:bg-background/10 hover:text-background">
+              <Button asChild size="lg" variant="ghost" className="h-12 rounded-full px-5 text-foreground hover:bg-foreground/10 hover:text-foreground">
                 <Link href="/services">See our services</Link>
               </Button>
             </div>

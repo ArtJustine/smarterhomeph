@@ -590,9 +590,9 @@ export default function BlogPostPage({ params }: { params: Promise<{ id: string 
             </div>
 
             <aside className="space-y-12 lg:col-span-4">
-              <div className="rounded-xl bg-foreground p-8 text-background">
+              <div className="rounded-xl border border-primary/30 bg-primary/10 p-8 text-foreground">
                 <h2 className="text-3xl leading-tight">Ready to price your own setup?</h2>
-                <p className="mt-3 text-sm leading-relaxed text-background/70">
+                <p className="mt-3 text-sm leading-relaxed text-foreground/70">
                   Pick a service, list what you want in each room and send it to us for a written quote.
                 </p>
                 <Button
