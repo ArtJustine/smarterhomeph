@@ -8,7 +8,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
 const PI = Math.PI
 
 export type DeviceType =
-  | "strip" | "fan" | "camera" | "lock" | "contact" | "motion" | "smoke" | "leak" | "th"
+  | "ceiling" | "lamp" | "fan" | "camera" | "lock" | "contact" | "motion" | "smoke" | "leak" | "th"
   | "thermo" | "ac" | "speaker" | "plug" | "hub"
 
 export type DeviceInfo = {
@@ -312,7 +312,7 @@ export function createHomeScene(container: HTMLElement): HomeScene {
 
   // ---------- devices ----------
   const CAT_OF: Record<string, string> = {
-    strip: "light", fan: "fan", motion: "sensor", contact: "sensor", leak: "sensor", smoke: "sensor", th: "sensor",
+    ceiling: "light", lamp: "light", fan: "fan", motion: "sensor", contact: "sensor", leak: "sensor", smoke: "sensor", th: "sensor",
     camera: "camera", lock: "lock", thermo: "climate", ac: "climate", speaker: "hub", plug: "hub", hub: "hub",
   }
   const CAT_COLOR: Record<string, number> = {
@@ -335,64 +335,84 @@ export function createHomeScene(container: HTMLElement): HomeScene {
 
   const build: Record<string, (dev: any) => void> = {}
 
-  build.strip = (dev) => {
+  // Shared glow + point light behaviour for ceiling lights and lamps.
+  function lightCommon(dev: any, o: { glowW: number; glowD: number; glowX: number; glowZ: number; glowY: number; glowOn: number; sprite: number; plY: number; plI: number; plDist: number }) {
     const g = dev.group
-    dev.segs = []
-    dev.color = new THREE.Color(0xffd9a0)
-    const room = ROOMS.find((r) => r.n === dev.room)!
     const glowMat = new THREE.MeshBasicMaterial({ map: glowTex, color: 0xffd9a0, transparent: true, opacity: 0, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -1 })
-    const glow = mesh(new THREE.PlaneGeometry(room.w * 1.05, room.d * 1.05), glowMat, room.x + room.w / 2, 0.012, room.z + room.d / 2, g)
+    const glow = mesh(new THREE.PlaneGeometry(o.glowW, o.glowD), glowMat, o.glowX, o.glowY, o.glowZ, g)
     glow.rotation.x = -PI / 2
-    dev.glowMat = glowMat
-    dev.segDefs.forEach((s: any, i: number) => {
-      const L = s.len
-      const ax = s.ax
-      const dim = ax === "x" ? [L, 0.03, 0.035] : ax === "y" ? [0.035, L, 0.035] : [0.035, 0.03, L]
-      const dd = ax === "x" ? [L - 0.02, 0.016, 0.022] : ax === "y" ? [0.022, L - 0.02, 0.022] : [0.022, 0.016, L - 0.02]
-      const hd = ax === "x" ? [L, 0.14, 0.14] : ax === "y" ? [0.14, L, 0.14] : [0.14, 0.14, L]
-      const hh = ax === "x" ? [L + 0.2, 0.4, 0.4] : ax === "y" ? [0.4, L + 0.2, 0.4] : [0.4, 0.4, L + 0.2]
-      mesh(bx(dim[0], dim[1], dim[2]), M(0x2b3340, { metalness: 0.5 }), s.x, s.y, s.z, g, true)
-      const dm = new THREE.MeshStandardMaterial({ color: 0xd7dbe0, emissive: 0x000000, roughness: 0.4 })
-      mesh(bx(dd[0], dd[1], dd[2]), dm, s.x + s.n[0] * 0.014, s.y, s.z + s.n[1] * 0.014, g)
-      const hm = new THREE.MeshBasicMaterial({ color: 0xffd9a0, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false })
-      mesh(bx(hd[0], hd[1], hd[2]), hm, s.x + s.n[0] * 0.05, s.y, s.z + s.n[1] * 0.05, g)
-      let pl: THREE.PointLight | null = null
-      if (!s.nopl) {
-        pl = new THREE.PointLight(0xffd9a0, 0, 7, 2)
-        pl.position.set(s.x + s.n[0] * 0.5, Math.min(s.y, 2.3) - 0.2, s.z + s.n[1] * 0.5)
-        g.add(pl)
+    const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, color: 0xffd9a0, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false }))
+    sp.scale.setScalar(o.sprite)
+    sp.position.set(0, o.plY, 0)
+    g.add(sp)
+    const pl = new THREE.PointLight(0xffd9a0, 0, o.plDist, 2)
+    pl.position.set(0, o.plY, 0)
+    g.add(pl)
+    return (shadeMat: THREE.MeshStandardMaterial, emissive: number) => {
+      glowMat.color.copy(dev.color)
+      glowMat.opacity = dev.on ? o.glowOn : 0
+      sp.material.color.copy(dev.color)
+      sp.material.opacity = dev.on ? 0.55 : 0
+      pl.color.copy(dev.color)
+      pl.intensity = dev.on ? o.plI : 0
+      if (dev.on) {
+        shadeMat.color.copy(dev.color)
+        shadeMat.emissive.copy(dev.color)
+        shadeMat.emissiveIntensity = emissive
+      } else {
+        shadeMat.color.setHex(0xe5e7eb)
+        shadeMat.emissive.setHex(0x000000)
+        shadeMat.emissiveIntensity = 0
       }
-      addHit(dev, bx(hh[0], hh[1], hh[2]), s.x, s.y, s.z)
-      dev.segs.push({ dm, hm, pl })
-      if (i === 0) {
-        dev.anchor = new THREE.Object3D()
-        dev.anchor.position.set(s.x, s.y, s.z)
-        g.add(dev.anchor)
-      }
-    })
-    dev.apply = () => {
-      dev.glowMat.color.copy(dev.color)
-      dev.glowMat.opacity = dev.on ? 0.34 : 0
-      dev.segs.forEach((s: any) => {
-        if (dev.on) {
-          s.dm.color.copy(dev.color)
-          s.dm.emissive.copy(dev.color)
-          s.dm.emissiveIntensity = 1.7
-          s.hm.color.copy(dev.color)
-          s.hm.opacity = 0.3
-          if (s.pl) {
-            s.pl.color.copy(dev.color)
-            s.pl.intensity = 5
-          }
-        } else {
-          s.dm.color.setHex(0xd7dbe0)
-          s.dm.emissive.setHex(0x000000)
-          s.dm.emissiveIntensity = 0
-          s.hm.opacity = 0
-          if (s.pl) s.pl.intensity = 0
-        }
-      })
     }
+  }
+
+  // Overhead light: a flat round fixture on the ceiling that lights the whole room.
+  build.ceiling = (dev) => {
+    const g = dev.group
+    const room = ROOMS.find((r) => r.n === dev.room)!
+    dev.color = new THREE.Color(0xfff1d6)
+    mesh(cy(0.34, 0.04, 28), M(0xf3f4f6), 0, -0.02, 0, g)
+    const lens = new THREE.MeshStandardMaterial({ color: 0xe5e7eb, emissive: 0x000000, roughness: 0.4 })
+    mesh(cy(0.28, 0.012, 28), lens, 0, -0.046, 0, g)
+    const upd = lightCommon(dev, {
+      glowW: room.w * 1.05, glowD: room.d * 1.05, glowX: room.x + room.w / 2 - dev.x, glowZ: room.z + room.d / 2 - dev.z,
+      glowY: 0.012 - dev.y, glowOn: 0.34, sprite: 1.5, plY: -0.35, plI: 7, plDist: 9,
+    })
+    addHit(dev, new THREE.SphereGeometry(0.55, 8, 6), 0, -0.1, 0)
+    dev.anchor = new THREE.Object3D()
+    dev.anchor.position.y = -0.1
+    g.add(dev.anchor)
+    dev.apply = () => upd(lens, 1.8)
+  }
+
+  // Accent lamp: floor lamp or table lamp with a small pool of light around it.
+  build.lamp = (dev) => {
+    const g = dev.group
+    dev.color = new THREE.Color(0xffc98a)
+    const floor = dev.kind === "floor"
+    const shade = new THREE.MeshStandardMaterial({ color: 0xe5e7eb, emissive: 0x000000, roughness: 0.6, side: THREE.DoubleSide })
+    let sy: number
+    if (floor) {
+      mesh(cy(0.15, 0.03, 24), M(0x2b3340, { metalness: 0.5 }), 0, 0.015, 0, g, true)
+      mesh(cy(0.012, 1.3, 8), M(0x2b3340, { metalness: 0.5 }), 0, 0.68, 0, g, true)
+      sy = 1.48
+      mesh(new THREE.CylinderGeometry(0.14, 0.22, 0.34, 24, 1, true), shade, 0, sy, 0, g)
+    } else {
+      mesh(cy(0.07, 0.03, 20), M(0x2b3340, { metalness: 0.5 }), 0, 0.015, 0, g, true)
+      mesh(cy(0.012, 0.2, 8), M(0x2b3340, { metalness: 0.5 }), 0, 0.13, 0, g, true)
+      sy = 0.33
+      mesh(new THREE.CylinderGeometry(0.08, 0.13, 0.2, 20, 1, true), shade, 0, sy, 0, g)
+    }
+    const upd = lightCommon(dev, {
+      glowW: floor ? 3.2 : 2.2, glowD: floor ? 3.2 : 2.2, glowX: 0, glowZ: 0, glowY: 0.013 - dev.y,
+      glowOn: 0.3, sprite: floor ? 0.9 : 0.55, plY: sy, plI: floor ? 3.5 : 2.2, plDist: floor ? 5.5 : 4,
+    })
+    addHit(dev, bx(0.5, floor ? 1.8 : 0.6, 0.5), 0, floor ? 0.9 : 0.25, 0)
+    dev.anchor = new THREE.Object3D()
+    dev.anchor.position.y = sy
+    g.add(dev.anchor)
+    dev.apply = () => upd(shade, 1.6)
   }
 
   build.fan = (dev) => {
@@ -680,9 +700,8 @@ export function createHomeScene(container: HTMLElement): HomeScene {
 
   const DEFS: any[] = [
     // Living
-    { type: "strip", id: "light.living_room", name: "Living room light strip", room: "Living Room", proto: "Zigbee", on: true, segDefs: [
-      { ax: "x", x: 3.0, y: 2.45, z: 4.89, len: 5.0, n: [0, -1] },
-      { ax: "z", x: 0.11, y: 2.45, z: 2.5, len: 4.2, n: [1, 0], nopl: true }] },
+    { type: "ceiling", id: "light.living_room", name: "Living room ceiling light", room: "Living Room", proto: "Zigbee", on: true, x: 4.6, y: 2.6, z: 2.5 },
+    { type: "lamp", kind: "floor", id: "light.living_floor_lamp", name: "Living room floor lamp", room: "Living Room", proto: "Zigbee", on: true, x: 2.9, y: 0, z: 4.4 },
     { type: "fan", id: "fan.living_room", name: "Living room ceiling fan", room: "Living Room", proto: "Wi-Fi", on: false, x: 3, y: 2.6, z: 2.5 },
     { type: "motion", id: "binary_sensor.living_room_motion", name: "Living room motion sensor", room: "Living Room", proto: "Zigbee", sim: true, on: false, x: 0.12, y: 2.3, z: 4.8, rot: (3 * PI) / 4 },
     { type: "contact", id: "binary_sensor.front_door_contact", name: "Front door sensor (opens door)", room: "Living Room", proto: "Zigbee", sim: true, on: false, door: true, px: 3.93, py: 2.05, pz: 0.1 },
@@ -692,30 +711,25 @@ export function createHomeScene(container: HTMLElement): HomeScene {
     { type: "speaker", id: "media_player.living_room", name: "Smart speaker", room: "Living Room", proto: "Wi-Fi", on: false, x: 0.3, y: 0.45, z: 3.1 },
     { type: "plug", id: "switch.living_tv_plug", name: "TV smart plug", room: "Living Room", proto: "Zigbee", on: false, x: 0.09, y: 0.35, z: 1.2, rot: PI / 2 },
     // Kitchen
-    { type: "strip", id: "light.kitchen", name: "Kitchen light strip", room: "Kitchen & Dining", proto: "Zigbee", on: true, segDefs: [
-      { ax: "x", x: 9.0, y: 2.45, z: 4.89, len: 5.2, n: [0, -1] },
-      { ax: "x", x: 9.0, y: 2.45, z: 0.11, len: 5.2, n: [0, 1], nopl: true }] },
+    { type: "ceiling", id: "light.kitchen", name: "Kitchen ceiling light", room: "Kitchen & Dining", proto: "Zigbee", on: true, x: 9.0, y: 2.6, z: 2.6 },
+    { type: "lamp", kind: "table", id: "light.kitchen_lamp", name: "Kitchen counter lamp", room: "Kitchen & Dining", proto: "Zigbee", on: false, x: 7.2, y: 0.9, z: 0.45 },
     { type: "leak", id: "binary_sensor.kitchen_leak", name: "Kitchen leak sensor", room: "Kitchen & Dining", proto: "Zigbee", sim: true, on: false, x: 8.6, y: 0, z: 1.15 },
     { type: "smoke", id: "binary_sensor.kitchen_smoke", name: "Kitchen smoke detector", room: "Kitchen & Dining", proto: "Zigbee", sim: true, on: false, x: 9, y: 2.6, z: 3.6 },
     { type: "contact", id: "binary_sensor.kitchen_window", name: "Kitchen window sensor", room: "Kitchen & Dining", proto: "Zigbee", sim: true, on: false, px: 8.0, py: 2.05, pz: 0.12, gx: true },
     // Master
-    { type: "strip", id: "light.master_bedroom", name: "Bedroom light strip", room: "Master Bedroom", proto: "Zigbee", on: false, segDefs: [
-      { ax: "z", x: 0.11, y: 2.45, z: 7.0, len: 3.2, n: [1, 0] },
-      { ax: "x", x: 2.5, y: 1.15, z: 8.8, len: 1.8, n: [0, -1], nopl: true }] },
+    { type: "ceiling", id: "light.master_bedroom", name: "Bedroom ceiling light", room: "Master Bedroom", proto: "Zigbee", on: false, x: 1.4, y: 2.6, z: 6.2 },
+    { type: "lamp", kind: "table", id: "light.bedside_left", name: "Bedside lamp (left)", room: "Master Bedroom", proto: "Zigbee", on: false, x: 1.95, y: 0.57, z: 8.55 },
+    { type: "lamp", kind: "table", id: "light.bedside_right", name: "Bedside lamp (right)", room: "Master Bedroom", proto: "Zigbee", on: false, x: 3.05, y: 0.57, z: 8.55 },
     { type: "fan", id: "fan.master_bedroom", name: "Bedroom ceiling fan", room: "Master Bedroom", proto: "Wi-Fi", on: false, x: 2.5, y: 2.6, z: 7.0 },
     { type: "ac", id: "climate.master_ac", name: "Bedroom aircon", room: "Master Bedroom", proto: "Wi-Fi", on: false, x: 4.2, y: 2.15, z: 5.09 },
     { type: "th", id: "sensor.master_temperature", name: "Bedroom temperature sensor", room: "Master Bedroom", proto: "Zigbee", x: 4.91, y: 1.4, z: 8.4, rot: -PI / 2 },
     // Bath
-    { type: "strip", id: "light.bathroom", name: "Bathroom light strip", room: "Bathroom", proto: "Zigbee", on: false, segDefs: [
-      { ax: "z", x: 7.87, y: 2.45, z: 7.0, len: 3.0, n: [-1, 0] },
-      { ax: "y", x: 5.14, y: 1.5, z: 5.5, len: 0.9, n: [1, 0], nopl: true },
-      { ax: "y", x: 5.14, y: 1.5, z: 6.5, len: 0.9, n: [1, 0], nopl: true }] },
+    { type: "ceiling", id: "light.bathroom", name: "Bathroom ceiling light", room: "Bathroom", proto: "Zigbee", on: false, x: 6.5, y: 2.6, z: 7.0 },
     { type: "leak", id: "binary_sensor.bathroom_leak", name: "Bathroom leak sensor", room: "Bathroom", proto: "Zigbee", sim: true, on: false, x: 7.0, y: 0, z: 7.8 },
     { type: "th", id: "sensor.bathroom_humidity", name: "Bathroom humidity sensor", room: "Bathroom", proto: "Zigbee", x: 7.91, y: 1.5, z: 5.5, rot: -PI / 2 },
     // Office
-    { type: "strip", id: "light.office", name: "Office light strip", room: "Office", proto: "Zigbee", on: false, segDefs: [
-      { ax: "x", x: 10, y: 2.45, z: 8.89, len: 3.2, n: [0, -1] },
-      { ax: "x", x: 10.4, y: 1.2, z: 8.88, len: 0.9, n: [0, -1], nopl: true }] },
+    { type: "ceiling", id: "light.office", name: "Office ceiling light", room: "Office", proto: "Zigbee", on: false, x: 9.2, y: 2.6, z: 6.0 },
+    { type: "lamp", kind: "table", id: "light.office_desk_lamp", name: "Office desk lamp", room: "Office", proto: "Zigbee", on: false, x: 9.7, y: 0.75, z: 8.5 },
     { type: "fan", id: "fan.office", name: "Office ceiling fan", room: "Office", proto: "Wi-Fi", on: false, x: 10, y: 2.6, z: 7.0 },
     { type: "ac", id: "climate.office_ac", name: "Office aircon", room: "Office", proto: "Wi-Fi", on: false, x: 11.3, y: 2.15, z: 5.09 },
     { type: "contact", id: "binary_sensor.office_window", name: "Office window sensor", room: "Office", proto: "Zigbee", sim: true, on: false, px: 11.9, py: 2.05, pz: 6.25, gx: false },

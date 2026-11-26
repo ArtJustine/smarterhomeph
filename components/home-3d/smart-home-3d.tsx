@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import {
-  Camera, DoorOpen, Droplets, Fan, Lightbulb, Lock, Plug, Radar, Router, Siren, Snowflake, Speaker, Thermometer,
+  Camera, DoorOpen, Droplets, Fan, Lamp, Lightbulb, Lock, Plug, Radar, Router, Siren, Snowflake, Speaker, Thermometer,
   type LucideIcon,
 } from "lucide-react"
 import type { DeviceInfo, DeviceState, DeviceType, HomeScene } from "./scene"
@@ -12,7 +12,7 @@ import type { DeviceInfo, DeviceState, DeviceType, HomeScene } from "./scene"
 const Fallback2D = dynamic(() => import("@/components/interactive-home").then((m) => m.InteractiveHome), { ssr: false })
 
 const ICONS: Record<DeviceType, LucideIcon> = {
-  strip: Lightbulb, fan: Fan, camera: Camera, lock: Lock, contact: DoorOpen, motion: Radar, smoke: Siren,
+  ceiling: Lightbulb, lamp: Lamp, fan: Fan, camera: Camera, lock: Lock, contact: DoorOpen, motion: Radar, smoke: Siren,
   leak: Droplets, th: Thermometer, thermo: Thermometer, ac: Snowflake, speaker: Speaker, plug: Plug, hub: Router,
 }
 
@@ -56,21 +56,23 @@ type SceneDef = { name: string; note: string; on: Record<string, Partial<DeviceS
 const SCENES: SceneDef[] = [
   {
     name: "Morning",
-    note: "Morning: lights up in the living room, kitchen and bedroom, aircon off, door stays locked.",
+    note: "Morning: ceiling lights on in the living room, kitchen and bedroom, aircon off, door stays locked.",
     on: { "light.living_room": { on: true }, "light.kitchen": { on: true }, "light.master_bedroom": { on: true } },
   },
   {
     name: "Movie night",
-    note: "Movie night: lights off, TV on, speaker playing, fan on low, thermostat at 24°C.",
+    note: "Movie night: ceiling lights off, floor lamp on, TV on, speaker playing, fan on low, thermostat at 24°C.",
     on: {
+      "light.living_floor_lamp": { on: true },
       "fan.living_room": { on: true, speed: 1 }, "climate.thermostat": { on: true, temp: 24 },
       "media_player.living_room": { on: true }, "switch.living_tv_plug": { on: true },
     },
   },
   {
     name: "Goodnight",
-    note: "Goodnight: lights off, door locked, cameras armed, bedroom aircon and fan on.",
+    note: "Goodnight: ceiling lights off, bedside lamps on, door locked, cameras armed, bedroom aircon and fan on.",
     on: {
+      "light.bedside_left": { on: true }, "light.bedside_right": { on: true },
       "camera.living_room": { on: true }, "climate.master_ac": { on: true }, "fan.master_bedroom": { on: true, speed: 1 },
       "climate.thermostat": { on: true, temp: 25 },
     },
@@ -308,7 +310,7 @@ export function SmartHome3D() {
       </div>
 
       {/* Extra controls for the selected device */}
-      {status === "ready" && selected && (selected.type === "fan" || selected.type === "thermo" || selected.type === "strip") && (
+      {status === "ready" && selected && (selected.type === "fan" || selected.type === "thermo" || selected.type === "ceiling" || selected.type === "lamp") && (
         <div className="mt-3 flex flex-wrap items-center gap-2 rounded-md border bg-background px-3 py-2 text-sm">
           <span className="eyebrow mr-1">{selected.name}</span>
           {selected.type === "fan" &&
@@ -354,7 +356,7 @@ export function SmartHome3D() {
               </button>
             </>
           )}
-          {selected.type === "strip" &&
+          {(selected.type === "ceiling" || selected.type === "lamp") &&
             COLORS.map((c) => (
               <button
                 key={c}
