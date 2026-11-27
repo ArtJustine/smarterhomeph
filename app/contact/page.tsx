@@ -168,11 +168,14 @@ export default function ContactPage() {
                     Click the button and your email app opens with a short template. Tell us where you live, what kind of
                     property it is and what you want to automate. We reply with next steps.
                   </p>
-                  <Button asChild className="w-full h-16 rounded-lg font-semibold text-xl tracking-tight">
-                    <a href={mailto}>Email {EMAIL}</a>
+                  <Button asChild size="lg" className="h-14 rounded-full px-8 text-base font-medium normal-case tracking-normal">
+                    <a href={mailto}>
+                      <Mail className="mr-2 h-5 w-5" strokeWidth={1.75} />
+                      Send us an email
+                    </a>
                   </Button>
                   <p className="text-sm text-muted-foreground">
-                    Button not opening anything? Write to {EMAIL} from any email account.
+                    Or write to <a href={mailto} className="text-foreground underline underline-offset-4">{EMAIL}</a> from any email account.
                   </p>
                 </div>
               </motion.div>
