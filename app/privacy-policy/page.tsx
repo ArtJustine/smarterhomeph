@@ -64,7 +64,7 @@ export default function PrivacyPolicyPage() {
 
             <h2 className="font-display text-3xl mb-4 mt-10">8. Contact Us</h2>
             <p className="text-muted-foreground">
-              If you have any questions about this Privacy Policy, please contact us at privacy@smarthome.com.
+              If you have any questions about this Privacy Policy, please contact us at info@smarterhomephilippines.com.
             </p>
           </div>
         </section>

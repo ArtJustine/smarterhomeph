@@ -7,7 +7,6 @@ import * as z from "zod"
 import { motion } from "framer-motion"
 import { 
   Mail, 
-  Phone, 
   MapPin, 
   Send, 
   CheckCircle2, 
@@ -92,17 +91,25 @@ export default function ContactPage() {
     toast.success("Builder configuration cleared.")
   }
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true)
-    // Simulate API call
-    setTimeout(() => {
-      console.log(values)
-      setIsSubmitting(false)
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      })
+      if (!res.ok) throw new Error("Request failed")
+      form.reset()
       setIsSubmitted(true)
       localStorage.removeItem("smarterhome_builder_config")
       setLoadedConfig(null)
       toast.success("Message sent. We will be in touch.")
-    }, 2000)
+    } catch {
+      toast.error("Could not send your message. Please email info@smarterhomephilippines.com instead.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -184,9 +191,8 @@ export default function ContactPage() {
 
                 <div className="grid gap-8">
                   {[
-                    { title: "Email Us", desc: "hello@smarterhomeph.com", icon: Mail },
-                    { title: "Call Us", desc: "+63 (2) 8000-0000", icon: Phone },
-                    { title: "Visit Us", desc: "123 Innovation Way, Taguig City", icon: MapPin },
+                    { title: "Email Us", desc: "info@smarterhomephilippines.com", icon: Mail },
+                    { title: "Location", desc: "Mabalacat City, Pampanga. No physical office, we come to you.", icon: MapPin },
                     { title: "Support", desc: "24/7 Priority Support", icon: Clock },
                   ].map((item, i) => (
                     <motion.div 
