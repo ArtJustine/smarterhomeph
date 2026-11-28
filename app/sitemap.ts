@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next"
+import { blogPath, blogSeo } from "@/lib/blog-seo"
 import { SITE_URL } from "@/lib/site"
 import { serviceTopics } from "@/lib/service-topics"
 import { cityPages } from "@/lib/cities"
@@ -19,14 +20,7 @@ const routes: { path: string; priority: number }[] = [
   { path: "/about", priority: 0.6 },
   { path: "/faqs", priority: 0.7 },
   { path: "/blog", priority: 0.7 },
-  { path: "/blog/1", priority: 0.5 },
-  { path: "/blog/2", priority: 0.5 },
-  { path: "/blog/3", priority: 0.5 },
-  { path: "/blog/4", priority: 0.5 },
-  { path: "/blog/5", priority: 0.5 },
-  { path: "/blog/6", priority: 0.5 },
-  { path: "/blog/7", priority: 0.6 },
-  { path: "/blog/8", priority: 0.6 },
+  ...Object.keys(blogSeo).map((id) => ({ path: blogPath(Number(id)), priority: Number(id) >= 7 ? 0.6 : 0.5 })),
   { path: "/privacy-policy", priority: 0.2 },
 ]
 

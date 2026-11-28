@@ -5,6 +5,17 @@ try {
   // ignore error
 }
 
+const blogSlugs = {
+  1: 'smart-home-devices-philippines',
+  2: 'smart-home-security-philippines',
+  3: 'smart-home-voice-assistant',
+  4: 'smart-home-energy-saving',
+  5: 'smart-home-integration',
+  6: 'smart-home-for-elderly',
+  7: 'how-to-start-a-smart-home-philippines',
+  8: 'cut-aircon-electricity-bill-philippines',
+}
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // /devices and /builder are hidden for now. The page code is kept in app/devices and app/builder.
@@ -24,6 +35,7 @@ const nextConfig = {
         destination: 'https://smarterhomephilippines.com/:path*',
         permanent: true,
       },
+      ...Object.entries(blogSlugs).map(([id, slug]) => ({ source: `/blog/${id}`, destination: `/blog/${slug}`, permanent: true })),
       { source: '/devices', destination: '/services', permanent: false },
       { source: '/builder', destination: '/services', permanent: false },
       { source: '/services/audio-video', destination: '/services/media-control', permanent: true },

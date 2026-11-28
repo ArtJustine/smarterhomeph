@@ -4,12 +4,13 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { PageHeader } from "@/components/page-header"
 import { JsonLd } from "@/components/json-ld"
+import { blogPath } from "@/lib/blog-seo"
 import { abs, breadcrumb, graph, webPage } from "@/lib/schema"
 
 const blogPosts = [
   {
     id: 8,
-    title: "How a Smart Home in the Philippines Can Cut Your Aircon Bill",
+    title: "How to Cut Your Aircon Electricity Bill in the Philippines With a Smart Home",
     excerpt: "Five simple automations that stop aircon waste, what each one needs, and what a smart home can't fix.",
     date: "November 28, 2026",
     author: "Art Gonzales",
@@ -25,7 +26,7 @@ const blogPosts = [
   },
   {
     id: 1,
-    title: "10 Smart Home Devices Worth Buying in the Philippines (and the Order to Buy Them)",
+    title: "Smart Home Devices in the Philippines: 10 to Buy First (With Prices)",
     excerpt: "Ten devices that make a daily difference, what each one does, and the voltage, wifi and brownout checks to make before you order.",
     date: "March 20, 2025",
     author: "Art Gonzales",
@@ -33,7 +34,7 @@ const blogPosts = [
   },
   {
     id: 2,
-    title: "How to Set Up Smart Home Security on a Budget in the Philippines",
+    title: "Smart Home Security in the Philippines: How to Set It Up on a Budget",
     excerpt: "What to buy first, what it costs, and how to avoid monthly fees, with the brownout and privacy details most guides skip.",
     date: "March 15, 2025",
     author: "Art Gonzales",
@@ -41,7 +42,7 @@ const blogPosts = [
   },
   {
     id: 3,
-    title: "The Future of Voice Assistants in Smart Homes",
+    title: "Smart Home Voice Assistants: Where Alexa and Google Assistant Are Heading",
     excerpt: "Explore how voice assistant technology is evolving and what it means for the future of home automation.",
     date: "March 10, 2025",
     author: "Art Gonzales",
@@ -49,7 +50,7 @@ const blogPosts = [
   },
   {
     id: 4,
-    title: "Energy Saving Tips with Smart Home Automation",
+    title: "Smart Home Energy Saving: How Automation Cuts Your Power Bill",
     excerpt: "Discover how smart thermostats, lighting, and appliances can help reduce your energy consumption.",
     date: "March 5, 2025",
     author: "Art Gonzales",
@@ -57,7 +58,7 @@ const blogPosts = [
   },
   {
     id: 5,
-    title: "Integrating Smart Home Systems: A Comprehensive Guide",
+    title: "Smart Home Integration: How to Connect Devices From Different Brands",
     excerpt: "Learn how to make different smart home ecosystems work together for a seamless experience.",
     date: "February 28, 2025",
     author: "Art Gonzales",
@@ -65,7 +66,7 @@ const blogPosts = [
   },
   {
     id: 6,
-    title: "Smart Home Setup for Aging in Place: A Practical Guide for Families",
+    title: "Smart Home for Elderly Parents: 7 Upgrades for Safer Aging in Place",
     excerpt: "Seven small upgrades that make a parent's home safer, plus the privacy and brownout details most guides skip.",
     date: "February 23, 2025",
     author: "Art Gonzales",
@@ -94,7 +95,7 @@ export default function BlogPage() {
               itemListElement: blogPosts.map((post, i) => ({
                 "@type": "ListItem",
                 position: i + 1,
-                url: abs(`/blog/${post.id}`),
+                url: abs(blogPath(post.id)),
                 name: post.title,
               })),
             },
@@ -115,7 +116,7 @@ export default function BlogPage() {
             {blogPosts.map((post) => (
               <li key={post.id} className="border-t">
                 <Link
-                  href={`/blog/${post.id}`}
+                  href={blogPath(post.id)}
                   className="group grid gap-3 py-8 transition-colors hover:bg-card md:grid-cols-[11rem_1fr_auto] md:gap-10 md:px-2"
                 >
                   <div className="eyebrow flex gap-3 md:block md:space-y-2">

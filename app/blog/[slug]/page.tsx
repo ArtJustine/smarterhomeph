@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { toast } from "sonner"
+import { blogSeo, blogSlugToId, blogPath } from "@/lib/blog-seo"
 
 // Structured blog articles content
 const BLOG_POSTS_DETAIL: Record<number, {
@@ -22,7 +23,7 @@ const BLOG_POSTS_DETAIL: Record<number, {
   content: React.ReactNode
 }> = {
   1: {
-    title: "10 Smart Home Devices Worth Buying in the Philippines (and the Order to Buy Them)",
+    title: "Smart Home Devices in the Philippines: 10 to Buy First (With Prices)",
     subtitle: "Ten devices that make a daily difference, what each one does, and the Philippine checks to make before you order.",
     date: "March 20, 2025",
     author: "Art Gonzales",
@@ -34,7 +35,7 @@ const BLOG_POSTS_DETAIL: Record<number, {
     content: (
       <>
         <p className="text-xl leading-relaxed text-foreground">
-          You don't need a full smart home to feel the difference. These ten devices are the ones that change your day, listed in the order most homes should buy them.
+          The best smart home devices in the Philippines are the ones that change your day, not the ones with the most features. These ten are listed in the order most homes should buy them.
         </p>
         <p className="leading-relaxed text-muted-foreground">
           Every device here works over normal home wifi. Prices below come from local listings and a recent TP-Link Philippines guide, so treat them as rough numbers.
@@ -103,13 +104,13 @@ const BLOG_POSTS_DETAIL: Record<number, {
         </ul>
 
         <p className="leading-relaxed text-muted-foreground">
-          New to all this? Start with our <Link href="/blog/7" className="underline underline-offset-4">beginner guide</Link>. If you're in Pampanga, Tarlac or Bulacan and want help picking and installing, use our <Link href="/services" className="underline underline-offset-4">services page</Link> to send us a room by room list for a quote.
+          New to all this? Start with our <Link href={blogPath(7)} className="underline underline-offset-4">beginner guide</Link>. If you're in Pampanga, Tarlac or Bulacan and want help picking and installing, use our <Link href="/services" className="underline underline-offset-4">services page</Link> to send us a room by room list for a quote.
         </p>
       </>
     )
   },
   2: {
-    title: "How to Set Up Smart Home Security on a Budget in the Philippines",
+    title: "Smart Home Security in the Philippines: How to Set It Up on a Budget",
     subtitle: "What to buy first, what it costs, and how to avoid monthly fees, with the brownout and privacy details most guides skip.",
     date: "March 15, 2025",
     author: "Art Gonzales",
@@ -121,7 +122,7 @@ const BLOG_POSTS_DETAIL: Record<number, {
     content: (
       <>
         <p className="text-xl leading-relaxed text-foreground">
-          You can cover the main weak points of a home for a few thousand pesos. You don't need a monthly plan, and you don't need to wire anything.
+          Smart home security in the Philippines can cover the main weak points of a home for a few thousand pesos. You don't need a monthly plan, and you don't need to wire anything.
         </p>
         <p className="leading-relaxed text-muted-foreground">
           The trick is buying in the right order and picking devices that store footage on your own card.
@@ -217,7 +218,7 @@ const BLOG_POSTS_DETAIL: Record<number, {
     )
   },
   3: {
-    title: "The Future of Voice Assistants in Smart Homes",
+    title: "Smart Home Voice Assistants: Where Alexa and Google Assistant Are Heading",
     subtitle: "Explore how voice assistant technology is evolving and what it means for the future of home automation.",
     date: "March 10, 2025",
     author: "Art Gonzales",
@@ -229,7 +230,7 @@ const BLOG_POSTS_DETAIL: Record<number, {
     content: (
       <>
         <p className="text-xl leading-relaxed text-foreground">
-          For years, voice control in the smart home has been somewhat transactional: "Turn on the lights," "What is the weather today?" or "Set a timer for 10 minutes." However, the integration of Large Language Models (LLMs) and advanced local processing is changing everything, turning smart assistants into proactive, contextual home co-pilots.
+          For years, the smart home voice assistant has been somewhat transactional: "Turn on the lights," "What is the weather today?" or "Set a timer for 10 minutes." However, the integration of Large Language Models (LLMs) and advanced local processing is changing everything, turning smart assistants into proactive, contextual home co-pilots.
         </p>
         <h2 className="text-3xl sm:text-4xl mt-14 mb-4">From Commands to Conversations</h2>
         <p className="leading-relaxed text-muted-foreground">
@@ -246,7 +247,7 @@ const BLOG_POSTS_DETAIL: Record<number, {
     )
   },
   4: {
-    title: "Energy Saving Tips with Smart Home Automation",
+    title: "Smart Home Energy Saving: How Automation Cuts Your Power Bill",
     subtitle: "Discover how smart thermostats, lighting, and appliances can help reduce your energy consumption.",
     date: "March 5, 2025",
     author: "Art Gonzales",
@@ -258,7 +259,7 @@ const BLOG_POSTS_DETAIL: Record<number, {
     content: (
       <>
         <p className="text-xl leading-relaxed text-foreground">
-          With utility bills rising and climate awareness at an all-time high, homeowners are searching for ways to decrease energy consumption. Fortunately, smart home technology offers powerful tools to automate energy efficiency without sacrificing comfort.
+          Smart home energy saving is how more homeowners are fighting rising utility bills, by automating the waste away. Fortunately, smart home technology offers powerful tools to automate energy efficiency without sacrificing comfort.
         </p>
         <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Automating Standby Power Cuts</h2>
         <p className="leading-relaxed text-muted-foreground">
@@ -275,7 +276,7 @@ const BLOG_POSTS_DETAIL: Record<number, {
     )
   },
   5: {
-    title: "Integrating Smart Home Systems: A Comprehensive Guide",
+    title: "Smart Home Integration: How to Connect Devices From Different Brands",
     subtitle: "Learn how to make different smart home ecosystems work together for a seamless experience.",
     date: "February 28, 2025",
     author: "Art Gonzales",
@@ -287,7 +288,7 @@ const BLOG_POSTS_DETAIL: Record<number, {
     content: (
       <>
         <p className="text-xl leading-relaxed text-foreground">
-          One of the biggest frustrations in home automation is fragmentation. Buying devices that require separate apps can turn a "smart home" into an exhausting chore. A seamless home automation experience relies on connecting different platforms together into a single, unified interface.
+          Smart home integration solves the biggest frustration in home automation: fragmentation. Buying devices that require separate apps can turn a "smart home" into an exhausting chore. A seamless home automation experience relies on connecting different platforms together into a single, unified interface.
         </p>
         <h2 className="text-3xl sm:text-4xl mt-14 mb-4">The Matter Standard: Unified Connectivity</h2>
         <p className="leading-relaxed text-muted-foreground">
@@ -304,7 +305,7 @@ const BLOG_POSTS_DETAIL: Record<number, {
     )
   },
   6: {
-    title: "Smart Home Setup for Aging in Place: A Practical Guide for Families",
+    title: "Smart Home for Elderly Parents: 7 Upgrades for Safer Aging in Place",
     subtitle: "Seven small upgrades that make a parent's or grandparent's home safer, plus the privacy and brownout details most guides skip.",
     date: "February 23, 2025",
     author: "Art Gonzales",
@@ -316,7 +317,7 @@ const BLOG_POSTS_DETAIL: Record<number, {
     content: (
       <>
         <p className="text-xl leading-relaxed text-foreground">
-          If your parents or grandparents want to stay in their own home, a few small devices can make that safer. Most of them work over normal home wifi.
+          A smart home for elderly parents or grandparents who want to stay in their own home can start with a few small devices that make it safer. Most of them work over normal home wifi.
         </p>
         <p className="leading-relaxed text-muted-foreground">
           One honest note first. Smart devices help with daily safety, but they don't replace a caregiver or medical care.
@@ -428,7 +429,7 @@ const BLOG_POSTS_DETAIL: Record<number, {
     content: (
       <>
         <p className="text-xl leading-relaxed text-foreground">
-          A smart home is a house where lights, locks, cameras and aircon respond to your phone, your voice or a schedule. You can start with one or two cheap devices and add more later.
+          Knowing how to start a smart home in the Philippines is simple: you begin with one or two cheap devices that let lights, locks, cameras and aircon respond to your phone, your voice or a schedule, then add more later.
         </p>
         <p className="leading-relaxed text-muted-foreground">
           Most guides to smart homes in the Philippines talk about market growth. This one covers what you do on day one.
@@ -508,7 +509,7 @@ const BLOG_POSTS_DETAIL: Record<number, {
     )
   },
   8: {
-    title: "How a Smart Home in the Philippines Can Cut Your Aircon Bill",
+    title: "How to Cut Your Aircon Electricity Bill in the Philippines With a Smart Home",
     subtitle: "Five simple automations that stop the waste, what each one needs, and what a smart home can't fix.",
     date: "November 28, 2026",
     author: "Art Gonzales",
@@ -520,7 +521,7 @@ const BLOG_POSTS_DETAIL: Record<number, {
     content: (
       <>
         <p className="text-xl leading-relaxed text-foreground">
-          For most homeowners, a smart home in the Philippines pays for itself in one place first: the aircon. You keep the same unit and the same remote. You just stop it running when it shouldn't.
+          To cut your aircon electricity bill in the Philippines, a smart home pays for itself in one place first: the aircon. You keep the same unit and the same remote. You just stop it running when it shouldn't.
         </p>
         <p className="leading-relaxed text-muted-foreground">
           This guide covers where the waste comes from and the five automations that fix most of it.
@@ -614,9 +615,9 @@ const BLOG_POSTS_DETAIL: Record<number, {
   }
 }
 
-export default function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
+export default function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = use(params)
-  const id = parseInt(resolvedParams.id)
+  const id = blogSlugToId(resolvedParams.slug) ?? 0
 
   const post = BLOG_POSTS_DETAIL[id]
 
@@ -715,7 +716,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ id: string 
                 <ul>
                   {otherPosts.map((other) => (
                     <li key={other.id} className="border-t last:border-b">
-                      <Link href={`/blog/${other.id}`} className="group block py-5">
+                      <Link href={blogPath(other.id)} className="group block py-5">
                         <p className="eyebrow text-primary-ink">{other.category}</p>
                         <p className="mt-2 font-display text-2xl leading-snug transition-transform duration-300 group-hover:translate-x-1">
                           {other.title}
