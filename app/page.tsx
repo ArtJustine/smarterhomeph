@@ -79,7 +79,18 @@ export default function Home() {
 
       <main className="flex-1">
         {/* Hero */}
-        <section className="band shade-1 container grid grid-cols-1 items-center gap-12 pb-20 pt-12 lg:grid-cols-12 lg:gap-10 lg:pb-28 lg:pt-20">
+        <section className="band shade-1 relative overflow-hidden">
+          <Image
+            src="https://images.unsplash.com/photo-1494526585095-c41746248156?ixlib=rb-4.1.0&q=80&fm=jpg&crop=entropy&cs=srgb&w=2400"
+            alt="Modern house with a lit doorway at dusk"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div aria-hidden="true" className="absolute inset-0 bg-black/70" />
+          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
+          <div className="container relative grid grid-cols-1 items-center gap-12 pb-20 pt-12 lg:grid-cols-12 lg:gap-10 lg:pb-28 lg:pt-20">
           <div className="min-w-0 lg:col-span-5">
             <p className="eyebrow mb-6">
               Smart home installer · Central Luzon
@@ -111,6 +122,7 @@ export default function Home() {
 
           <div className="min-w-0 lg:col-span-7">
             <SmartHome3D />
+          </div>
           </div>
         </section>
 
