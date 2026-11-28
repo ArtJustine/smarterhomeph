@@ -40,18 +40,28 @@ const setups = [
     href: "/services/lighting",
   },
   {
-    title: "Smart locks and cameras",
+    title: "Security",
     body: "Smart door locks and CCTV cameras with alerts on your phone, so you can check the gate from the office.",
     href: "/services/security",
   },
   {
-    title: "Aircon control",
-    body: "Smart aircon control and temperature sensors, so the room is cool when you get there, not all day.",
+    title: "Climate",
+    body: "Aircon control, fan switches, curtains and temperature sensors, so the room is cool when you get there, not all day.",
     href: "/services/climate",
   },
   {
-    title: "Sensors and plugs",
-    body: "Motion, door and power sensors that trigger the rest. Turn off the iron from your phone.",
+    title: "Automation",
+    body: "Smart hubs, scene buttons and voice control. Routines that keep working even when the internet drops.",
+    href: "/services/automation",
+  },
+  {
+    title: "Media control",
+    body: "Multi-room audio and TV control that tie into scenes, like movie night in one tap.",
+    href: "/services/media-control",
+  },
+  {
+    title: "Appliances",
+    body: "Smart plugs, pet feeders, purifiers and robot vacuums. Turn off the iron from your phone.",
     href: "/services/appliances",
   },
 ]
@@ -123,31 +133,31 @@ export default function Home() {
               Alexa, Apple Home or Google Home. We set up all three.
             </h2>
           </div>
-          <div className="grid gap-px overflow-hidden rounded-lg border bg-border md:grid-cols-3 [&:hover>a:not(:hover)]:opacity-50">
+          <div className="grid gap-3 md:grid-cols-3 [&:hover>a:not(:hover)]:opacity-50">
             {platformList.map((p) => (
               <Link
                 key={p.slug}
                 href={`/${p.slug}`}
-                className="group relative flex flex-col overflow-hidden bg-background p-8 transition-opacity duration-300"
+                className="group relative flex min-h-[26rem] flex-col justify-between overflow-hidden rounded-lg border bg-black p-8 text-white transition-opacity duration-300"
               >
+                <Image
+                  src={platformImages[p.slug].src}
+                  alt={platformImages[p.slug].alt}
+                  fill
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <span aria-hidden="true" className="absolute inset-0 bg-black/60 transition-colors duration-300 group-hover:bg-black/45" />
                 <span
                   aria-hidden="true"
                   className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                  style={{ background: "radial-gradient(circle at 50% 70%, rgba(255,255,255,0.9), rgba(0,0,0,0.04) 70%)" }}
+                  style={{ background: "radial-gradient(circle at 50% 100%, rgba(255,255,255,0.28), transparent 65%)" }}
                 />
-                <p className="relative font-display text-5xl leading-none">{p.name}</p>
-                <p className="relative mt-5 min-h-[3.5rem] max-w-xs text-muted-foreground">{p.short}</p>
-                <div className="relative my-8 flex h-56 items-center justify-center">
-                  <Image
-                    src={platformImages[p.slug].src}
-                    alt={platformImages[p.slug].alt}
-                    width={600}
-                    height={600}
-                    sizes="(min-width: 768px) 30vw, 90vw"
-                    className="h-full w-auto object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105"
-                  />
+                <div className="relative">
+                  <p className="font-display text-5xl leading-none text-white">{p.name}</p>
+                  <p className="mt-5 max-w-xs text-white/80">{p.short}</p>
                 </div>
-                <p className="relative mt-auto inline-flex items-center gap-1 text-sm underline-offset-4 group-hover:underline">
+                <p className="relative mt-8 inline-flex items-center gap-1 text-sm text-white underline-offset-4 group-hover:underline">
                   {p.name} setup <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </p>
               </Link>
