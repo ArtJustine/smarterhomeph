@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowRight, ArrowUpRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { SiteHeader } from "@/components/site-header"
@@ -6,6 +7,12 @@ import { SiteFooter } from "@/components/site-footer"
 import { SmartHome3D } from "@/components/home-3d/smart-home-3d"
 import { ExplainerVideo } from "@/components/explainer-video"
 import { platformList } from "@/lib/platforms"
+
+const platformImages: Record<string, { src: string; alt: string }> = {
+  alexa: { src: "/devices/alexa/echo-show.webp", alt: "Amazon Echo Show" },
+  "apple-home": { src: "/devices/apple-home/homepod.webp", alt: "Apple HomePod" },
+  "google-home": { src: "/devices/google-home/nest-hub.webp", alt: "Google Nest Hub" },
+}
 
 
 const steps = [
@@ -116,12 +123,31 @@ export default function Home() {
               Alexa, Apple Home or Google Home. We set up all three.
             </h2>
           </div>
-          <div className="grid gap-px overflow-hidden rounded-lg border bg-border md:grid-cols-3">
+          <div className="grid gap-px overflow-hidden rounded-lg border bg-border md:grid-cols-3 [&:hover>a:not(:hover)]:opacity-50">
             {platformList.map((p) => (
-              <Link key={p.slug} href={`/${p.slug}`} className="group bg-background p-8 transition-colors hover:bg-card">
-                <p className="font-display text-5xl leading-none">{p.name}</p>
-                <p className="mt-5 min-h-[3.5rem] max-w-xs text-muted-foreground">{p.short}</p>
-                <p className="mt-8 inline-flex items-center gap-1 text-sm underline-offset-4 group-hover:underline">
+              <Link
+                key={p.slug}
+                href={`/${p.slug}`}
+                className="group relative flex flex-col overflow-hidden bg-background p-8 transition-opacity duration-300"
+              >
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  style={{ background: "radial-gradient(circle at 50% 70%, rgba(255,255,255,0.9), rgba(0,0,0,0.04) 70%)" }}
+                />
+                <p className="relative font-display text-5xl leading-none">{p.name}</p>
+                <p className="relative mt-5 min-h-[3.5rem] max-w-xs text-muted-foreground">{p.short}</p>
+                <div className="relative my-8 flex h-56 items-center justify-center">
+                  <Image
+                    src={platformImages[p.slug].src}
+                    alt={platformImages[p.slug].alt}
+                    width={600}
+                    height={600}
+                    sizes="(min-width: 768px) 30vw, 90vw"
+                    className="h-full w-auto object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <p className="relative mt-auto inline-flex items-center gap-1 text-sm underline-offset-4 group-hover:underline">
                   {p.name} setup <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </p>
               </Link>
