@@ -26,6 +26,7 @@ const routes: { path: string; priority: number }[] = [
   { path: "/blog/5", priority: 0.5 },
   { path: "/blog/6", priority: 0.5 },
   { path: "/blog/7", priority: 0.6 },
+  { path: "/blog/8", priority: 0.6 },
   { path: "/privacy-policy", priority: 0.2 },
 ]
 

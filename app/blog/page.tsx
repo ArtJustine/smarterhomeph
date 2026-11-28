@@ -8,6 +8,14 @@ import { abs, breadcrumb, graph, webPage } from "@/lib/schema"
 
 const blogPosts = [
   {
+    id: 8,
+    title: "How a Smart Home in the Philippines Can Cut Your Aircon Bill",
+    excerpt: "Five simple automations that stop aircon waste, what each one needs, and what a smart home can't fix.",
+    date: "November 28, 2026",
+    author: "Art Gonzales",
+    category: "Energy",
+  },
+  {
     id: 7,
     title: "How to Start a Smart Home in the Philippines (and What to Buy First)",
     excerpt: "What to buy first, what it costs to begin, and the Philippine details to check before you order: voltage, 2.4GHz wifi and brownouts.",

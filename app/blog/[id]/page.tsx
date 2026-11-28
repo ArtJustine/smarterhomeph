@@ -506,6 +506,111 @@ const BLOG_POSTS_DETAIL: Record<number, {
         </p>
       </>
     )
+  },
+  8: {
+    title: "How a Smart Home in the Philippines Can Cut Your Aircon Bill",
+    subtitle: "Five simple automations that stop the waste, what each one needs, and what a smart home can't fix.",
+    date: "November 28, 2026",
+    author: "Art Gonzales",
+    authorRole: "Smarter Home PH",
+    authorAvatar: "",
+    readTime: "5 min read",
+    category: "Energy",
+    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200&auto=format&fit=crop",
+    content: (
+      <>
+        <p className="text-xl leading-relaxed text-foreground">
+          For most homeowners, a smart home in the Philippines pays for itself in one place first: the aircon. You keep the same unit and the same remote. You just stop it running when it shouldn't.
+        </p>
+        <p className="leading-relaxed text-muted-foreground">
+          This guide covers where the waste comes from and the five automations that fix most of it.
+        </p>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Where the waste comes from</h2>
+        <p className="leading-relaxed text-muted-foreground">
+          It's rarely the aircon itself. It's small habits that add up over a month:
+        </p>
+        <ul className="list-disc space-y-2 pl-5 leading-relaxed text-muted-foreground">
+          <li>Left on in a room nobody is using.</li>
+          <li>Set to the coldest setting to cool the room faster.</li>
+          <li>Running with a window or door open.</li>
+          <li>Started late, then turned way down to catch up.</li>
+        </ul>
+        <p className="leading-relaxed text-muted-foreground">
+          A smart home fixes these without asking you to remember anything.
+        </p>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Start with the free fix</h2>
+        <p className="leading-relaxed text-muted-foreground">
+          Set the temperature to 25°C. The Department of Energy recommends it, and <a href="https://www.meralco.com.ph/help/faqs" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">Meralco says</a> every degree lower can add 5% to 7% to what the aircon costs to run.
+        </p>
+        <p className="leading-relaxed text-muted-foreground">
+          Quick example. If your bedroom aircon costs ₱3,000 a month at 20°C, moving to 25°C could take roughly a quarter to a third off that. Your own numbers will differ, but the direction is the same.
+        </p>
+        <p className="leading-relaxed text-muted-foreground">
+          The catch is that people forget, or turn it back down at 2am. Automation holds the setting for you.
+        </p>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Five automations that save the most</h2>
+        <ol className="list-decimal space-y-4 pl-5 leading-relaxed text-muted-foreground">
+          <li>
+            <strong className="text-foreground">Auto-off timer.</strong> The aircon shuts off at a set time, so it isn't running all morning in an empty bedroom.
+          </li>
+          <li>
+            <strong className="text-foreground">Cool before you arrive.</strong> Start the aircon from your phone 20 minutes before you get home. No more leaving it on all day just to walk into a cold room. This is what an <Link href="/services/climate/ac-controllers" className="underline underline-offset-4">aircon controller</Link> does.
+          </li>
+          <li>
+            <strong className="text-foreground">Step up after you sleep.</strong> Start the night at 24°C, then raise it a degree or two an hour after bedtime. You're asleep. You won't notice.
+          </li>
+          <li>
+            <strong className="text-foreground">Window open, aircon off.</strong> A small door or window sensor tells the aircon to switch off after a few minutes if someone opens the window.
+          </li>
+          <li>
+            <strong className="text-foreground">Follow the room, not the clock.</strong> A temperature sensor placed where you actually sit lets the aircon react to the real room. The unit's own sensor only reads the air next to it.
+          </li>
+        </ol>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Then look at the quiet power users</h2>
+        <p className="leading-relaxed text-muted-foreground">
+          The aircon gets the blame, but other things pull power all day. The water dispenser, the TV corner and the PC setup are common ones.
+        </p>
+        <p className="leading-relaxed text-muted-foreground">
+          An <Link href="/services/appliances/energy-plugs" className="underline underline-offset-4">energy monitoring plug</Link> shows how many watts each one uses. Then you can cut the ones that waste power on standby. One warning: a basic smart plug is not for aircon. Check the plug's maximum load before you use it on anything heavy.
+        </p>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Check before you buy</h2>
+        <ul className="list-disc space-y-2 pl-5 leading-relaxed text-muted-foreground">
+          <li><strong className="text-foreground">Your aircon type.</strong> Most split-type units with an infrared remote work with a controller. Confirm the brand and model first.</li>
+          <li><strong className="text-foreground">Wifi in that room.</strong> A controller that drops off wifi misses its commands. Test your signal in the bedroom before you order.</li>
+          <li><strong className="text-foreground">2.4GHz.</strong> Many controllers and sensors only connect to 2.4GHz, so keep it switched on at your router.</li>
+          <li><strong className="text-foreground">Voltage.</strong> Look for 220 to 240V on anything that plugs into the wall.</li>
+        </ul>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Plan for brownouts</h2>
+        <p className="leading-relaxed text-muted-foreground">
+          No power means no router, and no router means your schedules and phone control stop until it's back.
+        </p>
+        <p className="leading-relaxed text-muted-foreground">
+          A small UPS for your modem and router helps. After a brownout, check that your schedules are running again before you rely on them for the night.
+        </p>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">What a smart home can't fix</h2>
+        <p className="leading-relaxed text-muted-foreground">
+          Automation won't help an aircon with a dirty filter, a unit too big or too small for the room, or a room that takes the afternoon sun. Clean the filter first and shade the window. Then automate.
+        </p>
+
+        <h2 className="text-3xl sm:text-4xl mt-14 mb-4">Quick answers</h2>
+        <ul className="list-disc space-y-3 pl-5 leading-relaxed text-muted-foreground">
+          <li><strong className="text-foreground">Do I need a new aircon?</strong> No. A controller works with the one you have, if it uses an infrared remote.</li>
+          <li><strong className="text-foreground">Is it worth it for one aircon?</strong> If it runs every day, usually yes. If you only use it a few nights a month, start with the 25°C setting and skip the hardware.</li>
+          <li><strong className="text-foreground">Can I do it myself?</strong> A controller is doable if you're comfortable with apps and wifi. Get help if your wifi is weak or you have several units to set up.</li>
+        </ul>
+
+        <p className="leading-relaxed text-muted-foreground">
+          In Pampanga, Tarlac or Bulacan and want this set up room by room? Use our <Link href="/services" className="underline underline-offset-4">services page</Link> to list your aircons and send it for a written quote.
+        </p>
+      </>
+    )
   }
 }
 

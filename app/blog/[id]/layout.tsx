@@ -39,6 +39,11 @@ const posts: Record<string, { title: string; description: string; published: str
     description: "What a smart home is, what to buy first, what it costs to begin, and the Philippine details to check: voltage, 2.4GHz wifi, brownouts and installers.",
     published: "2026-11-11",
   },
+  "8": {
+    title: "How a Smart Home in the Philippines Can Cut Your Aircon Bill",
+    description: "Five smart home automations that cut aircon waste in Philippine homes, from 25°C schedules to window sensors, plus brownout and wifi checks before you buy.",
+    published: "2026-11-28",
+  },
 }
 
 export const dynamicParams = false
