@@ -1,7 +1,4 @@
-"use client"
-
 import Link from "next/link"
-import { motion } from "framer-motion"
 import { ArrowRight, ArrowUpRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { SiteHeader } from "@/components/site-header"
@@ -58,11 +55,6 @@ const areas = [
   { name: "Bulacan", href: "/areas/bulacan", note: "Smart home installation in Malolos, Meycauayan and nearby" },
 ]
 
-const fade = {
-  initial: { opacity: 0, y: 14 },
-  animate: { opacity: 1, y: 0 },
-}
-
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
@@ -72,27 +64,21 @@ export default function Home() {
         {/* Hero */}
         <section className="band shade-1 container grid grid-cols-1 items-center gap-12 pb-20 pt-12 lg:grid-cols-12 lg:gap-10 lg:pb-28 lg:pt-20">
           <div className="min-w-0 lg:col-span-5">
-            <motion.p {...fade} transition={{ duration: 0.5 }} className="eyebrow mb-6">
+            <p className="eyebrow mb-6">
               Smart home installer · Central Luzon
-            </motion.p>
-            <motion.h1
-              {...fade}
-              transition={{ duration: 0.6, delay: 0.05 }}
+            </p>
+            <h1
               className="text-balance text-5xl leading-[1.02] sm:text-6xl lg:text-[3.6rem] xl:text-[4rem]"
             >
               Smart home setup in <span className="italic text-primary-ink">Pampanga, Tarlac and Bulacan.</span>
-            </motion.h1>
-            <motion.p
-              {...fade}
-              transition={{ duration: 0.6, delay: 0.12 }}
+            </h1>
+            <p
               className="mt-7 max-w-md text-lg leading-relaxed text-muted-foreground"
             >
               We plan, supply and install smart lights, door locks, CCTV cameras and aircon control that work
               with Alexa, Google Home and Home Assistant. Tap the house to see how it feels.
-            </motion.p>
-            <motion.div
-              {...fade}
-              transition={{ duration: 0.6, delay: 0.2 }}
+            </p>
+            <div
               className="mt-9 flex flex-wrap items-center gap-3"
             >
               <Button asChild size="lg" className="h-12 rounded-full px-7">
@@ -103,17 +89,12 @@ export default function Home() {
               <Button asChild size="lg" variant="ghost" className="h-12 rounded-full px-5">
                 <Link href="/services">Our services</Link>
               </Button>
-            </motion.div>
+            </div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.15 }}
-            className="min-w-0 lg:col-span-7"
-          >
+          <div className="min-w-0 lg:col-span-7">
             <SmartHome3D />
-          </motion.div>
+          </div>
         </section>
 
         {/* Explainer video */}

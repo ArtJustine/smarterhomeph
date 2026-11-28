@@ -3,7 +3,6 @@
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 import { usePathname } from "next/navigation"
-import { AnimatePresence, motion } from "framer-motion"
 import { ChevronDown, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -140,15 +139,8 @@ export function SiteHeader() {
         </div>
       </div>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="overflow-hidden md:hidden"
-          >
+      {open && (
+          <div className="menu-in overflow-hidden md:hidden">
             <nav className="container flex flex-col py-2" aria-label="Mobile">
               <div className="border-b py-4">
                 <p className="eyebrow mb-3">Platforms</p>
@@ -169,9 +161,8 @@ export function SiteHeader() {
                 <Link href="/contact">Get a quote</Link>
               </Button>
             </nav>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
     </header>
   )
 }

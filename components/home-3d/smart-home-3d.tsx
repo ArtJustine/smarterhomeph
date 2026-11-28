@@ -100,7 +100,10 @@ export function SmartHome3D() {
   const [clear, setClear] = useState(false)
   const [note, setNote] = useState("Tap anything. It's a demo, nothing here is connected.")
 
-  // Load three.js only when the demo is near the viewport and the browser is idle.
+  // three.js (about 700 KB and a heavy scene build) is NOT loaded with the page.
+  // It starts when the visitor taps the demo, hovers or focuses it, or touches any control.
+  // This keeps the main thread free during load, which is what PageSpeed measures.
+  const startRef = useRef<() => void>(() => {})
   useEffect(() => {
     const el = wrapRef.current
     if (!el) return
@@ -111,7 +114,6 @@ export function SmartHome3D() {
     }
     let cancelled = false
     let started = false
-    let idle = 0
     const start = () => {
       if (started || cancelled) return
       started = true
@@ -141,25 +143,14 @@ export function SmartHome3D() {
         })
         .catch(() => !cancelled && setStatus("failed"))
     }
-    const io = new IntersectionObserver(
-      (e) => {
-        if (!e[0].isIntersecting) return
-        io.disconnect()
-        const ric = (window as any).requestIdleCallback as undefined | ((cb: () => void, o?: { timeout: number }) => number)
-        if (ric) idle = ric(start, { timeout: 1500 })
-        else idle = window.setTimeout(start, 400)
-      },
-      { rootMargin: "200px" },
-    )
-    io.observe(el)
+    startRef.current = start
+    // Fine pointers (desktop): hovering the demo is enough to warm it up.
+    el.addEventListener("pointerenter", start, { once: true })
+    el.addEventListener("focusin", start, { once: true })
     return () => {
       cancelled = true
-      io.disconnect()
-      if (idle) {
-        const cic = (window as any).cancelIdleCallback as undefined | ((n: number) => void)
-        if (cic) cic(idle)
-        window.clearTimeout(idle)
-      }
+      el.removeEventListener("pointerenter", start)
+      el.removeEventListener("focusin", start)
       sceneRef.current?.dispose()
       sceneRef.current = null
     }
@@ -211,8 +202,8 @@ export function SmartHome3D() {
         {SCENES.map((def) => (
           <button
             key={def.name}
-            onClick={() => applyScene(def)}
-            disabled={status !== "ready"}
+            onClick={() => (status === "ready" ? applyScene(def) : startRef.current())}
+            disabled={status === "loading"}
             aria-pressed={activeScene === def.name}
             className={`shrink-0 rounded-full border px-4 py-1.5 text-sm transition-colors disabled:opacity-50 ${
               activeScene === def.name ? "border-foreground bg-foreground text-background" : "bg-background hover:border-foreground/60"
@@ -231,7 +222,18 @@ export function SmartHome3D() {
           role="img"
           aria-label="Interactive 3D cutaway of a 108 square metre smart home with a living room, kitchen, bedroom, bathroom and office. Lights, fans, cameras, door lock, aircon and sensors react to the buttons below."
         />
-        {status !== "ready" && (
+        {status === "idle" && (
+          <button
+            type="button"
+            onClick={() => startRef.current()}
+            className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-center"
+            aria-label="Load the interactive 3D smart home demo"
+          >
+            <span className="rounded-full border bg-background px-5 py-2 text-sm">Tap to explore the 3D home</span>
+            <span className="eyebrow">Interactive demo</span>
+          </button>
+        )}
+        {status === "loading" && (
           <div className="absolute inset-0 flex items-center justify-center">
             <p className="eyebrow animate-pulse">Loading 3D home</p>
           </div>
@@ -266,8 +268,9 @@ export function SmartHome3D() {
             key={t.room}
             role="tab"
             aria-selected={tab === t.room}
-            disabled={status !== "ready"}
+            disabled={status === "loading"}
             onClick={() => {
+              if (status !== "ready") return startRef.current()
               setTab(t.room)
               sceneRef.current?.focusRoom(t.room)
             }}
